@@ -1,0 +1,130 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scripts/ColorGrid.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.117647, 0.564706, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.156863, 0.156863, 0.592157, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.388235, 0.180392, 0.6, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.658824, 0.2, 0.454902, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.592157, 0.0941176, 0.0941176, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.921569, 0.462745, 0.0470588, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.980392, 0.811765, 0.223529, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.521569, 0.772549, 0.2, 1 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.133333, 0.545098, 0.133333, 1 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.168627, 0.168627, 0.168627, 1 )
+
+[node name="ColorGrid" type="GridContainer"]
+margin_left = 158.0
+margin_top = 460.0
+margin_right = 474.0
+margin_bottom = 514.0
+rect_min_size = Vector2( 220, 30 )
+size_flags_horizontal = 4
+columns = 5
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DodgerBlueButton" type="Button" parent="."]
+margin_right = 60.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 60, 25 )
+custom_styles/normal = SubResource( 1 )
+
+[node name="DarkBlueButton" type="Button" parent="."]
+margin_left = 64.0
+margin_right = 124.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 60, 25 )
+custom_styles/normal = SubResource( 2 )
+
+[node name="PurpleButton" type="Button" parent="."]
+margin_left = 128.0
+margin_right = 188.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 60, 25 )
+custom_styles/normal = SubResource( 3 )
+
+[node name="MagentaButton" type="Button" parent="."]
+margin_left = 192.0
+margin_right = 252.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 60, 25 )
+custom_styles/normal = SubResource( 4 )
+
+[node name="RedButton" type="Button" parent="."]
+margin_left = 256.0
+margin_right = 316.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 60, 25 )
+custom_styles/normal = SubResource( 5 )
+
+[node name="OrangeButton" type="Button" parent="."]
+margin_top = 29.0
+margin_right = 60.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 60, 25 )
+custom_styles/normal = SubResource( 6 )
+
+[node name="YellowButton" type="Button" parent="."]
+margin_left = 64.0
+margin_top = 29.0
+margin_right = 124.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 60, 25 )
+custom_styles/normal = SubResource( 7 )
+
+[node name="LightGreenButton" type="Button" parent="."]
+margin_left = 128.0
+margin_top = 29.0
+margin_right = 188.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 60, 25 )
+custom_styles/normal = SubResource( 8 )
+
+[node name="ForestGreenButton" type="Button" parent="."]
+margin_left = 192.0
+margin_top = 29.0
+margin_right = 252.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 60, 25 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="BlackButton" type="Button" parent="."]
+margin_left = 256.0
+margin_top = 29.0
+margin_right = 316.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 60, 25 )
+custom_styles/normal = SubResource( 10 )
+
+[connection signal="pressed" from="DodgerBlueButton" to="." method="_on_DodgerBlueButton_pressed"]
+[connection signal="pressed" from="DarkBlueButton" to="." method="_on_DarkBlueButton_pressed"]
+[connection signal="pressed" from="PurpleButton" to="." method="_on_PurpleButton_pressed"]
+[connection signal="pressed" from="MagentaButton" to="." method="_on_MagentaButton_pressed"]
+[connection signal="pressed" from="RedButton" to="." method="_on_RedButton_pressed"]
+[connection signal="pressed" from="OrangeButton" to="." method="_on_OrangeButton_pressed"]
+[connection signal="pressed" from="YellowButton" to="." method="_on_YellowButton_pressed"]
+[connection signal="pressed" from="LightGreenButton" to="." method="_on_LightGreenButton_pressed"]
+[connection signal="pressed" from="ForestGreenButton" to="." method="_on_ForestGreenButton_pressed"]
+[connection signal="pressed" from="BlackButton" to="." method="_on_BlackButton_pressed"]

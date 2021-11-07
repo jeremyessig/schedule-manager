@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/CalendarArray.gd" type="Script" id=1]
+
+[node name="CalendarArray" type="HBoxContainer"]
+margin_left = 60.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Column01" type="VBoxContainer" parent="."]
+margin_right = 203.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="Column02" type="VBoxContainer" parent="."]
+margin_left = 203.0
+margin_right = 406.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="Column03" type="VBoxContainer" parent="."]
+margin_left = 406.0
+margin_right = 609.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="Column04" type="VBoxContainer" parent="."]
+margin_left = 609.0
+margin_right = 813.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="Column05" type="VBoxContainer" parent="."]
+margin_left = 813.0
+margin_right = 1016.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="Column06" type="VBoxContainer" parent="."]
+margin_left = 1016.0
+margin_right = 1220.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0

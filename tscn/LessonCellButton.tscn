@@ -1,0 +1,86 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/LessonCellButton.gd" type="Script" id=1]
+[ext_resource path="res://res/calendar_cell_hover.tres" type="StyleBox" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 1, 1, 1, 1 )
+
+[node name="LessonCellButton" type="Button"]
+margin_right = 258.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 45 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginLeft" type="MarginContainer" parent="CenterContainer"]
+margin_right = 5.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 5, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 5.0
+margin_right = 253.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginTop" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
+margin_right = 248.0
+margin_bottom = 5.0
+rect_min_size = Vector2( 0, 5 )
+
+[node name="Infos" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 9.0
+margin_right = 248.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Text"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginBottom" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 248.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 0, 5 )
+
+[node name="MarginRight" type="MarginContainer" parent="CenterContainer"]
+margin_left = 253.0
+margin_right = 258.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 5, 0 )
+
+[connection signal="gui_input" from="." to="." method="_on_LessonCellButton_gui_input"]

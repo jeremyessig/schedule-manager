@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/CellButton.gd" type="Script" id=1]
+[ext_resource path="res://res/calendar_cell_hover.tres" type="StyleBox" id=2]
+[ext_resource path="res://res/calendar_cell_normal.tres" type="StyleBox" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="CellButton" type="Button"]
+margin_right = 258.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 45 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = ExtResource( 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="gui_input" from="." to="." method="_on_CellButton_gui_input"]
