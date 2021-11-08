@@ -29,7 +29,7 @@ onready var vbox_container := $Panel/VBoxContainer/Body/VboxContainer
 func _ready() -> void:
 	Signals.connect("lesson_added", self, "_on_lesson_added")
 	Signals.connect("subject_added", self,"_on_subject_added")
-
+	pass
 
 func _physics_process(delta):
 	if  self.rect_size.y >= 820:
@@ -45,12 +45,17 @@ func _physics_process(delta):
 func _on_subject_added() ->void: ## From NewSubjectDialog and SaveSystem.gd by Signals
 	Global.update_option_button(subject_option_button, Global.subjects_database)
 	_check_subject_lesson_database()
+#	subject_option_button.text = "Sélectionnez une matière dans la liste"
+#	subject_option_button.selected = -1
 
 
 
 func _on_lesson_added() ->void: ## From NewSubjectDialog and SaveSystem.gd by Signals
-	Global.update_option_button(lesson_option_button, Global.lessons_database)
+	var subject_selected: String = subject_option_button.get_item_text(0)
+	Global.update_option_button(lesson_option_button, Global.lessons_database, subject_selected)
+#	Global.update_option_button(lesson_option_button, Global.lessons_database)
 	_check_subject_lesson_database()
+	pass
 
 
 ##______________Verifications avant validation du cours________________________
@@ -141,4 +146,9 @@ func update_color(color:String) -> void:
 func _on_CancelButton_pressed() -> void:
 	hide()
 
+
+func _on_SubjectOptionButton_item_selected(index):
+	var subject_selected: String = subject_option_button.get_item_text(index)
+	Global.update_option_button(lesson_option_button, Global.lessons_database, subject_selected)
+	print_debug("BOUTON APPUYE")
 

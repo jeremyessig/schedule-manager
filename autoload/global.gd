@@ -23,15 +23,22 @@ func _ready() -> void:
 	
 
 ## Met a jours les optionButton listant les differentes matieres
-func update_option_button(button:OptionButton, database)->void:
+func update_option_button(button:OptionButton, database, subject: String = "")->void:
 	button.clear()
 	if database is Array:
 		for i in database:
 			button.add_item(i)
 	if database is Dictionary:
-		for k in database:
-			var value = database[k]
-			button.add_item(value[0])
+		if subject == "":
+			for k in database:
+				var value = database[k]
+				button.add_item(value[0])
+				print_debug("SUJET AJOUTE")
+		else:
+			for k in database:
+				var value = database[k]
+				if subject == value[1]:
+					button.add_item(value[0])			
 
 
 func reparent_node(parent: Node, source: Node, target:Node) ->void:

@@ -105,7 +105,6 @@ margin_top = 100.0
 margin_right = 484.0
 margin_bottom = 130.0
 rect_min_size = Vector2( 220, 30 )
-text = "Aucun cours trouvé"
 clip_text = true
 align = 1
 
@@ -333,4 +332,5 @@ custom_styles/focus = SubResource( 3 )
 custom_styles/normal = SubResource( 4 )
 text = "Annuler"
 
+[connection signal="item_selected" from="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/SubjectOptionButton" to="." method="_on_SubjectOptionButton_item_selected"]
 [connection signal="pressed" from="Panel/VBoxContainer/Foot/HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]

@@ -6,6 +6,7 @@ extends "res://scripts/LessonDialog.gd"
 
 var lesson_card : Node
 var old_id : String
+var data : Dictionary
 
 onready var add_lesson_to_calendar_button :Button = $Panel/VBoxContainer/Foot/HBoxContainer/AddLessonToCalendarButton
 onready var sub_lesson_to_calendar_button : Button = $Panel/VBoxContainer/Foot/HBoxContainer/SubLessonToCalendarButton

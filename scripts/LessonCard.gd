@@ -54,6 +54,62 @@ func _update_background():
 	self.add_stylebox_override("hover", is_not_displayed_bg_hover)
 
 
+func get_data() ->Dictionary:
+	var data = {
+	"id": id,
+	"type" : type,
+	"subject": subject,
+	"lesson_code" : lesson_code,
+	"duration" : duration,
+	"schedule" : schedule,
+	"is_obligatory" : is_obligatory,
+	"room" : room,
+	"lesson" : lesson,
+	"teacher" : teacher,
+	"color" : color,
+	"datetime" : datetime,
+	"rating" : rating,
+	"is_displayed" : is_displayed,
+	"size" : size,
+	"x" : x,
+	"y" : y
+	}
+	return data
+
+##Non utilisee pour l'instant
+#func set_data(data:Dictionary) ->void:
+#	if data.has("id"):
+#		id = data["id"]
+#	if data.has("type"):
+#		type = data["type"]
+#	if data.has("subject"):
+#		subject = data["subject"]
+#	if data.has("lesson_code"):
+#		lesson_code = data["lesson_code"]
+#	if data.has("duration"):
+#		duration = data["duration"]
+#	if data.has("schedule"):
+#		schedule = data["schedule"]
+#	if data.has("is_obligatory"):
+#		is_obligatory = data["is_obligatory"]
+#	if data.has("room"):
+#		room = data["room"]
+#	if data.has("lesson"):
+#		lesson = data["lesson"]
+#	if data.has("teacher"):
+#		teacher = data["teacher"]
+#	if data.has("color"):
+#		color = data["color"]
+#	if data.has("datetime"):
+#		datetime = data["datetime"]
+#	if data.has("is_displayed"):
+#		is_displayed = data["is_displayed"]
+#	if data.has("rating"):
+#		rating = data["rating"]
+#	if data.has("size"):
+#		size = data["size"]
+
+
 
 func assigning_dictionary_values(datas_arg:Dictionary) -> void:
 	type = datas_arg["type"]
