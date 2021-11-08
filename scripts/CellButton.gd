@@ -4,8 +4,7 @@ var red_style = preload("res://res/calendar_cell_normal_red.tres")
 var normal_style = preload("res://res/calendar_cell_normal.tres")
 
 var is_empty := true
-var x := 0
-var y := 0
+var position := Vector2.ZERO
 var size := 1
 
 onready var label := $Label
@@ -13,9 +12,9 @@ onready var label := $Label
 
 
 func add_coord_to_cell(xpos:int, ypos:int) ->void:
-	x = xpos
-	y = ypos
-	$Label.text = "(%s, %s)" % [x, y]
+	position.x = xpos
+	position.y = ypos
+	$Label.text = "(%s, %s)" % [position.x, position.y]
 	
 
 func _turn_cell_to_occupied() -> void:

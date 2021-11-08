@@ -38,12 +38,11 @@ func does_lesson_exist(card_id: String, type:String):
 func edit_lesson_card(datas:Dictionary, old_id:String) ->void:
 	var card = find_lesson_card(old_id)
 	var old_type = card.type
-	card.assigning_dictionary_values(datas)
-	card.update_infos()
+	card.set_data(datas)
 	if card.type != old_type:
 		var parent = card.get_parent()
 		add_lesson_card_to_container(card, parent)
-	card.emit_signal("updating_lesson_cell", datas)
+	card.emit_signal("lesson_cell_updated", datas, "")
 	
 
 func lesson_cell_opened(id) -> void:
@@ -52,12 +51,11 @@ func lesson_cell_opened(id) -> void:
 	Signals.emit_signal("lesson_card_pressed", node_path)
 	
 
-func create_lesson_card(lesson:Dictionary) ->void:
+func create_lesson_card(data:Dictionary) ->void:
 	var instance = lesson_card.instance()
 	temp.add_child(instance)
 	var child = temp.get_child(0)
-	child.assigning_dictionary_values(lesson)
-	child.update_infos()
+	child.load_data(data)
 	add_lesson_card_to_container(child, temp)
 
 

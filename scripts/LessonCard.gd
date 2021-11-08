@@ -1,6 +1,6 @@
 extends Button
 
-signal updating_lesson_cell(datas)
+signal lesson_cell_updated(datas)
 
 onready var is_displayed_bg = preload("res://res/button_lesson_card_in_schedule.tres")
 onready var is_not_displayed_bg = preload("res://res/button_lesson_card_normal.tres")
@@ -21,10 +21,12 @@ var datetime: Array
 var rating : int ## Permet de noter le cours avec des etoiles
 var is_displayed : bool = false setget _set_is_displayed
 var size : int ## Nombre de tuiles que le cours occupe dans l'agenda
-var x : int
-var y : int
+var version : float
+#var x : int
+#var y : int
+var position := Vector2.ZERO
 
-var datas : Dictionary
+#var datas : Dictionary
 
 onready var header_panel := $VBoxContainer/Header
 onready var title_label := $VBoxContainer/Header/Title
@@ -37,6 +39,10 @@ onready var obligatory_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridC
 onready var room_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/RoomField
 onready var teacher_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/TeacherField
 onready var displayed_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/DisplayedField
+
+
+func _ready():
+	version = ProjectSettings.get_setting("application/config/version")
 
 
 func _set_is_displayed(value) ->void:
@@ -71,60 +77,33 @@ func get_data() ->Dictionary:
 	"rating" : rating,
 	"is_displayed" : is_displayed,
 	"size" : size,
-	"x" : x,
-	"y" : y
+	"position":position,
+	"version": version
 	}
 	return data
 
-##Non utilisee pour l'instant
-#func set_data(data:Dictionary) ->void:
-#	if data.has("id"):
-#		id = data["id"]
-#	if data.has("type"):
-#		type = data["type"]
-#	if data.has("subject"):
-#		subject = data["subject"]
-#	if data.has("lesson_code"):
-#		lesson_code = data["lesson_code"]
-#	if data.has("duration"):
-#		duration = data["duration"]
-#	if data.has("schedule"):
-#		schedule = data["schedule"]
-#	if data.has("is_obligatory"):
-#		is_obligatory = data["is_obligatory"]
-#	if data.has("room"):
-#		room = data["room"]
-#	if data.has("lesson"):
-#		lesson = data["lesson"]
-#	if data.has("teacher"):
-#		teacher = data["teacher"]
-#	if data.has("color"):
-#		color = data["color"]
-#	if data.has("datetime"):
-#		datetime = data["datetime"]
-#	if data.has("is_displayed"):
-#		is_displayed = data["is_displayed"]
-#	if data.has("rating"):
-#		rating = data["rating"]
-#	if data.has("size"):
-#		size = data["size"]
 
-
-
-func assigning_dictionary_values(datas_arg:Dictionary) -> void:
-	type = datas_arg["type"]
-	lesson = datas_arg["lesson"]
-	subject = datas_arg["subject"]
-	id = datas_arg["id"]
-	teacher = datas_arg["teacher"]
-	lesson_code = datas_arg["code"]
-	duration = datas_arg["duration"]
-	is_obligatory = datas_arg["obligatory"]
-	room = datas_arg["room"]
-	color = datas_arg["color"]
-	schedule = datas_arg["schedule"]
-	is_displayed = datas_arg["is_displayed"]
-	datas = datas_arg
+func set_data(data:Dictionary) -> void:
+	type = data["type"]
+	lesson = data["lesson"]
+	subject = data["subject"]
+	id = data["id"]
+	teacher = data["teacher"]
+	lesson_code = data["lesson_code"]
+	duration = data["duration"]
+	is_obligatory = data["is_obligatory"]
+	room = data["room"]
+	color = data["color"]
+	schedule = data["schedule"]
+	is_displayed = data["is_displayed"]
+	if data.has("rating"):
+		rating = data["rating"]
+	if data.has("size"):
+		size = data["size"]
+	if data.has("position"):
+		position = data["position"]
+#	datas = data
+	update_infos()
 
 
 
@@ -142,9 +121,9 @@ func update_infos() -> void:
 		obligatory_field.text = "oui"
 	if not is_obligatory:
 		obligatory_field.text = "non"
-	_calcul_size(duration)
-	_caculate_position(schedule)
-	emit_signal("updating_lesson_cell", datas)
+	size = _calcul_size(duration)
+	position = _calculate_position(schedule)
+	emit_signal("lesson_cell_updated", get_data(), "")
 
 
 
@@ -161,24 +140,23 @@ func calculate_time(duration, schedule)->String:
 	return String(hours) + "h" + minutes
 
 
-## Calcule la position de la cellule lorsque le cours est affiche dans l'agenda
-func _caculate_position(schedule: Array) ->void:
-	x = schedule[0]
+func _calculate_position(schedule: Array) ->Vector2:
+	var x = schedule[0]
 	var hours = int(schedule[2])
 	var minutes = int(schedule[3])
-	y = (hours-7)*2
+	var y = (hours-7)*2
 	if minutes > 0:
 		y += 1
-
+	return Vector2(x,y)
 
 # Calcule la taille du cours lorsqu'il est affiche dans l'agenda
-func _calcul_size(duration: Array) ->void:
+func _calcul_size(duration: Array) ->int:
 	var hours = int(duration[0])
 	var minutes = int(duration[1])
 	var nbr_cells : int = hours * 2
 	if minutes > 0:
 		nbr_cells += 1
-	size = nbr_cells
+	return nbr_cells
 	
 
 func update_color(color:String) -> void:
@@ -189,14 +167,24 @@ func update_color(color:String) -> void:
 
 
 ##__________________Methodes d'exportation des donnees________________	
+
+func load_data(data:Dictionary) ->void:
+	if data.has("position"):
+		data["position"] = str2var(data["position"]) as Vector2
+	set_data(data)
+	
 	
 func export_to_json() ->Dictionary:
-	datas["is_displayed"] = false
-	return datas
+	var data: Dictionary = get_data()
+	data["is_displayed"] = false
+	data["rating"] = 0
+	data["position"] = var2str(Vector2(data["position"]))
+	return data
 
 
 func export_to_csv() ->PoolStringArray:
-	var subject :String = str(datas["type"] + " " + datas["lesson"])
+#	var subject :String = str(datas["type"] + " " + datas["lesson"])
+	var subject :String = str(type + " " + lesson)
 	var start_date :String = str(datetime[0][0]) + "/" + str(datetime[0][1]) + "/" + str(datetime[0][2])
 	var start_time : String = datetime[1][0]
 	var end_date : String = start_date
@@ -223,7 +211,8 @@ func _on_LessonCard_gui_input(event):
 					if is_obligatory:
 						Signals.emit_signal("error_emitted", "ObligatoryLesson", node_path) # -> Signals -> AlertDialog 
 					else:
-						Signals.emit_signal("deleting_lesson_from_calendar", x, y, size, id)
+#						Signals.emit_signal("deleting_lesson_from_calendar", x, y, size, id)
+						Signals.emit_signal("deleting_lesson_from_calendar", position, size, id)
 					return
 				Global.calendar_array.add_lesson(node_path)
 

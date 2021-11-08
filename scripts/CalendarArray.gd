@@ -36,16 +36,16 @@ func set_all_the_line(y:int, is_empty:bool) ->void: ## -> RightPanel
 
 
 
-func delete_lesson(xpos:int, ypos:int, size:int, id:String) ->void:
+func delete_lesson(pos: Vector2, size:int, id:String) ->void:
 	for column in self.get_children():
-		if column.get_index() == xpos:
+		if column.get_index() == pos.x:
 			for line in column.get_children():
-				if line.y == ypos:
+				if line.position.y == pos.y:
 					var i := 0
 					var new_cells := []
 					while i < size:
 						var tmp = empty_cell.instance()
-						tmp.add_coord_to_cell(xpos, ypos + i)
+						tmp.add_coord_to_cell(pos.x, pos.y + i)
 						new_cells.append(tmp)
 						var index = line.get_position_in_parent()
 						column.add_child_below_node(line, tmp)
@@ -60,13 +60,13 @@ func delete_lesson(xpos:int, ypos:int, size:int, id:String) ->void:
 func add_lesson(node_path:NodePath) ->void:
 	var card = get_node(node_path)
 	for column in self.get_children():
-		if column.get_index() == card.x: ## cherche la bonne colonne
+		if column.get_index() == card.position.x: ## cherche la bonne colonne
 			var i:= 0
 			var node_to_replace = []
 			while i < card.size:
 				var node : Node 
 				for child in column.get_children():
-					if child.y == card.y + i:
+					if child.position.y == card.position.y + i:
 						node = child
 				node_to_replace.append(node)
 				if node == null:
@@ -80,8 +80,8 @@ func add_lesson(node_path:NodePath) ->void:
 					card.is_displayed = false
 					return
 			var tmp = lesson_cell.instance()
-			tmp.init_cell(card.x, card.y, card.size, card.datas)
-			card.connect("updating_lesson_cell", tmp, "update_cell")
+			tmp.init_cell(card.position.x, card.position.y, card.size, card.get_data())
+			card.connect("lesson_cell_updated", tmp, "update_cell")
 			
 			## supprime les anciennes cellules vides
 			for node in node_to_replace:
@@ -89,7 +89,7 @@ func add_lesson(node_path:NodePath) ->void:
 
 			var node_index : int
 			for child in column.get_children():
-				if child.y + child.size <= card.y:
+				if child.position.y + child.size <= card.position.y:
 					node_index += 1
 			column.add_child(tmp)
 			column.move_child(tmp, node_index)

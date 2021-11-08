@@ -17,6 +17,8 @@ onready var buttons_container := $Panel/VBoxContainer/Foot/ButtonsContainer
 onready var cancel_button : Button = $Panel/VBoxContainer/Foot/ButtonsContainer/CancelButton
 onready var loading_wrong_format : Label = $Panel/VBoxContainer/Body/LoadingWrongFormat
 onready var saving_wrong_format : Label = $Panel/VBoxContainer/Body/SavingWrongFormat
+onready var old_version : Label = $Panel/VBoxContainer/Body/OldVersion
+onready var loading_old_save : Label = $Panel/VBoxContainer/Body/LoadingOldSave
 
 
 func _ready():
@@ -58,6 +60,14 @@ func _show_alert_dialog(message, node_path) ->void:
 		"SavingWrongFormat":
 			cancel_button.show()
 			saving_wrong_format.show()
+		
+		"OldVersion":
+			cancel_button.show()
+			old_version.show()
+			
+		"LoadingOldSave":
+			cancel_button.show()
+			loading_old_save.show()
 
 
 
@@ -80,6 +90,6 @@ func _on_ConfirmButton_pressed():
 
 
 func _on_SubButton_pressed():
-	Signals.emit_signal("deleting_lesson_from_calendar", node.x, node.y, node.size, node.id)
+	Signals.emit_signal("deleting_lesson_from_calendar", node.position, node.size, node.id)
 	_clear_panel()
 	hide()

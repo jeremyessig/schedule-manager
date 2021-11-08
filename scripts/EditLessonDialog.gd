@@ -63,10 +63,10 @@ func _update_infos() ->void:
 ##_______________Edition du cours___________________________
 
 func edit_lesson() ->void:
-	var datas :Dictionary = create_data_dictionary()
-	datas["color"] = card_color
-	datas["is_displayed"] = lesson_card.is_displayed
-	Signals.emit_signal("lesson_edited", datas, old_id)
+	var data :Dictionary = create_data_dictionary()
+	data["color"] = card_color
+	data["is_displayed"] = lesson_card.is_displayed
+	Signals.emit_signal("lesson_edited", data, old_id)
 	
 
 
@@ -77,17 +77,17 @@ func _show_edit_lesson_dialog() ->void:
 
 
 func _on_DeleteButton_pressed():
-	Signals.emit_signal("deleting_lesson_from_calendar", lesson_card.x, lesson_card.y, lesson_card.size, lesson_card.id)
+	Signals.emit_signal("deleting_lesson_from_calendar", lesson_card.position.x, lesson_card.position.y, lesson_card.size, lesson_card.id)
 	Signals.emit_signal("lesson_card_deleted", lesson_card.id)
 	hide()
 
 
 func _on_EditButton_pressed():
-	var old := {"x":lesson_card.x, "y":lesson_card.y, "size":lesson_card.size}
+	var old := {"position":lesson_card.position, "size":lesson_card.size}
 	edit_lesson()
 	if lesson_card.is_displayed: ## Lorsque l'horaire est modifie, recharge la cellule dans le bon emplacement
-		if old["x"] != lesson_card.x or old["y"] != lesson_card.y or lesson_card.size != old["size"]:
-			Signals.emit_signal("deleting_lesson_from_calendar", old["x"], old["y"], old["size"], lesson_card.id)
+		if old["position"].x != lesson_card.position.x or old["position"].y != lesson_card.position.y or lesson_card.size != old["size"]:
+			Signals.emit_signal("deleting_lesson_from_calendar", old["position"], old["size"], lesson_card.id)
 			yield(get_tree(),"idle_frame")
 			var node_path = lesson_card.get_path()
 			Global.calendar_array.add_lesson(node_path)
@@ -114,5 +114,5 @@ func _on_SubLessonToCalendarButton_pressed():
 		var node_path := lesson_card.get_path()
 		Signals.emit_signal("error_emitted", "ObligatoryLesson", node_path) # -> Signals -> AlertDialog 
 	else:
-		Signals.emit_signal("deleting_lesson_from_calendar", lesson_card.x, lesson_card.y, lesson_card.size, lesson_card.id)
+		Signals.emit_signal("deleting_lesson_from_calendar", lesson_card.position, lesson_card.size, lesson_card.id)
 	hide()

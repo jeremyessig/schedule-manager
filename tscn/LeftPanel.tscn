@@ -81,7 +81,7 @@ custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 2 )
 custom_styles/focus = SubResource( 1 )
 custom_styles/normal = ExtResource( 3 )
-text = "Ajouter un cours"
+text = "Créer un cours"
 
 [node name="MarginRight" type="MarginContainer" parent="VBoxContainer/NewClassContainer"]
 margin_left = 344.0

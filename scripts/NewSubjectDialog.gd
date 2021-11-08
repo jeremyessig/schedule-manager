@@ -24,9 +24,9 @@ func _add_subject_to_database(subject:String) ->void:
 		notification.text = "Cette matière est déjà enregistrée."
 		return
 	Global.subjects_database.append(subject)
-	Signals.emit_signal("subject_added") # to NewLessonDialog by Signals
 	Global.update_option_button(remove_subject_option_button, Global.subjects_database)
 	Global.update_option_button(define_lesson_subject_option_button, Global.subjects_database)
+	Signals.emit_signal("subject_added") # to NewLessonDialog by Signals
 	
 	
 func _add_lesson_to_database(lesson:String, subject:String) ->void:

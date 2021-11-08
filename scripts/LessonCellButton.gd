@@ -1,8 +1,7 @@
 extends Button
 
 var is_empty := false
-var x := 0
-var y := 0
+var position:= Vector2.ZERO
 var size := 0
 var id :String
 var datas : Dictionary
@@ -11,24 +10,24 @@ var is_obligatory : bool
 onready var infos : Label = $CenterContainer/VBoxContainer/Infos
 
 func _ready():
-	#Signals.connect("lesson_edited", self, "update_cell")
+	Signals.connect("lesson_edited", self, "update_cell")
 	infos.text = "%s \n %s \n Salle %s \n Prof. %s" %[datas["lesson"], datas["type"], datas["room"], datas["teacher"]]
 
 
 func init_cell(xpos, ypos, size_arg, datas_arg:Dictionary) ->void:
 	size = size_arg
 	rect_min_size.y = (size * self.rect_min_size.y)
-	x = xpos
-	y = ypos
+	position.x = xpos
+	position.y = ypos
 	id = datas_arg["id"]
 	datas = datas_arg
-	is_obligatory = datas_arg["obligatory"]
+	is_obligatory = datas_arg["is_obligatory"]
 	_color_table(datas_arg["color"])
 	
-func update_cell(datas_arg: Dictionary) ->void:
+func update_cell(datas_arg: Dictionary, _old_id:String) ->void:
 	infos.text = "%s \n %s \n Salle %s \n Prof. %s" %[datas_arg["lesson"], datas_arg["type"], datas_arg["room"], datas_arg["teacher"]]
 	id = datas_arg["id"]
-	is_obligatory = datas_arg["obligatory"]
+	is_obligatory = datas_arg["is_obligatory"]
 	_color_table(datas_arg["color"])
 	
 
@@ -49,7 +48,7 @@ func _on_LessonCellButton_gui_input(event):
 				if is_obligatory:
 					Signals.emit_signal("error_emitted", "ObligatoryLesson", node_path) # -> Signals -> AlertDialog 
 				else:
-					Signals.emit_signal("deleting_lesson_from_calendar", x, y, size, id)
+					Signals.emit_signal("deleting_lesson_from_calendar", position, size, id)
 
 	
 	

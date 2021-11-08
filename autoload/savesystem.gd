@@ -1,5 +1,6 @@
 extends Node
 
+
 func export_to_JSON(path:String) -> void:
 	var export_to_json = File.new()
 	if not path.get_extension() == "json":
@@ -41,15 +42,26 @@ func import_from_JSON(path:String) ->void:
 	data_file.open(path, File.READ)
 	while data_file.get_position() < data_file.get_len():
 		var node_data = parse_json(data_file.get_line())
+		if not node_data is Dictionary or !node_data.has("version") or node_data["version"] != ProjectSettings.get_setting("application/config/version"):
+			data_file.close()
+			if not node_data is Dictionary or !node_data.has("version"):
+				Signals.emit_signal("error_emitted", "LoadingWrongFormat" ,null)
+			elif node_data["version"] < ProjectSettings.get_setting("application/config/version"):
+				Signals.emit_signal("error_emitted", "LoadingOldSave", null)
+			elif node_data["version"] > ProjectSettings.get_setting("application/config/version"):
+				Signals.emit_signal("error_emitted", "OldVersion", null)
+			data_file.close()
+			return
 		Global.left_panel.create_lesson_card(node_data)
 		if not Global.subjects_database.has(node_data["subject"]):
 			Global.subjects_database.append(node_data["subject"])
 		Signals.emit_signal("subject_added")
 		Global.update_option_button(Global.new_subject_dialog.remove_subject_option_button, Global.subjects_database)
 		if not Global.lessons_database.has(node_data["lesson"]):
-			Global.lessons_database = node_data["lesson"]
+			Global.lessons_database[node_data["lesson"]] = [node_data["lesson"], node_data["subject"]]
 		Signals.emit_signal("lesson_added")
 		Global.update_option_button(Global.new_subject_dialog.remove_lesson_option_button, Global.lessons_database)
+		Global.update_option_button(Global.new_subject_dialog.define_lesson_subject_option_button, Global.subjects_database)
 		
 	data_file.close()
 	
