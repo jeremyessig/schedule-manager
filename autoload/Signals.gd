@@ -11,3 +11,5 @@ signal lesson_deleted_from_calendar(id) ## CalendarArray -> LeftPanel
 signal deleting_lesson_from_calendar(x, y, size, id) ## [EditLessonDialog, AlertDialog, LessonCellButton] -> CalendarArray
 signal deleting_lesson_from_calendar_finished # CalendarArray -> EditLessonDialog
 signal lesson_cell_opened(id) ## LessonCellButton -> LeftPanel
+
+signal data_sent(nodepath, data, debug)

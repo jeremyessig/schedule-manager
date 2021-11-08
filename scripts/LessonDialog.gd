@@ -114,7 +114,7 @@ func create_data_dictionary() -> Dictionary:
 	var card_id :String = lesson + type + schedule[1] + schedule[2] + schedule[3] + room
 	card_id = card_id.replace(" ", "")
 	card_id = card_id.replace("'", "")
-	var dictionary : Dictionary = {
+	var data : Dictionary = {
 		"id": card_id,
 		"type": type,
 		"subject": subject,
@@ -128,7 +128,7 @@ func create_data_dictionary() -> Dictionary:
 		"schedule": schedule,
 		"is_displayed": false,
 	}
-	return dictionary
+	return data
 	
 
 func update_color(color:String) -> void:

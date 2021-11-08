@@ -77,14 +77,14 @@ margin_left = 615.0
 margin_right = 735.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 120, 30 )
+custom_colors/font_color = Color( 0.235294, 0.498039, 1, 1 )
+custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color = Color( 0.235294, 0.498039, 1, 1 )
-custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
 text = "Ajouter"
 
 [node name="RemoveSubjectLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="3"]
@@ -109,14 +109,14 @@ margin_top = 60.0
 margin_right = 735.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 120, 30 )
+custom_colors/font_color = Color( 0.235294, 0.498039, 1, 1 )
+custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color = Color( 0.235294, 0.498039, 1, 1 )
-custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
 text = "Supprimer"
 
 [node name="AddLessonLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="6"]
@@ -141,14 +141,14 @@ margin_top = 120.0
 margin_right = 735.0
 margin_bottom = 160.0
 rect_min_size = Vector2( 120, 30 )
+custom_colors/font_color = Color( 0.235294, 0.498039, 1, 1 )
+custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color = Color( 0.235294, 0.498039, 1, 1 )
-custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
 text = "Ajouter"
 
 [node name="RemoveLessonLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="9"]
@@ -173,14 +173,14 @@ margin_top = 180.0
 margin_right = 735.0
 margin_bottom = 220.0
 rect_min_size = Vector2( 120, 30 )
+custom_colors/font_color = Color( 0.235294, 0.498039, 1, 1 )
+custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color = Color( 0.235294, 0.498039, 1, 1 )
-custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
 text = "Supprimer"
 
 [node name="Notification" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer" index="2"]
@@ -202,13 +202,13 @@ margin_bottom = 45.0
 margin_right = 120.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 120, 30 )
+custom_colors/font_color = Color( 0.235294, 0.498039, 1, 1 )
+custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = SubResource( 6 )
 custom_styles/pressed = SubResource( 7 )
 custom_styles/focus = SubResource( 8 )
 custom_styles/normal = SubResource( 9 )
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color = Color( 0.235294, 0.498039, 1, 1 )
-custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
 text = "Quitter"
 
 [connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/CreateButton" to="." method="_on_CreateButton_pressed"]
