@@ -21,10 +21,6 @@ script = ExtResource( 2 )
 autowrap = false
 clip_text = false
 
-[node name="ColorGrid" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="19"]
-custom_constants/vseparation = 4
-custom_constants/hseparation = 4
-
 [node name="HBoxContainer" parent="Panel/VBoxContainer/Foot" index="0"]
 margin_left = 178.0
 margin_right = 422.0

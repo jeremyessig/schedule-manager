@@ -47,7 +47,7 @@ func import_from_JSON(path:String) ->void:
 		Signals.emit_signal("subject_added")
 		Global.update_option_button(Global.new_subject_dialog.remove_subject_option_button, Global.subjects_database)
 		if not Global.lessons_database.has(node_data["lesson"]):
-			Global.lessons_database.append(node_data["lesson"])
+			Global.lessons_database = node_data["lesson"]
 		Signals.emit_signal("lesson_added")
 		Global.update_option_button(Global.new_subject_dialog.remove_lesson_option_button, Global.lessons_database)
 		
