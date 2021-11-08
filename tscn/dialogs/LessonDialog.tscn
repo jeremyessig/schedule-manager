@@ -166,7 +166,7 @@ margin_bottom = 30.0
 rect_min_size = Vector2( 60, 30 )
 text = "00"
 align = 1
-items = [ "00", null, false, 0, null, "15", null, false, 1, null, "30", null, false, 2, null, "45", null, false, 3, null ]
+items = [ "00", null, false, 0, null, "30", null, false, 2, null ]
 selected = 0
 
 [node name="MLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/LessonDuration" index="3"]
@@ -295,6 +295,8 @@ custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Couleur :"
 
 [node name="ColorGrid" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="19" instance=ExtResource( 3 )]
+custom_constants/vseparation = 4
+custom_constants/hseparation = 4
 
 [node name="Notification" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer" index="1"]
 margin_top = 512.0

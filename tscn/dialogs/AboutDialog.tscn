@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/AboutDialog.gd" type="Script" id=2]
+
+[node name="AboutDialog" type="WindowDialog"]
+visible = true
+margin_left = 482.0
+margin_top = 246.0
+margin_right = 849.0
+margin_bottom = 501.0
+popup_exclusive = true
+window_title = "A propos du logiciel"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainerBody" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainerBody"]
+margin_left = 95.0
+margin_top = 75.0
+margin_right = 272.0
+margin_bottom = 179.0
+custom_constants/separation = 16
+
+[node name="AuthorLabel" type="Label" parent="CenterContainerBody/VBoxContainer"]
+margin_right = 177.0
+margin_bottom = 14.0
+text = "Développé par Jérémy Essig"
+valign = 1
+
+[node name="LicenceLabel" type="Label" parent="CenterContainerBody/VBoxContainer"]
+margin_top = 30.0
+margin_right = 177.0
+margin_bottom = 44.0
+text = "Licence: MIT"
+align = 1
+valign = 1
+
+[node name="VersionLabel" type="Label" parent="CenterContainerBody/VBoxContainer"]
+margin_top = 60.0
+margin_right = 177.0
+margin_bottom = 74.0
+text = "Version du logiciel n°"
+align = 1
+valign = 1
+
+[node name="EngineLabel" type="Label" parent="CenterContainerBody/VBoxContainer"]
+margin_top = 90.0
+margin_right = 177.0
+margin_bottom = 104.0
+custom_colors/font_color = Color( 0.6, 0.6, 0.6, 1 )
+text = "Powered by Godot Engine"
+align = 1
+valign = 1

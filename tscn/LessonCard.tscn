@@ -84,14 +84,14 @@ __meta__ = {
 }
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 24.0
+margin_top = 40.0
 margin_right = 300.0
-margin_bottom = 215.0
+margin_bottom = 199.0
 rect_min_size = Vector2( 300, 0 )
 mouse_filter = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-custom_constants/vseparation = 6
+custom_constants/vseparation = 2
 custom_constants/hseparation = 0
 columns = 2
 
@@ -109,26 +109,26 @@ custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "TD"
 
 [node name="SubjectLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
-margin_top = 28.0
+margin_top = 24.0
 margin_right = 150.0
-margin_bottom = 42.0
+margin_bottom = 38.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Matière :"
 
 [node name="SubjectField" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 margin_left = 150.0
-margin_top = 20.0
+margin_top = 16.0
 margin_right = 300.0
-margin_bottom = 51.0
+margin_bottom = 47.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Histoire Contemporaine"
 autowrap = true
 
 [node name="LessonCodeLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
-margin_top = 57.0
+margin_top = 49.0
 margin_right = 150.0
-margin_bottom = 71.0
+margin_bottom = 63.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Identifiant :"
@@ -136,86 +136,86 @@ autowrap = true
 
 [node name="LessonCodeField" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 margin_left = 150.0
-margin_top = 57.0
+margin_top = 49.0
 margin_right = 300.0
-margin_bottom = 71.0
+margin_bottom = 63.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "HisInfo231"
 autowrap = true
 
 [node name="DurationLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
-margin_top = 77.0
+margin_top = 65.0
 margin_right = 150.0
-margin_bottom = 91.0
+margin_bottom = 79.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Durée :"
 
 [node name="DurationField" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 margin_left = 150.0
-margin_top = 77.0
+margin_top = 65.0
 margin_right = 300.0
-margin_bottom = 91.0
+margin_bottom = 79.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "1h30"
 
 [node name="ScheduleLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
-margin_top = 97.0
+margin_top = 81.0
 margin_right = 150.0
-margin_bottom = 111.0
+margin_bottom = 95.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Horaire :"
 
 [node name="ScheduleField" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 margin_left = 150.0
-margin_top = 97.0
+margin_top = 81.0
 margin_right = 300.0
-margin_bottom = 111.0
+margin_bottom = 95.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Jeudi 13h30 à 15h00"
 
 [node name="ObligatoryLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
-margin_top = 117.0
+margin_top = 97.0
 margin_right = 150.0
-margin_bottom = 131.0
+margin_bottom = 111.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Obligatoire: "
 
 [node name="ObligatoryField" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 margin_left = 150.0
-margin_top = 117.0
+margin_top = 97.0
 margin_right = 300.0
-margin_bottom = 131.0
+margin_bottom = 111.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Non"
 
 [node name="RoomLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
-margin_top = 137.0
+margin_top = 113.0
 margin_right = 150.0
-margin_bottom = 151.0
+margin_bottom = 127.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Salle :"
 
 [node name="RoomField" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 margin_left = 150.0
-margin_top = 137.0
+margin_top = 113.0
 margin_right = 300.0
-margin_bottom = 151.0
+margin_bottom = 127.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "104"
 
 [node name="TeacherLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
-margin_top = 157.0
+margin_top = 129.0
 margin_right = 150.0
-margin_bottom = 171.0
+margin_bottom = 143.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Professeur :"
 
 [node name="TeacherField" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 margin_left = 150.0
-margin_top = 157.0
+margin_top = 129.0
 margin_right = 300.0
-margin_bottom = 171.0
+margin_bottom = 143.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Bill Gates"
 
@@ -237,9 +237,9 @@ custom_colors/font_color = Color( 0.662745, 0, 0, 1 )
 text = "NON"
 
 [node name="RatingLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
-margin_top = 177.0
+margin_top = 145.0
 margin_right = 150.0
-margin_bottom = 191.0
+margin_bottom = 159.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Avis :"
 
