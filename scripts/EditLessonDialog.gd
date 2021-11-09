@@ -27,16 +27,16 @@ func get_item_index_by_string(node:OptionButton, content:String) -> int:
 func _open_dialog(nodepath:NodePath) ->void:
 	_show_edit_lesson_dialog()
 	lesson_card = get_node(nodepath)
-	_update_infos()
+	_update_gui()
 	update_color(card_color)
 
 
-func _update_infos() ->void:
+func _update_gui() ->void:
 	title.text = lesson_card.lesson
 	type_option_button.select(get_item_index_by_string(type_option_button, lesson_card.type))
 	teacher_line_edit.text = lesson_card.teacher
 	subject_option_button.select(get_item_index_by_string(subject_option_button, lesson_card.subject))
-	lesson_option_button.select(get_item_index_by_string(lesson_option_button, lesson_card.lesson))
+	Global.update_option_button(lesson_option_button, Global.lessons_database, lesson_card.subject)
 	room_line_edit.text = lesson_card.room
 	duration_hours_option_button.select(get_item_index_by_string(duration_hours_option_button, lesson_card.duration[0]))
 	duration_minutes_option_button.select(get_item_index_by_string(duration_minutes_option_button, lesson_card.duration[1]))

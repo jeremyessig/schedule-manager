@@ -63,6 +63,8 @@ func import_from_JSON(path:String) ->void:
 	var save_nodes = get_tree().get_nodes_in_group("lesson_cards")
 	for i in save_nodes:
 		i.delete()
+	Global.subjects_database.clear()
+	Global.lessons_database.clear()
 	
 	data_file.open(path, File.READ)
 	while data_file.get_position() < data_file.get_len():

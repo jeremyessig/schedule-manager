@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/calendar_button/class/Date.gd"
 }, {
+"base": "Node",
+"class": "Sort",
+"language": "GDScript",
+"path": "res://classes/sort.gd"
+}, {
 "base": "Reference",
 "class": "WindowRestrictor",
 "language": "GDScript",
@@ -33,6 +38,7 @@ _global_script_class_icons={
 "Calendar": "",
 "CalendarButtons": "",
 "Date": "",
+"Sort": "",
 "WindowRestrictor": ""
 }
 
@@ -41,7 +47,7 @@ _global_script_class_icons={
 config/name="Schedule Manager"
 run/main_scene="res://tscn/Main.tscn"
 config/icon="res://icon.png"
-config/version=0.11
+config/version=0.2
 
 [autoload]
 

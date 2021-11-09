@@ -11,6 +11,10 @@ var new_subject_dialog : Control
 var subjects_database : Array
 var lessons_database : Dictionary
 
+var settings: Dictionary = {
+	"card_index_top": false,
+}
+
 func _ready() -> void:
 	var root = get_tree().get_root()
 	right_panel = find_node_by_name(root, "RightPanel")
@@ -40,10 +44,12 @@ func update_option_button(button:OptionButton, database, subject: String = "")->
 					button.add_item(value[0])			
 
 
-func reparent_node(parent: Node, source: Node, target:Node) ->void:
-	parent.remove_child(source)
-	target.add_child(source)
-	source.set_owner(target)
+func reparent_node(parent: Node, child: Node, target:Node) ->void:
+	parent.remove_child(child)
+	target.add_child(child)
+	if settings["card_index_top"]:
+		target.move_child(child, 0)
+	child.set_owner(target)
 
 
 func get_item_string(node:OptionButton) ->String:

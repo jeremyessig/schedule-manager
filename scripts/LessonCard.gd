@@ -24,6 +24,7 @@ var is_displayed : bool = false setget _set_is_displayed
 var size : int ## Nombre de tuiles que le cours occupe dans l'agenda
 var version : float
 var position := Vector2.ZERO
+var index : int 
 
 onready var header_panel := $VBoxContainer/Header
 onready var title_label := $VBoxContainer/Header/Title
@@ -43,7 +44,7 @@ onready var displayed_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridCo
 func _ready():
 	version = ProjectSettings.get_setting("application/config/version")
 	Signals.connect("lesson_removed_from_calendar", self, "_undisplay")
-	save_date["created"] = OS.get_datetime()
+	save_date["created"] = OS.get_datetime() 
 
 ##______________setter et getter prives___________________________
 
@@ -73,7 +74,8 @@ func get_data() ->Dictionary:
 	"is_displayed" : is_displayed,
 	"size" : size,
 	"position":position,
-	"version": version
+	"version": version,
+	"index": index
 	}
 	return data
 
@@ -91,6 +93,7 @@ func set_data(data:Dictionary) -> void:
 	color = data["color"]
 	schedule = data["schedule"]
 	is_displayed = data["is_displayed"]
+	index = data["index"]
 	if data.has("save_date"):
 		save_date = data["save_date"]
 	if data.has("rating"):

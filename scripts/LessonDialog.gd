@@ -45,17 +45,14 @@ func _physics_process(delta):
 func _on_subject_added() ->void: ## From NewSubjectDialog and SaveSystem.gd by Signals
 	Global.update_option_button(subject_option_button, Global.subjects_database)
 	_check_subject_lesson_database()
-#	subject_option_button.text = "Sélectionnez une matière dans la liste"
-#	subject_option_button.selected = -1
 
 
 
 func _on_lesson_added() ->void: ## From NewSubjectDialog and SaveSystem.gd by Signals
 	var subject_selected: String = subject_option_button.get_item_text(0)
-	Global.update_option_button(lesson_option_button, Global.lessons_database, subject_selected)
-#	Global.update_option_button(lesson_option_button, Global.lessons_database)
+#	Global.update_option_button(lesson_option_button, Global.lessons_database, subject_selected)
+	Global.update_option_button(lesson_option_button, Global.lessons_database)
 	_check_subject_lesson_database()
-	pass
 
 
 ##______________Verifications avant validation du cours________________________
@@ -92,13 +89,20 @@ func check_for_validation() :
 
 
 func _check_if_lesson_exist(lesson_arg: OptionButton, type_arg: OptionButton, day_arg:OptionButton, hours_arg:OptionButton, minutes_arg:OptionButton, room_arg:LineEdit):
-	var card_id :String = lesson_arg.text + type_arg.text + day_arg.text + hours_arg.text + minutes_arg.text + room_arg.text
+	var card_id :String = type_arg.text + lesson_arg.text + attribut_letter_to_day(day_arg.text) + hours_arg.text + minutes_arg.text + room_arg.text
 	card_id = card_id.replace(" ", "")
 	card_id = card_id.replace("'", "")
 	if Global.left_panel.does_lesson_exist(card_id, type_arg.text):
 		return true
 	return false
 
+
+func attribut_letter_to_day(day: String) ->String:
+	var table = [["Lundi", "aaa"], ["Mardi", "bbb"], ["Mercredi", "ccc"],["Jeudi", "ddd"],["Vendredi", "eee"],["Samedi", "fff"],]
+	for letter in table:
+		if letter[0] == day:
+			return letter[1]
+	return day
 
 ##_______________Creation et envoie des donnees par signal________________________
 
@@ -116,9 +120,11 @@ func create_data_dictionary() -> Dictionary:
 		Global.get_item_string(schedule_days_option_button), 
 		Global.get_item_string(schedule_hours_option_button), 
 		Global.get_item_string(schedule_minutes_option_button)]
-	var card_id :String = lesson + type + schedule[1] + schedule[2] + schedule[3] + room
+#	var card_id :String = lesson + type + schedule[1] + schedule[2] + schedule[3] + room
+	var card_id :String = type + lesson + attribut_letter_to_day(schedule[1]) + schedule[2] + schedule[3] + room
 	card_id = card_id.replace(" ", "")
 	card_id = card_id.replace("'", "")
+	var index = 0
 	var data : Dictionary = {
 		"id": card_id,
 		"type": type,
@@ -132,6 +138,7 @@ func create_data_dictionary() -> Dictionary:
 		"color": color,
 		"schedule": schedule,
 		"is_displayed": false,
+		"index": index
 	}
 	return data
 	

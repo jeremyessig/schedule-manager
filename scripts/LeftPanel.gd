@@ -6,6 +6,7 @@ onready var td_container := $VBoxContainer/HBoxContainer2/VBoxContainer/ScrollCo
 onready var cm_container := $VBoxContainer/HBoxContainer2/VBoxContainer/ScrollContainer/ClassContainer/CMContainer
 onready var buttons_grid_container := $VBoxContainer/NewClassContainer/ButtonsGridContainer
 onready var temp := $Temp
+onready var sort_btn := $SortBtn
 
 
 ##______________Fonctions d'initialisation________________________
@@ -78,6 +79,30 @@ func add_lesson_card_to_container(child:Node, source:Node) ->void:
 		Global.reparent_node(source, child, td_container)
 
 
+func sort_cards(invert:bool):
+	var table = sort_lessons_by_letters()
+	if invert == true:
+		table.invert()
+	for card in get_tree().get_nodes_in_group("lesson_cards"):
+		if card.type == "Cours Magistral":
+			Global.reparent_node(cm_container, card, temp)
+		if card.type == "Travaux Dirigés":
+			Global.reparent_node(td_container, card, temp)
+	for matrix in table:
+		add_lesson_card_to_container(matrix[1], temp)
+		matrix[1].index = matrix[1].get_index()
+		
+
+
+func sort_lessons_by_letters() ->Array:
+	var table: Array
+	for card in get_tree().get_nodes_in_group("lesson_cards"):
+		var matrix = [card.id, card]
+		table.append(matrix)
+	table.sort_custom(Sort, "sort_ascending")
+	return table
+
+
 #func set_lesson_card(id:String) ->void:
 #	var card = find_lesson_card(id)
 #	card.is_displayed = false
@@ -120,3 +145,6 @@ func _responsive_TDCM_container():
 
 		
 	
+func _on_SortBtn_toggled(button_pressed):
+	sort_cards(button_pressed)
+	sort_btn.flip_v = button_pressed

@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://res/panel_secondary_color.tres" type="StyleBox" id=1]
 [ext_resource path="res://res/button_white_hover_styleboxflat.tres" type="StyleBox" id=2]
 [ext_resource path="res://res/button_white_styleboxflat.tres" type="StyleBox" id=3]
 [ext_resource path="res://res/Helvetica_bold.tres" type="DynamicFont" id=4]
 [ext_resource path="res://scripts/LeftPanel.gd" type="Script" id=5]
+[ext_resource path="res://assets/buttons/sort_descending_icon_128x128_normal.png" type="Texture" id=6]
+[ext_resource path="res://assets/buttons/sort_descending_icon_128x128_hover.png" type="Texture" id=7]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -230,6 +232,28 @@ margin_right = 360.0
 margin_bottom = 977.0
 rect_min_size = Vector2( 10, 0 )
 
+[node name="SortBtn" type="TextureButton" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -75.0
+margin_top = -75.0
+margin_right = -13.0
+margin_bottom = -14.0
+size_flags_vertical = 0
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource( 6 )
+texture_hover = ExtResource( 7 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Temp" type="Node2D" parent="."]
 visible = false
 position = Vector2( -1395.15, -244.106 )
+
+[connection signal="toggled" from="SortBtn" to="." method="_on_SortBtn_toggled"]

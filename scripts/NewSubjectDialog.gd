@@ -56,6 +56,7 @@ func _remove_lesson_from_database() ->void:
 	for lesson_card in get_tree().get_nodes_in_group("lesson_cards"):
 		if lesson_card.lesson == lesson_title:
 			lesson_card.delete()
+	Signals.emit_signal("lesson_added")
 	_update_GUI()
 
 
@@ -71,6 +72,7 @@ func _remove_subject_from_database() ->void:
 	for lesson_card in get_tree().get_nodes_in_group("lesson_cards"):
 		if !Global.lessons_database.has(lesson_card.lesson):
 			lesson_card.delete()
+	Signals.emit_signal("subject_added")
 	_update_GUI()	
 
 

@@ -215,9 +215,9 @@ margin_left = 185.0
 margin_right = 245.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 60, 30 )
-text = "7"
+text = "07"
 align = 1
-items = [ "7", null, false, 0, null, "8", null, false, 1, null, "9", null, false, 2, null, "10", null, false, 3, null, "11", null, false, 4, null, "12", null, false, 5, null, "13", null, false, 6, null, "14", null, false, 7, null, "15", null, false, 8, null, "16", null, false, 9, null, "17", null, false, 10, null, "18", null, false, 11, null, "19", null, false, 12, null, "20", null, false, 13, null, "21", null, false, 14, null ]
+items = [ "07", null, false, 0, null, "08", null, false, 1, null, "09", null, false, 2, null, "10", null, false, 3, null, "11", null, false, 4, null, "12", null, false, 5, null, "13", null, false, 6, null, "14", null, false, 7, null, "15", null, false, 8, null, "16", null, false, 9, null, "17", null, false, 10, null, "18", null, false, 11, null, "19", null, false, 12, null, "20", null, false, 13, null, "21", null, false, 14, null ]
 selected = 0
 
 [node name="HourLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/Schedule" index="3"]
