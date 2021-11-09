@@ -18,6 +18,7 @@ func _ready() -> void:
 	header.connect("export_csv_pressed", self, "_open_export_csv_dialog")
 	header.connect("about_pressed", self, "_open_about_dialog")
 	
+	
 
 
 

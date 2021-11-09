@@ -18,15 +18,12 @@ var lesson : String
 var teacher : String
 var color : String = "#00acb4"
 var datetime: Array
+var save_date: Dictionary = {"created": "", "edited": "", "saved": ""} ## Date de création et modification de la carte
 var rating : int ## Permet de noter le cours avec des etoiles
 var is_displayed : bool = false setget _set_is_displayed
 var size : int ## Nombre de tuiles que le cours occupe dans l'agenda
 var version : float
-#var x : int
-#var y : int
 var position := Vector2.ZERO
-
-#var datas : Dictionary
 
 onready var header_panel := $VBoxContainer/Header
 onready var title_label := $VBoxContainer/Header/Title
@@ -41,24 +38,20 @@ onready var teacher_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridCont
 onready var displayed_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/DisplayedField
 
 
+
+##_____________Methodes d'initialisation__________________________
 func _ready():
 	version = ProjectSettings.get_setting("application/config/version")
+	save_date["created"] = OS.get_datetime()
 
+##______________setter et getter prives___________________________
 
 func _set_is_displayed(value) ->void:
 	is_displayed = value
 	_update_background()
 	
 
-##_______________Methodes d'affichage de la classe____________________________
-func _update_background():
-	if is_displayed:
-		self.add_stylebox_override("normal", is_displayed_bg)
-		self.add_stylebox_override("hover", is_displayed_bg)
-		return
-	self.add_stylebox_override("normal", is_not_displayed_bg)
-	self.add_stylebox_override("hover", is_not_displayed_bg_hover)
-
+##_______________Gestion d'acces aux donnees____________________________
 
 func get_data() ->Dictionary:
 	var data = {
@@ -74,6 +67,7 @@ func get_data() ->Dictionary:
 	"teacher" : teacher,
 	"color" : color,
 	"datetime" : datetime,
+	"save_date": save_date,
 	"rating" : rating,
 	"is_displayed" : is_displayed,
 	"size" : size,
@@ -96,34 +90,16 @@ func set_data(data:Dictionary) -> void:
 	color = data["color"]
 	schedule = data["schedule"]
 	is_displayed = data["is_displayed"]
+	if data.has("save_date"):
+		save_date = data["save_date"]
 	if data.has("rating"):
 		rating = data["rating"]
 	if data.has("size"):
 		size = data["size"]
 	if data.has("position"):
 		position = data["position"]
-#	datas = data
-	update_infos()
+	update_GUI()
 
-
-
-func update_infos() -> void:
-	title_label.text = lesson
-	type_field.text = type
-	subject_field.text = subject
-	lesson_code_field.text = lesson_code
-	teacher_field.text = teacher
-	room_field.text = room
-	duration_field.text = "%sh%s" %[String(duration[0]), String(duration[1])]
-	schedule_field.text = "%s %sh%s à %s" %[String(schedule[1]), String(schedule[2]), String(schedule[3]), calculate_time(duration, schedule)]
-	update_color(color)
-	if is_obligatory:
-		obligatory_field.text = "oui"
-	if not is_obligatory:
-		obligatory_field.text = "non"
-	size = _calcul_size(duration)
-	position = _calculate_position(schedule)
-	emit_signal("lesson_cell_updated", get_data(), "")
 
 
 
@@ -157,8 +133,29 @@ func _calcul_size(duration: Array) ->int:
 	if minutes > 0:
 		nbr_cells += 1
 	return nbr_cells
-	
 
+
+##_______________Mise a jour de la GUI______________
+
+func update_GUI() -> void:
+	title_label.text = lesson
+	type_field.text = type
+	subject_field.text = subject
+	lesson_code_field.text = lesson_code
+	teacher_field.text = teacher
+	room_field.text = room
+	duration_field.text = "%sh%s" %[String(duration[0]), String(duration[1])]
+	schedule_field.text = "%s %sh%s à %s" %[String(schedule[1]), String(schedule[2]), String(schedule[3]), calculate_time(duration, schedule)]
+	update_color(color)
+	if is_obligatory:
+		obligatory_field.text = "oui"
+	if not is_obligatory:
+		obligatory_field.text = "non"
+	size = _calcul_size(duration)
+	position = _calculate_position(schedule)
+	emit_signal("lesson_cell_updated", get_data(), "")
+	
+	
 func update_color(color:String) -> void:
 	var new_style = StyleBoxFlat.new()
 	new_style.set_bg_color(Color(color))
@@ -166,7 +163,21 @@ func update_color(color:String) -> void:
 	header_panel.set('custom_styles/panel', new_style)
 
 
-##__________________Methodes d'exportation des donnees________________	
+func _update_background():
+	if is_displayed:
+		self.add_stylebox_override("normal", is_displayed_bg)
+		self.add_stylebox_override("hover", is_displayed_bg)
+		return
+	self.add_stylebox_override("normal", is_not_displayed_bg)
+	self.add_stylebox_override("hover", is_not_displayed_bg_hover)
+
+
+##__________________Methodes d'import / export des donnees et suppression________________	
+
+func delete()->void:
+	self.is_displayed = false
+	self.queue_free()
+
 
 func load_data(data:Dictionary) ->void:
 	if data.has("position"):
@@ -198,7 +209,7 @@ func export_to_csv() ->PoolStringArray:
 	
 	
 	
-##_______________Fonctions connectees_______________________________
+##_______________________Methodes connectees_______________________________
 
 func _on_LessonCard_gui_input(event):
 	var node_path : NodePath = self.get_path()
@@ -211,8 +222,7 @@ func _on_LessonCard_gui_input(event):
 					if is_obligatory:
 						Signals.emit_signal("error_emitted", "ObligatoryLesson", node_path) # -> Signals -> AlertDialog 
 					else:
-#						Signals.emit_signal("deleting_lesson_from_calendar", x, y, size, id)
-						Signals.emit_signal("deleting_lesson_from_calendar", position, size, id)
+						Signals.emit_signal("lesson_from_calendar_deleted", position, size, id)
 					return
 				Global.calendar_array.add_lesson(node_path)
 

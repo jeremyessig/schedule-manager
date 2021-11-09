@@ -48,7 +48,7 @@ func _on_LessonCellButton_gui_input(event):
 				if is_obligatory:
 					Signals.emit_signal("error_emitted", "ObligatoryLesson", node_path) # -> Signals -> AlertDialog 
 				else:
-					Signals.emit_signal("deleting_lesson_from_calendar", position, size, id)
+					Signals.emit_signal("lesson_from_calendar_deleted", position, size, id)
 
 	
 	

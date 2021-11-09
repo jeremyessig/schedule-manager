@@ -8,7 +8,7 @@ var lesson_cell = preload("res://tscn/LessonCellButton.tscn")
 
 func _ready() -> void:
 	_init_calendar_grid()
-	Signals.connect("deleting_lesson_from_calendar", self, "delete_lesson")
+	Signals.connect("lesson_from_calendar_deleted", self, "delete_lesson")
 
 
 func _init_calendar_grid() ->void:
@@ -52,7 +52,7 @@ func delete_lesson(pos: Vector2, size:int, id:String) ->void:
 						column.move_child(tmp, index)
 						i += 1
 					line.queue_free()
-					Signals.emit_signal("lesson_deleted_from_calendar", id)
+					Signals.emit_signal("lesson_removed_from_calendar", id)
 					
 
 

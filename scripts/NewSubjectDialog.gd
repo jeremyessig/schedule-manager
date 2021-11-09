@@ -13,6 +13,11 @@ onready var add_lesson_line_edit : LineEdit = $Panel/VBoxContainer/Body/VBoxCont
 onready var remove_lesson_option_button : OptionButton = $Panel/VBoxContainer/Body/VBoxContainer/GridContainer/RemoveLessonOptionButton
 onready var define_lesson_subject_option_button : OptionButton = $Panel/VBoxContainer/Body/VBoxContainer/GridContainer/DefineLessonSubjectOptionButton
 
+func _update_GUI() ->void:
+	Global.update_option_button(remove_subject_option_button, Global.subjects_database)
+	Global.update_option_button(remove_lesson_option_button, Global.lessons_database)
+	Global.update_option_button(define_lesson_subject_option_button, Global.subjects_database)
+
 
 func _add_subject_to_database(subject:String) ->void:
 	if add_subject_line_edit.text == "":
@@ -68,10 +73,7 @@ func _on_RemoveSubjectButton_pressed() -> void:
 	for k in Global.lessons_database:
 		if Global.lessons_database[k][1] == string:
 			Global.lessons_database.erase(k)
-	Global.update_option_button(remove_lesson_option_button, Global.lessons_database)
-	Global.update_option_button(remove_subject_option_button, Global.subjects_database)
-	Global.update_option_button(define_lesson_subject_option_button, Global.subjects_database)
-	emit_signal("subject_added")
+	_update_GUI()
 
 
 func _on_CreateLessonButton_pressed() -> void:
@@ -83,5 +85,6 @@ func _on_CreateLessonButton_pressed() -> void:
 func _on_RemoveLessonButton_pressed() -> void:
 	var string = Global.get_item_string(remove_lesson_option_button)
 	Global.lessons_database.erase(string)
-	emit_signal("lesson_added")
-	print_debug(Global.lessons_database)
+	for card in get_tree().get_nodes_in_group("lesson_cards"):
+		pass
+	_update_GUI()

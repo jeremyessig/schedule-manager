@@ -13,8 +13,19 @@ func _ready() -> void:
 	Signals.connect("lesson_created",self,"create_lesson_card") ## From NewLessonDialog by Signals
 	Signals.connect("lesson_edited", self, "edit_lesson_card") ## From EditLessonDialog by Signals
 	Signals.connect("lesson_card_deleted", self, "delete_lesson_card") ## From EditLessonDialog by Signals
-	Signals.connect("lesson_deleted_from_calendar", self, "set_lesson_card")
+	Signals.connect("lesson_removed_from_calendar", self, "set_lesson_card")
 	Signals.connect("lesson_cell_opened", self, "lesson_cell_opened")
+	_init_key_reference()
+
+
+## Cree une carte temporaire pour recuperer les clefs des data
+## Ces clefs sont utilisees comme modele de reference pour valider la retro-compatibilite des sauvegardes
+func _init_key_reference():	
+	create_lesson_card({})
+	var child = temp.get_child(0)
+	var dic = child.get_data()
+	SaveSystem.key_reference = dic.keys()
+	child.queue_free()
 	
 	
 func _physics_process(_delta: float) -> void:
@@ -55,8 +66,9 @@ func create_lesson_card(data:Dictionary) ->void:
 	var instance = lesson_card.instance()
 	temp.add_child(instance)
 	var child = temp.get_child(0)
-	child.load_data(data)
-	add_lesson_card_to_container(child, temp)
+	if !data.empty():
+		child.load_data(data)
+		add_lesson_card_to_container(child, temp)
 
 
 
@@ -84,7 +96,8 @@ func find_lesson_card(id:String) ->Node:
 
 
 func delete_lesson_card(id:String) ->void:
-	find_lesson_card(id).queue_free()
+#	find_lesson_card(id).queue_free()
+	find_lesson_card(id).delete()
 	
 
 ##___________________Affichage responsive_______________________________

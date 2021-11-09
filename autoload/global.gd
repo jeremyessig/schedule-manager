@@ -33,7 +33,6 @@ func update_option_button(button:OptionButton, database, subject: String = "")->
 			for k in database:
 				var value = database[k]
 				button.add_item(value[0])
-				print_debug("SUJET AJOUTE")
 		else:
 			for k in database:
 				var value = database[k]

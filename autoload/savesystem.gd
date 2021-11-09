@@ -1,6 +1,31 @@
 extends Node
+var key_reference : Array #Clefs de reference pour tester la compatibilite (init dans LeftPanel)
+var version : float
 
 
+func _ready():
+	version = ProjectSettings.get_setting("application/config/version")
+
+
+
+
+#######################################################################
+################### TRAITEMENT DES FICHIERS JSON ######################
+#######################################################################
+
+##________________Retro-compatibilite des fichiers_______________________
+
+## Verifie si les donnees de la sauvegarde son compatibles
+func is_compatible(data:Dictionary) ->bool:
+	return data.has_all(key_reference)
+
+
+func update_compatibility(node_data:Dictionary) -> void:
+	node_data["version"] = version
+			
+
+
+##_____________ ___Import et export en JSON ______________________________
 func export_to_JSON(path:String) -> void:
 	var export_to_json = File.new()
 	if not path.get_extension() == "json":
@@ -42,16 +67,19 @@ func import_from_JSON(path:String) ->void:
 	data_file.open(path, File.READ)
 	while data_file.get_position() < data_file.get_len():
 		var node_data = parse_json(data_file.get_line())
-		if not node_data is Dictionary or !node_data.has("version") or node_data["version"] != ProjectSettings.get_setting("application/config/version"):
-			data_file.close()
-			if not node_data is Dictionary or !node_data.has("version"):
-				Signals.emit_signal("error_emitted", "LoadingWrongFormat" ,null)
-			elif node_data["version"] < ProjectSettings.get_setting("application/config/version"):
-				Signals.emit_signal("error_emitted", "LoadingOldSave", null)
-			elif node_data["version"] > ProjectSettings.get_setting("application/config/version"):
-				Signals.emit_signal("error_emitted", "OldVersion", null)
+		if not node_data is Dictionary or !node_data.has("version"):
+			Signals.emit_signal("error_emitted", "LoadingWrongFormat" ,null)
 			data_file.close()
 			return
+		if node_data["version"] != version:
+			if node_data["version"] > version:
+				Signals.emit_signal("error_emitted", "OldVersion", null)
+				data_file.close()
+				return
+			if not is_compatible(node_data):
+				Signals.emit_signal("error_emitted", "LoadingOldSave", null)
+				data_file.close()
+				return
 		Global.left_panel.create_lesson_card(node_data)
 		if not Global.subjects_database.has(node_data["subject"]):
 			Global.subjects_database.append(node_data["subject"])
