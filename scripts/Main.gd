@@ -20,9 +20,6 @@ func _ready() -> void:
 	
 	
 
-
-
-
 #________Methode d'affichage des dialogs_____________
 #func _show_new_lesson_dialog() ->void:
 #	new_lesson_dialog.show()
