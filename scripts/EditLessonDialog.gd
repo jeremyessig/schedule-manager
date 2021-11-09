@@ -77,8 +77,7 @@ func _show_edit_lesson_dialog() ->void:
 
 
 func _on_DeleteButton_pressed():
-	Signals.emit_signal("lesson_from_calendar_deleted", lesson_card.position, lesson_card.size, lesson_card.id)
-	Signals.emit_signal("lesson_card_deleted", lesson_card.id)
+	lesson_card.delete()
 	hide()
 
 
@@ -87,7 +86,7 @@ func _on_EditButton_pressed():
 	edit_lesson()
 	if lesson_card.is_displayed: ## Lorsque l'horaire est modifie, recharge la cellule dans le bon emplacement
 		if old["position"].x != lesson_card.position.x or old["position"].y != lesson_card.position.y or lesson_card.size != old["size"]:
-			Signals.emit_signal("lesson_from_calendar_deleted", old["position"], old["size"], lesson_card.id)
+			Signals.emit_signal("removing_lesson_from_calendar", old["position"], old["size"], lesson_card.id)
 			yield(get_tree(),"idle_frame")
 			var node_path = lesson_card.get_path()
 			Global.calendar_array.add_lesson(node_path)
@@ -114,5 +113,5 @@ func _on_SubLessonToCalendarButton_pressed():
 		var node_path := lesson_card.get_path()
 		Signals.emit_signal("error_emitted", "ObligatoryLesson", node_path) # -> Signals -> AlertDialog 
 	else:
-		Signals.emit_signal("lesson_from_calendar_deleted", lesson_card.position, lesson_card.size, lesson_card.id)
+		Signals.emit_signal("removing_lesson_from_calendar", lesson_card.position, lesson_card.size, lesson_card.id)
 	hide()

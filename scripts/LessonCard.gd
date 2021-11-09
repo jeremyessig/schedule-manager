@@ -42,6 +42,7 @@ onready var displayed_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridCo
 ##_____________Methodes d'initialisation__________________________
 func _ready():
 	version = ProjectSettings.get_setting("application/config/version")
+	Signals.connect("lesson_removed_from_calendar", self, "_undisplay")
 	save_date["created"] = OS.get_datetime()
 
 ##______________setter et getter prives___________________________
@@ -175,7 +176,9 @@ func _update_background():
 ##__________________Methodes d'import / export des donnees et suppression________________	
 
 func delete()->void:
-	self.is_displayed = false
+	if is_displayed == true:
+		Signals.emit_signal("removing_lesson_from_calendar", position, size, id)
+		self.is_displayed = false
 	self.queue_free()
 
 
@@ -211,6 +214,12 @@ func export_to_csv() ->PoolStringArray:
 	
 ##_______________________Methodes connectees_______________________________
 
+## Le cours n'est plus affiche dans le calendrier
+func _undisplay(card_id:String):
+	if card_id == id:
+		self.is_displayed = false
+
+
 func _on_LessonCard_gui_input(event):
 	var node_path : NodePath = self.get_path()
 	if event is InputEventMouseButton and event.pressed:
@@ -222,7 +231,7 @@ func _on_LessonCard_gui_input(event):
 					if is_obligatory:
 						Signals.emit_signal("error_emitted", "ObligatoryLesson", node_path) # -> Signals -> AlertDialog 
 					else:
-						Signals.emit_signal("lesson_from_calendar_deleted", position, size, id)
+						Signals.emit_signal("removing_lesson_from_calendar", position, size, id)
 					return
 				Global.calendar_array.add_lesson(node_path)
 

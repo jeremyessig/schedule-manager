@@ -85,7 +85,7 @@ func _on_CreateLessonButton_pressed() -> void:
 func _on_RemoveLessonButton_pressed() -> void:
 	var string = Global.get_item_string(remove_lesson_option_button)
 	Global.lessons_database.erase(string)
-	for card in get_tree().get_nodes_in_group("lesson_cards"):
-		if card.lesson == string:
-			card.delete()
+	for lesson_card in get_tree().get_nodes_in_group("lesson_cards"):
+		if lesson_card.lesson == string:
+			lesson_card.delete()
 	_update_GUI()

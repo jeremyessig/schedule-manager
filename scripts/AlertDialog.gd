@@ -90,6 +90,6 @@ func _on_ConfirmButton_pressed():
 
 
 func _on_SubButton_pressed():
-	Signals.emit_signal("lesson_from_calendar_deleted", node.position, node.size, node.id)
+	Signals.emit_signal("removing_lesson_from_calendar", node.position, node.size, node.id)
 	_clear_panel()
 	hide()

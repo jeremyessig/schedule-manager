@@ -62,7 +62,7 @@ func import_from_JSON(path:String) ->void:
 	## Detruit les cours presents dans le programme
 	var save_nodes = get_tree().get_nodes_in_group("lesson_cards")
 	for i in save_nodes:
-		i.queue_free()
+		i.delete()
 	
 	data_file.open(path, File.READ)
 	while data_file.get_position() < data_file.get_len():

@@ -8,7 +8,7 @@ var lesson_cell = preload("res://tscn/LessonCellButton.tscn")
 
 func _ready() -> void:
 	_init_calendar_grid()
-	Signals.connect("lesson_from_calendar_deleted", self, "delete_lesson")
+	Signals.connect("removing_lesson_from_calendar", self, "remove_lesson")
 
 
 func _init_calendar_grid() ->void:
@@ -36,7 +36,7 @@ func set_all_the_line(y:int, is_empty:bool) ->void: ## -> RightPanel
 
 
 
-func delete_lesson(pos: Vector2, size:int, id:String) ->void:
+func remove_lesson(pos: Vector2, size:int, id:String) ->void:
 	for column in self.get_children():
 		if column.get_index() == pos.x:
 			for line in column.get_children():

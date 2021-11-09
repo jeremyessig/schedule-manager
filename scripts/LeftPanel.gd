@@ -12,8 +12,7 @@ onready var temp := $Temp
 func _ready() -> void:
 	Signals.connect("lesson_created",self,"create_lesson_card") ## From NewLessonDialog by Signals
 	Signals.connect("lesson_edited", self, "edit_lesson_card") ## From EditLessonDialog by Signals
-	Signals.connect("lesson_card_deleted", self, "delete_lesson_card") ## From EditLessonDialog by Signals
-	Signals.connect("lesson_removed_from_calendar", self, "set_lesson_card")
+#	Signals.connect("lesson_removed_from_calendar", self, "set_lesson_card")
 	Signals.connect("lesson_cell_opened", self, "lesson_cell_opened")
 	_init_key_reference()
 
@@ -79,9 +78,9 @@ func add_lesson_card_to_container(child:Node, source:Node) ->void:
 		Global.reparent_node(source, child, td_container)
 
 
-func set_lesson_card(id:String) ->void:
-	var card = find_lesson_card(id)
-	card.is_displayed = false
+#func set_lesson_card(id:String) ->void:
+#	var card = find_lesson_card(id)
+#	card.is_displayed = false
 
 
 func find_lesson_card(id:String) ->Node:
@@ -93,11 +92,6 @@ func find_lesson_card(id:String) ->Node:
 			return card
 	print_debug("Error: No lesson card found")
 	return null
-
-
-func delete_lesson_card(id:String) ->void:
-#	find_lesson_card(id).queue_free()
-	find_lesson_card(id).delete()
 	
 
 ##___________________Affichage responsive_______________________________
