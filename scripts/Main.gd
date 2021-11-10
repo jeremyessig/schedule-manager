@@ -54,4 +54,4 @@ func _on_ExportDialogCSV_file_selected(path):
 
 ##Affiche le gestionnaire de fichier pour exporter en csv
 func _on_ExportingCSVDialog_open_exporting_csv_file_dialog():
-	export_csv_file_dialog.show()
+	export_csv_file_dialog.popup_centered()

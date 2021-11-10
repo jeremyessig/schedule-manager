@@ -228,6 +228,9 @@ func _on_LessonCard_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		match event.button_index:
 			BUTTON_LEFT:
+				if Input.is_key_pressed(KEY_CONTROL):
+					self.delete()
+					return
 				Signals.emit_signal("lesson_card_pressed", node_path) ## -> Signals -> EditLessonDialog
 			BUTTON_RIGHT:
 				if is_displayed:

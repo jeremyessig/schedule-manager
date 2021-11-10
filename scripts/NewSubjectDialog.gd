@@ -107,3 +107,14 @@ func _on_CreateLessonButton_pressed() -> void:
 
 func _on_RemoveLessonButton_pressed() -> void:
 	_remove_lesson_from_database()
+
+
+func _on_AddSubjectLineEdit_text_entered(new_text):
+	_add_subject_to_database(new_text)
+	add_subject_line_edit.text = ""
+
+
+func _on_AddLessonLineEdit_text_entered(new_text):
+	var subject = Global.get_item_string(define_lesson_subject_option_button)
+	_add_lesson_to_database(new_text, subject)
+	add_lesson_line_edit.text = ""

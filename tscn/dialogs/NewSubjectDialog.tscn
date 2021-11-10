@@ -170,6 +170,7 @@ margin_top = 180.0
 margin_right = 605.0
 margin_bottom = 220.0
 rect_min_size = Vector2( 380, 40 )
+text = "Sélectionnez une matière"
 
 [node name="Container" type="Container" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="11"]
 margin_left = 615.0
@@ -244,8 +245,10 @@ custom_styles/focus = SubResource( 8 )
 custom_styles/normal = SubResource( 9 )
 text = "Quitter"
 
+[connection signal="text_entered" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/AddSubjectLineEdit" to="." method="_on_AddSubjectLineEdit_text_entered"]
 [connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/CreateButton" to="." method="_on_CreateButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/RemoveSubjectButton" to="." method="_on_RemoveSubjectButton_pressed"]
+[connection signal="text_entered" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/AddLessonLineEdit" to="." method="_on_AddLessonLineEdit_text_entered"]
 [connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/CreateLessonButton" to="." method="_on_CreateLessonButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/RemoveLessonButton" to="." method="_on_RemoveLessonButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Foot/HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]
