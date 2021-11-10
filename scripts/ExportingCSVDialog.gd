@@ -11,28 +11,28 @@ var calendar = preload("res://addons/calendar_button/class/Calendar.gd")
 var start_date :Array = [] ## Premier lundi de la rentree des cours que l'utilisateur indique
 
 onready var cancel_button : Button = $Panel/VBoxContainer/Foot/HBoxContainer/CancelButton
-onready var day_option_button : OptionButton = $Panel/VBoxContainer/Body/GridContainer/HBoxContainer/DayOptionButton
-onready var month_option_button : OptionButton = $Panel/VBoxContainer/Body/GridContainer/HBoxContainer/MonthOptionButton
-onready var year_option_button : OptionButton = $Panel/VBoxContainer/Body/GridContainer/HBoxContainer/MonthOptionButton
-
-
-func _ready():
-	_add_item(day_option_button, 31, 1)
-	_add_item(month_option_button, 12, 1)
-	_add_item(year_option_button, 2020, 2040)
-	
-
-	
-func _add_item(option_button: OptionButton, n:int, begining:int) ->void:	
-	var i = begining
-	while i <= n:
-		var number 
-		if i <= 9:
-			number = "0"+str(i)
-		else:
-			number = str(i)
-		option_button.add_item(number, i)
-		i+= 1
+#onready var day_option_button : OptionButton = $Panel/VBoxContainer/Body/GridContainer/HBoxContainer/DayOptionButton
+#onready var month_option_button : OptionButton = $Panel/VBoxContainer/Body/GridContainer/HBoxContainer/MonthOptionButton
+#onready var year_option_button : OptionButton = $Panel/VBoxContainer/Body/GridContainer/HBoxContainer/MonthOptionButton
+#
+#
+#func _ready():
+#	_add_item(day_option_button, 31, 1)
+#	_add_item(month_option_button, 12, 1)
+#	_add_item(year_option_button, 2020, 2040)
+#
+#
+#
+#func _add_item(option_button: OptionButton, n:int, begining:int) ->void:	
+#	var i = begining
+#	while i <= n:
+#		var number 
+#		if i <= 9:
+#			number = "0"+str(i)
+#		else:
+#			number = str(i)
+#		option_button.add_item(number, i)
+#		i+= 1
 
 ## Recupere les lesson_card (is_displayed) qui sont dans l'emploi du temps  
 func _get_nodes_in_schedule() -> Array:
@@ -95,43 +95,53 @@ func export_int_str(integer:int) -> String:
 ## Recupere le jour de l'attribut schedule de lesson_card et le compare a une date reelle
 func _attribute_day(node:Node) ->void:
 	var weekday = node.schedule[1]
-	var date
-	match weekday:
-		"Lundi":
-			node.datetime.append(start_date)
-
-		"Mardi":
-			date = change_to_next_day(start_date[0], start_date[1], start_date[2], 1)
-			node.datetime.append(date)
-
-		"Mercredi":
-			date = change_to_next_day(start_date[0], start_date[1], start_date[2], 2)
-			node.datetime.append(date)
-
-		"Jeudi":
-			date = change_to_next_day(start_date[0], start_date[1], start_date[2], 3)
-			node.datetime.append(date)
-
-		"Vendredi":
-			date = change_to_next_day(start_date[0], start_date[1], start_date[2], 4)
-			node.datetime.append(date)
-
-		"Samedi":
-			date = change_to_next_day(start_date[0], start_date[1], start_date[2], 5)
-			node.datetime.append(date)
+#	var date
+	var days_table = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
+	var days_to_further = days_table.find(weekday)
+	var date = change_to_next_day(int(start_date[0]), int(start_date[1]), int(start_date[2]), days_to_further)
+	node.datetime.append(date)
 
 
 ## Permet d'avancer dans la semaine ==> retourne les dates en fonction des mois et annees bisextiles
 func change_to_next_day(day:int, month:int, year:int, day_in_week:int) ->Array:
-	var selected_day = day
-	selected_day += day_in_week
-	if selected_day > calendar.get_days_in_month(month, year):
-		day = 1 ## reinitialise au premier jour du mois
-		month += 1 ## Met a jour au mois suivant 
+	day += day_in_week
+	if day > calendar.get_days_in_month(month, year):
+		var days_in_month = calendar.get_days_in_month(month, year)
+		day = (day - days_in_month)
+		if month == 12:
+			month = 1
+			year += 1
+		else:
+			month += 1 ## Met a jour au mois suivant 
 		return [export_int_str(day), export_int_str(month), year]
 	else:
-		day = selected_day
 		return [export_int_str(day), export_int_str(month), year]
+
+
+## Permet de reculer dans la semaine ==> retourne les dates en fonction des mois et annees bisextiles
+func change_to_previous_day(day:int, month:int, year:int, day_in_week:int) ->Array:
+	day -= day_in_week
+	if day < 1:
+		var days_in_month = calendar.get_days_in_month(month -1, year)
+		day = days_in_month + day
+		if month == 1:
+			month = 12
+			year -= 1
+		else:
+			month -= 1
+		return [export_int_str(day), export_int_str(month), year]
+	else:
+		return [export_int_str(day), export_int_str(month), year]
+
+
+## Quelque soit le jour selectionne par l'utilisateur, le jour est initialise 
+## au 1er lundi de la semaine selectionnee
+func _init_week_to_monday(date_value) ->void:
+	var day_name = Calendar.get_weekday_name(date_value[0], date_value[1], date_value[2])
+	var days_table = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+	var days_to_back = days_table.find(day_name)
+	start_date = change_to_previous_day(start_date[0], start_date[1], start_date[2], days_to_back)
+	print_debug(start_date)
 
 
 ## Recupere la date selectionnee par l'utilisateur dans le calendrier. 
@@ -140,7 +150,7 @@ func _on_BeginingDateButton_date_selected(date_obj):
 	start_date.append(int(date_obj.date("DD")))
 	start_date.append(int(date_obj.date("MM")))
 	start_date.append(int(date_obj.date("YYYY")))
-	print(start_date)
+	_init_week_to_monday(start_date)
 
 
 func _on_CancelButton_pressed():
