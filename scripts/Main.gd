@@ -51,6 +51,7 @@ func _on_ImportDialog_file_selected(path):
 ## Lance l'exportation en CSV
 func _on_ExportDialogCSV_file_selected(path):
 	SaveSystem.export_to_csv(path)
+	export_csv_file_dialog.hide()
 
 ##Affiche le gestionnaire de fichier pour exporter en csv
 func _on_ExportingCSVDialog_open_exporting_csv_file_dialog():

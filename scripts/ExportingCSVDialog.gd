@@ -10,8 +10,8 @@ var calendar = preload("res://addons/calendar_button/class/Calendar.gd")
 
 var start_date :Array = [] ## Premier lundi de la rentree des cours que l'utilisateur indique
 
-onready var cancel_button : Button = $Panel/VBoxContainer/Foot/HBoxContainer/CancelButton
 onready var begining_week_line_edit : LineEdit = $Panel/VBoxContainer/Body/GridContainer/BeginingWeekLineEdit
+onready var notification_label : Label = $Panel/VBoxContainer/Foot/VBoxContainer/NotificationLabel
 
 ## Recupere les lesson_card (is_displayed) qui sont dans l'emploi du temps  
 func _get_nodes_in_schedule() -> Array:
@@ -125,6 +125,7 @@ func _init_week_to_monday(date_value) ->void:
 
 func _refresh_gui() ->void:
 	begining_week_line_edit.text = "Semaine du lundi %s/%s/%s" %[start_date[0], start_date[1], start_date[2]]
+	notification_label.text = ""
 
 
 
@@ -145,6 +146,10 @@ func _on_CancelButton_pressed():
 
 
 func _on_ExportButton_pressed():
+	if start_date == []:
+		notification_label.text = "Veuillez indiquer une date de début des cours"
+		return
 	var nodes : Array = _get_nodes_in_schedule()
 	_attribute_datetime_to_nodes(nodes)
 	emit_signal("open_exporting_csv_file_dialog") # -> Main
+

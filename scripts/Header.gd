@@ -19,6 +19,15 @@ func _on_file_item_pressed(id)->void:
 	match id:
 		0:
 			Signals.emit_signal("program_reseted")
+		1:
+			pass
+			#Ouvrir
+		2:
+			pass
+			#enregistrer
+		3:
+			pass
+			#enregistrer sous
 		4:
 			emit_signal("export_csv_pressed")
 
