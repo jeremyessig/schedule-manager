@@ -16,6 +16,8 @@ onready var animation : AnimationPlayer = $AnimationPlayer
 
 func _ready():
 	Signals.connect("database_reseted", self, "_on_database_reseted")
+	Signals.connect("lessons_database_updated", self, "_update_GUI")
+	Signals.connect("subjects_database_updated", self, "_update_GUI")
 
 
 ##________________________ Methodes de gestion des donees____________

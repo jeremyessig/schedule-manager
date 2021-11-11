@@ -32,10 +32,8 @@ func load_from_res(path) -> void:
 		print("ERROR: file doesn't exist !")
 		return
 	var save : Resource = load(path)
-	Global.subjects_database = save.subject
-	Global.lessons_database = save.lesson
-	Signals.emit_signal("lesson_added")
-	Signals.emit_signal("subject_added")
+	Global.set_lessons_database(save.lesson)
+	Global.set_subjects_database(save.subject)
 	for node_data in save.data:
 		Global.left_panel.create_lesson_card(node_data)
 	

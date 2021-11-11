@@ -15,6 +15,27 @@ var settings: Dictionary = {
 	"card_index_top": false,
 }
 
+func set_subjects_database(value) ->void:
+	subjects_database = value
+	Signals.emit_signal("subjects_database_updated")
+
+func set_lessons_database(value) ->void:
+	lessons_database = value
+	Signals.emit_signal("lessons_database_updated")
+
+func add_to_subjects_database(value) ->void:
+	subjects_database.append(value)
+	Signals.emit_signal("subjects_database_updated")
+
+func add_to_lessons_database(key, value:Array) ->void:
+	lessons_database[key] = value
+	Signals.emit_signal("lessons_database_updated")
+
+func remove_from_lessons_database(key) ->void:
+	lessons_database.erase(key)
+	Signals.emit_signal("lessons_database_updated")
+
+
 func _ready() -> void:
 	_connect_signals()
 	var root = get_tree().get_root()
