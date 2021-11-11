@@ -12,6 +12,7 @@ onready var remove_subject_option_button : OptionButton = $Panel/VBoxContainer/B
 onready var add_lesson_line_edit : LineEdit = $Panel/VBoxContainer/Body/VBoxContainer/GridContainer/AddLessonLineEdit
 onready var remove_lesson_option_button : OptionButton = $Panel/VBoxContainer/Body/VBoxContainer/GridContainer/RemoveLessonOptionButton
 onready var define_lesson_subject_option_button : OptionButton = $Panel/VBoxContainer/Body/VBoxContainer/GridContainer/DefineLessonSubjectOptionButton
+onready var animation : AnimationPlayer = $AnimationPlayer
 
 func _ready():
 	Signals.connect("database_reseted", self, "_on_database_reseted")
@@ -50,6 +51,8 @@ func _add_lesson_to_database(lesson:String, subject:String) ->void:
 	Signals.emit_signal("lesson_added") # to NewLessonDialog by Signals
 	Global.update_option_button(remove_lesson_option_button, Global.lessons_database)
 	print_debug(Global.lessons_database)
+#	animation.play("lesson_saved")
+	
 
 
 func _remove_lesson_from_database() ->void:

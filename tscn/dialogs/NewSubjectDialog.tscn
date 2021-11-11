@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://tscn/Dialog.tscn" type="PackedScene" id=1]
 [ext_resource path="res://res/Helvetica_bold.tres" type="DynamicFont" id=2]
@@ -21,6 +21,88 @@
 [sub_resource type="StyleBoxEmpty" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel/VBoxContainer/Body/VBoxContainer/Notification:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "Cette leçon est déjà enregistrée." ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel/VBoxContainer/Body/VBoxContainer/Notification:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.160784, 0.666667, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel/VBoxContainer/Body/VBoxContainer/Notification:custom_colors/font_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.054902, 0.67451, 0.00392157, 1 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "lesson_already_exists"
+
+[sub_resource type="Animation" id=12]
+resource_name = "lesson_saved"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel/VBoxContainer/Body/VBoxContainer/Notification:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "Leçon enregistrée !", "" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel/VBoxContainer/Body/VBoxContainer/Notification:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.160784, 0.666667, 0, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0.160784, 0.666667, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel/VBoxContainer/Body/VBoxContainer/Notification:custom_colors/font_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.054902, 0.67451, 0.00392157, 1 ) ]
+}
 
 [node name="NewSubjectDialog" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -115,8 +197,8 @@ margin_top = 60.0
 margin_right = 735.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 120, 30 )
-custom_colors/font_color = Color( 0.235294, 0.498039, 1, 1 )
-custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
+custom_colors/font_color = Color( 0.803922, 0.117647, 0.117647, 1 )
+custom_colors/font_color_hover = Color( 1, 0.282353, 0.282353, 1 )
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
@@ -203,8 +285,8 @@ margin_top = 240.0
 margin_right = 735.0
 margin_bottom = 280.0
 rect_min_size = Vector2( 120, 30 )
-custom_colors/font_color = Color( 0.235294, 0.498039, 1, 1 )
-custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
+custom_colors/font_color = Color( 0.803922, 0.117647, 0.117647, 1 )
+custom_colors/font_color_hover = Color( 1, 0.282353, 0.282353, 1 )
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
@@ -214,11 +296,13 @@ custom_styles/normal = SubResource( 5 )
 text = "Supprimer"
 
 [node name="Notification" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer" index="2"]
+modulate = Color( 0.160784, 0.666667, 0, 0 )
 margin_top = 370.0
 margin_right = 735.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 0, 30 )
-custom_colors/font_color = Color( 0.647059, 0, 0, 1 )
+custom_colors/font_color = Color( 0.054902, 0.67451, 0.00392157, 1 )
+text = "Cette leçon est déjà enregistrée."
 align = 1
 valign = 1
 
@@ -243,7 +327,12 @@ custom_styles/hover = SubResource( 6 )
 custom_styles/pressed = SubResource( 7 )
 custom_styles/focus = SubResource( 8 )
 custom_styles/normal = SubResource( 9 )
-text = "Quitter"
+text = "Fermer"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+anims/RESET = SubResource( 10 )
+anims/lesson_already_exists = SubResource( 11 )
+anims/lesson_saved = SubResource( 12 )
 
 [connection signal="text_entered" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/AddSubjectLineEdit" to="." method="_on_AddSubjectLineEdit_text_entered"]
 [connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/CreateButton" to="." method="_on_CreateButton_pressed"]
