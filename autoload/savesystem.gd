@@ -2,10 +2,63 @@ extends Node
 var key_reference : Array #Clefs de reference pour tester la compatibilite (init dans LeftPanel)
 var version : float
 
+#const SAVE_VAR := "user://sav1.sav"
 
 func _ready():
 	version = ProjectSettings.get_setting("application/config/version")
 
+#######################################################################
+############################ SAUVEGARDE
+######################################################################
+
+func save_var(path:String) -> void:
+	var file := File.new()
+	file.open(path, File.WRITE)
+
+	for node in get_tree().get_nodes_in_group("lesson_cards"):
+		if node.filename.empty():
+			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
+			continue
+		if !node.has_method("export_to_json"):
+			print("persistent node '%s' is missing a save_var() function, skipped" % node.name)
+			continue
+		node.save_to_var(file)
+
+	file.close()
+	print_debug("Saved")
+
+
+func load_var(path) -> void:
+	# Instances a new `File` in read mode and attempt to load the file, if it is
+	# open-able and readable.
+	print(path)
+	var i = 0
+	while i < 20:
+		Global.left_panel.create_lesson_card({})
+		i += 1
+	
+	var file := File.new()
+	var error := file.open(path, File.READ)
+#
+#	if not error == OK:
+#		print("Could not load file at %s" % path)
+#		return
+#
+#	for lesson_card in get_tree().get_nodes_in_group("lesson_cards"):
+#		lesson_card.delete()
+#	# Send the loaded file to each child in the same order they were saved to
+#	# have them load their data.
+##	print(file.get_position())
+##	print(file.get_len())
+#	var i = 0
+	for node in get_tree().get_nodes_in_group("lesson_cards"):
+		node.load_from_var(file)
+#
+##	for child in get_children():
+##		child.load_from_var(file)
+#
+#	# Clean up
+	file.close()
 
 
 

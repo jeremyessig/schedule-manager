@@ -9,6 +9,8 @@ onready var import_dialog : FileDialog = $ImportDialog
 onready var export_csv_file_dialog : FileDialog = $ExportDialogCSV
 onready var exporting_csv_dialog: Control = $ExportingCSVDialog
 onready var about_dialog : WindowDialog = $AboutDialog
+onready var save_as_dialog : FileDialog = $SaveAsDialog
+onready var open_save_dialog : FileDialog = $OpenSaveDialog
 
 
 func _ready() -> void:
@@ -17,6 +19,8 @@ func _ready() -> void:
 	header.connect("import_json_pressed", self, "_open_import_dialog")
 	header.connect("export_csv_pressed", self, "_open_export_csv_dialog")
 	header.connect("about_pressed", self, "_open_about_dialog")
+	header.connect("save_as_pressed", self, "_open_save_as_dialog")
+	header.connect("open_save_pressed", self, "_open_open_save_dialog")
 	
 	
 
@@ -39,6 +43,13 @@ func _open_export_csv_dialog() ->void:
 
 func _open_about_dialog() ->void:
 	about_dialog.popup_centered()
+	
+func _open_save_as_dialog() ->void:
+	save_as_dialog.popup_centered()
+
+func _open_open_save_dialog() ->void:
+	open_save_dialog.popup_centered()
+
 
 func _on_FileDialog_file_selected(path):
 	SaveSystem.export_to_JSON(path)
@@ -56,3 +67,11 @@ func _on_ExportDialogCSV_file_selected(path):
 ##Affiche le gestionnaire de fichier pour exporter en csv
 func _on_ExportingCSVDialog_open_exporting_csv_file_dialog():
 	export_csv_file_dialog.popup_centered()
+
+
+func _on_SaveAsDialog_file_selected(path):
+	SaveSystem.save_var(path)
+
+
+func _on_OpenSaveDialog_file_selected(path):
+	SaveSystem.load_var(path)

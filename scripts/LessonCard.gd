@@ -190,8 +190,21 @@ func load_data(data:Dictionary) ->void:
 	if data.has("position"):
 		data["position"] = str2var(data["position"]) as Vector2
 	set_data(data)
-	
-	
+
+
+func save_to_var(file: File) -> void:
+	var datas = get_data()
+	for data in datas:
+		file.store_line(var2str(data))
+
+
+func load_from_var(file: File) -> void:
+	var datas = get_data()
+	for data in datas:
+		data[str2var(file.get_line())]
+	set_data(datas)
+
+		
 func export_to_json() ->Dictionary:
 	var data: Dictionary = get_data()
 	data["is_displayed"] = false
