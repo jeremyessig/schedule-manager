@@ -2,7 +2,7 @@ extends Node
 var key_reference : Array #Clefs de reference pour tester la compatibilite (init dans LeftPanel)
 var version : float
 
-#const SAVE_VAR := "user://sav1.sav"
+const SaveAsResource = preload("res://classes/save_as_resource.gd")
 
 func _ready():
 	version = ProjectSettings.get_setting("application/config/version")
@@ -11,54 +11,36 @@ func _ready():
 ############################ SAUVEGARDE
 ######################################################################
 
-func save_var(path:String) -> void:
-	var file := File.new()
-	file.open(path, File.WRITE)
-
+func save_to_res(path:String) -> void:
+	var save := SaveAsResource.new()
+	save.subject = Global.subjects_database
+	save.lesson = Global.lessons_database
 	for node in get_tree().get_nodes_in_group("lesson_cards"):
-		if node.filename.empty():
-			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
-			continue
-		if !node.has_method("export_to_json"):
+		if !node.has_method("save_to_res"):
 			print("persistent node '%s' is missing a save_var() function, skipped" % node.name)
 			continue
-		node.save_to_var(file)
-
-	file.close()
-	print_debug("Saved")
+		save.data.append(node.save_to_res())
+	ResourceSaver.save(path, save)
 
 
-func load_var(path) -> void:
-	# Instances a new `File` in read mode and attempt to load the file, if it is
-	# open-able and readable.
-	print(path)
-	var i = 0
-	while i < 20:
-		Global.left_panel.create_lesson_card({})
-		i += 1
+func load_from_res(path) -> void:
+	var file = File.new()
+	for lesson_card in get_tree().get_nodes_in_group("lesson_cards"):
+		lesson_card.delete()
+	Global.reset_databases()
+	if not file.file_exists(path):
+		print("ERROR: file doesn't exist !")
+		return
+	var save : Resource = load(path)
+	Global.subjects_database = save.subject
+	Global.lessons_database = save.lesson
+	Signals.emit_signal("lesson_added")
+	Signals.emit_signal("subject_added")
+	for node_data in save.data:
+		Global.left_panel.create_lesson_card(node_data)
 	
-	var file := File.new()
-	var error := file.open(path, File.READ)
-#
-#	if not error == OK:
-#		print("Could not load file at %s" % path)
-#		return
-#
-#	for lesson_card in get_tree().get_nodes_in_group("lesson_cards"):
-#		lesson_card.delete()
-#	# Send the loaded file to each child in the same order they were saved to
-#	# have them load their data.
-##	print(file.get_position())
-##	print(file.get_len())
-#	var i = 0
-	for node in get_tree().get_nodes_in_group("lesson_cards"):
-		node.load_from_var(file)
-#
-##	for child in get_children():
-##		child.load_from_var(file)
-#
-#	# Clean up
-	file.close()
+	
+		
 
 
 

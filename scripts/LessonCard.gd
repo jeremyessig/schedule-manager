@@ -190,12 +190,22 @@ func load_data(data:Dictionary) ->void:
 	if data.has("position"):
 		data["position"] = str2var(data["position"]) as Vector2
 	set_data(data)
+	if data["is_displayed"] == true:
+		var node_path : NodePath = self.get_path()
+		Global.calendar_array.add_lesson(node_path)
 
 
-func save_to_var(file: File) -> void:
-	var datas = get_data()
-	for data in datas:
-		file.store_line(var2str(data))
+func save_to_res() -> Dictionary:
+	var data: Dictionary = get_data()
+	data["position"] = var2str(Vector2(data["position"]))
+	return data
+
+
+
+#func save_to_var(file: File) -> void:
+#	var datas = get_data()
+#	for data in datas:
+#		file.store_line(var2str(data))
 
 
 func load_from_var(file: File) -> void:

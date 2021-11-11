@@ -70,8 +70,8 @@ func _on_ExportingCSVDialog_open_exporting_csv_file_dialog():
 
 
 func _on_SaveAsDialog_file_selected(path):
-	SaveSystem.save_var(path)
+	SaveSystem.save_to_res(path)
 
 
 func _on_OpenSaveDialog_file_selected(path):
-	SaveSystem.load_var(path)
+	SaveSystem.load_from_res(path)
