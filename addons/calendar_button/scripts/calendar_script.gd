@@ -11,7 +11,7 @@ var popup : Popup
 var calendar_buttons : CalendarButtons
 
 func _enter_tree():
-	set_toggle_mode(true)
+#	set_toggle_mode(true)
 	setup_calendar_icon()
 	popup = create_popup_scene()
 	calendar_buttons = create_calendar_buttons()
@@ -79,17 +79,36 @@ func go_next_year():
 
 func close_popup():
 	popup.hide()
-	set_pressed(false)
+#	set_pressed(false)
 
-func _toggled(is_pressed):
+#func _toggled(is_pressed):
+#	if(!has_node("popup")):
+#		add_child(popup)
+#	if(!is_pressed):
+#		close_popup()
+#	else:
+#		if(has_node("popup")):
+#			popup.show()
+#		else:
+#			add_child(popup)
+#	if(has_node("popup")):
+#		popup.show()
+#	else:
+#		add_child(popup)
+#	window_restrictor.restrict_popup_inside_screen(popup)
+
+func _pressed():
 	if(!has_node("popup")):
 		add_child(popup)
-	if(!is_pressed):
-		close_popup()
+#	if(!is_pressed):
+#		close_popup()
+#	else:
+#		if(has_node("popup")):
+#			popup.show()
+#		else:
+#			add_child(popup)
+	if(has_node("popup")):
+		popup.show()
 	else:
-		if(has_node("popup")):
-			popup.show()
-		else:
-			add_child(popup)
-	
-	window_restrictor.restrict_popup_inside_screen(popup)
+		add_child(popup)
+#	window_restrictor.restrict_popup_inside_screen(popup)
