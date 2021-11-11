@@ -29,6 +29,7 @@ onready var vbox_container := $Panel/VBoxContainer/Body/VboxContainer
 func _ready() -> void:
 	Signals.connect("lesson_added", self, "_on_lesson_added")
 	Signals.connect("subject_added", self,"_on_subject_added")
+	Signals.connect("database_reseted",self, "_on_database_reseted")
 	pass
 
 func _physics_process(delta):
@@ -149,7 +150,17 @@ func update_color(color:String) -> void:
 	new_style.set_corner_radius_individual(15,15,0,0)
 	head_panel.set('custom_styles/panel', new_style)
 
+
+
 ##________________Methodes connectees par signal_______________________________
+
+func _on_database_reseted(database_name:String) -> void:
+	if database_name == "subjects_database":
+		_on_subject_added()
+	if database_name == "lessons_database":
+		_on_lesson_added()
+
+
 func _on_CancelButton_pressed() -> void:
 	hide()
 

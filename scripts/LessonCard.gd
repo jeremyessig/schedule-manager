@@ -44,6 +44,7 @@ onready var displayed_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridCo
 func _ready():
 	version = ProjectSettings.get_setting("application/config/version")
 	Signals.connect("lesson_removed_from_calendar", self, "_undisplay")
+	Signals.connect("program_reseted", self, "delete") ## Header -> Signals
 	save_date["created"] = OS.get_datetime() 
 
 ##______________setter et getter prives___________________________

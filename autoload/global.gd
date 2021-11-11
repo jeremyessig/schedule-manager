@@ -16,6 +16,7 @@ var settings: Dictionary = {
 }
 
 func _ready() -> void:
+	_connect_signals()
 	var root = get_tree().get_root()
 	right_panel = find_node_by_name(root, "RightPanel")
 	new_lesson_button = find_node_by_name(root, "NewLessonButton")
@@ -24,6 +25,18 @@ func _ready() -> void:
 	left_panel = find_node_by_name(root, "LeftPanel")
 	calendar_array = find_node_by_name(root, "CalendarArray")
 	new_subject_dialog = find_node_by_name(root, "NewSubjectDialog")
+
+
+func _connect_signals() ->void:
+	Signals.connect("program_reseted", self, "reset_databases")
+
+
+## Gestion des bases de donnees
+func reset_databases() -> void:
+	subjects_database.clear()
+	Signals.emit_signal("database_reseted", "subjects_database")
+	lessons_database.clear()
+	Signals.emit_signal("database_reseted", "lessons_database")
 	
 
 ## Met a jours les optionButton listant les differentes matieres

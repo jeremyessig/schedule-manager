@@ -44,7 +44,7 @@ margin_right = 55.0
 margin_bottom = 30.0
 focus_mode = 2
 text = "Fichier"
-items = [ "Nouvel emploi du temps", null, 0, false, false, 0, 0, null, "", false, "Enregistrer", null, 0, false, false, 1, 0, null, "", false, "Exporter en .JSON", null, 0, false, false, 2, 0, null, "", false, "Importer un fichier .JSON", null, 0, false, false, 3, 0, null, "", false, "Exporter pour Google Agenda", null, 0, false, false, 4, 0, null, "", false, "Enregistrer sous...", null, 0, false, false, 5, 0, null, "", false, "Ouvrir", null, 0, false, false, 6, 0, null, "", false ]
+items = [ "Nouvel emploi du temps", null, 0, false, false, 0, 0, null, "", false, "Ouvrir", null, 0, false, false, 1, 0, null, "", false, "Enregistrer", null, 0, false, false, 4, 0, null, "", false, "Enregistrer sous...", null, 0, false, false, 5, 0, null, "", false, "Exporter pour Google Agenda", null, 0, false, false, 6, 0, null, "", false ]
 switch_on_hover = true
 
 [node name="EditionMenuButton" type="MenuButton" parent="HBoxContainer/Toolbar"]
@@ -55,7 +55,7 @@ focus_mode = 2
 text = "Edition"
 switch_on_hover = true
 
-[node name="DataBaseMenuButton" type="MenuButton" parent="HBoxContainer/Toolbar"]
+[node name="DatabaseMenuButton" type="MenuButton" parent="HBoxContainer/Toolbar"]
 margin_left = 111.0
 margin_right = 233.0
 margin_bottom = 30.0

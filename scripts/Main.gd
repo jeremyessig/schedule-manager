@@ -4,7 +4,7 @@ onready var new_lesson_dialog := $NewLessonDialog
 onready var new_subject_dialog := $NewSubjectDialog
 onready var alert_dialog := $AlertDialog
 onready var header : Panel = $App/Header
-onready var export_dialog : FileDialog = $ExportDialog
+onready var export_database_dialog : FileDialog = $ExportDatabaseDialog
 onready var import_dialog : FileDialog = $ImportDialog
 onready var export_csv_file_dialog : FileDialog = $ExportDialogCSV
 onready var exporting_csv_dialog: Control = $ExportingCSVDialog
@@ -29,7 +29,7 @@ func _show_new_subject_dialog() ->void:
 	
 
 func _open_export_dialog() -> void:
-	export_dialog.popup_centered()
+	export_database_dialog.popup_centered()
 
 func _open_import_dialog() -> void:
 	import_dialog.popup_centered()

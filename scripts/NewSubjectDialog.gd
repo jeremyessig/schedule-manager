@@ -13,6 +13,8 @@ onready var add_lesson_line_edit : LineEdit = $Panel/VBoxContainer/Body/VBoxCont
 onready var remove_lesson_option_button : OptionButton = $Panel/VBoxContainer/Body/VBoxContainer/GridContainer/RemoveLessonOptionButton
 onready var define_lesson_subject_option_button : OptionButton = $Panel/VBoxContainer/Body/VBoxContainer/GridContainer/DefineLessonSubjectOptionButton
 
+func _ready():
+	Signals.connect("database_reseted", self, "_on_database_reseted")
 
 
 ##________________________ Methodes de gestion des donees____________
@@ -85,6 +87,11 @@ func _update_GUI() ->void:
 
 
 ##_________________________ Methodes connectees ___________________________________
+func _on_database_reseted(database_name:String) -> void:
+	if database_name == "subjects_database" or database_name == "lessons_database":
+		_update_GUI()
+
+
 func _on_CancelButton_pressed() -> void:
 	notification.text = ""
 	hide()

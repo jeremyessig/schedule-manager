@@ -10,5 +10,8 @@ signal lesson_removed_from_calendar(id) ## CalendarArray -> LessonCard
 signal removing_lesson_from_calendar(position, size, id) ## [EditLessonDialog, AlertDialog, LessonCellButton] -> CalendarArray
 signal deleting_lesson_from_calendar_finished # CalendarArray -> EditLessonDialog
 signal lesson_cell_opened(id) ## LessonCellButton -> LeftPanel
+signal program_reseted ## Header -> 
 
 signal data_sent(nodepath, data, debug)
+
+signal database_reseted(database_name) # 

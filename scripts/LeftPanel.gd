@@ -45,7 +45,6 @@ func does_lesson_exist(card_id: String, type:String):
 	return false
 
 
-
 func edit_lesson_card(datas:Dictionary, old_id:String) ->void:
 	var card = find_lesson_card(old_id)
 	var old_type = card.type
