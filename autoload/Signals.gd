@@ -17,3 +17,5 @@ signal data_sent(nodepath, data, debug)
 signal database_reseted(database_name) # 
 signal lessons_database_updated
 signal subjects_database_updated
+
+signal save_as_pressed

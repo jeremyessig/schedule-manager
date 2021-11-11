@@ -19,10 +19,14 @@ func _ready() -> void:
 	header.connect("import_json_pressed", self, "_open_import_dialog")
 	header.connect("export_csv_pressed", self, "_open_export_csv_dialog")
 	header.connect("about_pressed", self, "_open_about_dialog")
-	header.connect("save_as_pressed", self, "_open_save_as_dialog")
+	Signals.connect("save_as_pressed", self, "_open_save_as_dialog")
 	header.connect("open_save_pressed", self, "_open_open_save_dialog")
 	
-	
+func _unhandled_input(event):
+	if event.is_action_pressed("save"):
+		SaveSystem.save_to_res()
+	if event.is_action_pressed("open_saves"):
+		open_save_dialog.popup_centered()
 
 #________Methode d'affichage des dialogs_____________
 #func _show_new_lesson_dialog() ->void:

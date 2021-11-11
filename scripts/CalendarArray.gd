@@ -29,7 +29,7 @@ func _add_empty_cells(number:int, column:Node, x:int) ->void:
 func set_all_the_line(y:int, is_empty:bool) ->void: ## -> RightPanel
 	for child in self.get_children():
 		for grand_child in child.get_children():
-			if grand_child.y == y:
+			if grand_child.position.y == y:
 				if grand_child.is_empty == is_empty:
 					if grand_child.has_method("set_cell"):
 						grand_child.set_cell()

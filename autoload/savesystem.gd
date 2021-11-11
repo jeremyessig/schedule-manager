@@ -3,6 +3,7 @@ var key_reference : Array #Clefs de reference pour tester la compatibilite (init
 var version : float
 
 const SaveAsResource = preload("res://classes/save_as_resource.gd")
+var path_to_save : String
 
 func _ready():
 	version = ProjectSettings.get_setting("application/config/version")
@@ -11,8 +12,14 @@ func _ready():
 ############################ SAUVEGARDE
 ######################################################################
 
-func save_to_res(path:String) -> void:
+func save_to_res(path:String = "") -> void:
+	if path == "" and path_to_save == "":
+		Signals.emit_signal("save_as_pressed")
+		return 
+	if path == "":
+		path = path_to_save
 	var save := SaveAsResource.new()
+	save.version = version
 	save.subject = Global.subjects_database
 	save.lesson = Global.lessons_database
 	for node in get_tree().get_nodes_in_group("lesson_cards"):
@@ -21,9 +28,13 @@ func save_to_res(path:String) -> void:
 			continue
 		save.data.append(node.save_to_res())
 	ResourceSaver.save(path, save)
+	path_to_save = path
 
 
 func load_from_res(path) -> void:
+	if !path.ends_with(".res"):
+		Signals.emit_signal("error_emitted", "LoadingWrongFormat" ,null)
+		return
 	var file = File.new()
 	for lesson_card in get_tree().get_nodes_in_group("lesson_cards"):
 		lesson_card.delete()
@@ -32,10 +43,13 @@ func load_from_res(path) -> void:
 		print("ERROR: file doesn't exist !")
 		return
 	var save : Resource = load(path)
+	for node_data in save.data:
+		if not is_compatible(node_data):
+			return
+		node_data["version"] = version
+		Global.left_panel.create_lesson_card(node_data)
 	Global.set_lessons_database(save.lesson)
 	Global.set_subjects_database(save.subject)
-	for node_data in save.data:
-		Global.left_panel.create_lesson_card(node_data)
 	
 	
 		
@@ -49,13 +63,26 @@ func load_from_res(path) -> void:
 ##________________Retro-compatibilite des fichiers_______________________
 
 ## Verifie si les donnees de la sauvegarde son compatibles
-func is_compatible(data:Dictionary) ->bool:
+func is_same_keys(data:Dictionary) ->bool:
 	return data.has_all(key_reference)
 
 
 func update_compatibility(node_data:Dictionary) -> void:
 	node_data["version"] = version
 			
+
+func is_compatible(node_data) -> bool:
+	if not node_data is Dictionary or !node_data.has("version"):
+		Signals.emit_signal("error_emitted", "LoadingWrongFormat" ,null)
+		return false
+	if node_data["version"] != version:
+		if node_data["version"] > version:
+			Signals.emit_signal("error_emitted", "OldVersion", null)
+			return false
+		if not is_same_keys(node_data):
+			Signals.emit_signal("error_emitted", "LoadingOldSave", null)
+			return false
+	return true
 
 
 ##_____________ ___Import et export en JSON ______________________________
@@ -83,6 +110,9 @@ func export_to_JSON(path:String) -> void:
 
 
 func import_from_JSON(path:String) ->void:
+	if !path.ends_with(".json"):
+		Signals.emit_signal("error_emitted", "LoadingWrongFormat" ,null)
+		return		
 	var data_file = File.new()
 	if not data_file.file_exists(path):
 		print("File doesn't exist !")
@@ -94,27 +124,19 @@ func import_from_JSON(path:String) ->void:
 	
 	## Detruit les cours presents dans le programme
 	var save_nodes = get_tree().get_nodes_in_group("lesson_cards")
+	var id_table: Array
 	for i in save_nodes:
-		i.delete()
-	Global.subjects_database.clear()
-	Global.lessons_database.clear()
+		id_table.append(i["id"])
 	
 	data_file.open(path, File.READ)
 	while data_file.get_position() < data_file.get_len():
 		var node_data = parse_json(data_file.get_line())
-		if not node_data is Dictionary or !node_data.has("version"):
-			Signals.emit_signal("error_emitted", "LoadingWrongFormat" ,null)
+		if not is_compatible(node_data):
 			data_file.close()
 			return
-		if node_data["version"] != version:
-			if node_data["version"] > version:
-				Signals.emit_signal("error_emitted", "OldVersion", null)
-				data_file.close()
-				return
-			if not is_compatible(node_data):
-				Signals.emit_signal("error_emitted", "LoadingOldSave", null)
-				data_file.close()
-				return
+		if id_table.find(node_data["id"]) != -1:
+			print(node_data["lesson"])
+			continue 
 		Global.left_panel.create_lesson_card(node_data)
 		if not Global.subjects_database.has(node_data["subject"]):
 			Global.subjects_database.append(node_data["subject"])

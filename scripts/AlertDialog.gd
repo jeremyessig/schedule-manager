@@ -19,6 +19,7 @@ onready var loading_wrong_format : Label = $Panel/VBoxContainer/Body/LoadingWron
 onready var saving_wrong_format : Label = $Panel/VBoxContainer/Body/SavingWrongFormat
 onready var old_version : Label = $Panel/VBoxContainer/Body/OldVersion
 onready var loading_old_save : Label = $Panel/VBoxContainer/Body/LoadingOldSave
+onready var empty_schedule : Label = $Panel/VBoxContainer/Body/EmptySchedule
 
 
 func _ready():
@@ -68,6 +69,10 @@ func _show_alert_dialog(message, node_path) ->void:
 		"LoadingOldSave":
 			cancel_button.show()
 			loading_old_save.show()
+			
+		"EmptySchedule":
+			cancel_button.show()
+			empty_schedule.show()
 
 
 

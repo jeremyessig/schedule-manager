@@ -149,7 +149,12 @@ func _on_ExportButton_pressed():
 	if start_date == []:
 		notification_label.text = "Veuillez indiquer une date de début des cours"
 		return
-	var nodes : Array = _get_nodes_in_schedule()
-	_attribute_datetime_to_nodes(nodes)
-	emit_signal("open_exporting_csv_file_dialog") # -> Main
+	for card in get_tree().get_nodes_in_group("lesson_cards"):
+		if card.is_displayed == true:
+			var nodes : Array = _get_nodes_in_schedule()
+			_attribute_datetime_to_nodes(nodes)
+			emit_signal("open_exporting_csv_file_dialog") # -> Main
+			return
+	hide()
+	Signals.emit_signal("error_emitted", "EmptySchedule", null)
 

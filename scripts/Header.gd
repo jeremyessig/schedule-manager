@@ -4,7 +4,6 @@ signal export_json_pressed
 signal import_json_pressed
 signal export_csv_pressed
 signal about_pressed
-signal save_as_pressed
 signal open_save_pressed
 
 onready var file : MenuButton = $HBoxContainer/Toolbar/FileMenuButton
@@ -25,10 +24,9 @@ func _on_file_item_pressed(id)->void:
 			pass
 			emit_signal("open_save_pressed")
 		2:
-			pass
-			#enregistrer
+			SaveSystem.save_to_res()
 		3:
-			emit_signal("save_as_pressed")
+			Signals.emit_signal("save_as_pressed")
 		4:
 			emit_signal("export_csv_pressed")
 

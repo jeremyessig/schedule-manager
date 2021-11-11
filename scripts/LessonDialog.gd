@@ -51,7 +51,6 @@ func _on_subject_added() ->void: ## From NewSubjectDialog and SaveSystem.gd by S
 
 func _on_lesson_added() ->void: ## From NewSubjectDialog and SaveSystem.gd by Signals
 	var subject_selected: String = subject_option_button.get_item_text(0)
-#	Global.update_option_button(lesson_option_button, Global.lessons_database, subject_selected)
 	Global.update_option_button(lesson_option_button, Global.lessons_database)
 	_check_subject_lesson_database()
 
