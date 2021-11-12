@@ -27,9 +27,11 @@ onready var vbox_container := $Panel/VBoxContainer/Body/VboxContainer
 
 
 func _ready() -> void:
-	Signals.connect("lesson_added", self, "_on_lesson_added")
-	Signals.connect("subject_added", self,"_on_subject_added")
+#	Signals.connect("lesson_added", self, "_on_lesson_added")
+#	Signals.connect("subject_added", self,"_on_subject_added")
 	Signals.connect("database_reseted",self, "_on_database_reseted")
+	Signals.connect("lessons_database_updated", self, "_on_lesson_added")
+	Signals.connect("subjects_database_updated", self, "_on_subject_added")
 	pass
 
 func _physics_process(delta):
@@ -46,13 +48,16 @@ func _physics_process(delta):
 func _on_subject_added() ->void: ## From NewSubjectDialog and SaveSystem.gd by Signals
 	Global.update_option_button(subject_option_button, Global.subjects_database)
 	_check_subject_lesson_database()
+	_on_lesson_added()
 
 
 
 func _on_lesson_added() ->void: ## From NewSubjectDialog and SaveSystem.gd by Signals
+	if not _check_subject_lesson_database():
+		return
 	var subject_selected: String = subject_option_button.get_item_text(0)
-	Global.update_option_button(lesson_option_button, Global.lessons_database)
-	_check_subject_lesson_database()
+	Global.update_option_button(lesson_option_button, Global.lessons_database, subject_selected)
+	print_debug(Global.subjects_database)
 
 
 ##______________Verifications avant validation du cours________________________
@@ -89,7 +94,7 @@ func check_for_validation() :
 
 
 func _check_if_lesson_exist(lesson_arg: OptionButton, type_arg: OptionButton, day_arg:OptionButton, hours_arg:OptionButton, minutes_arg:OptionButton, room_arg:LineEdit):
-	var card_id :String = type_arg.text + lesson_arg.text + attribut_letter_to_day(day_arg.text) + hours_arg.text + minutes_arg.text + room_arg.text
+	var card_id :String =  lesson_arg.text + type_arg.text + attribut_letter_to_day(day_arg.text) + hours_arg.text + minutes_arg.text + room_arg.text
 	card_id = card_id.replace(" ", "")
 	card_id = card_id.replace("'", "")
 	if Global.left_panel.does_lesson_exist(card_id, type_arg.text):
@@ -121,7 +126,7 @@ func create_data_dictionary() -> Dictionary:
 		Global.get_item_string(schedule_hours_option_button), 
 		Global.get_item_string(schedule_minutes_option_button)]
 #	var card_id :String = lesson + type + schedule[1] + schedule[2] + schedule[3] + room
-	var card_id :String = type + lesson + attribut_letter_to_day(schedule[1]) + schedule[2] + schedule[3] + room
+	var card_id :String = lesson + type + attribut_letter_to_day(schedule[1]) + schedule[2] + schedule[3] + room
 	card_id = card_id.replace(" ", "")
 	card_id = card_id.replace("'", "")
 	var index = 0

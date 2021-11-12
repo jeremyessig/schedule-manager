@@ -122,10 +122,9 @@ func import_from_JSON(path:String) ->void:
 		Signals.emit_signal("error_emitted", "LoadingWrongFormat", null)
 		return
 	
-	## Detruit les cours presents dans le programme
 	var save_nodes = get_tree().get_nodes_in_group("lesson_cards")
-	var id_table: Array
-	for i in save_nodes:
+	var id_table: Array ## Liste les cours present dans le programme via leur id
+	for i in save_nodes: ## Cree un tableau avec toutes les id
 		id_table.append(i["id"])
 	
 	data_file.open(path, File.READ)
@@ -134,20 +133,13 @@ func import_from_JSON(path:String) ->void:
 		if not is_compatible(node_data):
 			data_file.close()
 			return
-		if id_table.find(node_data["id"]) != -1:
-			print(node_data["lesson"])
-			continue 
+		if id_table.find(node_data["id"]) != -1: ## Si l'id du cours est present dans le tableau, il n'est pas charge !
+			continue  ## Cela permet d'eviter les doublons
 		Global.left_panel.create_lesson_card(node_data)
 		if not Global.subjects_database.has(node_data["subject"]):
-			Global.subjects_database.append(node_data["subject"])
-		Signals.emit_signal("subject_added")
-		Global.update_option_button(Global.new_subject_dialog.remove_subject_option_button, Global.subjects_database)
+			Global.add_to_subjects_database(node_data["subject"])
 		if not Global.lessons_database.has(node_data["lesson"]):
-			Global.lessons_database[node_data["lesson"]] = [node_data["lesson"], node_data["subject"]]
-		Signals.emit_signal("lesson_added")
-		Global.update_option_button(Global.new_subject_dialog.remove_lesson_option_button, Global.lessons_database)
-		Global.update_option_button(Global.new_subject_dialog.define_lesson_subject_option_button, Global.subjects_database)
-		
+			Global.add_to_lessons_database(node_data["lesson"], [node_data["lesson"], node_data["subject"]])
 	data_file.close()
 	
 

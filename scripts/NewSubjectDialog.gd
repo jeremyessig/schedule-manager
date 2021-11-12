@@ -16,71 +16,49 @@ onready var animation : AnimationPlayer = $AnimationPlayer
 
 func _ready():
 	Signals.connect("database_reseted", self, "_on_database_reseted")
-	Signals.connect("lessons_database_updated", self, "_update_GUI")
+	Signals.connect("lessons_database_updated", self, "_refresh_lessons_GUI")
 	Signals.connect("subjects_database_updated", self, "_update_GUI")
 
 
 ##________________________ Methodes de gestion des donees____________
 func _add_subject_to_database(subject:String) ->void:
 	if add_subject_line_edit.text == "":
-		notification.add_color_override("font_color", Color("#a50000"))
-		notification.text = "Veuillez entrer une valeur correcte."
-		return	
+		_error_notification("Veuillez entrer une valeur correcte.")
 	if Global.subjects_database.has(add_subject_line_edit.text):
-		notification.add_color_override("font_color", Color("#a50000"))
-		notification.text = "Cette matière est déjà enregistrée."
-		return
-	Global.subjects_database.append(subject)
-	Global.update_option_button(remove_subject_option_button, Global.subjects_database)
-	Global.update_option_button(define_lesson_subject_option_button, Global.subjects_database)
-	Signals.emit_signal("subject_added") # to NewLessonDialog by Signals
+		_error_notification("Cette matière est déjà enregistrée.")
+	Global.add_to_subjects_database(subject)
 	
 	
 func _add_lesson_to_database(lesson:String, subject:String) ->void:
 	if add_lesson_line_edit.text == "":
-		notification.add_color_override("font_color", Color("#a50000"))
-		notification.text = "Veuillez entrer une valeur correcte."
-		return	
+		_error_notification("Veuillez entrer une valeur correcte.")
 	if Global.subjects_database == []:
-		notification.add_color_override("font_color", Color("#a50000"))
-		notification.text = "Veuillez spécifier la matière de la leçon"
-		return
+		_error_notification("Veuillez spécifier la matière de la leçon")
 	if Global.lessons_database.has(add_lesson_line_edit.text):
-		notification.add_color_override("font_color", Color("#a50000"))
-		notification.text = "Cette leçon est déjà enregistrée."
-		return
-	Global.lessons_database[lesson] = [lesson, subject]
-	Signals.emit_signal("lesson_added") # to NewLessonDialog by Signals
-	Global.update_option_button(remove_lesson_option_button, Global.lessons_database)
-	print_debug(Global.lessons_database)
-#	animation.play("lesson_saved")
-	
+		_error_notification("Cette leçon est déjà enregistrée.")
+	Global.add_to_lessons_database(lesson, [lesson, subject])
+	animation.play("lesson_saved")
 
 
 func _remove_lesson_from_database() ->void:
 	var lesson_title: String = Global.get_item_string(remove_lesson_option_button)
-	Global.lessons_database.erase(lesson_title)
+	Global.remove_from_lessons_database(lesson_title)
 	for lesson_card in get_tree().get_nodes_in_group("lesson_cards"):
 		if lesson_card.lesson == lesson_title:
 			lesson_card.delete()
-	Signals.emit_signal("lesson_added")
-	_update_GUI()
 
 
 func _remove_subject_from_database() ->void:
 	var subject:String = Global.get_item_string(remove_subject_option_button)
-	var i = Global.subjects_database.find(subject)
-	Global.subjects_database.remove(i)
+	Global.remove_from_subjects_database(subject)
 	var tmp:Dictionary = {}
 	for k in Global.lessons_database:
 		if Global.lessons_database[k][1] != subject:
 			tmp[k] = Global.lessons_database[k]
-	Global.lessons_database = tmp
+	Global.set_lessons_database(tmp)
 	for lesson_card in get_tree().get_nodes_in_group("lesson_cards"):
 		if !Global.lessons_database.has(lesson_card.lesson):
 			lesson_card.delete()
-	Signals.emit_signal("subject_added")
-	_update_GUI()	
 
 
 ##_________________________ Gestion de la GUI _________________________
@@ -88,7 +66,14 @@ func _update_GUI() ->void:
 	Global.update_option_button(remove_subject_option_button, Global.subjects_database)
 	Global.update_option_button(remove_lesson_option_button, Global.lessons_database)
 	Global.update_option_button(define_lesson_subject_option_button, Global.subjects_database)
+	
+func _refresh_lessons_GUI() ->void:
+	Global.update_option_button(remove_lesson_option_button, Global.lessons_database)
 
+func _error_notification(msg:String) ->void:
+	notification.add_color_override("font_color", Color("#a50000"))
+	notification.text = msg
+	return
 
 
 ##_________________________ Methodes connectees ___________________________________

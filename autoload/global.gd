@@ -17,23 +17,36 @@ var settings: Dictionary = {
 
 func set_subjects_database(value) ->void:
 	subjects_database = value
+	subjects_database.sort()
 	Signals.emit_signal("subjects_database_updated")
 
 func set_lessons_database(value) ->void:
 	lessons_database = value
 	Signals.emit_signal("lessons_database_updated")
 
-func add_to_subjects_database(value) ->void:
+func add_to_subjects_database(value:String) ->void:
 	subjects_database.append(value)
+	subjects_database.sort()
 	Signals.emit_signal("subjects_database_updated")
 
-func add_to_lessons_database(key, value:Array) ->void:
+func add_to_lessons_database(key:String, value:Array) ->void:
 	lessons_database[key] = value
+	var keys_table = lessons_database.keys()
+	keys_table.sort()
+	var tmp : Dictionary
+	for i in keys_table:
+		tmp[i] = lessons_database[i]
+	lessons_database = tmp
 	Signals.emit_signal("lessons_database_updated")
 
-func remove_from_lessons_database(key) ->void:
+func remove_from_lessons_database(key:String) ->void:
 	lessons_database.erase(key)
 	Signals.emit_signal("lessons_database_updated")
+	
+func remove_from_subjects_database(subject:String) ->void:
+	var index = subjects_database.find(subject)
+	subjects_database.remove(index)
+	Signals.emit_signal("subjects_database_updated")
 
 
 func _ready() -> void:
