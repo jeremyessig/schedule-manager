@@ -27,11 +27,14 @@ func get_item_index_by_string(node:OptionButton, content:String) -> int:
 func _open_dialog(nodepath:NodePath) ->void:
 	_show_edit_lesson_dialog()
 	lesson_card = get_node(nodepath)
+	rating = lesson_card.rating
+	print(rating)
 	_update_gui()
 	update_color(card_color)
 
 
 func _update_gui() ->void:
+	refresh_rating_gui()
 	title.text = lesson_card.lesson
 	type_option_button.select(get_item_index_by_string(type_option_button, lesson_card.type))
 	teacher_line_edit.text = lesson_card.teacher

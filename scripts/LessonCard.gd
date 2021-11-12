@@ -19,7 +19,7 @@ var teacher : String
 var color : String = "#00acb4"
 var datetime: Array
 var save_date: Dictionary = {"created": "", "edited": "", "saved": ""} ## Date de création et modification de la carte
-var rating : int ## Permet de noter le cours avec des etoiles
+var rating : int = 0 ## Permet de noter le cours avec des etoiles
 var is_displayed : bool = false setget _set_is_displayed
 var size : int ## Nombre de tuiles que le cours occupe dans l'agenda
 var version : float
@@ -47,10 +47,10 @@ func _ready():
 	Signals.connect("lesson_removed_from_calendar", self, "_undisplay")
 	Signals.connect("program_reseted", self, "delete") ## Header -> Signals
 	save_date["created"] = OS.get_datetime() 
-	for btn in stars_container.get_children():
-		btn.connect("mouse_hover", self, "_on_star_btn_overflew")
-		btn.connect("mouse_out", self, "_on_star_btn_overflew")
-		btn.connect("mouse_pressed", self, "_on_star_btn_toggled")
+#	for btn in stars_container.get_children():
+#		btn.connect("mouse_hover", self, "_on_star_btn_overflew")
+#		btn.connect("mouse_out", self, "_on_star_btn_overflew")
+#		btn.connect("mouse_pressed", self, "_on_star_btn_toggled")
 
 ##______________setter et getter prives___________________________
 
@@ -157,6 +157,7 @@ func update_GUI() -> void:
 	duration_field.text = "%sh%s" %[String(duration[0]), String(duration[1])]
 	schedule_field.text = "%s %sh%s à %s" %[String(schedule[1]), String(schedule[2]), String(schedule[3]), calculate_time(duration, schedule)]
 	update_color(color)
+	_refresh_rating_gui()
 	if is_obligatory:
 		obligatory_field.text = "oui"
 	if not is_obligatory:
@@ -164,6 +165,12 @@ func update_GUI() -> void:
 	size = _calcul_size(duration)
 	position = _calculate_position(schedule)
 	emit_signal("lesson_cell_updated", get_data(), "")
+
+func _refresh_rating_gui():
+	for star in stars_container.get_children():
+		star.hide()
+		if rating == star.get_index():
+			star.show()
 	
 	
 func update_color(color:String) -> void:
@@ -246,29 +253,6 @@ func export_to_csv() ->PoolStringArray:
 	
 ##_______________________Methodes connectees_______________________________
 
-func _on_star_btn_overflew(value:int):
-	for btn in stars_container.get_children():
-		if btn.value <= value:
-			btn.overflew(true)
-		else:
-			btn.overflew(false)
-
-func _on_star_btn_toggled(value, is_pressed):
-	if rating != value:
-		rating = value	
-		for btn in stars_container.get_children():
-			if btn.value <= value and !btn.is_pressed:
-				btn.set_is_pressed(true)
-			elif btn.value == value and btn.is_pressed:
-				btn.set_is_pressed(true)
-			elif btn.value > value:
-				btn.set_is_pressed(false)
-	else:
-		rating = 0
-		for btn in stars_container.get_children():
-			btn.set_is_pressed(false)
-	print(rating)
-
 
 ## Le cours n'est plus affiche dans le calendrier
 func _undisplay(card_id:String):
@@ -294,8 +278,3 @@ func _on_LessonCard_gui_input(event):
 					return
 				Global.calendar_array.add_lesson(node_path)
 
-
-
-func _on_StarsContainer_mouse_exited():
-	for btn in stars_container.get_children():
-		btn.overflew(false)

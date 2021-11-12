@@ -4,6 +4,8 @@ extends Control
 var subjects_and_lessons_are_ready := false
 var card_color : String = "#1e90ff"
 
+var rating : int
+
 onready var type_option_button : OptionButton = $Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/TypeOptionButton
 onready var subject_option_button : OptionButton = $Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/SubjectOptionButton
 onready var lesson_option_button : OptionButton = $Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/LessonOptionButton
@@ -21,17 +23,20 @@ onready var title : Label = $Panel/VBoxContainer/Head/Title
 onready var head_panel : Panel = $Panel/VBoxContainer/Head
 onready var panel : Panel = $Panel
 onready var vbox_container := $Panel/VBoxContainer/Body/VboxContainer
+onready var stars_container :HBoxContainer= $Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/StarsContainer
 
 
 
 
 
 func _ready() -> void:
-#	Signals.connect("lesson_added", self, "_on_lesson_added")
-#	Signals.connect("subject_added", self,"_on_subject_added")
 	Signals.connect("database_reseted",self, "_on_database_reseted")
 	Signals.connect("lessons_database_updated", self, "_on_lesson_added")
 	Signals.connect("subjects_database_updated", self, "_on_subject_added")
+	for btn in stars_container.get_children():
+		btn.connect("mouse_hover", self, "_on_star_btn_overflew")
+		btn.connect("mouse_out", self, "_on_star_btn_overflew")
+		btn.connect("mouse_pressed", self, "_on_star_btn_toggled")
 	pass
 
 func _physics_process(delta):
@@ -143,7 +148,8 @@ func create_data_dictionary() -> Dictionary:
 		"color": color,
 		"schedule": schedule,
 		"is_displayed": false,
-		"index": index
+		"index": index,
+		"rating":rating
 	}
 	return data
 	
@@ -155,8 +161,40 @@ func update_color(color:String) -> void:
 	head_panel.set('custom_styles/panel', new_style)
 
 
+func refresh_rating_gui():
+	for btn in stars_container.get_children():
+		btn.set_is_pressed(false)
+		if btn.value <= rating:
+			btn.set_is_pressed(true)
+
+
+
 
 ##________________Methodes connectees par signal_______________________________
+func _on_star_btn_overflew(value:int):
+	for btn in stars_container.get_children():
+		if btn.value <= value:
+			btn.overflew(true)
+		else:
+			btn.overflew(false)
+
+func _on_star_btn_toggled(value, is_pressed):
+	if rating != value:
+		rating = value	
+		for btn in stars_container.get_children():
+			if btn.value <= value and !btn.is_pressed:
+				btn.set_is_pressed(true)
+			elif btn.value == value and btn.is_pressed:
+				btn.set_is_pressed(true)
+			elif btn.value > value:
+				btn.set_is_pressed(false)
+	else:
+		rating = 0
+		for btn in stars_container.get_children():
+			btn.set_is_pressed(false)
+	print(rating)
+
+
 
 func _on_database_reseted(database_name:String) -> void:
 	if database_name == "subjects_database":
@@ -174,3 +212,8 @@ func _on_SubjectOptionButton_item_selected(index):
 	Global.update_option_button(lesson_option_button, Global.lessons_database, subject_selected)
 	print_debug("BOUTON APPUYE")
 
+
+
+func _on_StarsContainer_mouse_exited():
+	for btn in stars_container.get_children():
+		btn.overflew(false)

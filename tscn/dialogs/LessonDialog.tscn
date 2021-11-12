@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/LessonDialog.gd" type="Script" id=1]
 [ext_resource path="res://res/Helvetica_bold.tres" type="DynamicFont" id=2]
 [ext_resource path="res://tscn/ColorGrid.tscn" type="PackedScene" id=3]
 [ext_resource path="res://tscn/Dialog.tscn" type="PackedScene" id=4]
+[ext_resource path="res://tscn/btn/StarBtn.tscn" type="PackedScene" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -52,7 +53,7 @@ size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer" index="0"]
 margin_right = 484.0
-margin_bottom = 514.0
+margin_bottom = 566.0
 custom_constants/vseparation = 20
 custom_constants/hseparation = 20
 columns = 2
@@ -286,14 +287,59 @@ rect_min_size = Vector2( 220, 30 )
 align = 1
 placeholder_text = "(optionnel)"
 
-[node name="ColorLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="18"]
-margin_top = 480.0
+[node name="RatingLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="18"]
+margin_top = 469.0
 margin_right = 129.0
-margin_bottom = 494.0
+margin_bottom = 483.0
+custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
+text = "Avis"
+
+[node name="StarsContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="19"]
+margin_left = 149.0
+margin_top = 460.0
+margin_right = 484.0
+margin_bottom = 492.0
+custom_constants/separation = 0
+
+[node name="StarBtn1" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/StarsContainer" index="0" instance=ExtResource( 5 )]
+margin_right = 32.0
+margin_bottom = 32.0
+value = 1
+
+[node name="StarBtn2" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/StarsContainer" index="1" instance=ExtResource( 5 )]
+margin_left = 32.0
+margin_right = 64.0
+margin_bottom = 32.0
+value = 2
+
+[node name="StarBtn3" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/StarsContainer" index="2" instance=ExtResource( 5 )]
+margin_left = 64.0
+margin_right = 96.0
+margin_bottom = 32.0
+value = 3
+
+[node name="StarBtn4" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/StarsContainer" index="3" instance=ExtResource( 5 )]
+margin_left = 96.0
+margin_right = 128.0
+margin_bottom = 32.0
+value = 4
+
+[node name="StarBtn5" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/StarsContainer" index="4" instance=ExtResource( 5 )]
+margin_left = 128.0
+margin_right = 160.0
+margin_bottom = 32.0
+value = 5
+
+[node name="ColorLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="20"]
+margin_top = 532.0
+margin_right = 129.0
+margin_bottom = 546.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Couleur :"
 
-[node name="ColorGrid" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="19" instance=ExtResource( 3 )]
+[node name="ColorGrid" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="21" instance=ExtResource( 3 )]
+margin_top = 512.0
+margin_bottom = 566.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 
@@ -333,4 +379,5 @@ custom_styles/normal = SubResource( 4 )
 text = "Annuler"
 
 [connection signal="item_selected" from="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/SubjectOptionButton" to="." method="_on_SubjectOptionButton_item_selected"]
+[connection signal="mouse_exited" from="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/StarsContainer" to="." method="_on_StarsContainer_mouse_exited"]
 [connection signal="pressed" from="Panel/VBoxContainer/Foot/HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]

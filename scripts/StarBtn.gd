@@ -5,9 +5,10 @@ signal mouse_out(value)
 signal mouse_pressed(value, is_pressed)
 signal starBtn_pressed(toggle, value)
 
-var star_selected : Texture = preload("res://assets/buttons/star_selected.png")
-var star_unselected : Texture = preload("res://assets/buttons/star_unselected.png")
-var star_hover : Texture = preload("res://assets/buttons/star_hover.png")
+
+export var star_selected : Texture 
+export var star_unselected : Texture 
+export var star_hover : Texture 
 
 export(int) var value
 export var is_pressed: bool = false setget set_is_pressed
