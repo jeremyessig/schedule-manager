@@ -37,6 +37,7 @@ onready var obligatory_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridC
 onready var room_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/RoomField
 onready var teacher_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/TeacherField
 onready var displayed_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/DisplayedField
+onready var stars_container := $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/StarsContainer
 
 
 
@@ -46,6 +47,10 @@ func _ready():
 	Signals.connect("lesson_removed_from_calendar", self, "_undisplay")
 	Signals.connect("program_reseted", self, "delete") ## Header -> Signals
 	save_date["created"] = OS.get_datetime() 
+	for btn in stars_container.get_children():
+		btn.connect("mouse_hover", self, "_on_star_btn_overflew")
+		btn.connect("mouse_out", self, "_on_star_btn_overflew")
+		btn.connect("mouse_pressed", self, "_on_star_btn_toggled")
 
 ##______________setter et getter prives___________________________
 
@@ -241,6 +246,30 @@ func export_to_csv() ->PoolStringArray:
 	
 ##_______________________Methodes connectees_______________________________
 
+func _on_star_btn_overflew(value:int):
+	for btn in stars_container.get_children():
+		if btn.value <= value:
+			btn.overflew(true)
+		else:
+			btn.overflew(false)
+
+func _on_star_btn_toggled(value, is_pressed):
+	if rating != value:
+		rating = value	
+		for btn in stars_container.get_children():
+			if btn.value <= value and !btn.is_pressed:
+				btn.set_is_pressed(true)
+			elif btn.value == value and btn.is_pressed:
+				btn.set_is_pressed(true)
+			elif btn.value > value:
+				btn.set_is_pressed(false)
+	else:
+		rating = 0
+		for btn in stars_container.get_children():
+			btn.set_is_pressed(false)
+	print(rating)
+
+
 ## Le cours n'est plus affiche dans le calendrier
 func _undisplay(card_id:String):
 	if card_id == id:
@@ -265,3 +294,8 @@ func _on_LessonCard_gui_input(event):
 					return
 				Global.calendar_array.add_lesson(node_path)
 
+
+
+func _on_StarsContainer_mouse_exited():
+	for btn in stars_container.get_children():
+		btn.overflew(false)

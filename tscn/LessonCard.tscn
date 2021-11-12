@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://res/button_lesson_card_hover.tres" type="StyleBox" id=1]
 [ext_resource path="res://res/button_lesson_card_normal.tres" type="StyleBox" id=2]
 [ext_resource path="res://scripts/LessonCard.gd" type="Script" id=3]
+[ext_resource path="res://tscn/btn/StarBtn.tscn" type="PackedScene" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -84,9 +85,9 @@ __meta__ = {
 }
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 40.0
+margin_top = 39.0
 margin_right = 300.0
-margin_bottom = 199.0
+margin_bottom = 200.0
 rect_min_size = Vector2( 300, 0 )
 mouse_filter = 2
 size_flags_horizontal = 6
@@ -237,11 +238,41 @@ custom_colors/font_color = Color( 0.662745, 0, 0, 1 )
 text = "NON"
 
 [node name="RatingLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
-margin_top = 145.0
+margin_top = 146.0
 margin_right = 150.0
-margin_bottom = 159.0
+margin_bottom = 160.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Avis :"
+
+[node name="StarsContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_left = 150.0
+margin_top = 145.0
+margin_right = 300.0
+margin_bottom = 161.0
+custom_constants/separation = 0
+
+[node name="01" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/StarsContainer" instance=ExtResource( 4 )]
+value = 1
+
+[node name="02" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/StarsContainer" instance=ExtResource( 4 )]
+margin_left = 16.0
+margin_right = 32.0
+value = 2
+
+[node name="03" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/StarsContainer" instance=ExtResource( 4 )]
+margin_left = 32.0
+margin_right = 48.0
+value = 3
+
+[node name="04" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/StarsContainer" instance=ExtResource( 4 )]
+margin_left = 48.0
+margin_right = 64.0
+value = 4
+
+[node name="05" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/StarsContainer" instance=ExtResource( 4 )]
+margin_left = 64.0
+margin_right = 80.0
+value = 5
 
 [node name="MarginLeft2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 313.0
@@ -250,3 +281,4 @@ margin_bottom = 239.0
 rect_min_size = Vector2( 5, 5 )
 
 [connection signal="gui_input" from="." to="." method="_on_LessonCard_gui_input"]
+[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/StarsContainer" to="." method="_on_StarsContainer_mouse_exited"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/buttons/star_unselected.png" type="Texture" id=1]
+[ext_resource path="res://scripts/StarBtn.gd" type="Script" id=4]
+
+[node name="StarBtn" type="TextureRect"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="gui_input" from="." to="." method="_on_StarBtn_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_StarBtn_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_StarBtn_mouse_exited"]
