@@ -9,12 +9,14 @@ signal open_save_pressed
 onready var file : MenuButton = $HBoxContainer/Toolbar/FileMenuButton
 onready var database_menu : MenuButton = $HBoxContainer/Toolbar/DatabaseMenuButton
 onready var help : MenuButton = $HBoxContainer/Toolbar/HelpMenuButton
+onready var display_menu : MenuButton = $HBoxContainer/Toolbar/DisplayMenuButton
+
 
 func _ready() -> void:
 	file.get_popup().connect("id_pressed", self, "_on_file_item_pressed")
 	database_menu.get_popup().connect("id_pressed", self, "_on_database_item_pressed")
 	help.get_popup().connect("id_pressed", self, "_on_help_item_pressed")
-	
+	display_menu.get_popup().connect("id_pressed", self, "_on_display_item_pressed")
 
 func _on_file_item_pressed(id)->void:
 	match id:
@@ -36,6 +38,15 @@ func _on_database_item_pressed(id)->void:
 			emit_signal("import_json_pressed")
 		1:
 			emit_signal("export_json_pressed")
+
+
+func _on_display_item_pressed(id)->void:
+	match id:
+		0:
+			Global.left_panel.sort_cards(false)
+		1:
+			Global.left_panel.sort_cards(true)
+
 
 func _on_help_item_pressed(id)->void:
 	match id:

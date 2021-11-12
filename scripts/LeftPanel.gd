@@ -90,6 +90,7 @@ func sort_cards(invert:bool):
 	for matrix in table:
 		add_lesson_card_to_container(matrix[1], temp)
 		matrix[1].index = matrix[1].get_index()
+	sort_btn.flip_v = invert
 		
 
 
@@ -146,4 +147,3 @@ func _responsive_TDCM_container():
 	
 func _on_SortBtn_toggled(button_pressed):
 	sort_cards(button_pressed)
-	sort_btn.flip_v = button_pressed
