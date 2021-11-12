@@ -103,11 +103,18 @@ func sort_lessons_by_letters() ->Array:
 	return table
 
 
-func sort_lessons_by_rating():
+func sort_lessons_by_rating(invert:bool = false):
 	var table: Array
 	for card in get_tree().get_nodes_in_group("lesson_cards"):
 		table.append(card)
 	table = Sort.by_rating(table, 5)
+	if invert:
+		table.invert()
+	for card in table:
+		if card.type == "Cours Magistral":
+			Global.reparent_node(cm_container, card, cm_container)
+		if card.type == "Travaux Dirigés":
+			Global.reparent_node(td_container, card, td_container)	
 
 
 #func set_lesson_card(id:String) ->void:

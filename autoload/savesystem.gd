@@ -4,6 +4,7 @@ var version : float
 
 const SaveAsResource = preload("res://classes/save_as_resource.gd")
 var path_to_save : String
+var last_opened_path : String
 
 func _ready():
 	version = ProjectSettings.get_setting("application/config/version")
@@ -50,6 +51,8 @@ func load_from_res(path) -> void:
 		Global.left_panel.create_lesson_card(node_data)
 	Global.set_lessons_database(save.lesson)
 	Global.set_subjects_database(save.subject)
+	last_opened_path = path
+	path_to_save = path
 	
 	
 		
