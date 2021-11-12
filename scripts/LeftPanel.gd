@@ -103,6 +103,13 @@ func sort_lessons_by_letters() ->Array:
 	return table
 
 
+func sort_lessons_by_rating():
+	var table: Array
+	for card in get_tree().get_nodes_in_group("lesson_cards"):
+		table.append(card)
+	table = Sort.by_rating(table, 5)
+
+
 #func set_lesson_card(id:String) ->void:
 #	var card = find_lesson_card(id)
 #	card.is_displayed = false

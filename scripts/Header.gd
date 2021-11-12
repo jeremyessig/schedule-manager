@@ -46,6 +46,8 @@ func _on_display_item_pressed(id)->void:
 			Global.left_panel.sort_cards(false)
 		1:
 			Global.left_panel.sort_cards(true)
+		2:
+			Global.left_panel.sort_lessons_by_rating()
 
 
 func _on_help_item_pressed(id)->void:
