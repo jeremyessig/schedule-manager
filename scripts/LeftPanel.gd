@@ -108,7 +108,7 @@ func sort_lessons_by_rating(invert:bool = false):
 	for card in get_tree().get_nodes_in_group("lesson_cards"):
 		table.append(card)
 	table = Sort.by_rating(table, 5)
-	if invert:
+	if !invert:
 		table.invert()
 	for card in table:
 		if card.type == "Cours Magistral":
