@@ -74,7 +74,7 @@ func export_int_str(integer:int) -> String:
 ## Recupere le jour de l'attribut schedule de lesson_card et le compare a une date reelle
 func _attribute_day(node:Node) ->void:
 	var weekday = node.schedule[1]
-	var days_table = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
+	var days_table = Global.get_weekday()
 	var days_to_further = days_table.find(weekday)
 	var date = change_to_next_day(int(start_date[0]), int(start_date[1]), int(start_date[2]), days_to_further)
 	node.datetime.append(date)

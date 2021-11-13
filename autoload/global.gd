@@ -7,7 +7,7 @@ var new_subject_button : Button
 var alert_dialog : Control
 var calendar_array : HBoxContainer
 var new_subject_dialog : Control
-var weekday : Array = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"]
+const weekday : Array = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
 
 var subjects_database : Array
 var lessons_database : Dictionary
@@ -54,7 +54,7 @@ func remove_from_subjects_database(subject:String) ->void:
 
 
 func get_weekday() ->Array:
-	return weekday
+	return weekday.duplicate()
 
 
 
