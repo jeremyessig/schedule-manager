@@ -79,6 +79,13 @@ func add_lesson_card_to_container(child:Node, source:Node) ->void:
 		Global.reparent_node(source, child, td_container)
 
 
+func clear_CM_and_TD_containers()->void:
+	for card in cm_container.get_children():
+		Global.reparent_node(cm_container, card, temp)
+	for card in td_container.get_children():
+		Global.reparent_node(td_container, card, temp)	
+
+
 func sort_cards(invert:bool):
 	var table = sort_lessons_by_letters()
 	if invert == true:
@@ -150,13 +157,6 @@ func _refresh_searched_card(new_text) ->void:
 	var lesson_cards_found = _get_subsequence_of_lesson_cards(new_text)
 	for card in lesson_cards_found:
 		add_lesson_card_to_container(card, temp)
-
-
-func clear_CM_and_TD_containers()->void:
-	for card in cm_container.get_children():
-		Global.reparent_node(cm_container, card, temp)
-	for card in td_container.get_children():
-		Global.reparent_node(td_container, card, temp)	
 
 
 func clear_searched() ->void:	
