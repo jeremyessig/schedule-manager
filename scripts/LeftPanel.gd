@@ -5,6 +5,7 @@ var lesson_card := preload("res://tscn/LessonCard.tscn")
 onready var td_container := $VBoxContainer/HBoxContainer2/VBoxContainer/ScrollContainer/ClassContainer/TDContainer
 onready var cm_container := $VBoxContainer/HBoxContainer2/VBoxContainer/ScrollContainer/ClassContainer/CMContainer
 onready var buttons_grid_container := $VBoxContainer/NewClassContainer/ButtonsGridContainer
+onready var search_line_edit: LineEdit = $VBoxContainer/SearchContainer/SearchLineEdit
 onready var temp := $Temp
 onready var sort_btn := $SortBtn
 
@@ -157,7 +158,51 @@ func _responsive_TDCM_container():
 	cm_container.columns = 1
 	buttons_grid_container.columns = 1
 
+
+##________________ Methode de recherche_____________________
+
+func _refresh_searched_card(new_text) ->void:
+	for card in get_tree().get_nodes_in_group("lesson_cards"):
+		if card.type == "Cours Magistral":
+			Global.reparent_node(cm_container, card, temp)
+		if card.type == "Travaux Dirigés":
+			Global.reparent_node(td_container, card, temp)	
+	var lesson_cards_found = _get_subsequence_of_lesson_cards(new_text)
+	for card in lesson_cards_found:
+		add_lesson_card_to_container(card, temp)
+
+
+func clear_searched() ->void:	
+	search_line_edit.clear()
+	for card in get_tree().get_nodes_in_group("lesson_cards"):
+		add_lesson_card_to_container(card, temp)
 		
+
+func _get_subsequence_of_lesson_cards(text:String) -> Array:
+	var table : Array
+	for card in get_tree().get_nodes_in_group("lesson_cards"):
+		if text.is_subsequence_ofi(card.lesson):
+			table.append(card)
+	return table
+
+
+##__________________Methode connectees_______________________		
 	
 func _on_SortBtn_toggled(button_pressed):
 	sort_cards(button_pressed)
+
+
+func _on_SearchLineEdit_text_changed(new_text):
+	_refresh_searched_card(new_text)
+
+
+func _on_SearchLineEdit_focus_exited():
+	call_deferred("clear_searched")
+
+
+func _on_SearchLineEdit_focus_entered():
+	for card in get_tree().get_nodes_in_group("lesson_cards"):
+		if card.type == "Cours Magistral":
+			Global.reparent_node(cm_container, card, temp)
+		if card.type == "Travaux Dirigés":
+			Global.reparent_node(td_container, card, temp)	

@@ -24,14 +24,3 @@ static func by_rating(table:Array, max_rating:int, tmp:Array = [], count:int = 0
 		count += 1
 		by_rating(table, max_rating, tmp, count)
 	return tmp
-
-
-#static func by_rating(table:Array, max_rating:int, tmp:Array = []):
-#	for node in table:
-#		if node.rating == max_rating:
-#			tmp.append(node)
-#			table.erase(table.find(node))
-#	if max_rating >= 0:
-#		max_rating -= 1
-#		by_rating(table, max_rating, tmp)
-#	return tmp
