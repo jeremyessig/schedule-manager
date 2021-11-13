@@ -1,5 +1,5 @@
 # Schedule Manager for Sorbonne University
-![](icon.png)
+![](screenshots/screenshot01.png)
 
 This is a personnal schedule manager for students of Sorbonne University (Paris France)
 
