@@ -108,12 +108,24 @@ custom_constants/separation = 8
 alignment = 1
 
 [node name="SearchLineEdit" type="LineEdit" parent="VBoxContainer/SearchContainer"]
-margin_left = 45.0
-margin_right = 315.0
+margin_left = 28.0
+margin_right = 298.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 270, 30 )
 placeholder_text = "Rechercher un cours"
 placeholder_alpha = 0.369
+
+[node name="Button" type="Button" parent="VBoxContainer/SearchContainer"]
+margin_left = 306.0
+margin_right = 331.0
+margin_bottom = 30.0
+custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 0.278431, 0.278431, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "X"
+flat = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 181.0

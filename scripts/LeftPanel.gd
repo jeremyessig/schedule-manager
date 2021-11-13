@@ -35,7 +35,7 @@ func _physics_process(_delta: float) -> void:
 
 ##___________________Creation des cartes de cours___________________________________
 func does_lesson_exist(card_id: String, type:String):
-	var container :Node
+	var container : GridContainer
 	if type == "Travaux Dirigés":
 		container = td_container
 	if type == "Cours Magistral":
@@ -47,8 +47,8 @@ func does_lesson_exist(card_id: String, type:String):
 
 
 func edit_lesson_card(datas:Dictionary, old_id:String) ->void:
-	var card = find_lesson_card(old_id)
-	var old_type = card.type
+	var card : Button = find_lesson_card(old_id)
+	var old_type : String = card.type
 	card.set_data(datas)
 	if card.type != old_type:
 		var parent = card.get_parent()
@@ -57,8 +57,8 @@ func edit_lesson_card(datas:Dictionary, old_id:String) ->void:
 	
 
 func lesson_cell_opened(id) -> void:
-	var node = find_lesson_card(id)
-	var node_path = node.get_path()
+	var node : Button = find_lesson_card(id)
+	var node_path :NodePath = node.get_path()
 	Signals.emit_signal("lesson_card_pressed", node_path)
 	
 
@@ -71,12 +71,29 @@ func create_lesson_card(data:Dictionary) ->void:
 		add_lesson_card_to_container(child, temp)
 
 
+func get_all_lesson_cards() ->Array:
+	var table:Array
+	for card in get_tree().get_nodes_in_group("lesson_cards"):
+		table.append(card)	
+	return table
+
 
 func add_lesson_card_to_container(child:Node, source:Node) ->void:
 	if child.type == "Cours Magistral":
 		Global.reparent_node(source, child, cm_container)
 	if child.type == "Travaux Dirigés":
 		Global.reparent_node(source, child, td_container)
+
+
+func find_lesson_card(id:String) ->Node:
+	for card in cm_container.get_children():
+		if card.id == id:
+			return card
+	for card in td_container.get_children():
+		if card.id == id:
+			return card
+	print_debug("Error: No lesson card found")
+	return null
 
 
 func clear_CM_and_TD_containers()->void:
@@ -86,6 +103,7 @@ func clear_CM_and_TD_containers()->void:
 		Global.reparent_node(td_container, card, temp)	
 
 
+##_____________________ Triage des cours_______________________________
 func sort_cards(invert:bool):
 	var table = sort_lessons_by_letters()
 	if invert == true:
@@ -98,8 +116,7 @@ func sort_cards(invert:bool):
 	for matrix in table:
 		add_lesson_card_to_container(matrix[1], temp)
 		matrix[1].index = matrix[1].get_index()
-	sort_btn.flip_v = invert
-		
+	sort_btn.flip_v = invert		
 
 
 func sort_lessons_by_letters() ->Array:
@@ -111,37 +128,44 @@ func sort_lessons_by_letters() ->Array:
 	return table
 
 
-func sort_lessons_by_rating(invert:bool = false):
+func sort_lessons_by_subjects(invert:bool = false) ->void:
+	var subjects_list:Array = Global.get_subjects_database()
 	var table: Array
-	for card in get_tree().get_nodes_in_group("lesson_cards"):
-		table.append(card)
+	table = get_all_lesson_cards()
+	table = Sort.by_subjects(table, subjects_list, invert)
+	dispatch_sorted_cards_to_CM_and_TD_containers(table)
+
+
+func sort_lessons_by_rating(invert:bool = false) ->void:
+	var table: Array
+	table = get_all_lesson_cards()
 	table = Sort.by_rating(table, 5)
 	if !invert:
 		table.invert()
+	dispatch_sorted_cards_to_CM_and_TD_containers(table)
+
+
+func sort_lessons_by_days(invert:bool = false) ->void:
+	var table: Array
+	var weekday: Array = Global.get_weekday()
+	table = get_all_lesson_cards()
+	table = Sort.by_days(table, weekday, invert)
+	dispatch_sorted_cards_to_CM_and_TD_containers(table)	
+
+
+func dispatch_sorted_cards_to_CM_and_TD_containers(table:Array) ->void:
 	for card in table:
 		if card.type == "Cours Magistral":
 			Global.reparent_node(cm_container, card, cm_container)
 		if card.type == "Travaux Dirigés":
 			Global.reparent_node(td_container, card, td_container)	
 
-
 #func set_lesson_card(id:String) ->void:
 #	var card = find_lesson_card(id)
 #	card.is_displayed = false
 
+	
 
-func find_lesson_card(id:String) ->Node:
-	for card in cm_container.get_children():
-		if card.id == id:
-			return card
-	for card in td_container.get_children():
-		if card.id == id:
-			return card
-	print_debug("Error: No lesson card found")
-	return null
-	
-	
-	
 ##________________ Methode de recherche_____________________
 
 func _get_subsequence_of_lesson_cards(text:String) -> Array:
@@ -154,7 +178,7 @@ func _get_subsequence_of_lesson_cards(text:String) -> Array:
 
 func _refresh_searched_card(new_text) ->void:
 	clear_CM_and_TD_containers()
-	var lesson_cards_found = _get_subsequence_of_lesson_cards(new_text)
+	var lesson_cards_found : Array = _get_subsequence_of_lesson_cards(new_text)
 	for card in lesson_cards_found:
 		add_lesson_card_to_container(card, temp)
 

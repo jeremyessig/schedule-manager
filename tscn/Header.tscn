@@ -78,7 +78,7 @@ focus_mode = 2
 custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Affichage"
-items = [ "Trier les cours de A à Z", null, 0, false, false, 0, 0, null, "", false, "Trier les cours de Z à A", null, 0, false, false, 1, 0, null, "", false, "Trier les cours par les mieux notés", null, 0, false, false, 2, 0, null, "", false, "Trier les cours par les moins bien notés", null, 0, false, false, 3, 0, null, "", false ]
+items = [ "Trier les cours de A à Z", null, 0, false, false, 0, 0, null, "", false, "Trier les cours de Z à A", null, 0, false, false, 1, 0, null, "", false, "Trier les cours par les mieux notés", null, 0, false, false, 2, 0, null, "", false, "Trier les cours par les moins bien notés", null, 0, false, false, 3, 0, null, "", false, "Trier les cours par sujet A à Z", null, 0, false, false, 4, 0, null, "", false, "Trier les cours par sujet Z à A", null, 0, false, false, 5, 0, null, "", false, "Afficher les cours du lundi au samedi", null, 0, false, false, 6, 0, null, "", false, "Afficher les cours du samedi au lundi", null, 0, false, false, 7, 0, null, "", false ]
 switch_on_hover = true
 
 [node name="SettingsMenuButton" type="MenuButton" parent="HBoxContainer/Toolbar"]

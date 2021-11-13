@@ -50,6 +50,14 @@ func _on_display_item_pressed(id)->void:
 			Global.left_panel.sort_lessons_by_rating()
 		3:
 			Global.left_panel.sort_lessons_by_rating(true)
+		4:
+			Global.left_panel.sort_lessons_by_subjects()
+		5:
+			Global.left_panel.sort_lessons_by_subjects(true)
+		6:
+			Global.left_panel.sort_lessons_by_days()
+		7:
+			Global.left_panel.sort_lessons_by_days(true)
 
 
 func _on_help_item_pressed(id)->void:

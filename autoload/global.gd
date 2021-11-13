@@ -7,6 +7,7 @@ var new_subject_button : Button
 var alert_dialog : Control
 var calendar_array : HBoxContainer
 var new_subject_dialog : Control
+var weekday : Array = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"]
 
 var subjects_database : Array
 var lessons_database : Dictionary
@@ -23,6 +24,9 @@ func set_subjects_database(value) ->void:
 func set_lessons_database(value) ->void:
 	lessons_database = value
 	Signals.emit_signal("lessons_database_updated")
+
+func get_subjects_database() ->Array:
+	return subjects_database
 
 func add_to_subjects_database(value:String) ->void:
 	subjects_database.append(value)
@@ -47,6 +51,12 @@ func remove_from_subjects_database(subject:String) ->void:
 	var index = subjects_database.find(subject)
 	subjects_database.remove(index)
 	Signals.emit_signal("subjects_database_updated")
+
+
+func get_weekday() ->Array:
+	return weekday
+
+
 
 
 func _ready() -> void:
