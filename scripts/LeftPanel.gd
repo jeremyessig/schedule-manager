@@ -133,6 +133,38 @@ func find_lesson_card(id:String) ->Node:
 	print_debug("Error: No lesson card found")
 	return null
 	
+	
+	
+##________________ Methode de recherche_____________________
+
+func _get_subsequence_of_lesson_cards(text:String) -> Array:
+	var table : Array
+	for card in get_tree().get_nodes_in_group("lesson_cards"):
+		if text.is_subsequence_ofi(card.lesson):
+			table.append(card)
+	return table ## contient les cartes avec les bons noms
+
+
+func _refresh_searched_card(new_text) ->void:
+	clear_CM_and_TD_containers()
+	var lesson_cards_found = _get_subsequence_of_lesson_cards(new_text)
+	for card in lesson_cards_found:
+		add_lesson_card_to_container(card, temp)
+
+
+func clear_CM_and_TD_containers()->void:
+	for card in cm_container.get_children():
+		Global.reparent_node(cm_container, card, temp)
+	for card in td_container.get_children():
+		Global.reparent_node(td_container, card, temp)	
+
+
+func clear_searched() ->void:	
+	search_line_edit.clear()
+	clear_CM_and_TD_containers()
+	for card in get_tree().get_nodes_in_group("lesson_cards"):
+		add_lesson_card_to_container(card, temp)
+
 
 ##___________________Affichage responsive_______________________________
 ## Ecart de 340 px
@@ -159,32 +191,6 @@ func _responsive_TDCM_container():
 	buttons_grid_container.columns = 1
 
 
-##________________ Methode de recherche_____________________
-
-func _refresh_searched_card(new_text) ->void:
-	for card in get_tree().get_nodes_in_group("lesson_cards"):
-		if card.type == "Cours Magistral":
-			Global.reparent_node(cm_container, card, temp)
-		if card.type == "Travaux Dirigés":
-			Global.reparent_node(td_container, card, temp)	
-	var lesson_cards_found = _get_subsequence_of_lesson_cards(new_text)
-	for card in lesson_cards_found:
-		add_lesson_card_to_container(card, temp)
-
-
-func clear_searched() ->void:	
-	search_line_edit.clear()
-	for card in get_tree().get_nodes_in_group("lesson_cards"):
-		add_lesson_card_to_container(card, temp)
-		
-
-func _get_subsequence_of_lesson_cards(text:String) -> Array:
-	var table : Array
-	for card in get_tree().get_nodes_in_group("lesson_cards"):
-		if text.is_subsequence_ofi(card.lesson):
-			table.append(card)
-	return table
-
 
 ##__________________Methode connectees_______________________		
 	
@@ -197,12 +203,6 @@ func _on_SearchLineEdit_text_changed(new_text):
 
 
 func _on_SearchLineEdit_focus_exited():
-	call_deferred("clear_searched")
+	call_deferred("clear_searched") ## Sinon pas possible de cliquer sur la carte
 
 
-func _on_SearchLineEdit_focus_entered():
-	for card in get_tree().get_nodes_in_group("lesson_cards"):
-		if card.type == "Cours Magistral":
-			Global.reparent_node(cm_container, card, temp)
-		if card.type == "Travaux Dirigés":
-			Global.reparent_node(td_container, card, temp)	

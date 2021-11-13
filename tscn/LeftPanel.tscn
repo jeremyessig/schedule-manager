@@ -278,7 +278,6 @@ __meta__ = {
 visible = false
 position = Vector2( -1395.15, -244.106 )
 
-[connection signal="focus_entered" from="VBoxContainer/SearchContainer/SearchLineEdit" to="." method="_on_SearchLineEdit_focus_entered"]
 [connection signal="focus_exited" from="VBoxContainer/SearchContainer/SearchLineEdit" to="." method="_on_SearchLineEdit_focus_exited"]
 [connection signal="text_changed" from="VBoxContainer/SearchContainer/SearchLineEdit" to="." method="_on_SearchLineEdit_text_changed"]
 [connection signal="toggled" from="SortBtn" to="." method="_on_SortBtn_toggled"]
