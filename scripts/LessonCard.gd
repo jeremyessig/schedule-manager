@@ -47,10 +47,6 @@ func _ready():
 	Signals.connect("lesson_removed_from_calendar", self, "_undisplay")
 	Signals.connect("program_reseted", self, "delete") ## Header -> Signals
 	save_date["created"] = OS.get_datetime() 
-#	for btn in stars_container.get_children():
-#		btn.connect("mouse_hover", self, "_on_star_btn_overflew")
-#		btn.connect("mouse_out", self, "_on_star_btn_overflew")
-#		btn.connect("mouse_pressed", self, "_on_star_btn_toggled")
 
 ##______________setter et getter prives___________________________
 
