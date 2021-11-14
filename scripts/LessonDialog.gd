@@ -19,6 +19,7 @@ onready var schedule_minutes_option_button : OptionButton = $Panel/VBoxContainer
 onready var teacher_line_edit : LineEdit = $Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/TeacherLineEdit
 onready var lesson_code_line_edit : LineEdit = $Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/LessonCodeLineEdit
 onready var obligatory_check_button : CheckButton = $Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/ObligatoryCheckButton
+onready var location_option_button : OptionButton = $Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/LocationOptionButton
 onready var title : Label = $Panel/VBoxContainer/Head/Title
 onready var head_panel : Panel = $Panel/VBoxContainer/Head
 onready var panel : Panel = $Panel
@@ -33,6 +34,7 @@ func _ready() -> void:
 	Signals.connect("database_reseted",self, "_on_database_reseted")
 	Signals.connect("lessons_database_updated", self, "_on_lesson_added")
 	Signals.connect("subjects_database_updated", self, "_on_subject_added")
+	Signals.connect("locations_database_updated", self, "_on_location_added")
 	for btn in stars_container.get_children():
 		btn.connect("mouse_hover", self, "_on_star_btn_overflew")
 		btn.connect("mouse_out", self, "_on_star_btn_overflew")
@@ -63,6 +65,10 @@ func _on_lesson_added() ->void: ## From NewSubjectDialog and SaveSystem.gd by Si
 	var subject_selected: String = subject_option_button.get_item_text(0)
 	Global.update_option_button(lesson_option_button, Global.lessons_database, subject_selected)
 	print_debug(Global.subjects_database)
+
+
+func _on_location_added() ->void:
+	Global.update_option_button(location_option_button, Global.get_locations_database())
 
 
 ##______________Verifications avant validation du cours________________________
@@ -126,6 +132,7 @@ func create_data_dictionary() -> Dictionary:
 	var room = room_line_edit.text
 	var obligatory = obligatory_check_button.is_pressed()
 	var color = card_color
+	var location = Global.get_item_string(location_option_button)
 	var schedule = [schedule_days_option_button.get_selected_id(), 
 		Global.get_item_string(schedule_days_option_button), 
 		Global.get_item_string(schedule_hours_option_button), 
@@ -149,7 +156,8 @@ func create_data_dictionary() -> Dictionary:
 		"schedule": schedule,
 		"is_displayed": false,
 		"index": index,
-		"rating":rating
+		"rating":rating,
+		"location": location
 	}
 	return data
 	
@@ -201,6 +209,8 @@ func _on_database_reseted(database_name:String) -> void:
 		_on_subject_added()
 	if database_name == "lessons_database":
 		_on_lesson_added()
+	if database_name == "locations_database":
+		_on_location_added()
 
 
 func _on_CancelButton_pressed() -> void:

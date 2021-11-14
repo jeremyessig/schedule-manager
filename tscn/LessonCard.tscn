@@ -195,33 +195,47 @@ margin_bottom = 111.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Non"
 
-[node name="RoomLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+[node name="LocationLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 margin_top = 113.0
 margin_right = 150.0
 margin_bottom = 127.0
+custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
+text = "Etablissement: "
+
+[node name="LocationField" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_left = 150.0
+margin_top = 113.0
+margin_right = 300.0
+margin_bottom = 127.0
+custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
+
+[node name="RoomLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+margin_top = 129.0
+margin_right = 150.0
+margin_bottom = 143.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Salle :"
 
 [node name="RoomField" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 margin_left = 150.0
-margin_top = 113.0
+margin_top = 129.0
 margin_right = 300.0
-margin_bottom = 127.0
+margin_bottom = 143.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "104"
 
 [node name="TeacherLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
-margin_top = 129.0
+margin_top = 145.0
 margin_right = 150.0
-margin_bottom = 143.0
+margin_bottom = 159.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Professeur :"
 
 [node name="TeacherField" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 margin_left = 150.0
-margin_top = 129.0
+margin_top = 145.0
 margin_right = 300.0
-margin_bottom = 143.0
+margin_bottom = 159.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Bill Gates"
 
@@ -243,17 +257,17 @@ custom_colors/font_color = Color( 0.662745, 0, 0, 1 )
 text = "NON"
 
 [node name="RatingLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
-margin_top = 145.0
+margin_top = 161.0
 margin_right = 150.0
-margin_bottom = 159.0
+margin_bottom = 175.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Avis :"
 
 [node name="StarsContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 margin_left = 150.0
-margin_top = 145.0
+margin_top = 161.0
 margin_right = 300.0
-margin_bottom = 159.0
+margin_bottom = 175.0
 custom_constants/separation = 0
 
 [node name="Stars0" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/StarsContainer"]

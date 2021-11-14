@@ -25,6 +25,7 @@ var size : int ## Nombre de tuiles que le cours occupe dans l'agenda
 var version : float
 var position := Vector2.ZERO
 var index : int 
+var location: String
 
 onready var header_panel := $VBoxContainer/Header
 onready var title_label := $VBoxContainer/Header/Title
@@ -38,6 +39,7 @@ onready var room_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridContain
 onready var teacher_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/TeacherField
 onready var displayed_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/DisplayedField
 onready var stars_container := $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/StarsContainer
+onready var location_field : Label = $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/LocationField
 
 
 
@@ -77,7 +79,8 @@ func get_data() ->Dictionary:
 	"size" : size,
 	"position":position,
 	"version": version,
-	"index": index
+	"index": index,
+	"location": location
 	}
 	return data
 
@@ -96,6 +99,7 @@ func set_data(data:Dictionary) -> void:
 	schedule = data["schedule"]
 	is_displayed = data["is_displayed"]
 	index = data["index"]
+	location = data["location"]
 	if data.has("save_date"):
 		save_date = data["save_date"]
 	if data.has("rating"):
@@ -154,6 +158,7 @@ func update_GUI() -> void:
 	schedule_field.text = "%s %sh%s à %s" %[String(schedule[1]), String(schedule[2]), String(schedule[3]), calculate_time(duration, schedule)]
 	update_color(color)
 	_refresh_rating_gui()
+	location_field.text = location
 	if is_obligatory:
 		obligatory_field.text = "oui"
 	if not is_obligatory:

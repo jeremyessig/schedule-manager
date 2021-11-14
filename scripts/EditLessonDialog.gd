@@ -38,6 +38,7 @@ func _update_gui() ->void:
 	title.text = lesson_card.lesson
 	type_option_button.select(get_item_index_by_string(type_option_button, lesson_card.type))
 	teacher_line_edit.text = lesson_card.teacher
+	location_option_button.select(get_item_index_by_string(location_option_button, lesson_card.location))
 	subject_option_button.select(get_item_index_by_string(subject_option_button, lesson_card.subject))
 	Global.update_option_button(lesson_option_button, Global.lessons_database, lesson_card.subject)
 	room_line_edit.text = lesson_card.room

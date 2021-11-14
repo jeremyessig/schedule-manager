@@ -108,19 +108,20 @@ tracks/2/keys = {
 script = ExtResource( 3 )
 
 [node name="Panel" parent="." index="1"]
-margin_top = -258.0
-margin_bottom = 241.0
+margin_top = -341.0
+margin_bottom = 317.0
 
 [node name="Title" parent="Panel/VBoxContainer/Head" index="0"]
 text = "Gérer les cours et les matières"
 
 [node name="Body" parent="Panel/VBoxContainer" index="1"]
-margin_bottom = 445.0
+margin_bottom = 598.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Body" index="0"]
 margin_left = 32.0
+margin_top = 16.0
 margin_right = 767.0
-margin_bottom = 400.0
+margin_bottom = 536.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
@@ -140,7 +141,7 @@ autowrap = true
 [node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="1"]
 margin_top = 80.0
 margin_right = 735.0
-margin_bottom = 360.0
+margin_bottom = 480.0
 custom_constants/vseparation = 20
 custom_constants/hseparation = 10
 columns = 3
@@ -295,11 +296,77 @@ custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Supprimer"
 
-[node name="Notification" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer" index="2"]
-modulate = Color( 0.160784, 0.666667, 0, 0 )
-margin_top = 370.0
+[node name="AddLocationLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="15"]
+margin_top = 313.0
+margin_right = 215.0
+margin_bottom = 327.0
+custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
+text = "Ajouter un établissement:"
+
+[node name="AddLocationLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="16"]
+margin_left = 225.0
+margin_top = 300.0
+margin_right = 605.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 380, 40 )
+max_length = 90
+placeholder_text = "ex: Clignancourt"
+
+[node name="AddLocationButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="17"]
+margin_left = 615.0
+margin_top = 300.0
+margin_right = 735.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 120, 30 )
+custom_colors/font_color = Color( 0.227451, 0.494118, 0.890196, 1 )
+custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Ajouter"
+
+[node name="RemoveLocationLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="18"]
+margin_top = 373.0
+margin_right = 215.0
+margin_bottom = 387.0
+custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
+text = "Supprimer un établissement:"
+
+[node name="RemoveLocationOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="19"]
+margin_left = 225.0
+margin_top = 360.0
+margin_right = 605.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 380, 40 )
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RemoveLocationButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="20"]
+margin_left = 615.0
+margin_top = 360.0
 margin_right = 735.0
 margin_bottom = 400.0
+rect_min_size = Vector2( 120, 30 )
+custom_colors/font_color = Color( 0.803922, 0.117647, 0.117647, 1 )
+custom_colors/font_color_hover = Color( 1, 0.282353, 0.282353, 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Supprimer"
+
+[node name="Notification" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer" index="2"]
+modulate = Color( 0.160784, 0.666667, 0, 0 )
+margin_top = 490.0
+margin_right = 735.0
+margin_bottom = 520.0
 rect_min_size = Vector2( 0, 30 )
 custom_colors/font_color = Color( 0.054902, 0.67451, 0.00392157, 1 )
 text = "Cette leçon est déjà enregistrée."
@@ -307,8 +374,8 @@ align = 1
 valign = 1
 
 [node name="Foot" parent="Panel/VBoxContainer" index="2"]
-margin_top = 445.0
-margin_bottom = 505.0
+margin_top = 598.0
+margin_bottom = 658.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Foot" index="0"]
 margin_left = 340.0
@@ -340,4 +407,7 @@ anims/lesson_saved = SubResource( 12 )
 [connection signal="text_entered" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/AddLessonLineEdit" to="." method="_on_AddLessonLineEdit_text_entered"]
 [connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/CreateLessonButton" to="." method="_on_CreateLessonButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/RemoveLessonButton" to="." method="_on_RemoveLessonButton_pressed"]
+[connection signal="text_entered" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/AddLocationLineEdit" to="." method="_on_AddLocationLineEdit_text_entered"]
+[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/AddLocationButton" to="." method="_on_AddLocationButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/RemoveLocationButton" to="." method="_on_RemoveLocationButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Foot/HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]

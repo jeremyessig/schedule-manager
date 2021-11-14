@@ -9,6 +9,7 @@ var calendar_array : HBoxContainer
 var new_subject_dialog : Control
 const weekday : Array = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
 
+var locations_database: Array
 var subjects_database : Array
 var lessons_database : Dictionary
 
@@ -16,10 +17,29 @@ var settings: Dictionary = {
 	"card_index_top": false,
 }
 
+func set_locations_database(value) ->void:
+	locations_database = value
+	locations_database.sort()
+	Signals.emit_signal("locations_database_updated")
+
+func get_locations_database() ->Array:
+	return locations_database
+	
+func add_to_locations_database(value:String) ->void:
+	locations_database.append(value)
+	locations_database.sort()
+	Signals.emit_signal("locations_database_updated")
+
 func set_subjects_database(value) ->void:
 	subjects_database = value
 	subjects_database.sort()
 	Signals.emit_signal("subjects_database_updated")
+
+func remove_from_locations_database(location:String) ->void:
+	var index : int = locations_database.find(location)
+	locations_database.remove(index)
+	Signals.emit_signal("locations_database_updated")
+
 
 func set_lessons_database(value) ->void:
 	lessons_database = value
@@ -81,6 +101,8 @@ func reset_databases() -> void:
 	Signals.emit_signal("database_reseted", "subjects_database")
 	lessons_database.clear()
 	Signals.emit_signal("database_reseted", "lessons_database")
+	locations_database.clear()
+	Signals.emit_signal("database_reseted", "locations_database")
 	
 
 ## Met a jours les optionButton listant les differentes matieres

@@ -53,7 +53,7 @@ size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer" index="0"]
 margin_right = 484.0
-margin_bottom = 566.0
+margin_bottom = 616.0
 custom_constants/vseparation = 20
 custom_constants/hseparation = 20
 columns = 2
@@ -109,34 +109,52 @@ rect_min_size = Vector2( 220, 30 )
 clip_text = true
 align = 1
 
-[node name="RoomLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="6"]
+[node name="LocationLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="6"]
 margin_top = 158.0
 margin_right = 129.0
 margin_bottom = 172.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
-text = "Salle :"
+text = "Etablissement:"
 
-[node name="RoomLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="7"]
+[node name="LocationOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="7"]
 margin_left = 149.0
 margin_top = 150.0
 margin_right = 484.0
 margin_bottom = 180.0
 rect_min_size = Vector2( 220, 30 )
+text = "Aucun établissement trouvé"
+clip_text = true
 align = 1
-placeholder_text = "Entrez un nom de salle (optionnel)"
+selected = 0
 
-[node name="LessonDurationLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="8"]
+[node name="RoomLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="8"]
 margin_top = 208.0
 margin_right = 129.0
 margin_bottom = 222.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
-text = "Durée du cours :"
+text = "Salle :"
 
-[node name="LessonDuration" type="HBoxContainer" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="9"]
+[node name="RoomLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="9"]
 margin_left = 149.0
 margin_top = 200.0
 margin_right = 484.0
 margin_bottom = 230.0
+rect_min_size = Vector2( 220, 30 )
+align = 1
+placeholder_text = "Entrez un nom de salle (optionnel)"
+
+[node name="LessonDurationLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="10"]
+margin_top = 258.0
+margin_right = 129.0
+margin_bottom = 272.0
+custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
+text = "Durée du cours :"
+
+[node name="LessonDuration" type="HBoxContainer" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="11"]
+margin_left = 149.0
+margin_top = 250.0
+margin_right = 484.0
+margin_bottom = 280.0
 custom_constants/separation = 11
 __meta__ = {
 "_edit_use_anchors_": false
@@ -177,18 +195,18 @@ margin_bottom = 22.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "minute(s)"
 
-[node name="ScheduleLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="10"]
-margin_top = 258.0
+[node name="ScheduleLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="12"]
+margin_top = 308.0
 margin_right = 129.0
-margin_bottom = 272.0
+margin_bottom = 322.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Horaire :"
 
-[node name="Schedule" type="HBoxContainer" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="11"]
+[node name="Schedule" type="HBoxContainer" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="13"]
 margin_left = 149.0
-margin_top = 250.0
+margin_top = 300.0
 margin_right = 484.0
-margin_bottom = 280.0
+margin_bottom = 330.0
 custom_constants/separation = 11
 __meta__ = {
 "_edit_use_anchors_": false
@@ -239,66 +257,66 @@ align = 1
 items = [ "00", null, false, 0, null, "15", null, false, 1, null, "30", null, false, 2, null, "45", null, false, 3, null ]
 selected = 0
 
-[node name="ObligatoryLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="12"]
-margin_top = 313.0
+[node name="ObligatoryLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="14"]
+margin_top = 363.0
 margin_right = 129.0
-margin_bottom = 327.0
+margin_bottom = 377.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Obligatoire :"
 
-[node name="ObligatoryCheckButton" type="CheckButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="13"]
+[node name="ObligatoryCheckButton" type="CheckButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="15"]
 margin_left = 149.0
-margin_top = 300.0
+margin_top = 350.0
 margin_right = 225.0
-margin_bottom = 340.0
+margin_bottom = 390.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="TeacherLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="14"]
-margin_top = 368.0
-margin_right = 129.0
-margin_bottom = 382.0
-custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
-text = "Professeur :"
-
-[node name="TeacherLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="15"]
-margin_left = 149.0
-margin_top = 360.0
-margin_right = 484.0
-margin_bottom = 390.0
-rect_min_size = Vector2( 220, 30 )
-align = 1
-placeholder_text = "Nom du professeur (optionnel)"
-
-[node name="LessonCodeLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="16"]
+[node name="TeacherLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="16"]
 margin_top = 418.0
 margin_right = 129.0
 margin_bottom = 432.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
-text = "Identifiant du cours:"
+text = "Professeur :"
 
-[node name="LessonCodeLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="17"]
+[node name="TeacherLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="17"]
 margin_left = 149.0
 margin_top = 410.0
 margin_right = 484.0
 margin_bottom = 440.0
 rect_min_size = Vector2( 220, 30 )
 align = 1
-placeholder_text = "(optionnel)"
+placeholder_text = "Nom du professeur (optionnel)"
 
-[node name="RatingLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="18"]
-margin_top = 469.0
+[node name="LessonCodeLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="18"]
+margin_top = 468.0
 margin_right = 129.0
-margin_bottom = 483.0
+margin_bottom = 482.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
-text = "Avis"
+text = "Identifiant du cours:"
 
-[node name="StarsContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="19"]
+[node name="LessonCodeLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="19"]
 margin_left = 149.0
 margin_top = 460.0
 margin_right = 484.0
-margin_bottom = 492.0
+margin_bottom = 490.0
+rect_min_size = Vector2( 220, 30 )
+align = 1
+placeholder_text = "(optionnel)"
+
+[node name="RatingLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="20"]
+margin_top = 519.0
+margin_right = 129.0
+margin_bottom = 533.0
+custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
+text = "Avis"
+
+[node name="StarsContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="21"]
+margin_left = 149.0
+margin_top = 510.0
+margin_right = 484.0
+margin_bottom = 542.0
 custom_constants/separation = 0
 
 [node name="StarBtn1" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/StarsContainer" index="0" instance=ExtResource( 5 )]
@@ -330,16 +348,16 @@ margin_right = 160.0
 margin_bottom = 32.0
 value = 5
 
-[node name="ColorLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="20"]
-margin_top = 532.0
+[node name="ColorLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="22"]
+margin_top = 582.0
 margin_right = 129.0
-margin_bottom = 546.0
+margin_bottom = 596.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Couleur :"
 
-[node name="ColorGrid" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="21" instance=ExtResource( 3 )]
-margin_top = 512.0
-margin_bottom = 566.0
+[node name="ColorGrid" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="23" instance=ExtResource( 3 )]
+margin_top = 562.0
+margin_bottom = 616.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 

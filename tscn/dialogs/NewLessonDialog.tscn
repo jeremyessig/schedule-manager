@@ -21,6 +21,9 @@ script = ExtResource( 2 )
 autowrap = false
 clip_text = false
 
+[node name="LocationOptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="7"]
+selected = -1
+
 [node name="MinutesOptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/Schedule" index="4"]
 items = [ "00", null, false, 0, null, "30", null, false, 2, null ]
 

@@ -23,6 +23,7 @@ func save_to_res(path:String = "") -> void:
 	save.version = version
 	save.subject = Global.subjects_database
 	save.lesson = Global.lessons_database
+	save.location = Global.get_locations_database()
 	for node in get_tree().get_nodes_in_group("lesson_cards"):
 		if !node.has_method("save_to_res"):
 			print("persistent node '%s' is missing a save_var() function, skipped" % node.name)
@@ -51,6 +52,7 @@ func load_from_res(path) -> void:
 		Global.left_panel.create_lesson_card(node_data)
 	Global.set_lessons_database(save.lesson)
 	Global.set_subjects_database(save.subject)
+	Global.set_locations_database(save.location)
 	last_opened_path = path
 	path_to_save = path
 	
@@ -141,6 +143,8 @@ func import_from_JSON(path:String) ->void:
 		Global.left_panel.create_lesson_card(node_data)
 		if not Global.subjects_database.has(node_data["subject"]):
 			Global.add_to_subjects_database(node_data["subject"])
+		if not Global.locations_database.has(node_data["location"]):
+			Global.add_to_locations_database(node_data["location"])
 		if not Global.lessons_database.has(node_data["lesson"]):
 			Global.add_to_lessons_database(node_data["lesson"], [node_data["lesson"], node_data["subject"]])
 	data_file.close()
