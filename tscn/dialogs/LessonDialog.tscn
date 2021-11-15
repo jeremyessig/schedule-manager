@@ -37,9 +37,9 @@ rect_pivot_offset = Vector2( -912.859, -210.385 )
 
 [node name="VboxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Body" index="0"]
 margin_left = 25.0
-margin_top = 21.0
+margin_top = 29.0
 margin_right = 575.0
-margin_bottom = 564.0
+margin_bottom = 555.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 32
@@ -363,9 +363,8 @@ custom_constants/hseparation = 4
 [node name="Notification" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer" index="1"]
 margin_top = 512.0
 margin_right = 550.0
-margin_bottom = 543.0
+margin_bottom = 526.0
 custom_colors/font_color = Color( 0.662745, 0, 0, 1 )
-text = "Vous devez d'abord créer une matière, définir un titre de cours et un lieu d'enseignement dans le Gestionnaire de matières et de cours"
 align = 1
 valign = 1
 autowrap = true

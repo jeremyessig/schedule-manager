@@ -32,9 +32,9 @@ onready var stars_container :HBoxContainer= $Panel/VBoxContainer/Body/VboxContai
 
 func _ready() -> void:
 	Signals.connect("database_reseted",self, "_on_database_reseted")
-	Signals.connect("lessons_database_updated", self, "_on_lesson_added")
-	Signals.connect("subjects_database_updated", self, "_on_subject_added")
-	Signals.connect("locations_database_updated", self, "_on_location_added")
+	Signals.connect("lessons_database_updated", self, "_lesson_refreshed")
+	Signals.connect("subjects_database_updated", self, "_subject_refreshed")
+	Signals.connect("locations_database_updated", self, "_location_refreshed")
 	for btn in stars_container.get_children():
 		btn.connect("mouse_hover", self, "_on_star_btn_overflew")
 		btn.connect("mouse_out", self, "_on_star_btn_overflew")
@@ -49,28 +49,6 @@ func _physics_process(delta):
 	panel.rect_size.y = 680
 	vbox_container.rect_size.y = 543
 	
-
-
-##_______________Mise à jours des matieres et cours dans les bases de données____________________________
-func _on_subject_added() ->void: ## From NewSubjectDialog and SaveSystem.gd by Signals
-	Global.update_option_button(subject_option_button, Global.subjects_database)
-#	check_subject_lesson_database()
-	_on_lesson_added()
-
-
-
-func _on_lesson_added() ->void: ## From NewSubjectDialog and SaveSystem.gd by Signals
-#	if not check_subject_lesson_database():
-#		return
-	var subject_selected: String = subject_option_button.get_item_text(0)
-	Global.update_option_button(lesson_option_button, Global.lessons_database, subject_selected)
-	print_debug(Global.subjects_database)
-
-
-func _on_location_added() ->void:
-#	if not check_subject_lesson_database():
-#		return
-	Global.update_option_button(location_option_button, Global.get_locations_database())
 
 
 ##______________Verifications avant validation du cours________________________
@@ -171,6 +149,21 @@ func create_data_dictionary() -> Dictionary:
 	
 
 ##____________ Gestion de la GUI ________________
+func _subject_refreshed() ->void: ## From NewSubjectDialog and SaveSystem.gd by Signals
+	Global.update_option_button(subject_option_button, Global.subjects_database)
+	_lesson_refreshed()
+
+
+func _lesson_refreshed() ->void: ## From NewSubjectDialog and SaveSystem.gd by Signals
+	var subject_selected: String = subject_option_button.get_item_text(0)
+	Global.update_option_button(lesson_option_button, Global.lessons_database, subject_selected)
+	print_debug(Global.subjects_database)
+
+
+func _location_refreshed() ->void:
+	Global.update_option_button(location_option_button, Global.get_locations_database())
+
+
 func reset_notification() ->void:
 	notification.text = ""
 
@@ -217,11 +210,11 @@ func _on_star_btn_toggled(value, is_pressed):
 
 func _on_database_reseted(database_name:String) -> void:
 	if database_name == "subjects_database":
-		_on_subject_added()
+		_subject_refreshed()
 	if database_name == "lessons_database":
-		_on_lesson_added()
+		_lesson_refreshed()
 	if database_name == "locations_database":
-		_on_location_added()
+		_location_refreshed()
 
 
 func _on_CancelButton_pressed() -> void:

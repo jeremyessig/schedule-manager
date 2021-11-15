@@ -5,7 +5,6 @@ extends "res://scripts/LessonDialog.gd"
 
 
 func _ready():
-#	Global.new_lesson_button.connect("pressed", self, "_show_lesson_dialog")
 	Global.alert_dialog.connect("confirmed", self, "_cancel_error")
 
 
@@ -31,11 +30,6 @@ func _on_CreateButton_pressed() -> void:
 	if not check_for_validation():
 		return
 	create_lesson()
-
-
-##_______________Methodes connectees______________________________
-func _show_lesson_dialog() ->void: #From NewLessonButton by Main
-	show()
 
 
 func _on_ColorGrid_color_picked(color):
