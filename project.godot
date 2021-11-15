@@ -70,8 +70,9 @@ _global_script_class_icons={
 
 config/name="Schedule Manager"
 run/main_scene="res://tscn/Main.tscn"
-config/icon="res://icon.png"
-config/version=0.35
+config/icon="res://assets/icon.png"
+config/windows_native_icon="res://assets/icon.ico"
+config/version=0.38
 
 [autoload]
 
