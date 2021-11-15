@@ -33,6 +33,7 @@ func _unhandled_input(event):
 #________Methode d'affichage des dialogs_____________
 func _show_new_lesson_dialog() ->void:
 	new_lesson_dialog.check_subject_lesson_database()
+	new_lesson_dialog.reset_default_GUI()
 	new_lesson_dialog.show()
 
 func _show_new_subject_dialog() ->void:

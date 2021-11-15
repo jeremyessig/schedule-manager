@@ -48,6 +48,7 @@ func _update_gui() ->void:
 	schedule_days_option_button.select(get_item_index_by_string(schedule_days_option_button, lesson_card.schedule[1]))
 	schedule_hours_option_button.select(get_item_index_by_string(schedule_hours_option_button, lesson_card.schedule[2]))
 	schedule_minutes_option_button.select(get_item_index_by_string(schedule_minutes_option_button, lesson_card.schedule[3]))
+	note_text_edit.text = lesson_card.note
 	if lesson_card.is_obligatory:
 		obligatory_check_button.pressed = true
 	else:
@@ -69,7 +70,7 @@ func _update_gui() ->void:
 
 func edit_lesson() ->void:
 	var data :Dictionary = create_data_dictionary()
-#	data["color"] = card_color
+	data["color"] = card_color
 	data["is_displayed"] = lesson_card.is_displayed
 	Signals.emit_signal("lesson_edited", data, old_id)
 
@@ -88,8 +89,17 @@ func _on_DeleteButton_pressed():
 
 
 func _on_EditButton_pressed():
-	if not check_for_validation():
-		return
+	print(lesson_card.is_displayed)
+	if (Global.get_item_string(type_option_button) != lesson_card.type or
+		Global.get_item_string(subject_option_button) != lesson_card.subject or
+		Global.get_item_string(lesson_option_button) != lesson_card.lesson or
+		Global.get_item_string(schedule_days_option_button) != lesson_card.schedule[1] or
+		Global.get_item_string(schedule_hours_option_button) != lesson_card.schedule[2] or
+		Global.get_item_string(schedule_minutes_option_button) != lesson_card.schedule[3] or
+		room_line_edit.text != lesson_card.room
+		):
+			if not check_for_validation():
+				return
 	var old := {"position":lesson_card.position, "size":lesson_card.size}
 	edit_lesson()
 	if lesson_card.is_displayed: ## Lorsque l'horaire est modifie, recharge la cellule dans le bon emplacement

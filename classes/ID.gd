@@ -22,7 +22,7 @@ func exists(id:String) ->bool:
 	return false
 	
 
-func standardize_string(string:String) ->String:
+static func standardize_string(string:String) ->String:
 	string = string.to_lower()
 	string = string.replace(" ", "")
 	string = string.replace("'", "")

@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://classes/ID.gd"
 }, {
 "base": "Node",
+"class": "IsSafe",
+"language": "GDScript",
+"path": "res://classes/is_safe.gd"
+}, {
+"base": "Node",
 "class": "Nodes",
 "language": "GDScript",
 "path": "res://classes/node_manager.gd"
@@ -54,6 +59,7 @@ _global_script_class_icons={
 "CalendarButtons": "",
 "Date": "",
 "ID": "",
+"IsSafe": "",
 "Nodes": "",
 "SaveAsResource": "",
 "Sort": "",

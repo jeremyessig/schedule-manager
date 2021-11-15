@@ -53,7 +53,7 @@ size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer" index="0"]
 margin_right = 484.0
-margin_bottom = 616.0
+margin_bottom = 736.0
 custom_constants/vseparation = 20
 custom_constants/hseparation = 20
 columns = 2
@@ -359,6 +359,20 @@ margin_top = 562.0
 margin_bottom = 616.0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
+
+[node name="NoteLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="24"]
+margin_top = 679.0
+margin_right = 129.0
+margin_bottom = 693.0
+custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
+text = "Note:"
+
+[node name="NoteTextEdit" type="TextEdit" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="25"]
+margin_left = 149.0
+margin_top = 636.0
+margin_right = 484.0
+margin_bottom = 736.0
+rect_min_size = Vector2( 0, 100 )
 
 [node name="Notification" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer" index="1"]
 margin_top = 512.0

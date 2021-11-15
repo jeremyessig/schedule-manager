@@ -20,6 +20,7 @@ onready var teacher_line_edit : LineEdit = $Panel/VBoxContainer/Body/VboxContain
 onready var lesson_code_line_edit : LineEdit = $Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/LessonCodeLineEdit
 onready var obligatory_check_button : CheckButton = $Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/ObligatoryCheckButton
 onready var location_option_button : OptionButton = $Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/LocationOptionButton
+onready var note_text_edit :TextEdit = $Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/NoteTextEdit
 onready var title : Label = $Panel/VBoxContainer/Head/Title
 onready var head_panel : Panel = $Panel/VBoxContainer/Head
 onready var panel : Panel = $Panel
@@ -75,6 +76,12 @@ func _check_lesson_duration() ->bool:
 
 
 func check_for_validation() :
+	var is_safe = IsSafe.new()
+	if (not is_safe.string(note_text_edit.text) or 
+		not is_safe.string(teacher_line_edit.text) or 
+		not is_safe.string(room_line_edit.text) or 
+		not is_safe.string(lesson_code_line_edit.text)):
+		return
 	if not check_subject_lesson_database():
 		return false
 	if not _check_lesson_duration():
@@ -124,6 +131,7 @@ func create_data_dictionary() -> Dictionary:
 		Global.get_item_string(schedule_days_option_button), 
 		Global.get_item_string(schedule_hours_option_button), 
 		Global.get_item_string(schedule_minutes_option_button)]
+	var note = note_text_edit.text
 	var id = ID.new()
 	var card_id :String = id.generate(subject, lesson, type, schedule[1], schedule[2], schedule[3], location, room)
 	var index = 0
@@ -143,19 +151,40 @@ func create_data_dictionary() -> Dictionary:
 		"is_displayed": false,
 		"index": index,
 		"rating":rating,
-		"location": location
+		"location": location,
+		"note": note
 	}
 	return data
 	
 
 ##____________ Gestion de la GUI ________________
+func reset_default_GUI():
+	type_option_button.select(0)
+	subject_option_button.select(0)
+	lesson_option_button.select(0)
+	room_line_edit.text = ""
+	duration_hours_option_button.select(0)
+	duration_minutes_option_button.select(0)
+	schedule_days_option_button.select(0)
+	schedule_hours_option_button.select(0)
+	schedule_minutes_option_button.select(0)
+	teacher_line_edit.text = ""
+	lesson_code_line_edit.text = ""
+	obligatory_check_button.set_pressed(false)
+	location_option_button.select(0)
+	note_text_edit.text = ""
+	title.text = "Nouveau cours"
+	
+
 func _subject_refreshed() ->void: ## From NewSubjectDialog and SaveSystem.gd by Signals
 	Global.update_option_button(subject_option_button, Global.subjects_database)
 	_lesson_refreshed()
 
 
 func _lesson_refreshed() ->void: ## From NewSubjectDialog and SaveSystem.gd by Signals
-	var subject_selected: String = subject_option_button.get_item_text(0)
+	var subject_selected: String = ""
+	if !Global.subjects_database.empty():
+		subject_selected = subject_option_button.get_item_text(0)
 	Global.update_option_button(lesson_option_button, Global.lessons_database, subject_selected)
 	print_debug(Global.subjects_database)
 
@@ -219,6 +248,7 @@ func _on_database_reseted(database_name:String) -> void:
 
 func _on_CancelButton_pressed() -> void:
 	reset_notification()
+	reset_default_GUI()
 	hide()
 
 

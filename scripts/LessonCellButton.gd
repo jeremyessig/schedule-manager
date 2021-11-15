@@ -24,7 +24,10 @@ func init_cell(xpos, ypos, size_arg, datas_arg:Dictionary) ->void:
 	is_obligatory = datas_arg["is_obligatory"]
 	_color_table(datas_arg["color"])
 	
-func update_cell(datas_arg: Dictionary, _old_id:String) ->void:
+func update_cell(datas_arg: Dictionary, old_id:String) ->void:
+	if id != datas_arg["id"]:
+		if id != old_id:
+			return
 	infos.text = "%s \n %s \n Salle %s \n Prof. %s" %[datas_arg["lesson"], datas_arg["type"], datas_arg["room"], datas_arg["teacher"]]
 	id = datas_arg["id"]
 	is_obligatory = datas_arg["is_obligatory"]

@@ -20,6 +20,7 @@ onready var saving_wrong_format : Label = $Panel/VBoxContainer/Body/SavingWrongF
 onready var old_version : Label = $Panel/VBoxContainer/Body/OldVersion
 onready var loading_old_save : Label = $Panel/VBoxContainer/Body/LoadingOldSave
 onready var empty_schedule : Label = $Panel/VBoxContainer/Body/EmptySchedule
+onready var banned_word : Label = $Panel/VBoxContainer/Body/BannedWord
 
 
 func _ready():
@@ -73,6 +74,10 @@ func _show_alert_dialog(message, node_path) ->void:
 		"EmptySchedule":
 			cancel_button.show()
 			empty_schedule.show()
+			
+		"BannedWord":
+			cancel_button.show()
+			banned_word.show()
 
 
 

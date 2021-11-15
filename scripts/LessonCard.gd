@@ -26,6 +26,7 @@ var version : float
 var position := Vector2.ZERO
 var index : int 
 var location: String
+var note : String
 
 onready var header_panel := $VBoxContainer/Header
 onready var title_label := $VBoxContainer/Header/Title
@@ -80,7 +81,8 @@ func get_data() ->Dictionary:
 	"position":position,
 	"version": version,
 	"index": index,
-	"location": location
+	"location": location,
+	"note" : note
 	}
 	return data
 
@@ -100,6 +102,7 @@ func set_data(data:Dictionary) -> void:
 	is_displayed = data["is_displayed"]
 	index = data["index"]
 	location = data["location"]
+	note = data["note"]
 	if data.has("save_date"):
 		save_date = data["save_date"]
 	if data.has("rating"):
