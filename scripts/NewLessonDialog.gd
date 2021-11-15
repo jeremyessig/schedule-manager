@@ -5,7 +5,7 @@ extends "res://scripts/LessonDialog.gd"
 
 
 func _ready():
-	Global.new_lesson_button.connect("pressed", self, "_show_lesson_dialog")
+#	Global.new_lesson_button.connect("pressed", self, "_show_lesson_dialog")
 	Global.alert_dialog.connect("confirmed", self, "_cancel_error")
 
 
@@ -18,6 +18,8 @@ func _cancel_error(error) ->void:
 
 #______________Initialisation de la creation du cours_____________
 func create_lesson() ->void:
+	if not check_subject_lesson_database():
+		return
 	var datas = create_data_dictionary()
 	datas["is_displayed"] = false
 	Signals.emit_signal("lesson_created", datas) ## To LeftPanel by Signals

@@ -8,22 +8,9 @@ const td_cm_table: Dictionary = {"Cours Magistral":"cm", "Travaux Dirigés":"td"
 
 
 
-func generate(subject: String, lesson:String, type:String, day:String, hour, minute, room) ->String:
-	var new_id :String = lesson + subject + _abbreviate_cm_td(type) + _attribut_letter_to_day(day) + str(hour) + str(minute) + str(room)
-	new_id = new_id.to_lower()
-	new_id = new_id.replace(" ", "")
-	new_id = new_id.replace("'", "")
-	new_id = new_id.replace(":","")
-	new_id = new_id.replace(".","")
-	new_id = new_id.replace(",","")
-	new_id = new_id.replace("_","")
-	new_id = new_id.replace("-","")
-	new_id = new_id.replace("/","")
-	new_id = new_id.replace("é","e")
-	new_id = new_id.replace("è","e")
-	new_id = new_id.replace("à","a")
-	new_id = new_id.replace("(","")
-	new_id = new_id.replace(")","")
+func generate(subject: String, lesson:String, type:String, day:String, hour, minute, location:String, room) ->String:
+	var new_id :String = lesson + subject + _abbreviate_cm_td(type) + _attribut_letter_to_day(day) + str(hour) + str(minute) + location +str(room)
+	standardize_string(new_id)
 	return new_id
 
 
@@ -35,7 +22,22 @@ func exists(id:String) ->bool:
 	return false
 	
 
-
+func standardize_string(string:String) ->String:
+	string = string.to_lower()
+	string = string.replace(" ", "")
+	string = string.replace("'", "")
+	string = string.replace(":","")
+	string = string.replace(".","")
+	string = string.replace(",","")
+	string = string.replace("_","")
+	string = string.replace("-","")
+	string = string.replace("/","")
+	string = string.replace("é","e")
+	string = string.replace("è","e")
+	string = string.replace("à","a")
+	string = string.replace("(","")
+	string = string.replace(")","")
+	return string
 
 
 

@@ -54,27 +54,35 @@ func _physics_process(delta):
 ##_______________Mise à jours des matieres et cours dans les bases de données____________________________
 func _on_subject_added() ->void: ## From NewSubjectDialog and SaveSystem.gd by Signals
 	Global.update_option_button(subject_option_button, Global.subjects_database)
-	_check_subject_lesson_database()
+#	check_subject_lesson_database()
 	_on_lesson_added()
 
 
 
 func _on_lesson_added() ->void: ## From NewSubjectDialog and SaveSystem.gd by Signals
-	if not _check_subject_lesson_database():
-		return
+#	if not check_subject_lesson_database():
+#		return
 	var subject_selected: String = subject_option_button.get_item_text(0)
 	Global.update_option_button(lesson_option_button, Global.lessons_database, subject_selected)
 	print_debug(Global.subjects_database)
 
 
 func _on_location_added() ->void:
+#	if not check_subject_lesson_database():
+#		return
 	Global.update_option_button(location_option_button, Global.get_locations_database())
 
 
 ##______________Verifications avant validation du cours________________________
-func _check_subject_lesson_database() ->bool:
-	if Global.subjects_database.empty() or Global.lessons_database.empty():
-		notification.text = ""
+func check_subject_lesson_database() ->bool:
+	if Global.subjects_database.empty():
+		notification.text = "Vous devez ajouter une matière !"
+		return false
+	if Global.lessons_database.empty():
+		notification.text = "Vous devez ajouter un cours !"
+		return false
+	if Global.locations_database.empty():
+		notification.text = "Vous devez ajouter un lieu d'enseignement !"
 		return false
 	notification.text = ""
 	return true
@@ -89,11 +97,11 @@ func _check_lesson_duration() ->bool:
 
 
 func check_for_validation() :
-	if not _check_subject_lesson_database():
+	if not check_subject_lesson_database():
 		return false
 	if not _check_lesson_duration():
 		return false
-	if _check_if_lesson_exist(subject_option_button, lesson_option_button, type_option_button, schedule_days_option_button, schedule_hours_option_button, schedule_minutes_option_button, room_line_edit):
+	if check_if_lesson_exists():
 		notification.text = "Ce cours existe déjà !"
 		return false
 	if room_line_edit.text == "":
@@ -104,10 +112,18 @@ func check_for_validation() :
 
 
 
-func _check_if_lesson_exist(subject_arg: OptionButton,lesson_arg: OptionButton, type_arg: OptionButton, day_arg:OptionButton, hours_arg:OptionButton, minutes_arg:OptionButton, room_arg:LineEdit):
+func check_if_lesson_exists():
 	var id = ID.new()
-	var card_id :String = id.generate(subject_arg.text, lesson_arg.text, type_arg.text, day_arg.text, hours_arg.text, minutes_arg.text, room_arg.text)
-	if Global.left_panel.does_lesson_exist(card_id, type_arg.text):
+	var card_id :String = id.generate(subject_option_button.text, 
+										lesson_option_button.text, 
+										type_option_button.text, 
+										schedule_days_option_button.text, 
+										schedule_hours_option_button.text, 
+										schedule_minutes_option_button.text,
+										location_option_button.text, 
+										room_line_edit.text
+										)
+	if Global.left_panel.does_lesson_exist(card_id, type_option_button.text):
 		return true
 	return false
 
@@ -131,7 +147,7 @@ func create_data_dictionary() -> Dictionary:
 		Global.get_item_string(schedule_hours_option_button), 
 		Global.get_item_string(schedule_minutes_option_button)]
 	var id = ID.new()
-	var card_id :String = id.generate(subject, lesson, type, schedule[1], schedule[2], schedule[3], room)
+	var card_id :String = id.generate(subject, lesson, type, schedule[1], schedule[2], schedule[3], location, room)
 	var index = 0
 	print(card_id)
 	var data : Dictionary = {
@@ -153,6 +169,10 @@ func create_data_dictionary() -> Dictionary:
 	}
 	return data
 	
+
+##____________ Gestion de la GUI ________________
+func reset_notification() ->void:
+	notification.text = ""
 
 func update_color(color:String) -> void:
 	var new_style = StyleBoxFlat.new()
@@ -205,6 +225,7 @@ func _on_database_reseted(database_name:String) -> void:
 
 
 func _on_CancelButton_pressed() -> void:
+	reset_notification()
 	hide()
 
 

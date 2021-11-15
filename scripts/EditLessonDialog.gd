@@ -41,6 +41,7 @@ func _update_gui() ->void:
 	location_option_button.select(get_item_index_by_string(location_option_button, lesson_card.location))
 	subject_option_button.select(get_item_index_by_string(subject_option_button, lesson_card.subject))
 	Global.update_option_button(lesson_option_button, Global.lessons_database, lesson_card.subject)
+	lesson_option_button.select(get_item_index_by_string(lesson_option_button, lesson_card.lesson))
 	room_line_edit.text = lesson_card.room
 	duration_hours_option_button.select(get_item_index_by_string(duration_hours_option_button, lesson_card.duration[0]))
 	duration_minutes_option_button.select(get_item_index_by_string(duration_minutes_option_button, lesson_card.duration[1]))
@@ -67,9 +68,8 @@ func _update_gui() ->void:
 ##_______________Edition du cours___________________________
 
 func edit_lesson() ->void:
-#	_check_if_lesson_exist()
 	var data :Dictionary = create_data_dictionary()
-	data["color"] = card_color
+#	data["color"] = card_color
 	data["is_displayed"] = lesson_card.is_displayed
 	Signals.emit_signal("lesson_edited", data, old_id)
 
@@ -88,6 +88,8 @@ func _on_DeleteButton_pressed():
 
 
 func _on_EditButton_pressed():
+	if not check_for_validation():
+		return
 	var old := {"position":lesson_card.position, "size":lesson_card.size}
 	edit_lesson()
 	if lesson_card.is_displayed: ## Lorsque l'horaire est modifie, recharge la cellule dans le bon emplacement

@@ -15,6 +15,7 @@ onready var open_save_dialog : FileDialog = $OpenSaveDialog
 
 func _ready() -> void:
 	Global.new_subject_button.connect("pressed", self, "_show_new_subject_dialog")
+	Global.new_lesson_button.connect("pressed", self, "_show_new_lesson_dialog")
 	header.connect("export_json_pressed", self, "_open_export_dialog")
 	header.connect("import_json_pressed", self, "_open_import_dialog")
 	header.connect("export_csv_pressed", self, "_open_export_csv_dialog")
@@ -30,8 +31,9 @@ func _unhandled_input(event):
 		open_save_dialog.popup_centered()
 
 #________Methode d'affichage des dialogs_____________
-#func _show_new_lesson_dialog() ->void:
-#	new_lesson_dialog.show()
+func _show_new_lesson_dialog() ->void:
+	new_lesson_dialog.check_subject_lesson_database()
+	new_lesson_dialog.show()
 
 func _show_new_subject_dialog() ->void:
 	new_subject_dialog.show()
