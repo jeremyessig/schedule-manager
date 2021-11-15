@@ -125,7 +125,6 @@ rect_min_size = Vector2( 220, 30 )
 text = "Aucun établissement trouvé"
 clip_text = true
 align = 1
-selected = 0
 
 [node name="RoomLabel" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="8"]
 margin_top = 208.0

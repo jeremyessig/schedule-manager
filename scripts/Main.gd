@@ -22,6 +22,7 @@ func _ready() -> void:
 	Signals.connect("save_as_pressed", self, "_open_save_as_dialog")
 	header.connect("open_save_pressed", self, "_open_open_save_dialog")
 	
+	
 func _unhandled_input(event):
 	if event.is_action_pressed("save"):
 		SaveSystem.save_to_res()

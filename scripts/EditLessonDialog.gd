@@ -67,11 +67,13 @@ func _update_gui() ->void:
 ##_______________Edition du cours___________________________
 
 func edit_lesson() ->void:
+#	_check_if_lesson_exist()
 	var data :Dictionary = create_data_dictionary()
 	data["color"] = card_color
 	data["is_displayed"] = lesson_card.is_displayed
 	Signals.emit_signal("lesson_edited", data, old_id)
-	
+
+
 
 
 ##____________Fonctions connectees par signaux_______________________

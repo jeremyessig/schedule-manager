@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://addons/calendar_button/class/Date.gd"
 }, {
 "base": "Node",
+"class": "ID",
+"language": "GDScript",
+"path": "res://classes/ID.gd"
+}, {
+"base": "Node",
 "class": "Nodes",
 "language": "GDScript",
 "path": "res://classes/node_manager.gd"
@@ -48,6 +53,7 @@ _global_script_class_icons={
 "Calendar": "",
 "CalendarButtons": "",
 "Date": "",
+"ID": "",
 "Nodes": "",
 "SaveAsResource": "",
 "Sort": "",
@@ -59,7 +65,7 @@ _global_script_class_icons={
 config/name="Schedule Manager"
 run/main_scene="res://tscn/Main.tscn"
 config/icon="res://icon.png"
-config/version=0.32
+config/version=0.35
 
 [autoload]
 

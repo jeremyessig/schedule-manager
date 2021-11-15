@@ -134,6 +134,9 @@ func reparent_node(parent: Node, child: Node, target:Node) ->void:
 func get_item_string(node:OptionButton) ->String:
 	var item_id = node.get_selected_id()
 	var item_index = node.get_item_index(item_id)
+	if item_index == -1:
+		print_debug("Error: %s has no value" %node.name)
+		return ""
 	var string = node.get_item_text(item_index)
 	return string
 

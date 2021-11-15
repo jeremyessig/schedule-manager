@@ -93,7 +93,7 @@ func check_for_validation() :
 		return false
 	if not _check_lesson_duration():
 		return false
-	if _check_if_lesson_exist(lesson_option_button, type_option_button, schedule_days_option_button, schedule_hours_option_button, schedule_minutes_option_button, room_line_edit):
+	if _check_if_lesson_exist(subject_option_button, lesson_option_button, type_option_button, schedule_days_option_button, schedule_hours_option_button, schedule_minutes_option_button, room_line_edit):
 		notification.text = "Ce cours existe déjà !"
 		return false
 	if room_line_edit.text == "":
@@ -104,21 +104,14 @@ func check_for_validation() :
 
 
 
-func _check_if_lesson_exist(lesson_arg: OptionButton, type_arg: OptionButton, day_arg:OptionButton, hours_arg:OptionButton, minutes_arg:OptionButton, room_arg:LineEdit):
-	var card_id :String =  lesson_arg.text + type_arg.text + attribut_letter_to_day(day_arg.text) + hours_arg.text + minutes_arg.text + room_arg.text
-	card_id = card_id.replace(" ", "")
-	card_id = card_id.replace("'", "")
+func _check_if_lesson_exist(subject_arg: OptionButton,lesson_arg: OptionButton, type_arg: OptionButton, day_arg:OptionButton, hours_arg:OptionButton, minutes_arg:OptionButton, room_arg:LineEdit):
+	var id = ID.new()
+	var card_id :String = id.generate(subject_arg.text, lesson_arg.text, type_arg.text, day_arg.text, hours_arg.text, minutes_arg.text, room_arg.text)
 	if Global.left_panel.does_lesson_exist(card_id, type_arg.text):
 		return true
 	return false
 
 
-func attribut_letter_to_day(day: String) ->String:
-	var table = [["Lundi", "aaa"], ["Mardi", "bbb"], ["Mercredi", "ccc"],["Jeudi", "ddd"],["Vendredi", "eee"],["Samedi", "fff"],]
-	for letter in table:
-		if letter[0] == day:
-			return letter[1]
-	return day
 
 ##_______________Creation et envoie des donnees par signal________________________
 
@@ -137,11 +130,10 @@ func create_data_dictionary() -> Dictionary:
 		Global.get_item_string(schedule_days_option_button), 
 		Global.get_item_string(schedule_hours_option_button), 
 		Global.get_item_string(schedule_minutes_option_button)]
-#	var card_id :String = lesson + type + schedule[1] + schedule[2] + schedule[3] + room
-	var card_id :String = lesson + type + attribut_letter_to_day(schedule[1]) + schedule[2] + schedule[3] + room
-	card_id = card_id.replace(" ", "")
-	card_id = card_id.replace("'", "")
+	var id = ID.new()
+	var card_id :String = id.generate(subject, lesson, type, schedule[1], schedule[2], schedule[3], room)
 	var index = 0
+	print(card_id)
 	var data : Dictionary = {
 		"id": card_id,
 		"type": type,
@@ -201,7 +193,6 @@ func _on_star_btn_toggled(value, is_pressed):
 		for btn in stars_container.get_children():
 			btn.set_is_pressed(false)
 	print(rating)
-
 
 
 func _on_database_reseted(database_name:String) -> void:
