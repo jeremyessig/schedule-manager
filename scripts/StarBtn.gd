@@ -39,7 +39,7 @@ func overflew(val:bool) ->void:
 		texture = star_unselected
 	elif val == false and is_pressed == true:
 		texture = star_selected
-	
+
 		
 
 func _on_StarBtn_toggled(button_pressed):

@@ -29,8 +29,6 @@ onready var stars_container :HBoxContainer= $Panel/VBoxContainer/Body/VboxContai
 
 
 
-
-
 func _ready() -> void:
 	Signals.connect("database_reseted",self, "_on_database_reseted")
 	Signals.connect("lessons_database_updated", self, "_lesson_refreshed")
@@ -158,10 +156,11 @@ func create_data_dictionary() -> Dictionary:
 	
 
 ##____________ Gestion de la GUI ________________
-func reset_default_GUI():
+func reset_default_GUI() ->void:
 	type_option_button.select(0)
-	subject_option_button.select(0)
-	lesson_option_button.select(0)
+	_subject_refreshed()
+	_lesson_refreshed()
+	_location_refreshed()
 	room_line_edit.text = ""
 	duration_hours_option_button.select(0)
 	duration_minutes_option_button.select(0)
@@ -171,9 +170,11 @@ func reset_default_GUI():
 	teacher_line_edit.text = ""
 	lesson_code_line_edit.text = ""
 	obligatory_check_button.set_pressed(false)
-	location_option_button.select(0)
 	note_text_edit.text = ""
+	reset_notification()
 	title.text = "Nouveau cours"
+	for star in stars_container.get_children():
+		star.set_is_pressed(false)
 	
 
 func _subject_refreshed() ->void: ## From NewSubjectDialog and SaveSystem.gd by Signals
@@ -219,6 +220,7 @@ func _on_star_btn_overflew(value:int):
 			btn.overflew(true)
 		else:
 			btn.overflew(false)
+
 
 func _on_star_btn_toggled(value, is_pressed):
 	if rating != value:

@@ -77,7 +77,7 @@ func _remove_location_from_database() ->void:
 	Global.remove_from_locations_database(location_title)
 	for lesson_card in get_tree().get_nodes_in_group("lesson_cards"):
 		if location_title == lesson_card["location"]:
-			lesson_card["location"] = ""
+			lesson_card.delete()
 	
 
 
