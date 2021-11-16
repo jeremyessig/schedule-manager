@@ -5,22 +5,37 @@
 
 extends Control
 
+var default_blue_btn_normal : StyleBoxFlat = preload("res://res/buttons/default_blue_button_normal.tres")
+var default_blue_btn_focus : StyleBoxFlat = preload("res://res/buttons/default_blue_button_focus.tres")
+var default_blue_btn_hover : StyleBoxFlat = preload("res://res/buttons/default_blue_button_hover.tres")
 
-onready var add_subject_line_edit : LineEdit = $Panel/VBoxContainer/Body/VBoxContainer/GridContainer/AddSubjectLineEdit
+
+onready var add_subject_line_edit : LineEdit = $Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid/AddSubjectLineEdit
 onready var notification : Label = $Panel/VBoxContainer/Body/VBoxContainer/Notification
-onready var remove_subject_option_button : OptionButton = $Panel/VBoxContainer/Body/VBoxContainer/GridContainer/RemoveSubjectOptionButton
-onready var add_lesson_line_edit : LineEdit = $Panel/VBoxContainer/Body/VBoxContainer/GridContainer/AddLessonLineEdit
-onready var remove_lesson_option_button : OptionButton = $Panel/VBoxContainer/Body/VBoxContainer/GridContainer/RemoveLessonOptionButton
-onready var define_lesson_subject_option_button : OptionButton = $Panel/VBoxContainer/Body/VBoxContainer/GridContainer/DefineLessonSubjectOptionButton
-onready var add_location_line_edit : LineEdit = $Panel/VBoxContainer/Body/VBoxContainer/GridContainer/AddLocationLineEdit
-onready var remove_location_option_button : OptionButton = $Panel/VBoxContainer/Body/VBoxContainer/GridContainer/RemoveLocationOptionButton
+onready var remove_subject_option_button : OptionButton = $Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid/RemoveSubjectOptionButton
+onready var add_lesson_line_edit : LineEdit = $Panel/VBoxContainer/Body/VBoxContainer/LessonGrid/AddLessonLineEdit
+onready var remove_lesson_option_button : OptionButton = $Panel/VBoxContainer/Body/VBoxContainer/LessonGrid/RemoveLessonOptionButton
+onready var define_lesson_subject_option_button : OptionButton = $Panel/VBoxContainer/Body/VBoxContainer/LessonGrid/DefineLessonSubjectOptionButton
+onready var add_location_line_edit : LineEdit = $Panel/VBoxContainer/Body/VBoxContainer/LocationGrid/AddLocationLineEdit
+onready var remove_location_option_button : OptionButton = $Panel/VBoxContainer/Body/VBoxContainer/LocationGrid/RemoveLocationOptionButton
+onready var subject_grid : GridContainer = $Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid
+onready var lesson_grid : GridContainer = $Panel/VBoxContainer/Body/VBoxContainer/LessonGrid
+onready var location_grid : GridContainer = $Panel/VBoxContainer/Body/VBoxContainer/LocationGrid
+onready var subject_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/SubjectBtn
+onready var lesson_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/LessonBtn
+onready var location_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/LocationBtn
 onready var animation : AnimationPlayer = $AnimationPlayer
+onready var body_vbox : VBoxContainer = $Panel/VBoxContainer/Body/VBoxContainer
+onready var buttons_container : HBoxContainer = $Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer
+
+
 
 func _ready():
 	Signals.connect("database_reseted", self, "_on_database_reseted")
 	Signals.connect("lessons_database_updated", self, "_refresh_lessons_GUI")
 	Signals.connect("locations_database_updated", self, "_refresh_locations_GUI")
 	Signals.connect("subjects_database_updated", self, "_update_GUI")
+	_btn_focused(subject_btn)
 
 
 ##________________________ Methodes de gestion des donees____________
@@ -99,6 +114,21 @@ func _error_notification(msg:String) ->void:
 	return
 
 
+func _show_grid(grid:GridContainer) ->void:
+	for node in body_vbox.get_children():
+		if node is GridContainer:
+			node.hide()
+	grid.show()
+
+
+func _btn_focused(button:Button) ->void:
+	for btn in buttons_container.get_children():
+		btn.set("custom_styles/normal",default_blue_btn_normal)
+		btn.set("custom_styles/hover",default_blue_btn_hover)
+	button.set("custom_styles/normal",default_blue_btn_focus)
+	button.set("custom_styles/hover",default_blue_btn_focus)
+
+
 ##_________________________ Methodes connectees ___________________________________
 func _on_database_reseted(database_name:String) -> void:
 	if database_name == "subjects_database" or database_name == "lessons_database" :
@@ -155,3 +185,22 @@ func _on_AddLocationLineEdit_text_entered(new_text):
 
 func _on_RemoveLocationButton_pressed():
 	_remove_location_from_database()
+
+
+## Boutons de navigation entre les sujets, les cours et les etablissements
+	
+
+
+func _on_SubjectBtn_pressed():
+	_show_grid(subject_grid)
+	_btn_focused(subject_btn)
+
+
+func _on_LessonBtn_pressed():
+	_show_grid(lesson_grid)
+	_btn_focused(lesson_btn)
+
+
+func _on_LocationBtn_pressed():
+	_show_grid(location_grid)
+	_btn_focused(location_btn)

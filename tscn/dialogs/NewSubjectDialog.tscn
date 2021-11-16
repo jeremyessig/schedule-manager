@@ -108,52 +108,65 @@ tracks/2/keys = {
 script = ExtResource( 3 )
 
 [node name="Panel" parent="." index="1"]
-margin_top = -341.0
-margin_bottom = 317.0
+margin_top = -266.0
+margin_bottom = 235.0
 
 [node name="Title" parent="Panel/VBoxContainer/Head" index="0"]
 text = "Gérer les cours et les matières"
 
 [node name="Body" parent="Panel/VBoxContainer" index="1"]
-margin_bottom = 598.0
+margin_bottom = 441.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Body" index="0"]
-margin_left = 32.0
-margin_top = 16.0
-margin_right = 767.0
-margin_bottom = 536.0
+margin_left = 48.0
+margin_top = 45.0
+margin_right = 752.0
+margin_bottom = 351.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 10
+custom_constants/separation = 38
 
-[node name="InfoLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer" index="0"]
-margin_right = 735.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 0, 70 )
-size_flags_horizontal = 3
-size_flags_vertical = 6
-custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
-text = "Avant d'ajouter un nouveau cours à votre liste, vous devez d'abord le créer ici en ajoutant le nom de la matière (ex: Histoire antique, Géographie économique, etc.) et le nom du cours dans les champs correspondants ci-dessous."
-align = 1
-valign = 1
-autowrap = true
+[node name="ButtonsContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="0"]
+margin_right = 704.0
+margin_bottom = 20.0
+custom_constants/separation = 15
+alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="1"]
-margin_top = 80.0
+[node name="SubjectBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="0"]
+margin_left = 224.0
+margin_right = 292.0
+margin_bottom = 20.0
+text = "Matières"
+
+[node name="LessonBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="1"]
+margin_left = 307.0
+margin_right = 355.0
+margin_bottom = 20.0
+text = "Cours"
+
+[node name="LocationBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="2"]
+margin_left = 370.0
+margin_right = 480.0
+margin_bottom = 20.0
+text = "Etablissements"
+
+[node name="SubjectGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="1"]
+margin_top = 58.0
 margin_right = 735.0
-margin_bottom = 480.0
+margin_bottom = 238.0
+rect_min_size = Vector2( 0, 180 )
 custom_constants/vseparation = 20
 custom_constants/hseparation = 10
 columns = 3
 
-[node name="AddSubjectLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="0"]
+[node name="AddSubjectLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid" index="0"]
 margin_top = 13.0
 margin_right = 215.0
 margin_bottom = 27.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Ajouter une nouvelle matière:"
 
-[node name="AddSubjectLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="1"]
+[node name="AddSubjectLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid" index="1"]
 margin_left = 225.0
 margin_right = 605.0
 margin_bottom = 40.0
@@ -161,7 +174,7 @@ rect_min_size = Vector2( 380, 40 )
 max_length = 60
 placeholder_text = "ex: Histoire contemporaine"
 
-[node name="CreateButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="2"]
+[node name="CreateButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid" index="2"]
 margin_left = 615.0
 margin_right = 735.0
 margin_bottom = 40.0
@@ -176,14 +189,14 @@ custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Ajouter"
 
-[node name="RemoveSubjectLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="3"]
+[node name="RemoveSubjectLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid" index="3"]
 margin_top = 73.0
 margin_right = 215.0
 margin_bottom = 87.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Supprimer une matière existante:"
 
-[node name="RemoveSubjectOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="4"]
+[node name="RemoveSubjectOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid" index="4"]
 margin_left = 225.0
 margin_top = 60.0
 margin_right = 605.0
@@ -192,7 +205,7 @@ rect_min_size = Vector2( 380, 40 )
 text = "Sélectionnez une matière à supprimer"
 clip_text = true
 
-[node name="RemoveSubjectButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="5"]
+[node name="RemoveSubjectButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid" index="5"]
 margin_left = 615.0
 margin_top = 60.0
 margin_right = 735.0
@@ -208,27 +221,58 @@ custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Supprimer"
 
-[node name="AddLessonLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="6"]
-margin_top = 133.0
-margin_right = 215.0
-margin_bottom = 147.0
+[node name="LessonGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="2"]
+visible = false
+margin_top = 58.0
+margin_right = 704.0
+margin_bottom = 238.0
+rect_min_size = Vector2( 0, 180 )
+custom_constants/vseparation = 20
+custom_constants/hseparation = 10
+columns = 3
+
+[node name="DefineLessonSubjectLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid" index="0"]
+margin_top = 13.0
+margin_right = 184.0
+margin_bottom = 27.0
+custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
+text = "Matière du nouveau cours :"
+
+[node name="DefineLessonSubjectOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid" index="1"]
+margin_left = 194.0
+margin_right = 574.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 380, 40 )
+
+[node name="Container" type="Container" parent="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid" index="2"]
+margin_left = 584.0
+margin_right = 704.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AddLessonLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid" index="3"]
+margin_top = 73.0
+margin_right = 184.0
+margin_bottom = 87.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Titre du nouveau cours :"
 
-[node name="AddLessonLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="7"]
-margin_left = 225.0
-margin_top = 120.0
-margin_right = 605.0
-margin_bottom = 160.0
+[node name="AddLessonLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid" index="4"]
+margin_left = 194.0
+margin_top = 60.0
+margin_right = 574.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 380, 40 )
 max_length = 90
 placeholder_text = "ex: Les pionniers de l'informatique (1950-1970)"
 
-[node name="CreateLessonButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="8"]
-margin_left = 615.0
-margin_top = 120.0
-margin_right = 735.0
-margin_bottom = 160.0
+[node name="CreateLessonButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid" index="5"]
+margin_left = 584.0
+margin_top = 60.0
+margin_right = 704.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 120, 30 )
 custom_colors/font_color = Color( 0.235294, 0.498039, 1, 1 )
 custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
@@ -240,51 +284,26 @@ custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Ajouter"
 
-[node name="DefineLessonSubjectLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="9"]
-margin_top = 193.0
-margin_right = 215.0
-margin_bottom = 207.0
-custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
-text = "Matière du nouveau cours :"
-
-[node name="DefineLessonSubjectOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="10"]
-margin_left = 225.0
-margin_top = 180.0
-margin_right = 605.0
-margin_bottom = 220.0
-rect_min_size = Vector2( 380, 40 )
-text = "Sélectionnez une matière"
-
-[node name="Container" type="Container" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="11"]
-margin_left = 615.0
-margin_top = 180.0
-margin_right = 735.0
-margin_bottom = 220.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RemoveLessonLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="12"]
-margin_top = 253.0
-margin_right = 215.0
-margin_bottom = 267.0
+[node name="RemoveLessonLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid" index="6"]
+margin_top = 133.0
+margin_right = 184.0
+margin_bottom = 147.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Supprimer un cours existant:"
 
-[node name="RemoveLessonOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="13"]
-margin_left = 225.0
-margin_top = 240.0
-margin_right = 605.0
-margin_bottom = 280.0
+[node name="RemoveLessonOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid" index="7"]
+margin_left = 194.0
+margin_top = 120.0
+margin_right = 574.0
+margin_bottom = 160.0
 rect_min_size = Vector2( 380, 40 )
-text = "Sélectionnez un cours à supprimer"
 clip_text = true
 
-[node name="RemoveLessonButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="14"]
-margin_left = 615.0
-margin_top = 240.0
-margin_right = 735.0
-margin_bottom = 280.0
+[node name="RemoveLessonButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid" index="8"]
+margin_left = 584.0
+margin_top = 120.0
+margin_right = 704.0
+margin_bottom = 160.0
 rect_min_size = Vector2( 120, 30 )
 custom_colors/font_color = Color( 0.803922, 0.117647, 0.117647, 1 )
 custom_colors/font_color_hover = Color( 1, 0.282353, 0.282353, 1 )
@@ -296,27 +315,35 @@ custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Supprimer"
 
-[node name="AddLocationLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="15"]
-margin_top = 313.0
-margin_right = 215.0
-margin_bottom = 327.0
+[node name="LocationGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="3"]
+visible = false
+margin_top = 394.0
+margin_right = 706.0
+margin_bottom = 574.0
+rect_min_size = Vector2( 0, 180 )
+custom_constants/vseparation = 20
+custom_constants/hseparation = 10
+columns = 3
+
+[node name="AddLocationLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/LocationGrid" index="0"]
+margin_top = 13.0
+margin_right = 186.0
+margin_bottom = 27.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Ajouter un établissement:"
 
-[node name="AddLocationLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="16"]
-margin_left = 225.0
-margin_top = 300.0
-margin_right = 605.0
-margin_bottom = 340.0
+[node name="AddLocationLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VBoxContainer/LocationGrid" index="1"]
+margin_left = 196.0
+margin_right = 576.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 380, 40 )
 max_length = 90
 placeholder_text = "ex: Clignancourt"
 
-[node name="AddLocationButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="17"]
-margin_left = 615.0
-margin_top = 300.0
-margin_right = 735.0
-margin_bottom = 340.0
+[node name="AddLocationButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/LocationGrid" index="2"]
+margin_left = 586.0
+margin_right = 706.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 120, 30 )
 custom_colors/font_color = Color( 0.227451, 0.494118, 0.890196, 1 )
 custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
@@ -328,29 +355,29 @@ custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Ajouter"
 
-[node name="RemoveLocationLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="18"]
-margin_top = 373.0
-margin_right = 215.0
-margin_bottom = 387.0
+[node name="RemoveLocationLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/LocationGrid" index="3"]
+margin_top = 73.0
+margin_right = 186.0
+margin_bottom = 87.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Supprimer un établissement:"
 
-[node name="RemoveLocationOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="19"]
-margin_left = 225.0
-margin_top = 360.0
-margin_right = 605.0
-margin_bottom = 400.0
+[node name="RemoveLocationOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VBoxContainer/LocationGrid" index="4"]
+margin_left = 196.0
+margin_top = 60.0
+margin_right = 576.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 380, 40 )
 clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RemoveLocationButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/GridContainer" index="20"]
-margin_left = 615.0
-margin_top = 360.0
-margin_right = 735.0
-margin_bottom = 400.0
+[node name="RemoveLocationButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/LocationGrid" index="5"]
+margin_left = 586.0
+margin_top = 60.0
+margin_right = 706.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 120, 30 )
 custom_colors/font_color = Color( 0.803922, 0.117647, 0.117647, 1 )
 custom_colors/font_color_hover = Color( 1, 0.282353, 0.282353, 1 )
@@ -362,11 +389,11 @@ custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Supprimer"
 
-[node name="Notification" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer" index="2"]
+[node name="Notification" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer" index="4"]
 modulate = Color( 0.160784, 0.666667, 0, 0 )
-margin_top = 490.0
-margin_right = 735.0
-margin_bottom = 520.0
+margin_top = 276.0
+margin_right = 704.0
+margin_bottom = 306.0
 rect_min_size = Vector2( 0, 30 )
 custom_colors/font_color = Color( 0.054902, 0.67451, 0.00392157, 1 )
 text = "Cette leçon est déjà enregistrée."
@@ -374,8 +401,8 @@ align = 1
 valign = 1
 
 [node name="Foot" parent="Panel/VBoxContainer" index="2"]
-margin_top = 598.0
-margin_bottom = 658.0
+margin_top = 441.0
+margin_bottom = 501.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Foot" index="0"]
 margin_left = 340.0
@@ -401,13 +428,16 @@ anims/RESET = SubResource( 10 )
 anims/lesson_already_exists = SubResource( 11 )
 anims/lesson_saved = SubResource( 12 )
 
-[connection signal="text_entered" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/AddSubjectLineEdit" to="." method="_on_AddSubjectLineEdit_text_entered"]
-[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/CreateButton" to="." method="_on_CreateButton_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/RemoveSubjectButton" to="." method="_on_RemoveSubjectButton_pressed"]
-[connection signal="text_entered" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/AddLessonLineEdit" to="." method="_on_AddLessonLineEdit_text_entered"]
-[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/CreateLessonButton" to="." method="_on_CreateLessonButton_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/RemoveLessonButton" to="." method="_on_RemoveLessonButton_pressed"]
-[connection signal="text_entered" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/AddLocationLineEdit" to="." method="_on_AddLocationLineEdit_text_entered"]
-[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/AddLocationButton" to="." method="_on_AddLocationButton_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/GridContainer/RemoveLocationButton" to="." method="_on_RemoveLocationButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/SubjectBtn" to="." method="_on_SubjectBtn_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/LessonBtn" to="." method="_on_LessonBtn_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/LocationBtn" to="." method="_on_LocationBtn_pressed"]
+[connection signal="text_entered" from="Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid/AddSubjectLineEdit" to="." method="_on_AddSubjectLineEdit_text_entered"]
+[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid/CreateButton" to="." method="_on_CreateButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid/RemoveSubjectButton" to="." method="_on_RemoveSubjectButton_pressed"]
+[connection signal="text_entered" from="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid/AddLessonLineEdit" to="." method="_on_AddLessonLineEdit_text_entered"]
+[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid/CreateLessonButton" to="." method="_on_CreateLessonButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid/RemoveLessonButton" to="." method="_on_RemoveLessonButton_pressed"]
+[connection signal="text_entered" from="Panel/VBoxContainer/Body/VBoxContainer/LocationGrid/AddLocationLineEdit" to="." method="_on_AddLocationLineEdit_text_entered"]
+[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/LocationGrid/AddLocationButton" to="." method="_on_AddLocationButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/LocationGrid/RemoveLocationButton" to="." method="_on_RemoveLocationButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Foot/HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]
