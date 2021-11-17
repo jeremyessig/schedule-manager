@@ -9,6 +9,7 @@ var calendar_array : HBoxContainer
 var new_subject_dialog : Control
 const weekday : Array = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
 
+var disciplines_database : Array
 var locations_database: Array
 var subjects_database : Array
 var lessons_database : Dictionary
@@ -39,6 +40,27 @@ func remove_from_locations_database(location:String) ->void:
 	locations_database.remove(index)
 	Signals.emit_signal("locations_database_updated")
 
+##__________ Gestion des disciplines
+func set_disciplines_database(value) ->void:
+	disciplines_database = value
+	disciplines_database.sort()
+	Signals.emit_signal("disciplines_database_updated")
+	
+	
+func get_disciplines_database() ->Array:
+	return disciplines_database
+	
+	
+func add_to_disciplines_database(value) ->void:
+	disciplines_database.append(value)
+	disciplines_database.sort()
+	Signals.emit_signal("disciplines_database_updated")
+
+
+func remove_from_disciplines_database(discipline:String) ->void:
+	var index = disciplines_database.find(discipline)
+	disciplines_database.remove(index)
+	Signals.emit_signal("disciplines_database_updated")	
 
 
 ##__________ Gestion des cours

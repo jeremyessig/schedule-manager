@@ -132,25 +132,102 @@ margin_bottom = 20.0
 custom_constants/separation = 15
 alignment = 1
 
-[node name="SubjectBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="0"]
-margin_left = 239.0
-margin_right = 307.0
+[node name="DisciplineBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="0"]
+margin_left = 194.0
+margin_right = 270.0
+margin_bottom = 20.0
+text = "Discipline"
+
+[node name="SubjectBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="1"]
+margin_left = 285.0
+margin_right = 353.0
 margin_bottom = 20.0
 text = "Matières"
 
-[node name="LessonBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="1"]
-margin_left = 322.0
-margin_right = 370.0
+[node name="LessonBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="2"]
+margin_left = 368.0
+margin_right = 416.0
 margin_bottom = 20.0
 text = "Cours"
 
-[node name="LocationBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="2"]
-margin_left = 385.0
-margin_right = 495.0
+[node name="LocationBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="3"]
+margin_left = 431.0
+margin_right = 541.0
 margin_bottom = 20.0
 text = "Etablissements"
 
-[node name="SubjectGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="1"]
+[node name="DisciplineGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="1"]
+margin_top = 58.0
+margin_right = 747.0
+margin_bottom = 238.0
+rect_min_size = Vector2( 0, 180 )
+custom_constants/vseparation = 20
+custom_constants/hseparation = 10
+columns = 3
+
+[node name="AddDisciplineLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/DisciplineGrid" index="0"]
+margin_top = 13.0
+margin_right = 227.0
+margin_bottom = 27.0
+custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
+text = "Ajouter une nouvelle discipline:"
+
+[node name="AddDisciplineLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VBoxContainer/DisciplineGrid" index="1"]
+margin_left = 237.0
+margin_right = 617.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 380, 40 )
+max_length = 60
+placeholder_text = "ex: Histoire"
+
+[node name="CreateDisciplineButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/DisciplineGrid" index="2"]
+margin_left = 627.0
+margin_right = 747.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 120, 30 )
+custom_colors/font_color = Color( 0.235294, 0.498039, 1, 1 )
+custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Ajouter"
+
+[node name="RemoveDisciplineLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/DisciplineGrid" index="3"]
+margin_top = 73.0
+margin_right = 227.0
+margin_bottom = 87.0
+custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
+text = "Supprimer une discipline existante:"
+
+[node name="RemoveDisciplineOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VBoxContainer/DisciplineGrid" index="4"]
+margin_left = 237.0
+margin_top = 60.0
+margin_right = 617.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 380, 40 )
+clip_text = true
+
+[node name="RemoveDisciplineButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/DisciplineGrid" index="5"]
+margin_left = 627.0
+margin_top = 60.0
+margin_right = 747.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 120, 30 )
+custom_colors/font_color = Color( 0.803922, 0.117647, 0.117647, 1 )
+custom_colors/font_color_hover = Color( 1, 0.282353, 0.282353, 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Supprimer"
+
+[node name="SubjectGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="2"]
+visible = false
 margin_top = 58.0
 margin_right = 735.0
 margin_bottom = 238.0
@@ -221,7 +298,7 @@ custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Supprimer"
 
-[node name="LessonGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="2"]
+[node name="LessonGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="3"]
 visible = false
 margin_top = 58.0
 margin_right = 704.0
@@ -315,7 +392,7 @@ custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Supprimer"
 
-[node name="LocationGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="3"]
+[node name="LocationGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="4"]
 visible = false
 margin_top = 394.0
 margin_right = 706.0
@@ -389,7 +466,7 @@ custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Supprimer"
 
-[node name="Notification" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer" index="4"]
+[node name="Notification" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer" index="5"]
 modulate = Color( 0.160784, 0.666667, 0, 0 )
 margin_top = 276.0
 margin_right = 735.0
@@ -428,6 +505,7 @@ anims/RESET = SubResource( 10 )
 anims/lesson_already_exists = SubResource( 11 )
 anims/lesson_saved = SubResource( 12 )
 
+[connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/DisciplineBtn" to="." method="_on_DisciplineBtn_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/SubjectBtn" to="." method="_on_SubjectBtn_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/LessonBtn" to="." method="_on_LessonBtn_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/LocationBtn" to="." method="_on_LocationBtn_pressed"]

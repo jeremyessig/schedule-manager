@@ -21,9 +21,11 @@ onready var remove_location_option_button : OptionButton = $Panel/VBoxContainer/
 onready var subject_grid : GridContainer = $Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid
 onready var lesson_grid : GridContainer = $Panel/VBoxContainer/Body/VBoxContainer/LessonGrid
 onready var location_grid : GridContainer = $Panel/VBoxContainer/Body/VBoxContainer/LocationGrid
+onready var discipline_grid : GridContainer = $Panel/VBoxContainer/Body/VBoxContainer/DisciplineGrid
 onready var subject_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/SubjectBtn
 onready var lesson_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/LessonBtn
 onready var location_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/LocationBtn
+onready var discipline_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/DisciplineBtn
 onready var animation : AnimationPlayer = $AnimationPlayer
 onready var body_vbox : VBoxContainer = $Panel/VBoxContainer/Body/VBoxContainer
 onready var buttons_container : HBoxContainer = $Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer
@@ -35,7 +37,7 @@ func _ready():
 	Signals.connect("lessons_database_updated", self, "_refresh_lessons_GUI")
 	Signals.connect("locations_database_updated", self, "_refresh_locations_GUI")
 	Signals.connect("subjects_database_updated", self, "_update_GUI")
-	_btn_focused(subject_btn)
+	_btn_focused(discipline_btn)
 
 
 ##________________________ Methodes de gestion des donees____________
@@ -206,3 +208,8 @@ func _on_LessonBtn_pressed():
 func _on_LocationBtn_pressed():
 	_show_grid(location_grid)
 	_btn_focused(location_btn)
+
+
+func _on_DisciplineBtn_pressed():
+	_show_grid(discipline_grid)
+	_btn_focused(discipline_btn)
