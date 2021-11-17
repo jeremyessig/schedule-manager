@@ -22,10 +22,19 @@ func get_time_24h(minutes: int) -> Array:
 	var hours := minutes / 60
 	minutes = minutes%60
 	return [hours, minutes]
+	
+func get_time_24h_StringArray(minutes:int) -> Array:
+	var time := get_time_24h(minutes)
+	time[0] = str(time[0])
+	if time[1] <10:
+		time[1] = "0" + str(time[1])
+	time[1] = str(time[1]) 
+	return time
 
 
 func get_time_24h_str(minutes:int, separator:String=":") -> String:
 	var time := get_time_24h(minutes)
 	if time[1] <10:
 		time[1] = "0" + str(time[1])
+	time[1] = str(time[1]) 
 	return str(time[0]) + separator + str(time[1])

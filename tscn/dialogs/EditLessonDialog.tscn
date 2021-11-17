@@ -36,6 +36,9 @@ text = "Editer un cours"
 autowrap = false
 clip_text = false
 
+[node name="MinutesOptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/LessonDuration" index="2"]
+items = [ "00", null, false, 0, null, "30", null, false, 1, null ]
+
 [node name="MinutesOptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/Schedule" index="4"]
 items = [ "00", null, false, 0, null, "30", null, false, 2, null ]
 

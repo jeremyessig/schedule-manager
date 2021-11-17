@@ -34,6 +34,7 @@ func _open_dialog(nodepath:NodePath) ->void:
 
 
 func _update_gui() ->void:
+	var time := Time.new()
 	refresh_rating_gui()
 	title.text = lesson_card.lesson
 	type_option_button.select(get_item_index_by_string(type_option_button, lesson_card.type))
@@ -43,11 +44,15 @@ func _update_gui() ->void:
 	Global.update_option_button(lesson_option_button, Global.lessons_database, lesson_card.subject)
 	lesson_option_button.select(get_item_index_by_string(lesson_option_button, lesson_card.lesson))
 	room_line_edit.text = lesson_card.room
-	duration_hours_option_button.select(get_item_index_by_string(duration_hours_option_button, lesson_card.duration[0]))
-	duration_minutes_option_button.select(get_item_index_by_string(duration_minutes_option_button, lesson_card.duration[1]))
+	print(lesson_card.duration)
+	var duration :Array= time.get_time_24h_StringArray(lesson_card.duration)
+	print(duration)
+	duration_hours_option_button.select(get_item_index_by_string(duration_hours_option_button, duration[0]))
+	duration_minutes_option_button.select(get_item_index_by_string(duration_minutes_option_button, duration[1]))
 	schedule_days_option_button.select(get_item_index_by_string(schedule_days_option_button, lesson_card.schedule[1]))
-	schedule_hours_option_button.select(get_item_index_by_string(schedule_hours_option_button, lesson_card.schedule[2]))
-	schedule_minutes_option_button.select(get_item_index_by_string(schedule_minutes_option_button, lesson_card.schedule[3]))
+	var schedule_time : Array= time.get_time_24h(lesson_card.schedule[2])
+	schedule_hours_option_button.select(get_item_index_by_string(schedule_hours_option_button, str(schedule_time[0])))
+	schedule_minutes_option_button.select(get_item_index_by_string(schedule_minutes_option_button, str(schedule_time[1])))
 	note_text_edit.text = lesson_card.note
 	if lesson_card.is_obligatory:
 		obligatory_check_button.pressed = true
@@ -89,13 +94,14 @@ func _on_DeleteButton_pressed():
 
 
 func _on_EditButton_pressed():
-	print(lesson_card.is_displayed)
+	var time = Time.new()
+	var schedule = time.get_time_24h(lesson_card.schedule[2])
 	if (Global.get_item_string(type_option_button) != lesson_card.type or
 		Global.get_item_string(subject_option_button) != lesson_card.subject or
 		Global.get_item_string(lesson_option_button) != lesson_card.lesson or
 		Global.get_item_string(schedule_days_option_button) != lesson_card.schedule[1] or
-		Global.get_item_string(schedule_hours_option_button) != lesson_card.schedule[2] or
-		Global.get_item_string(schedule_minutes_option_button) != lesson_card.schedule[3] or
+		int(Global.get_item_string(schedule_hours_option_button)) != int(schedule[0]) or
+		int(Global.get_item_string(schedule_minutes_option_button)) != schedule[1] or
 		room_line_edit.text != lesson_card.room
 		):
 			if not check_for_validation():

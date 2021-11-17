@@ -119,7 +119,7 @@ func set_data(data:Dictionary) -> void:
 ##________________Methodes de calcule___________________________
 func _calculate_position(schedule: Array) ->Vector2:
 	var time = Time.new()
-	var schedule_table:Array = time.get_time_24h(duration)
+	var schedule_table:Array = time.get_time_24h(schedule[2])
 	var x = schedule[0]
 	var hours = int(schedule_table[0])
 	var minutes = int(schedule_table[1])
