@@ -37,7 +37,6 @@ func _attribute_time(node:Node) ->void:
 	var begining :String = time.get_time_csv_format(node.schedule[2]) 
 	var end : String = time.get_time_csv_format(node.schedule[2] + node.duration)
 	node.datetime.append([begining, end])
-	
 
 
 ## Transforme un chiffre en une string minute ou heure en ajoutant un 0 
