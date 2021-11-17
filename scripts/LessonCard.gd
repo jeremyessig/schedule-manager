@@ -54,6 +54,10 @@ func _ready():
 
 func _set_is_displayed(value) ->void:
 	is_displayed = value
+	if is_displayed:
+		add_to_group("lesson_cards_displayed")
+	else:
+		remove_from_group("lesson_cards_displayed")
 	_update_background()
 	
 

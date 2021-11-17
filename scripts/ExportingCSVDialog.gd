@@ -13,14 +13,6 @@ var start_date :Array = [] ## Premier lundi de la rentree des cours que l'utilis
 onready var begining_week_line_edit : LineEdit = $Panel/VBoxContainer/Body/GridContainer/BeginingWeekLineEdit
 onready var notification_label : Label = $Panel/VBoxContainer/Foot/VBoxContainer/NotificationLabel
 
-## Recupere les lesson_card (is_displayed) qui sont dans l'emploi du temps  
-func _get_nodes_in_schedule() -> Array:
-	var array := []
-	for card in get_tree().get_nodes_in_group("lesson_cards"):
-		if card.is_displayed:
-			array.append(card) 
-	return array
-
 
 ## Ajoute les dates et les heures dans l'attribut datetime de lesson_card
 func _attribute_datetime_to_nodes(nodes:Array) ->void:
@@ -125,12 +117,11 @@ func _on_ExportButton_pressed():
 	if start_date == []:
 		notification_label.text = "Veuillez indiquer une date de début des cours"
 		return
-	for card in get_tree().get_nodes_in_group("lesson_cards"):
-		if card.is_displayed == true:
-			var nodes : Array = _get_nodes_in_schedule()
-			_attribute_datetime_to_nodes(nodes)
-			emit_signal("open_exporting_csv_file_dialog") # -> Main
-			return
+	var displayed_cards = get_tree().get_nodes_in_group("lesson_cards_displayed")
+	if displayed_cards.empty():
+		Signals.emit_signal("error_emitted", "EmptySchedule", null)
+		return
+	_attribute_datetime_to_nodes(displayed_cards)
+	emit_signal("open_exporting_csv_file_dialog")
 	hide()
-	Signals.emit_signal("error_emitted", "EmptySchedule", null)
 
