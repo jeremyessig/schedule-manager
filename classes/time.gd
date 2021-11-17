@@ -31,7 +31,30 @@ func get_time_24h_StringArray(minutes:int) -> Array:
 	time[1] = str(time[1]) 
 	return time
 
+func get_time_00h00_StringArray(minutes:int) ->Array:
+	var time :Array= get_time_24h_StringArray(minutes)
+	if int(time[0]) < 10:
+		time[0] = "0" + time[0]
+	return time
+
 
 func get_time_24h_str(minutes:int, separator:String=":") -> String:
 	var time := get_time_24h_StringArray(minutes)
 	return time[0] + separator + time[1]
+
+
+func get_time_00h00_str(minutes:int, separator:String=":") -> String:
+	var time := get_time_00h00_StringArray(minutes)
+	return time[0] + separator + time[1]
+
+
+func get_time_csv_format(minutes:int) ->String:
+	var time: String
+	if minutes < 720: ## < que 12h ==> AM
+		time = get_time_00h00_str(minutes) + " AM"
+	elif minutes >= 720 and minutes < 780: ## minutes >= 12h00 et minutes < 13h00
+		time = get_time_00h00_str(minutes) + " PM"
+	else:
+		minutes = minutes - 720
+		time = get_time_00h00_str(minutes) + " PM"		
+	return time

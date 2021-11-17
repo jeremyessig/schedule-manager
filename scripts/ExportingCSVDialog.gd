@@ -31,36 +31,13 @@ func _attribute_datetime_to_nodes(nodes:Array) ->void:
 		print_debug(node.lesson, node.datetime)
 
 
-## Additionne l'heure de debut et la duree pour obtenir l'heure de fin du cours
-## Cette fonction est presque la meme que celle dans lesson_card ==> voir pour les fusionner
+## Retourne l'heure de debut et de fin du cours en format anglais (AM/PM)
 func _attribute_time(node:Node) ->void:
-	var begining : String = _export_time(int(node.schedule[2]), int(node.schedule[3]))
-	var hours = int(node.duration[0]) + int(node.schedule[2])
-	var minutes = 30
-	if int(node.duration[1]) + int(node.schedule[3]) >= 60:
-		hours += 1
-		minutes = 0
-	if int(node.duration[1]) + int(node.schedule[3]) < 30:
-		minutes = 0
-	var end : String = _export_time(hours, minutes)
-	
+	var time := Time.new()
+	var begining :String = time.get_time_csv_format(node.schedule[2]) 
+	var end : String = time.get_time_csv_format(node.schedule[2] + node.duration)
 	node.datetime.append([begining, end])
-
-
-## Transforme des heures et minutes sur 24h en temps sur 12H AM PM 
-## Car le google agenda n'accepte que les heures sous format AM et PM
-func _export_time(hours:int, minutes:int) ->String:
-	var time : Array = [hours, minutes]
-	if time[0] < 12: ## L'heure reste en AM (matin)
-		var str_hour = export_int_str(time[0])
-		var str_min = export_int_str(time[1])
-		return str_hour + ":" + str_min + " AM"
-	## L'heure bascule en PM 
-	if time[0] == 12 and time[1] == 30:
-		return "12:30 PM"
-	var str_hour = export_int_str(time[0]-12)
-	var str_min = export_int_str(time[1])
-	return str_hour + ":" + str_min + " PM"
+	
 
 
 ## Transforme un chiffre en une string minute ou heure en ajoutant un 0 
@@ -119,7 +96,7 @@ func _init_week_to_monday(date_value) ->void:
 	var days_table = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 	var days_to_back = days_table.find(day_name)
 	start_date = change_to_previous_day(start_date[0], start_date[1], start_date[2], days_to_back)
-	print_debug(start_date)
+#	print_debug(start_date)
 
 ##________________________________ GUI_________________________________
 
