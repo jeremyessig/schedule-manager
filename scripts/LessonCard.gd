@@ -10,7 +10,7 @@ var id :String
 var type :String
 var subject : String
 var lesson_code : String
-var duration : Array
+var duration : int
 var schedule : Array
 var is_obligatory : bool
 var room : String
@@ -117,31 +117,23 @@ func set_data(data:Dictionary) -> void:
 
 
 ##________________Methodes de calcule___________________________
-## Renvoie un affichage de la date sous format 24H00
-func calculate_time(duration, schedule)->String:
-	var hours = int(duration[0]) + int(schedule[2])
-	var minutes = "30"
-	if int(duration[1]) + int(schedule[3]) >= 60:
-		hours += 1
-		minutes = "00"
-	if int(duration[1]) + int(schedule[3]) < 30:
-		minutes = "00"
-	return String(hours) + "h" + minutes
-
-
 func _calculate_position(schedule: Array) ->Vector2:
+	var time = Time.new()
+	var schedule_table:Array = time.get_time_24h(duration)
 	var x = schedule[0]
-	var hours = int(schedule[2])
-	var minutes = int(schedule[3])
+	var hours = int(schedule_table[0])
+	var minutes = int(schedule_table[1])
 	var y = (hours-7)*2
 	if minutes > 0:
 		y += 1
 	return Vector2(x,y)
 
 # Calcule la taille du cours lorsqu'il est affiche dans l'agenda
-func _calcul_size(duration: Array) ->int:
-	var hours = int(duration[0])
-	var minutes = int(duration[1])
+func _calcul_size(duration: int) ->int:
+	var time := Time.new()
+	var duration_table:Array = time.get_time_24h(duration)
+	var hours = int(duration_table[0])
+	var minutes = int(duration_table[1])
 	var nbr_cells : int = hours * 2
 	if minutes > 0:
 		nbr_cells += 1
@@ -151,14 +143,15 @@ func _calcul_size(duration: Array) ->int:
 ##_______________Mise a jour de la GUI______________
 
 func update_GUI() -> void:
+	var time :Time= Time.new()
 	title_label.text = lesson
 	type_field.text = type
 	subject_field.text = subject
 	lesson_code_field.text = lesson_code
 	teacher_field.text = teacher
 	room_field.text = room
-	duration_field.text = "%sh%s" %[String(duration[0]), String(duration[1])]
-	schedule_field.text = "%s %sh%s à %s" %[String(schedule[1]), String(schedule[2]), String(schedule[3]), calculate_time(duration, schedule)]
+	duration_field.text = time.get_time_24h_str(duration, "h")
+	schedule_field.text = "%s %s à %s" %[String(schedule[1]), time.get_time_24h_str(schedule[2], "h"), time.get_time_24h_str(schedule[2] + duration, "h")]
 	update_color(color)
 	_refresh_rating_gui()
 	location_field.text = location

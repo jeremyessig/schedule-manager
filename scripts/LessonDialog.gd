@@ -101,11 +101,11 @@ func check_if_lesson_exists():
 										lesson_option_button.text, 
 										type_option_button.text, 
 										schedule_days_option_button.text, 
-										schedule_hours_option_button.text, 
-										schedule_minutes_option_button.text,
+										str(int(schedule_hours_option_button.text)) + "h" + schedule_minutes_option_button.text,
 										location_option_button.text, 
 										room_line_edit.text
 										)
+	print("ID verifiée: " + card_id)
 	if Global.left_panel.does_lesson_exist(card_id, type_option_button.text):
 		return true
 	return false
@@ -118,20 +118,26 @@ func create_data_dictionary() -> Dictionary:
 	var type = Global.get_item_string(type_option_button)
 	var subject = Global.get_item_string(subject_option_button)
 	var lesson = Global.get_item_string(lesson_option_button)
-	var duration: Array = [Global.get_item_string(duration_hours_option_button), Global.get_item_string(duration_minutes_option_button)]
+	var duration_table: Array = [Global.get_item_string(duration_hours_option_button), Global.get_item_string(duration_minutes_option_button)]
+	var time :Time = Time.new() 
+	var duration :int= time.get_minutes(duration_table)
 	var teacher = teacher_line_edit.text
 	var lesson_code = lesson_code_line_edit.text
 	var room = room_line_edit.text
 	var obligatory = obligatory_check_button.is_pressed()
 	var color = card_color
 	var location = Global.get_item_string(location_option_button)
-	var schedule = [schedule_days_option_button.get_selected_id(), 
-		Global.get_item_string(schedule_days_option_button), 
-		Global.get_item_string(schedule_hours_option_button), 
-		Global.get_item_string(schedule_minutes_option_button)]
+	var schedule = [
+					schedule_days_option_button.get_selected_id(), ## id utilise pour positionner dans la colomne du calendrier
+					Global.get_item_string(schedule_days_option_button), ## Jour du cours
+					time.get_minutes(
+									[Global.get_item_string(schedule_hours_option_button), Global.get_item_string(schedule_minutes_option_button)] ## horaire en minutes
+									)
+					]
+	print(schedule)
 	var note = note_text_edit.text
 	var id = ID.new()
-	var card_id :String = id.generate(subject, lesson, type, schedule[1], schedule[2], schedule[3], location, room)
+	var card_id :String = id.generate(subject, lesson, type, schedule[1], time.get_time_24h_str(schedule[2], "h"), location, room)
 	var index = 0
 	print(card_id)
 	var data : Dictionary = {
