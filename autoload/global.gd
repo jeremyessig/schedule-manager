@@ -23,8 +23,10 @@ func set_locations_database(value) ->void:
 	locations_database.sort()
 	Signals.emit_signal("locations_database_updated")
 
+
 func get_locations_database() ->Array:
 	return locations_database
+	
 	
 func add_to_locations_database(value:String) ->void:
 	locations_database.append(value)
@@ -37,13 +39,17 @@ func remove_from_locations_database(location:String) ->void:
 	locations_database.remove(index)
 	Signals.emit_signal("locations_database_updated")
 
+
+
 ##__________ Gestion des cours
 func set_lessons_database(value) ->void:
 	lessons_database = value
 	Signals.emit_signal("lessons_database_updated")
 
+
 func get_lessons_database() ->Dictionary:
 	return lessons_database
+
 
 func add_to_lessons_database(key:String, value:Array) ->void:
 	lessons_database[key] = value
@@ -55,10 +61,12 @@ func add_to_lessons_database(key:String, value:Array) ->void:
 	lessons_database = tmp
 	Signals.emit_signal("lessons_database_updated")
 
+
 func remove_from_lessons_database(key:String) ->void:
 	lessons_database.erase(key)
 	Signals.emit_signal("lessons_database_updated")
 		
+
 
 ##__________ Gestion des sujets
 func set_subjects_database(value) ->void:
