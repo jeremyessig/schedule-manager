@@ -1,5 +1,6 @@
 .import/
 .idea/
+executables/*
 artwork/
 Control.gd
 Control.tscn
