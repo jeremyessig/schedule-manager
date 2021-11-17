@@ -9,14 +9,48 @@ var calendar_array : HBoxContainer
 var new_subject_dialog : Control
 const weekday : Array = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
 
+## Les disciplines ne sont pas encore ajoutees dans le programme car cela complexifie enormement son fonctionnement.
+## Si le logiciel connait un grand succes aupres de nombreuses universites, ajouter
+## la discipline, le niveau de licence etc. (mais dans ce cas il faudra utiliser une base de donnee msqlLit)
 var disciplines_database : Array
+
 var locations_database: Array
 var subjects_database : Array
 var lessons_database : Dictionary
+var distances_list : Dictionary
 
 var settings: Dictionary = {
 	"card_index_top": false,
 }
+func set_distances_list(value:Dictionary) ->void:
+	distances_list = value
+	Signals.emit_signal("distances_list_updated")
+	
+func get_distances_list() ->Dictionary:
+	return distances_list
+	
+func add_to_distances_list(location_1:String, location_2:String, time:int) ->void:
+	var key :String = location_1 + "/" + location_2
+	distances_list[key] = time
+	Signals.emit_signal("distances_list_updated")
+	
+func remove_from_distances_list() ->void:
+	pass
+	
+func is_in_distances_list(location_1:String, location_2:String) -> bool:
+	var key : String = location_1 + "/" + location_2 
+	if distances_list.has(key):
+		return true 
+	return false
+
+
+func get_travel_time_between(location_1:String, location_2:String) ->int:
+	var key : String = location_1 + "/" + location_2 
+	if !distances_list.has(key):
+		return 0
+	return distances_list[key]
+
+
 
 ##__________ Gestion des etablissements
 func set_locations_database(value) ->void:

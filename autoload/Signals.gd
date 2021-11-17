@@ -19,5 +19,6 @@ signal lessons_database_updated ##
 signal subjects_database_updated ## 
 signal locations_database_updated
 signal disciplines_database_updated
+signal distances_list_updated
 
 signal save_as_pressed ## Head ->

@@ -133,30 +133,32 @@ custom_constants/separation = 15
 alignment = 1
 
 [node name="DisciplineBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="0"]
+visible = false
 margin_left = 194.0
 margin_right = 270.0
 margin_bottom = 20.0
 text = "Discipline"
 
 [node name="SubjectBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="1"]
-margin_left = 285.0
-margin_right = 353.0
+margin_left = 239.0
+margin_right = 307.0
 margin_bottom = 20.0
 text = "Matières"
 
 [node name="LessonBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="2"]
-margin_left = 368.0
-margin_right = 416.0
+margin_left = 322.0
+margin_right = 370.0
 margin_bottom = 20.0
 text = "Cours"
 
 [node name="LocationBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="3"]
-margin_left = 431.0
-margin_right = 541.0
+margin_left = 385.0
+margin_right = 495.0
 margin_bottom = 20.0
 text = "Etablissements"
 
 [node name="DisciplineGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="1"]
+visible = false
 margin_top = 58.0
 margin_right = 747.0
 margin_bottom = 238.0
@@ -227,7 +229,6 @@ custom_styles/normal = SubResource( 5 )
 text = "Supprimer"
 
 [node name="SubjectGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="2"]
-visible = false
 margin_top = 58.0
 margin_right = 735.0
 margin_bottom = 238.0
