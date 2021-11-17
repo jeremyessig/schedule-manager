@@ -10,7 +10,6 @@ var id :String
 var type :String
 var subject : String
 var lesson_code : String
-var duration : int
 var schedule : Array
 var is_obligatory : bool
 var room : String
@@ -66,7 +65,6 @@ func get_data() ->Dictionary:
 	"type" : type,
 	"subject": subject,
 	"lesson_code" : lesson_code,
-	"duration" : duration,
 	"schedule" : schedule,
 	"is_obligatory" : is_obligatory,
 	"room" : room,
@@ -94,7 +92,6 @@ func set_data(data:Dictionary) -> void:
 	id = data["id"]
 	teacher = data["teacher"]
 	lesson_code = data["lesson_code"]
-	duration = data["duration"]
 	is_obligatory = data["is_obligatory"]
 	room = data["room"]
 	color = data["color"]
@@ -119,8 +116,8 @@ func set_data(data:Dictionary) -> void:
 ##________________Methodes de calcule___________________________
 func _calculate_position(schedule: Array) ->Vector2:
 	var time = Time.new()
-	var schedule_table:Array = time.get_time_24h(schedule[2])
-	var x = _find_x_pos(schedule[1])
+	var schedule_table:Array = time.get_time_24h(schedule[1])
+	var x = _find_x_pos(schedule[0])
 	var hours = int(schedule_table[0])
 	var minutes = int(schedule_table[1])
 	var y = (hours-7)*2
@@ -154,8 +151,8 @@ func update_GUI() -> void:
 	lesson_code_field.text = lesson_code
 	teacher_field.text = teacher
 	room_field.text = room
-	duration_field.text = time.get_time_24h_str(duration, "h")
-	schedule_field.text = "%s %s à %s" %[String(schedule[1]), time.get_time_24h_str(schedule[2], "h"), time.get_time_24h_str(schedule[2] + duration, "h")]
+	duration_field.text = time.get_time_24h_str(schedule[2], "h")
+	schedule_field.text = "%s %s à %s" %[String(schedule[0]), time.get_time_24h_str(schedule[1], "h"), time.get_time_24h_str(schedule[3], "h")]
 	update_color(color)
 	_refresh_rating_gui()
 	location_field.text = location
@@ -163,7 +160,7 @@ func update_GUI() -> void:
 		obligatory_field.text = "oui"
 	if not is_obligatory:
 		obligatory_field.text = "non"
-	size = _calcul_size(duration)
+	size = _calcul_size(schedule[2])
 	position = _calculate_position(schedule)
 	emit_signal("lesson_cell_updated", get_data(), "")
 

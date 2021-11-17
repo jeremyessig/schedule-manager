@@ -34,8 +34,8 @@ func _attribute_datetime_to_nodes(nodes:Array) ->void:
 ## Retourne l'heure de debut et de fin du cours en format anglais (AM/PM)
 func _attribute_time(node:Node) ->void:
 	var time := Time.new()
-	var begining :String = time.get_time_csv_format(node.schedule[2]) 
-	var end : String = time.get_time_csv_format(node.schedule[2] + node.duration)
+	var begining :String = time.get_time_csv_format(node.schedule[1]) 
+	var end : String = time.get_time_csv_format(node.schedule[1] + node.schedule[2])
 	node.datetime.append([begining, end])
 
 
@@ -49,7 +49,7 @@ func export_int_str(integer:int) -> String:
 
 ## Recupere le jour de l'attribut schedule de lesson_card et le compare a une date reelle
 func _attribute_day(node:Node) ->void:
-	var weekday = node.schedule[1]
+	var weekday = node.schedule[0]
 	var days_table = Global.get_weekday()
 	var days_to_further = days_table.find(weekday)
 	var date = change_to_next_day(int(start_date[0]), int(start_date[1]), int(start_date[2]), days_to_further)
