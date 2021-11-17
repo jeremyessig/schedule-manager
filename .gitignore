@@ -1,5 +1,7 @@
 .import/
 .idea/
+executables/
+artwork/
 Control.gd
 Control.tscn
 default_env.tres

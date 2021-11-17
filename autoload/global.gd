@@ -17,6 +17,7 @@ var settings: Dictionary = {
 	"card_index_top": false,
 }
 
+##__________ Gestion des etablissements
 func set_locations_database(value) ->void:
 	locations_database = value
 	locations_database.sort()
@@ -30,28 +31,19 @@ func add_to_locations_database(value:String) ->void:
 	locations_database.sort()
 	Signals.emit_signal("locations_database_updated")
 
-func set_subjects_database(value) ->void:
-	subjects_database = value
-	subjects_database.sort()
-	Signals.emit_signal("subjects_database_updated")
 
 func remove_from_locations_database(location:String) ->void:
 	var index : int = locations_database.find(location)
 	locations_database.remove(index)
 	Signals.emit_signal("locations_database_updated")
 
-
+##__________ Gestion des cours
 func set_lessons_database(value) ->void:
 	lessons_database = value
 	Signals.emit_signal("lessons_database_updated")
 
-func get_subjects_database() ->Array:
-	return subjects_database
-
-func add_to_subjects_database(value:String) ->void:
-	subjects_database.append(value)
-	subjects_database.sort()
-	Signals.emit_signal("subjects_database_updated")
+func get_lessons_database() ->Dictionary:
+	return lessons_database
 
 func add_to_lessons_database(key:String, value:Array) ->void:
 	lessons_database[key] = value
@@ -66,12 +58,31 @@ func add_to_lessons_database(key:String, value:Array) ->void:
 func remove_from_lessons_database(key:String) ->void:
 	lessons_database.erase(key)
 	Signals.emit_signal("lessons_database_updated")
+		
+
+##__________ Gestion des sujets
+func set_subjects_database(value) ->void:
+	subjects_database = value
+	subjects_database.sort()
+	Signals.emit_signal("subjects_database_updated")
+
+func get_subjects_database() ->Array:
+	return subjects_database
+
+func add_to_subjects_database(value:String) ->void:
+	subjects_database.append(value)
+	subjects_database.sort()
+	Signals.emit_signal("subjects_database_updated")
+
 	
 func remove_from_subjects_database(subject:String) ->void:
 	var index = subjects_database.find(subject)
 	subjects_database.remove(index)
 	Signals.emit_signal("subjects_database_updated")
 
+
+
+##________________________
 
 func get_weekday() ->Array:
 	return weekday.duplicate()

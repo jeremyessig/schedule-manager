@@ -102,11 +102,14 @@ func _update_GUI() ->void:
 	Global.update_option_button(remove_lesson_option_button, Global.lessons_database)
 	Global.update_option_button(define_lesson_subject_option_button, Global.subjects_database)
 	
+	
 func _refresh_lessons_GUI() ->void:
 	Global.update_option_button(remove_lesson_option_button, Global.lessons_database)
 
+
 func _refresh_locations_GUI() ->void:
 	Global.update_option_button(remove_location_option_button, Global.locations_database)
+
 
 func _error_notification(msg:String) ->void:
 	notification.add_color_override("font_color", Color("#a50000"))
@@ -189,7 +192,6 @@ func _on_RemoveLocationButton_pressed():
 
 ## Boutons de navigation entre les sujets, les cours et les etablissements
 	
-
 
 func _on_SubjectBtn_pressed():
 	_show_grid(subject_grid)
