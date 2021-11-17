@@ -96,16 +96,16 @@ func check_for_validation() :
 
 
 func check_if_lesson_exists():
+	var time = Time.new()
 	var id = ID.new()
 	var card_id :String = id.generate(subject_option_button.text, 
 										lesson_option_button.text, 
 										type_option_button.text, 
 										schedule_days_option_button.text, 
-										str(int(schedule_hours_option_button.text)) + "h" + schedule_minutes_option_button.text,
+										str(time.get_minutes([schedule_hours_option_button.text, schedule_minutes_option_button.text])),
 										location_option_button.text, 
 										room_line_edit.text
 										)
-	print("ID verifiée: " + card_id)
 	if Global.left_panel.does_lesson_exist(card_id, type_option_button.text):
 		return true
 	return false
@@ -137,9 +137,8 @@ func create_data_dictionary() -> Dictionary:
 	print(schedule)
 	var note = note_text_edit.text
 	var id = ID.new()
-	var card_id :String = id.generate(subject, lesson, type, schedule[1], time.get_time_24h_str(schedule[2], "h"), location, room)
+	var card_id :String = id.generate(subject, lesson, type, schedule[1], str(schedule[2]), location, room)
 	var index = 0
-	print(card_id)
 	var data : Dictionary = {
 		"id": card_id,
 		"type": type,

@@ -120,13 +120,17 @@ func set_data(data:Dictionary) -> void:
 func _calculate_position(schedule: Array) ->Vector2:
 	var time = Time.new()
 	var schedule_table:Array = time.get_time_24h(schedule[2])
-	var x = schedule[0]
+	var x = _find_x_pos(schedule[1])
 	var hours = int(schedule_table[0])
 	var minutes = int(schedule_table[1])
 	var y = (hours-7)*2
 	if minutes > 0:
 		y += 1
 	return Vector2(x,y)
+
+
+func _find_x_pos(day:String) -> int:
+	return Global.weekday.find(day)
 
 # Calcule la taille du cours lorsqu'il est affiche dans l'agenda
 func _calcul_size(duration: int) ->int:
