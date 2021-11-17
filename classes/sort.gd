@@ -45,7 +45,7 @@ static func by_days(table:Array, weekday_list:Array, invert:bool = false) ->Arra
 	var tmp: Array
 	for weekday in weekday_list:
 		for node in table:
-			if weekday == node.schedule[0]:
+			if weekday == node.schedule["day"]:
 				tmp.append(node)
 				table.erase(table.find(node))
 	return tmp

@@ -10,7 +10,7 @@ var id :String
 var type :String
 var subject : String
 var lesson_code : String
-var schedule : Array
+var schedule : Dictionary
 var is_obligatory : bool
 var room : String
 var lesson : String
@@ -114,10 +114,10 @@ func set_data(data:Dictionary) -> void:
 
 
 ##________________Methodes de calcule___________________________
-func _calculate_position(schedule: Array) ->Vector2:
+func _calculate_position(schedule: Dictionary) ->Vector2:
 	var time = Time.new()
-	var schedule_table:Array = time.get_time_24h(schedule[1])
-	var x = _find_x_pos(schedule[0])
+	var schedule_table:Array = time.get_time_24h(schedule["start"])
+	var x = _find_x_pos(schedule["day"])
 	var hours = int(schedule_table[0])
 	var minutes = int(schedule_table[1])
 	var y = (hours-7)*2
@@ -151,8 +151,8 @@ func update_GUI() -> void:
 	lesson_code_field.text = lesson_code
 	teacher_field.text = teacher
 	room_field.text = room
-	duration_field.text = time.get_time_24h_str(schedule[2], "h")
-	schedule_field.text = "%s %s à %s" %[String(schedule[0]), time.get_time_24h_str(schedule[1], "h"), time.get_time_24h_str(schedule[3], "h")]
+	duration_field.text = time.get_time_24h_str(schedule["duration"], "h")
+	schedule_field.text = "%s %s à %s" %[String(schedule["day"]), time.get_time_24h_str(schedule["start"], "h"), time.get_time_24h_str(schedule["end"], "h")]
 	update_color(color)
 	_refresh_rating_gui()
 	location_field.text = location
@@ -160,7 +160,7 @@ func update_GUI() -> void:
 		obligatory_field.text = "oui"
 	if not is_obligatory:
 		obligatory_field.text = "non"
-	size = _calcul_size(schedule[2])
+	size = _calcul_size(schedule["duration"])
 	position = _calculate_position(schedule)
 	emit_signal("lesson_cell_updated", get_data(), "")
 
@@ -242,8 +242,8 @@ func export_to_csv() ->PoolStringArray:
 	var end_time : String = datetime[1][1]
 	var all_day : String = "False"
 	var description : String = "Prof. %s" %teacher
-	var location : String = "Salle %s" %room
-	var private : String = "False" 
+	var location : String = "%s Salle %s" %[location, room]
+	var private : String = "True" 
 	var array :PoolStringArray = [subject, start_date, start_time, end_date, end_time, all_day, description, location, private]
 	return array
 	

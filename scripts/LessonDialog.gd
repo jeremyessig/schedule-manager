@@ -113,13 +113,13 @@ func check_if_lesson_exists():
 
 
 ##_______________Creation et envoie des donnees par signal________________________
-func _get_schedule() ->Array:
+func _get_schedule() ->Dictionary:
 	var time = Time.new()
 	var duration :int = time.get_minutes([Global.get_item_string(duration_hours_option_button), Global.get_item_string(duration_minutes_option_button)])
 	var day = Global.get_item_string(schedule_days_option_button)
-	var begining :int = time.get_minutes([Global.get_item_string(schedule_hours_option_button), Global.get_item_string(schedule_minutes_option_button)])
-	var end :int = begining + duration
-	return [day, begining, duration, end]
+	var start :int = time.get_minutes([Global.get_item_string(schedule_hours_option_button), Global.get_item_string(schedule_minutes_option_button)])
+	var end :int = start + duration
+	return {"day":day, "start":start, "duration":duration, "end":end}
 
 func create_data_dictionary() -> Dictionary:
 	var type = Global.get_item_string(type_option_button)
@@ -136,7 +136,7 @@ func create_data_dictionary() -> Dictionary:
 	print(schedule)
 	var note = note_text_edit.text
 	var id = ID.new()
-	var card_id :String = id.generate(subject, lesson, type, schedule[0], str(schedule[1]), location, room)
+	var card_id :String = id.generate(subject, lesson, type, schedule["day"], str(schedule["start"]), location, room)
 	var index = 0
 	var data : Dictionary = {
 		"id": card_id,
