@@ -33,8 +33,5 @@ func get_time_24h_StringArray(minutes:int) -> Array:
 
 
 func get_time_24h_str(minutes:int, separator:String=":") -> String:
-	var time := get_time_24h(minutes)
-	if time[1] <10:
-		time[1] = "0" + str(time[1])
-	time[1] = str(time[1]) 
-	return str(time[0]) + separator + str(time[1])
+	var time := get_time_24h_StringArray(minutes)
+	return time[0] + separator + time[1]
