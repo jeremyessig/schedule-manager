@@ -40,6 +40,7 @@ onready var teacher_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridCont
 onready var displayed_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/DisplayedField
 onready var stars_container := $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/StarsContainer
 onready var location_field : Label = $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/LocationField
+onready var note_field : Label = $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/NoteField
 
 
 
@@ -167,6 +168,7 @@ func update_GUI() -> void:
 	size = _calcul_size(schedule["duration"])
 	position = _calculate_position(schedule)
 	emit_signal("lesson_cell_updated", get_data(), "")
+	note_field.text = note
 
 func _refresh_rating_gui():
 	for star in stars_container.get_children():

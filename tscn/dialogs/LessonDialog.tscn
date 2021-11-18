@@ -373,6 +373,7 @@ margin_top = 636.0
 margin_right = 484.0
 margin_bottom = 736.0
 rect_min_size = Vector2( 0, 100 )
+wrap_enabled = true
 
 [node name="Notification" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer" index="1"]
 margin_top = 512.0

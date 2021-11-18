@@ -26,7 +26,8 @@ onready var subject_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/Butto
 onready var lesson_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/LessonBtn
 onready var location_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/LocationBtn
 onready var discipline_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer/DisciplineBtn
-onready var animation : AnimationPlayer = $AnimationPlayer
+onready var description_label : Label = $Panel/VBoxContainer/Body/VBoxContainer/Description
+onready var notification_player : AnimationPlayer = $NotificationPlayer
 onready var body_vbox : VBoxContainer = $Panel/VBoxContainer/Body/VBoxContainer
 onready var buttons_container : HBoxContainer = $Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer
 
@@ -37,46 +38,62 @@ func _ready():
 	Signals.connect("lessons_database_updated", self, "_refresh_lessons_GUI")
 	Signals.connect("locations_database_updated", self, "_refresh_locations_GUI")
 	Signals.connect("subjects_database_updated", self, "_update_GUI")
-	_btn_focused(discipline_btn)
+	_btn_focused(subject_btn)
 
 
 ##________________________ Methodes de gestion des donees____________
 func _add_subject_to_database(subject:String) ->void:
 	if add_subject_line_edit.text == "":
-		_error_notification("Veuillez entrer une valeur correcte.")
+		notification_player.play("empty_field")
+		return
 	if Global.subjects_database.has(add_subject_line_edit.text):
-		_error_notification("Cette matière est déjà enregistrée.")
+		notification_player.play("subject_exists")
+		return
 	Global.add_to_subjects_database(subject)
+	notification_player.play("subject_saved")
 
 
 func _add_location_to_database(location:String) ->void:
 	if add_location_line_edit.text == "":
-		_error_notification("Veuillez entrer une valeur correcte.")
+		notification_player.play("empty_field")
+		return
 	if Global.locations_database.has(add_location_line_edit.text):
-		_error_notification("Cet établissement est déjà enregistré.")
+		notification_player.play("location_exists")
+		return
 	Global.add_to_locations_database(location)
+	notification_player.play("location_saved")
 	
 	
 func _add_lesson_to_database(lesson:String, subject:String) ->void:
 	if add_lesson_line_edit.text == "":
-		_error_notification("Veuillez entrer une valeur correcte.")
+		notification_player.play("empty_field")
+		return
 	if Global.subjects_database == []:
-		_error_notification("Veuillez spécifier la matière de la leçon")
+		notification_player.play("lesson_without_subject")
+		return
 	if Global.lessons_database.has(add_lesson_line_edit.text):
-		_error_notification("Cette leçon est déjà enregistrée.")
+		notification_player.play("lesson_exists")
+		return
 	Global.add_to_lessons_database(lesson, [lesson, subject])
-	animation.play("lesson_saved")
+	notification_player.play("lesson_saved")
 
 
 func _remove_lesson_from_database() ->void:
+	if remove_lesson_option_button.get_item_count() == 0:
+		notification_player.play("empty_field")
+		return
 	var lesson_title: String = Global.get_item_string(remove_lesson_option_button)
 	Global.remove_from_lessons_database(lesson_title)
 	for lesson_card in get_tree().get_nodes_in_group("lesson_cards"):
 		if lesson_card.lesson == lesson_title:
 			lesson_card.delete()
+	notification_player.play("element_deleted")
 
 
 func _remove_subject_from_database() ->void:
+	if remove_subject_option_button.get_item_count() == 0:
+		notification_player.play("empty_field")
+		return
 	var subject:String = Global.get_item_string(remove_subject_option_button)
 	Global.remove_from_subjects_database(subject)
 	var tmp:Dictionary = {}
@@ -87,14 +104,19 @@ func _remove_subject_from_database() ->void:
 	for lesson_card in get_tree().get_nodes_in_group("lesson_cards"):
 		if !Global.lessons_database.has(lesson_card.lesson):
 			lesson_card.delete()
+	notification_player.play("element_deleted")
 
 
 func _remove_location_from_database() ->void:
+	if remove_location_option_button.get_item_count() == 0:
+		notification_player.play("empty_field")
+		return
 	var location_title: String = Global.get_item_string(remove_location_option_button)
 	Global.remove_from_locations_database(location_title)
 	for lesson_card in get_tree().get_nodes_in_group("lesson_cards"):
 		if location_title == lesson_card["location"]:
 			lesson_card.delete()
+	notification_player.play("element_deleted")
 	
 
 
@@ -116,7 +138,6 @@ func _refresh_locations_GUI() ->void:
 func _error_notification(msg:String) ->void:
 	notification.add_color_override("font_color", Color("#a50000"))
 	notification.text = msg
-	return
 
 
 func _show_grid(grid:GridContainer) ->void:
@@ -198,16 +219,18 @@ func _on_RemoveLocationButton_pressed():
 func _on_SubjectBtn_pressed():
 	_show_grid(subject_grid)
 	_btn_focused(subject_btn)
+	description_label.text = "Les cours ont besoins d'être rattachés à une matière d'étude."
 
 
 func _on_LessonBtn_pressed():
 	_show_grid(lesson_grid)
 	_btn_focused(lesson_btn)
-
+	description_label.text = 'Vous devez définir les titres de vos cours en les ajoutants ici. Vous pourrez ensuite créer un cours en cliquant sur le bouton "Créer un cours"'
 
 func _on_LocationBtn_pressed():
 	_show_grid(location_grid)
 	_btn_focused(location_btn)
+	description_label.text = "Entrez les différents lieux où vous étudiez. Si vous avez plusieurs lieux d'étude, vous pourrez définir des temps de trajet dans les paramtères."
 
 
 func _on_DisciplineBtn_pressed():
