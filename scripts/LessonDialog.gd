@@ -47,16 +47,16 @@ func _physics_process(delta):
 		panel.rect_size.y = 900
 		vbox_container.rect_size.y = 840
 		vbox_container.margin_top = 40
-		_set_panel_to_center()
+		_set_panel_to_center(0,-25)
 		return
-	_set_panel_to_center()
+	_set_panel_to_center(0,0)
 	panel.rect_size.y = 680
 	vbox_container.rect_size.y = 543
 	
-func _set_panel_to_center():
+func _set_panel_to_center(xoffset:int = 0, yoffset:int = 0):
 	var xpos: int = (self.rect_size.x/2)-(panel.rect_size.x/2)
 	var ypos: int = (self.rect_size.y/2)-(panel.rect_size.y/2)
-	panel.rect_position = Vector2(xpos, ypos-10)
+	panel.rect_position = Vector2(xpos + xoffset, ypos + yoffset)
 
 ##______________Verifications avant validation du cours________________________
 func check_subject_lesson_database() ->bool:
