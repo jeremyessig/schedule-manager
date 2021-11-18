@@ -41,7 +41,7 @@ func _ready() -> void:
 		btn.connect("mouse_pressed", self, "_on_star_btn_toggled")
 	pass
 
-## Permet un affichage modal
+## Permet un affichage responsive
 func _physics_process(delta):
 	if  self.rect_size.y >= 980:
 		panel.rect_size.y = 900

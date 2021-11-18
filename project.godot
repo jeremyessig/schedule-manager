@@ -78,7 +78,7 @@ config/name="Schedule Manager"
 run/main_scene="res://tscn/Main.tscn"
 config/icon="res://assets/icon.png"
 config/windows_native_icon="res://assets/icon.ico"
-config/version=0.39
+config/version=0.41
 
 [autoload]
 
