@@ -17,10 +17,10 @@ onready var notification_label : Label = $Panel/VBoxContainer/Foot/VBoxContainer
 ## Ajoute les dates et les heures dans l'attribut datetime de lesson_card
 func _attribute_datetime_to_nodes(nodes:Array) ->void:
 	for node in nodes:
-		node.datetime.clear()
+		node.csv_datetime.clear()
 		_attribute_day(node)
 		_attribute_time(node)
-		print_debug(node.lesson, node.datetime)
+		print_debug(node.lesson, node.csv_datetime)
 
 
 ## Retourne l'heure de debut et de fin du cours en format anglais (AM/PM)
@@ -28,7 +28,7 @@ func _attribute_time(node:Node) ->void:
 	var time := Time.new()
 	var begining :String = time.get_time_csv_format(node.schedule["start"]) 
 	var end : String = time.get_time_csv_format(node.schedule["end"])
-	node.datetime.append([begining, end])
+	node.csv_datetime.append([begining, end])
 
 
 ## Transforme un chiffre en une string minute ou heure en ajoutant un 0 
@@ -45,7 +45,7 @@ func _attribute_day(node:Node) ->void:
 	var days_table = Global.get_weekday()
 	var days_to_further = days_table.find(weekday)
 	var date = change_to_next_day(int(start_date[0]), int(start_date[1]), int(start_date[2]), days_to_further)
-	node.datetime.append(date)
+	node.csv_datetime.append(date)
 
 
 ## Permet d'avancer dans la semaine ==> retourne les dates en fonction des mois et annees bisextiles

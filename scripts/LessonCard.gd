@@ -16,7 +16,7 @@ var room : String
 var lesson : String
 var teacher : String
 var color : String = "#00acb4"
-var datetime: Array
+var csv_datetime: Array
 var save_date: Dictionary = {"created": "", "edited": "", "saved": ""} ## Date de création et modification de la carte
 var rating : int = 0 ## Permet de noter le cours avec des etoiles
 var is_displayed : bool = false setget _set_is_displayed
@@ -75,7 +75,7 @@ func get_data() ->Dictionary:
 	"lesson" : lesson,
 	"teacher" : teacher,
 	"color" : color,
-	"datetime" : datetime,
+	"csv_datetime" : csv_datetime,
 	"save_date": save_date,
 	"rating" : rating,
 	"is_displayed" : is_displayed,
@@ -240,10 +240,10 @@ func export_to_json() ->Dictionary:
 func export_to_csv() ->PoolStringArray:
 #	var subject :String = str(datas["type"] + " " + datas["lesson"])
 	var subject :String = str(type + " " + lesson)
-	var start_date :String = str(datetime[0][0]) + "/" + str(datetime[0][1]) + "/" + str(datetime[0][2])
-	var start_time : String = datetime[1][0]
+	var start_date :String = str(csv_datetime[0][0]) + "/" + str(csv_datetime[0][1]) + "/" + str(csv_datetime[0][2])
+	var start_time : String = csv_datetime[1][0]
 	var end_date : String = start_date
-	var end_time : String = datetime[1][1]
+	var end_time : String = csv_datetime[1][1]
 	var all_day : String = "False"
 	var description : String = "Prof. %s" %teacher
 	var location : String = "%s Salle %s" %[location, room]
