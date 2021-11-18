@@ -46,7 +46,7 @@ func _add_subject_to_database(subject:String) ->void:
 	if add_subject_line_edit.text == "":
 		notification_player.play("empty_field")
 		return
-	if Global.subjects_database.has(add_subject_line_edit.text):
+	if Global.does_subejct_exist(add_subject_line_edit.text):
 		notification_player.play("subject_exists")
 		return
 	Global.add_to_subjects_database(subject)
@@ -57,7 +57,7 @@ func _add_location_to_database(location:String) ->void:
 	if add_location_line_edit.text == "":
 		notification_player.play("empty_field")
 		return
-	if Global.locations_database.has(add_location_line_edit.text):
+	if Global.does_location_exist(add_location_line_edit.text):
 		notification_player.play("location_exists")
 		return
 	Global.add_to_locations_database(location)
@@ -71,7 +71,7 @@ func _add_lesson_to_database(lesson:String, subject:String) ->void:
 	if Global.subjects_database == []:
 		notification_player.play("lesson_without_subject")
 		return
-	if Global.lessons_database.has(add_lesson_line_edit.text):
+	if Global.does_lesson_exist(add_lesson_line_edit.text):
 		notification_player.play("lesson_exists")
 		return
 	Global.add_to_lessons_database(lesson, [lesson, subject])

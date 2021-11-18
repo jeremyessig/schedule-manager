@@ -74,6 +74,15 @@ func remove_from_locations_database(location:String) ->void:
 	locations_database.remove(index)
 	Signals.emit_signal("locations_database_updated")
 
+
+func does_location_exist(title:String) ->bool:
+	title = ID.standardize_string(title)
+	for i in locations_database:
+		i = ID.standardize_string(i)
+		if i == title:
+			return true
+	return false
+
 ##__________ Gestion des disciplines
 func set_disciplines_database(value) ->void:
 	disciplines_database = value
@@ -121,7 +130,15 @@ func add_to_lessons_database(key:String, value:Array) ->void:
 func remove_from_lessons_database(key:String) ->void:
 	lessons_database.erase(key)
 	Signals.emit_signal("lessons_database_updated")
-		
+
+func does_lesson_exist(title:String) ->bool:
+	title = ID.standardize_string(title)
+	var keys = lessons_database.keys()
+	for i in keys:
+		i = ID.standardize_string(i)
+		if i == title:
+			return true
+	return false
 
 
 ##__________ Gestion des sujets
@@ -144,6 +161,14 @@ func remove_from_subjects_database(subject:String) ->void:
 	subjects_database.remove(index)
 	Signals.emit_signal("subjects_database_updated")
 
+
+func does_subejct_exist(title:String) ->bool:
+	title = ID.standardize_string(title)
+	for i in subjects_database:
+		i = ID.standardize_string(i)
+		if i == title:
+			return true
+	return false
 
 
 ##________________________
