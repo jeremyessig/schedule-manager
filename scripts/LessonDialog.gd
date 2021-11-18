@@ -25,6 +25,7 @@ onready var title : Label = $Panel/VBoxContainer/Head/Title
 onready var head_panel : Panel = $Panel/VBoxContainer/Head
 onready var panel : Panel = $Panel
 onready var vbox_container := $Panel/VBoxContainer/Body/VboxContainer
+onready var body : CenterContainer = $Panel/VBoxContainer/Body
 onready var stars_container :HBoxContainer= $Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/StarsContainer
 
 
@@ -40,15 +41,22 @@ func _ready() -> void:
 		btn.connect("mouse_pressed", self, "_on_star_btn_toggled")
 	pass
 
+## Permet un affichage modal
 func _physics_process(delta):
-	if  self.rect_size.y >= 820:
-		panel.rect_size.y = 720
-		vbox_container.rect_size.y = 580
+	if  self.rect_size.y >= 980:
+		panel.rect_size.y = 900
+		vbox_container.rect_size.y = 840
+		vbox_container.margin_top = 40
+		_set_panel_to_center()
 		return
+	_set_panel_to_center()
 	panel.rect_size.y = 680
 	vbox_container.rect_size.y = 543
 	
-
+func _set_panel_to_center():
+	var xpos: int = (self.rect_size.x/2)-(panel.rect_size.x/2)
+	var ypos: int = (self.rect_size.y/2)-(panel.rect_size.y/2)
+	panel.rect_position = Vector2(xpos, ypos-10)
 
 ##______________Verifications avant validation du cours________________________
 func check_subject_lesson_database() ->bool:
