@@ -94,3 +94,4 @@ func add_lesson(node_path:NodePath) ->void:
 			column.add_child(tmp)
 			column.move_child(tmp, node_index)
 			card.is_displayed = true
+			Signals.emit_signal("lesson_added_to_calendar", card.get_data())

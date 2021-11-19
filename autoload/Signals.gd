@@ -7,7 +7,8 @@ signal subject_added
 signal lesson_added
 signal error_emitted(error_name, node_path)
 signal lesson_removed_from_calendar(id) ## CalendarArray -> LessonCard
-signal removing_lesson_from_calendar(position, size, id) ## [EditLessonDialog, AlertDialog, LessonCellButton] -> CalendarArray
+signal removing_lesson_from_calendar(position, size, id)  ## [EditLessonDialog, AlertDialog, LessonCellButton] -> CalendarArray
+signal lesson_added_to_calendar(nodepath)
 signal deleting_lesson_from_calendar_finished # CalendarArray -> EditLessonDialog
 signal lesson_cell_opened(id) ## LessonCellButton -> LeftPanel
 signal program_reseted ## Header -> 

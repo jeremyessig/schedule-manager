@@ -15,6 +15,7 @@ func _ready() -> void:
 	Signals.connect("lesson_created",self,"create_lesson_card") ## From NewLessonDialog by Signals
 	Signals.connect("lesson_edited", self, "edit_lesson_card") ## From EditLessonDialog by Signals
 #	Signals.connect("lesson_removed_from_calendar", self, "set_lesson_card")
+	Signals.connect("lesson_added_to_calendar", self, "_refresh_conflicting_lessons")
 	Signals.connect("lesson_cell_opened", self, "lesson_cell_opened")
 	_init_key_reference()
 
@@ -103,6 +104,15 @@ func clear_CM_and_TD_containers()->void:
 		Global.reparent_node(td_container, card, temp)	
 
 
+func _refresh_conflicting_lessons(lesson_added:Dictionary):
+	for card in get_tree().get_nodes_in_group("lesson_cards"):
+		if !card.is_displayed:			
+			if card.is_in_conflict_with(lesson_added.schedule["start"], lesson_added.schedule["end"]):
+				card.is_in_conflict = true
+		card.refresh_is_in_conflict_GUI()
+			
+			
+		
 ##_____________________ Triage des cours_______________________________
 func sort_cards(invert:bool):
 	var table = sort_lessons_by_letters()

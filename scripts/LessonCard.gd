@@ -5,6 +5,7 @@ signal lesson_cell_updated(datas)
 onready var is_displayed_bg = preload("res://res/button_lesson_card_in_schedule.tres")
 onready var is_not_displayed_bg = preload("res://res/button_lesson_card_normal.tres")
 onready var is_not_displayed_bg_hover = preload("res://res/button_lesson_card_hover.tres")
+onready var _conflict_lesson_bg = preload("res://res/button_lesson_card_conflict.tres") 
 
 var id :String
 var type :String
@@ -26,6 +27,8 @@ var position := Vector2.ZERO
 var index : int 
 var location: String
 var note : String
+
+var is_in_conflict : bool = false
 
 onready var header_panel := $VBoxContainer/Header
 onready var title_label := $VBoxContainer/Header/Title
@@ -146,6 +149,14 @@ func _calcul_size(duration: int) ->int:
 	return nbr_cells
 
 
+## Verifie si il y a un clonflit avec un autre cours
+func is_in_conflict_with(lesson_start:int, lesson_end:int) ->bool:
+	if schedule["end"] > lesson_start:
+		return true
+	if schedule["start"] < lesson_end:
+		return true
+	return false
+
 ##_______________Mise a jour de la GUI______________
 
 func update_GUI() -> void:
@@ -160,6 +171,7 @@ func update_GUI() -> void:
 	schedule_field.text = "%s %s à %s" %[String(schedule["day"]), time.get_time_24h_str(schedule["start"], "h"), time.get_time_24h_str(schedule["end"], "h")]
 	update_color(color)
 	_refresh_rating_gui()
+	refresh_is_in_conflict_GUI()
 	location_field.text = location
 	if is_obligatory:
 		obligatory_field.text = "oui"
@@ -175,6 +187,12 @@ func _refresh_rating_gui():
 		star.hide()
 		if rating == star.get_index():
 			star.show()
+
+func refresh_is_in_conflict_GUI():
+	if is_in_conflict:
+		self.add_stylebox_override("normal", _conflict_lesson_bg)
+	else:
+		self.add_stylebox_override("normal", is_not_displayed_bg)
 	
 	
 func update_color(color:String) -> void:

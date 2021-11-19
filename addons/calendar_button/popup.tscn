@@ -3,7 +3,6 @@
 [ext_resource path="res://res/calendar_theme.tres" type="Theme" id=1]
 
 [node name="popup" type="WindowDialog"]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -94,56 +93,56 @@ custom_constants/hseparation = 10
 columns = 7
 
 [node name="label_sunday" type="Label" parent="PanelContainer/vbox/hbox_label_days"]
-margin_right = 31.0
+margin_right = 35.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 30, 15 )
-text = "Sun"
+text = "Dim"
 align = 1
 
 [node name="label_monday" type="Label" parent="PanelContainer/vbox/hbox_label_days"]
-margin_left = 41.0
-margin_right = 77.0
+margin_left = 45.0
+margin_right = 76.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 30, 15 )
-text = "Mon"
+text = "Lun"
 align = 1
 
 [node name="label_thuesday" type="Label" parent="PanelContainer/vbox/hbox_label_days"]
-margin_left = 87.0
+margin_left = 86.0
 margin_right = 118.0
 margin_bottom = 22.0
-text = "Tue"
+text = "Mar"
 align = 1
 
 [node name="label_wednesday" type="Label" parent="PanelContainer/vbox/hbox_label_days"]
 margin_left = 128.0
-margin_right = 165.0
+margin_right = 161.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 30, 15 )
-text = "Wed"
+text = "Mer"
 align = 1
 
 [node name="label_thursday" type="Label" parent="PanelContainer/vbox/hbox_label_days"]
-margin_left = 175.0
-margin_right = 206.0
+margin_left = 171.0
+margin_right = 201.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 30, 15 )
-text = "Thu"
+text = "Jeu"
 align = 1
 
 [node name="label_friday" type="Label" parent="PanelContainer/vbox/hbox_label_days"]
-margin_left = 216.0
-margin_right = 246.0
+margin_left = 211.0
+margin_right = 243.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 30, 15 )
-text = "Fri"
+text = "Ven"
 align = 1
 
 [node name="label_saturday" type="Label" parent="PanelContainer/vbox/hbox_label_days"]
-margin_left = 256.0
-margin_right = 283.0
+margin_left = 253.0
+margin_right = 288.0
 margin_bottom = 22.0
-text = "Sat"
+text = "Sam"
 align = 1
 
 [node name="hbox_days" type="GridContainer" parent="PanelContainer/vbox"]
