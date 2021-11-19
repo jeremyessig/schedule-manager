@@ -104,12 +104,17 @@ func clear_CM_and_TD_containers()->void:
 		Global.reparent_node(td_container, card, temp)	
 
 
+
+##____________ Gestion des conflits de cartes______________
+
+
 func _refresh_conflicting_lessons(lesson_added:Dictionary):
-	for card in get_tree().get_nodes_in_group("lesson_cards"):
-		if !card.is_displayed:			
-			if card.is_in_conflict_with(lesson_added.schedule["start"], lesson_added.schedule["end"]):
-				card.is_in_conflict = true
-		card.refresh_is_in_conflict_GUI()
+	pass
+#	for card in get_tree().get_nodes_in_group("lesson_cards"):
+#		if !card.is_displayed:			
+#			if card.is_in_conflict_with(lesson_added.schedule["start"], lesson_added.schedule["end"]):
+#				card.is_in_conflict = true
+#		card.refresh_is_in_conflict_GUI()
 			
 			
 		

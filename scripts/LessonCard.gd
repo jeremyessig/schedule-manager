@@ -28,7 +28,7 @@ var index : int
 var location: String
 var note : String
 
-var is_in_conflict : bool = false
+var is_in_conflict : bool setget _set_is_in_conflict
 
 onready var header_panel := $VBoxContainer/Header
 onready var title_label := $VBoxContainer/Header/Title
@@ -52,7 +52,8 @@ func _ready():
 	version = ProjectSettings.get_setting("application/config/version")
 	Signals.connect("lesson_removed_from_calendar", self, "_undisplay")
 	Signals.connect("program_reseted", self, "delete") ## Header -> Signals
-	save_date["created"] = OS.get_datetime() 
+	save_date["created"] = OS.get_datetime()
+	
 
 ##______________setter et getter prives___________________________
 
@@ -63,6 +64,11 @@ func _set_is_displayed(value) ->void:
 	else:
 		remove_from_group("lesson_cards_displayed")
 	_update_background()
+
+
+func _set_is_in_conflict(value) ->void:
+	is_in_conflict = value
+	refresh_is_in_conflict_GUI()
 	
 
 ##_______________Gestion d'acces aux donnees____________________________
@@ -117,6 +123,10 @@ func set_data(data:Dictionary) -> void:
 	if data.has("position"):
 		position = data["position"]
 	update_GUI()
+	if does_conflict_exist_in("lesson_cards_displayed"):
+		self.is_in_conflict = true
+	else:
+		self.is_in_conflict = false
 
 
 
@@ -149,13 +159,41 @@ func _calcul_size(duration: int) ->int:
 	return nbr_cells
 
 
+##_________________ Verification avancee des conflits entre cours______________
 ## Verifie si il y a un clonflit avec un autre cours
 func is_in_conflict_with(lesson_start:int, lesson_end:int) ->bool:
-	if schedule["end"] > lesson_start:
+	if schedule["start"] >= lesson_end and lesson_start < schedule["end"]:
 		return true
-	if schedule["start"] < lesson_end:
-		return true
-	return false
+#	if schedule["end"]  > lesson_start
+	
+	return false	
+#	if schedule["end"] > lesson_start:
+#		print("start: %s / end: %s  || LS : %s / LE : %s" %[schedule["start"], schedule["end"], lesson_start, lesson_end])
+#		return true
+#	if schedule["start"] < lesson_end:
+#		print("start")
+#		return true
+#	print("none")
+#	return false
+
+
+func search_conflicts_in(node_group:String) -> Array:
+	var list_of_conflicts :Array
+	for card in get_tree().get_nodes_in_group(node_group):
+		if card != self:
+			print("start: %s / end: %s" %[card.schedule["start"], card.schedule["end"]])
+			if card.is_in_conflict_with(schedule["start"], schedule["end"]):
+				list_of_conflicts.append(card)
+	print(list_of_conflicts)
+	return list_of_conflicts
+
+
+func does_conflict_exist_in(node_group:String) ->bool:
+	if search_conflicts_in(node_group).empty():
+		return false
+	return true
+			
+
 
 ##_______________Mise a jour de la GUI______________
 
@@ -171,7 +209,6 @@ func update_GUI() -> void:
 	schedule_field.text = "%s %s à %s" %[String(schedule["day"]), time.get_time_24h_str(schedule["start"], "h"), time.get_time_24h_str(schedule["end"], "h")]
 	update_color(color)
 	_refresh_rating_gui()
-	refresh_is_in_conflict_GUI()
 	location_field.text = location
 	if is_obligatory:
 		obligatory_field.text = "oui"
@@ -181,6 +218,7 @@ func update_GUI() -> void:
 	position = _calculate_position(schedule)
 	emit_signal("lesson_cell_updated", get_data(), "")
 	note_field.text = note
+	
 
 func _refresh_rating_gui():
 	for star in stars_container.get_children():
@@ -189,6 +227,7 @@ func _refresh_rating_gui():
 			star.show()
 
 func refresh_is_in_conflict_GUI():
+	print("refresh_is_in_conflict_GUI")
 	if is_in_conflict:
 		self.add_stylebox_override("normal", _conflict_lesson_bg)
 	else:

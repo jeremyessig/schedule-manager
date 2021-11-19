@@ -201,7 +201,6 @@ func _on_AddLessonLineEdit_text_entered(new_text):
 func _on_AddLocationButton_pressed():
 	_add_location_to_database(add_location_line_edit.text)
 	add_location_line_edit.text = ""
-	print(Global.locations_database)
 
 
 func _on_AddLocationLineEdit_text_entered(new_text):

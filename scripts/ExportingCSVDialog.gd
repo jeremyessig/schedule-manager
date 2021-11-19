@@ -20,7 +20,6 @@ func _attribute_datetime_to_nodes(nodes:Array) ->void:
 		node.csv_datetime.clear()
 		_attribute_day(node)
 		_attribute_time(node)
-		print_debug(node.lesson, node.csv_datetime)
 
 
 ## Retourne l'heure de debut et de fin du cours en format anglais (AM/PM)
@@ -87,7 +86,6 @@ func _init_week_to_monday(date_value) ->void:
 	var days_table = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 	var days_to_back = days_table.find(day_name)
 	start_date = change_to_previous_day(start_date[0], start_date[1], start_date[2], days_to_back)
-#	print_debug(start_date)
 
 ##________________________________ GUI_________________________________
 

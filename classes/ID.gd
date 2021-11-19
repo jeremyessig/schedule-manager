@@ -11,7 +11,6 @@ const td_cm_table: Dictionary = {"Cours Magistral":"cm", "Travaux Dirigés":"td"
 func generate(subject: String, lesson:String, type:String, day:String, time:String, location:String, room) ->String:
 	var new_id :String = lesson + subject + _abbreviate_cm_td(type) + _attribut_letter_to_day(day) + time +location +str(room)
 	new_id = standardize_string(new_id)
-	print("new_id: %s" %new_id)
 	return new_id
 
 

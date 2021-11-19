@@ -14,11 +14,6 @@ onready var open_save_dialog : FileDialog = $OpenSaveDialog
 
 
 func _ready() -> void:
-	var time = Time.new()
-	var cours_debut = time.get_minutes_from_str("16:00")
-	var cours_duree = time.get_minutes_from_str("1h00")
-	var cours_fini = cours_debut + cours_duree
-	print(time.get_time_24h_str(cours_fini, "h"))
 	Global.new_subject_button.connect("pressed", self, "_show_new_subject_dialog")
 	Global.new_lesson_button.connect("pressed", self, "_show_new_lesson_dialog")
 	header.connect("export_json_pressed", self, "_open_export_dialog")

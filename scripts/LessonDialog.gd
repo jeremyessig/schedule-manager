@@ -141,7 +141,6 @@ func create_data_dictionary() -> Dictionary:
 	var color = card_color
 	var location = Global.get_item_string(location_option_button)
 	var schedule = _get_schedule()
-	print(schedule)
 	var note = note_text_edit.text
 	var id = ID.new()
 	var card_id :String = id.generate(subject, lesson, type, schedule["day"], str(schedule["start"]), location, room)
@@ -198,7 +197,6 @@ func _lesson_refreshed() ->void: ## From NewSubjectDialog and SaveSystem.gd by S
 	if !Global.subjects_database.empty():
 		subject_selected = subject_option_button.get_item_text(0)
 	Global.update_option_button(lesson_option_button, Global.lessons_database, subject_selected)
-	print_debug(Global.subjects_database)
 
 
 func _location_refreshed() ->void:
@@ -247,7 +245,6 @@ func _on_star_btn_toggled(value, is_pressed):
 		rating = 0
 		for btn in stars_container.get_children():
 			btn.set_is_pressed(false)
-	print(rating)
 
 
 func _on_database_reseted(database_name:String) -> void:
@@ -268,7 +265,6 @@ func _on_CancelButton_pressed() -> void:
 func _on_SubjectOptionButton_item_selected(index):
 	var subject_selected: String = subject_option_button.get_item_text(index)
 	Global.update_option_button(lesson_option_button, Global.lessons_database, subject_selected)
-	print_debug("BOUTON APPUYE")
 
 
 

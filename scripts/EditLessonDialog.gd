@@ -28,7 +28,6 @@ func _open_dialog(nodepath:NodePath) ->void:
 	_show_edit_lesson_dialog()
 	lesson_card = get_node(nodepath)
 	rating = lesson_card.rating
-	print(rating)
 	_update_gui()
 	update_color(card_color)
 
