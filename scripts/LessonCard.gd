@@ -236,7 +236,7 @@ func refresh_is_in_conflict_GUI():
 	if is_in_conflict:
 		self.add_stylebox_override("normal", _conflict_lesson_bg)
 	else:
-		self.add_stylebox_override("normal", is_not_displayed_bg)
+		_update_background()
 	
 	
 func update_color(color:String) -> void:
