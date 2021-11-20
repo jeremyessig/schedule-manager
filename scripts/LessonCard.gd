@@ -167,24 +167,27 @@ func get_number_of_minutes_in_common_between_lessons(lesson_start:int, lesson_en
 	var end = min(schedule["end"], lesson_end)
 	return end-start+1
 
+
 ## Verifie si le nombre de minutes entre les 2 cours est superieur a 1 
-func is_in_conflict_with(lesson_start:int, lesson_end:int) ->bool:
+func is_in_conflict_with(lesson_start:int, lesson_end:int, lesson_day:String) ->bool:
+	if lesson_day != schedule["day"]:
+		return false
 	var minutes:int = get_number_of_minutes_in_common_between_lessons(lesson_start, lesson_end) 
 	if minutes > 1:
 		return true
 	return false	
 
 
-
+##Retourne dans un tableau tous les cours qui sont en conflit avec ce cours
 func search_conflicts_in(node_group:String) -> Array:
 	var list_of_conflicts :Array
 	for card in get_tree().get_nodes_in_group(node_group):
 		if card != self:
-			print("self start: %s / end: %s" %[schedule["start"], schedule["end"]])
-			print("card start: %s / end: %s" %[card.schedule["start"], card.schedule["end"]])
-			if card.is_in_conflict_with(schedule["start"], schedule["end"]):
+#			print_debug("self start: %s / end: %s" %[schedule["start"], schedule["end"]])
+#			print_debug("card start: %s / end: %s" %[card.schedule["start"], card.schedule["end"]])
+			if card.is_in_conflict_with(schedule["start"], schedule["end"], schedule["day"]):
 				list_of_conflicts.append(card)
-	print(list_of_conflicts)
+#	print_debug(list_of_conflicts)
 	return list_of_conflicts
 
 
