@@ -161,27 +161,27 @@ func _calcul_size(duration: int) ->int:
 
 ##_________________ Verification avancee des conflits entre cours______________
 ## Verifie si il y a un clonflit avec un autre cours
+## Calcule si les deux paires de chiffres ont des minutes de cours en commun
+func get_number_of_minutes_in_common_between_lessons(lesson_start:int, lesson_end:int) ->int:
+	var start = max(schedule["start"], lesson_start)
+	var end = min(schedule["end"], lesson_end)
+	return end-start+1
+
+## Verifie si le nombre de minutes entre les 2 cours est superieur a 1 
 func is_in_conflict_with(lesson_start:int, lesson_end:int) ->bool:
-	if schedule["start"] >= lesson_end and lesson_start < schedule["end"]:
+	var minutes:int = get_number_of_minutes_in_common_between_lessons(lesson_start, lesson_end) 
+	if minutes > 1:
 		return true
-#	if schedule["end"]  > lesson_start
-	
 	return false	
-#	if schedule["end"] > lesson_start:
-#		print("start: %s / end: %s  || LS : %s / LE : %s" %[schedule["start"], schedule["end"], lesson_start, lesson_end])
-#		return true
-#	if schedule["start"] < lesson_end:
-#		print("start")
-#		return true
-#	print("none")
-#	return false
+
 
 
 func search_conflicts_in(node_group:String) -> Array:
 	var list_of_conflicts :Array
 	for card in get_tree().get_nodes_in_group(node_group):
 		if card != self:
-			print("start: %s / end: %s" %[card.schedule["start"], card.schedule["end"]])
+			print("self start: %s / end: %s" %[schedule["start"], schedule["end"]])
+			print("card start: %s / end: %s" %[card.schedule["start"], card.schedule["end"]])
 			if card.is_in_conflict_with(schedule["start"], schedule["end"]):
 				list_of_conflicts.append(card)
 	print(list_of_conflicts)
