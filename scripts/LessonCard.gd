@@ -123,10 +123,8 @@ func set_data(data:Dictionary) -> void:
 	if data.has("position"):
 		position = data["position"]
 	update_GUI()
-	if does_conflict_exist_in("lesson_cards_displayed"):
-		self.is_in_conflict = true
-	else:
-		self.is_in_conflict = false
+	set_conflicts()
+
 
 
 
@@ -195,8 +193,12 @@ func does_conflict_exist_in(node_group:String) ->bool:
 	if search_conflicts_in(node_group).empty():
 		return false
 	return true
-			
 
+func set_conflicts() ->void:	
+	if does_conflict_exist_in("lesson_cards_displayed"):
+		self.is_in_conflict = true
+	else:
+		self.is_in_conflict = false
 
 ##_______________Mise a jour de la GUI______________
 
@@ -334,6 +336,9 @@ func _on_LessonCard_gui_input(event):
 					return
 				Signals.emit_signal("lesson_card_pressed", node_path) ## -> Signals -> EditLessonDialog
 			BUTTON_RIGHT:
+				if is_in_conflict:
+					Signals.emit_signal("error_emitted", "FilledCell", null)
+					return
 				if is_displayed:
 					if is_obligatory:
 						Signals.emit_signal("error_emitted", "ObligatoryLesson", node_path) # -> Signals -> AlertDialog 

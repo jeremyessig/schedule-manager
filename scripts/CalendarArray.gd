@@ -53,6 +53,8 @@ func remove_lesson(pos: Vector2, size:int, id:String) ->void:
 						i += 1
 					line.queue_free()
 					Signals.emit_signal("lesson_removed_from_calendar", id)
+					for lesson_card in get_tree().get_nodes_in_group("lesson_cards"):
+						lesson_card.set_conflicts()
 					
 
 
@@ -95,3 +97,5 @@ func add_lesson(node_path:NodePath) ->void:
 			column.move_child(tmp, node_index)
 			card.is_displayed = true
 			Signals.emit_signal("lesson_added_to_calendar", card.get_data())
+			for lesson_card in get_tree().get_nodes_in_group("lesson_cards"):
+				lesson_card.set_conflicts()
