@@ -11,6 +11,7 @@ onready var exporting_csv_dialog: Control = $ExportingCSVDialog
 onready var about_dialog : WindowDialog = $AboutDialog
 onready var save_as_dialog : FileDialog = $SaveAsDialog
 onready var open_save_dialog : FileDialog = $OpenSaveDialog
+onready var route_dialog :Control = $RouteDialog
 
 
 func _ready() -> void:
@@ -23,6 +24,7 @@ func _ready() -> void:
 	header.connect("about_pressed", self, "_open_about_dialog")
 	Signals.connect("save_as_pressed", self, "_open_save_as_dialog")
 	header.connect("open_save_pressed", self, "_open_open_save_dialog")
+	header.connect("route_pressed", self, "_on_open_route_dialog")
 	
 	
 func _unhandled_input(event):
@@ -59,6 +61,8 @@ func _open_save_as_dialog() ->void:
 func _open_open_save_dialog() ->void:
 	open_save_dialog.popup_centered()
 
+func _on_open_route_dialog() ->void:
+	route_dialog.show()
 
 func _on_FileDialog_file_selected(path):
 	SaveSystem.export_to_JSON(path)

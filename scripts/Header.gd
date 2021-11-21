@@ -5,11 +5,13 @@ signal import_json_pressed
 signal export_csv_pressed
 signal about_pressed
 signal open_save_pressed
+signal route_pressed
 
 onready var file : MenuButton = $HBoxContainer/Toolbar/FileMenuButton
 onready var database_menu : MenuButton = $HBoxContainer/Toolbar/DatabaseMenuButton
 onready var help : MenuButton = $HBoxContainer/Toolbar/HelpMenuButton
 onready var display_menu : MenuButton = $HBoxContainer/Toolbar/DisplayMenuButton
+onready var settings_menu : MenuButton = $HBoxContainer/Toolbar/SettingsMenuButton
 
 
 func _ready() -> void:
@@ -17,6 +19,7 @@ func _ready() -> void:
 	database_menu.get_popup().connect("id_pressed", self, "_on_database_item_pressed")
 	help.get_popup().connect("id_pressed", self, "_on_help_item_pressed")
 	display_menu.get_popup().connect("id_pressed", self, "_on_display_item_pressed")
+	settings_menu.get_popup().connect("id_pressed", self, "_on_settings_item_pressed")
 
 func _on_file_item_pressed(id)->void:
 	match id:
@@ -59,6 +62,12 @@ func _on_display_item_pressed(id)->void:
 		7:
 			Global.left_panel.sort_lessons_by_days(true)
 
+func _on_settings_item_pressed(id)->void:
+	match id:
+		0:
+			pass
+		1:
+			emit_signal("route_pressed")
 
 func _on_help_item_pressed(id)->void:
 	match id:
