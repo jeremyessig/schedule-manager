@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://tscn/Dialog.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/DistancesDialog.gd" type="Script" id=2]
+[ext_resource path="res://tscn/prefabs/LocationRoutesContainer.tscn" type="PackedScene" id=3]
 
 [node name="RouteDialog" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -23,24 +24,20 @@ margin_right = 993.0
 margin_bottom = 548.0
 
 [node name="BodyVContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Body" index="0"]
-margin_left = 106.0
-margin_top = 217.0
-margin_right = 886.0
-margin_bottom = 285.0
+margin_left = 97.0
+margin_top = 196.0
+margin_right = 896.0
+margin_bottom = 306.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 30
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body/BodyVContainer" index="0"]
-margin_right = 780.0
-margin_bottom = 24.0
-
-[node name="LineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/BodyVContainer/HBoxContainer" index="0"]
-margin_right = 58.0
-margin_bottom = 24.0
-editable = false
+[node name="LocationRoutesContainer" parent="Panel/VBoxContainer/Body/BodyVContainer" index="0" instance=ExtResource( 3 )]
 
 [node name="NewConnectionContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body/BodyVContainer" index="1"]
-margin_top = 28.0
-margin_right = 780.0
-margin_bottom = 68.0
+margin_top = 70.0
+margin_right = 799.0
+margin_bottom = 110.0
 custom_constants/separation = 35
 
 [node name="NewLocationAOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer" index="0"]
