@@ -1,13 +1,13 @@
-extends VBoxContainer
+extends HBoxContainer
 
 var location_A: String setget set_location_A, get_location_A
 var location_B: String setget set_location_B, get_location_B
 var time : int setget set_time, get_time
 
-onready var location_A_line_edit : LineEdit = $LocationLine/LocationALineEdit
-onready var location_B_line_edit : LineEdit = $LocationLine/LocationBLineEdit
-onready var hour_line_edit : LineEdit = $LocationLine/TimeContainer/HourLineEdit
-onready var minute_line_edit : LineEdit = $LocationLine/TimeContainer/MinuteLineEdit
+onready var location_A_line_edit : LineEdit = $LocationALineEdit
+onready var location_B_line_edit : LineEdit = $LocationBLineEdit
+onready var hour_line_edit : LineEdit = $TimeContainer/HourLineEdit
+onready var minute_line_edit : LineEdit = $TimeContainer/MinuteLineEdit
 
 
 func set_location_A(value:String) ->void:
@@ -31,6 +31,8 @@ func set_time(value:int) ->void:
 func get_time() ->int:
 	return time
 
+func _ready():
+	add_to_database()
 
 
 func init_values(data:Dictionary) ->void:
@@ -44,8 +46,13 @@ func delete() ->void:
 	self.queue_free()
 
 
+func add_to_database() ->void:
+	Global.add_to_routes_database(location_A, location_B, time)
+
+
 func _refresh_GUI() ->void:
 	var t = Time.new()
+	print(location_A_line_edit)
 	location_A_line_edit.text = location_A
 	location_B_line_edit.text = location_B
 	var time_table = t.get_time_24h_StringArray(time)

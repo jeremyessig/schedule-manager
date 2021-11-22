@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/Route.gd" type="Script" id=1]
+[ext_resource path="res://res/buttons/default_red_button_normal.tres" type="StyleBox" id=2]
+[ext_resource path="res://res/buttons/default_red_button_pressed.tres" type="StyleBox" id=3]
+[ext_resource path="res://res/buttons/default_red_button_hover.tres" type="StyleBox" id=4]
+
+[node name="Route" type="HBoxContainer"]
+margin_right = 799.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+custom_constants/separation = 35
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LocationALineEdit" type="LineEdit" parent="."]
+margin_right = 220.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 220, 40 )
+align = 1
+editable = false
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="TimeContainer" type="HBoxContainer" parent="."]
+margin_left = 255.0
+margin_right = 431.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HourLineEdit" type="LineEdit" parent="TimeContainer"]
+margin_right = 80.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 80, 40 )
+align = 1
+editable = false
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="HLabel" type="Label" parent="TimeContainer"]
+margin_left = 84.0
+margin_top = 13.0
+margin_right = 92.0
+margin_bottom = 27.0
+text = "h"
+
+[node name="MinuteLineEdit" type="LineEdit" parent="TimeContainer"]
+margin_left = 96.0
+margin_right = 176.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 80, 40 )
+align = 1
+editable = false
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="LocationBLineEdit" type="LineEdit" parent="."]
+margin_left = 466.0
+margin_right = 686.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 220, 40 )
+align = 1
+editable = false
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="DeleteBtn" type="Button" parent="."]
+margin_left = 721.0
+margin_right = 807.0
+margin_bottom = 40.0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Supprimer"
+
+[connection signal="pressed" from="DeleteBtn" to="." method="_on_DeleteBtn_pressed"]

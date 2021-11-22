@@ -17,39 +17,44 @@ var disciplines_database : Array
 var locations_database: Array
 var subjects_database : Array
 var lessons_database : Dictionary
-var distances_list : Dictionary
+var routes_database : Dictionary
 
 var settings: Dictionary = {
 	"card_index_top": false,
 }
-func set_distances_list(value:Dictionary) ->void:
-	distances_list = value
-	Signals.emit_signal("distances_list_updated")
+func set_routes_database(value:Dictionary) ->void:
+	routes_database = value
+	Signals.emit_signal("routes_database_updated")
 	
-func get_distances_list() ->Dictionary:
-	return distances_list
+func get_routes_database() ->Dictionary:
+	return routes_database
 	
-func add_to_distances_list(location_1:String, location_2:String, time:int) ->void:
-	var key :String = location_1 + "/" + location_2
-	distances_list[key] = time
-	Signals.emit_signal("distances_list_updated")
+func add_to_routes_database(location_A:String, location_B:String, time:int) ->void:
+	var key : String = create_locations_database_key(location_A, location_B)
+	routes_database[key] = time
+	Signals.emit_signal("routes_database_updated")
 	
-func remove_from_distances_list() ->void:
+func remove_from_routes_database() ->void:
 	pass
 	
-func is_in_distances_list(location_1:String, location_2:String) -> bool:
-	var key : String = location_1 + "/" + location_2 
-	if distances_list.has(key):
+func is_in_routes_database(location_A:String, location_B:String) -> bool:
+	var key : String = create_locations_database_key(location_A, location_B)
+	if routes_database.has(key):
 		return true 
 	return false
 
 
-func get_travel_time_between(location_1:String, location_2:String) ->int:
-	var key : String = location_1 + "/" + location_2 
-	if !distances_list.has(key):
+func get_travel_time_between(location_A:String, location_B:String) ->int:
+	var key : String = create_locations_database_key(location_A, location_B)
+	if !routes_database.has(key):
 		return 0
-	return distances_list[key]
+	return routes_database[key]
 
+
+func create_locations_database_key(location_A:String, location_B:String) ->String:
+	var locations = [location_A, location_B]
+	locations = locations.sort()
+	return locations[0]+ "/" + locations[1]
 
 
 ##__________ Gestion des etablissements
