@@ -53,8 +53,8 @@ func get_travel_time_between(location_A:String, location_B:String) ->int:
 
 func create_locations_database_key(location_A:String, location_B:String) ->String:
 	var locations = [location_A, location_B]
-	locations = locations.sort()
-	return locations[0]+ "/" + locations[1]
+	locations.sort()
+	return locations[0] + "/" + locations[1]
 
 
 ##__________ Gestion des etablissements

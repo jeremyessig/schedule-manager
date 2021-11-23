@@ -31,14 +31,12 @@ func set_time(value:int) ->void:
 func get_time() ->int:
 	return time
 
-func _ready():
-	add_to_database()
-
 
 func init_values(data:Dictionary) ->void:
 	location_A = data["location_A"]
 	location_B = data["location_B"]
 	time = data["time"]
+	add_to_database()
 	_refresh_GUI()
 
 
@@ -48,6 +46,7 @@ func delete() ->void:
 
 func add_to_database() ->void:
 	Global.add_to_routes_database(location_A, location_B, time)
+	print_debug(Global.routes_database)
 
 
 func _refresh_GUI() ->void:

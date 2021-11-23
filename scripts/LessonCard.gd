@@ -281,12 +281,6 @@ func save_to_res() -> Dictionary:
 
 
 
-#func save_to_var(file: File) -> void:
-#	var datas = get_data()
-#	for data in datas:
-#		file.store_line(var2str(data))
-
-
 func load_from_var(file: File) -> void:
 	var datas = get_data()
 	for data in datas:
