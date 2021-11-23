@@ -62,7 +62,8 @@ func _set_is_displayed(value) ->void:
 	if is_displayed:
 		add_to_group("lesson_cards_displayed")
 	else:
-		remove_from_group("lesson_cards_displayed")
+		if self.is_in_group("lesson_cards_displayed"):
+			remove_from_group("lesson_cards_displayed")
 	_update_background()
 
 
@@ -331,7 +332,8 @@ func _on_LessonCard_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		match event.button_index:
 			BUTTON_LEFT:
-				if Input.is_key_pressed(KEY_CONTROL):
+				#if Input.is_key_pressed("delete"):
+				if Input.is_action_pressed("delete"):
 					self.delete()
 					return
 				Signals.emit_signal("lesson_card_pressed", node_path) ## -> Signals -> EditLessonDialog

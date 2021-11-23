@@ -31,18 +31,24 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 30
 
-[node name="ListOfRoutes" type="VBoxContainer" parent="Panel/VBoxContainer/Body/BodyVContainer" index="0"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Body/BodyVContainer" index="0"]
 margin_right = 800.0
-margin_bottom = 300.0
+margin_bottom = 14.0
+text = "Liste des trajets"
+
+[node name="ListOfRoutes" type="VBoxContainer" parent="Panel/VBoxContainer/Body/BodyVContainer" index="1"]
+margin_top = 44.0
+margin_right = 800.0
+margin_bottom = 344.0
 rect_min_size = Vector2( 800, 300 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
 
-[node name="NewConnectionContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body/BodyVContainer" index="1"]
-margin_top = 330.0
+[node name="NewConnectionContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body/BodyVContainer" index="2"]
+margin_top = 374.0
 margin_right = 800.0
-margin_bottom = 370.0
+margin_bottom = 414.0
 rect_min_size = Vector2( 800, 40 )
 custom_constants/separation = 35
 
