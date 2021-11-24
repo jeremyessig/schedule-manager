@@ -168,10 +168,11 @@ func get_number_of_minutes_in_common_between_lessons(lesson_start:int, lesson_en
 
 
 ## Verifie si le nombre de minutes entre les 2 cours est superieur a 1 
-func is_in_conflict_with(lesson_start:int, lesson_end:int, lesson_day:String) ->bool:
+func is_in_conflict_with(lesson_start:int, lesson_end:int, lesson_day:String, travel_time:int) ->bool:
 	if lesson_day != schedule["day"]:
 		return false
 	var minutes:int = get_number_of_minutes_in_common_between_lessons(lesson_start, lesson_end) 
+	minutes += travel_time
 	if minutes > 1:
 		return true
 	return false	
@@ -184,7 +185,10 @@ func search_conflicts_in(node_group:String) -> Array:
 		if card != self:
 #			print_debug("self start: %s / end: %s" %[schedule["start"], schedule["end"]])
 #			print_debug("card start: %s / end: %s" %[card.schedule["start"], card.schedule["end"]])
-			if card.is_in_conflict_with(schedule["start"], schedule["end"], schedule["day"]):
+			var travel_time: int = 0
+			if card.location != location:
+				travel_time = Global.get_travel_time_between(card.location, location)
+			if card.is_in_conflict_with(schedule["start"], schedule["end"], schedule["day"], travel_time):
 				list_of_conflicts.append(card)
 #	print_debug(list_of_conflicts)
 	return list_of_conflicts
