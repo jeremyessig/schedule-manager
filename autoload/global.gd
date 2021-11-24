@@ -17,45 +17,65 @@ var disciplines_database : Array
 var locations_database: Array
 var subjects_database : Array
 var lessons_database : Dictionary
-var routes_database : Dictionary
+var routes_database : Array
 
 var settings: Dictionary = {
 	"card_index_top": false,
 }
-func set_routes_database(value:Dictionary) ->void:
+
+func set_routes_database(value:Array) ->void:
 	routes_database = value
 	Signals.emit_signal("routes_database_updated")
 	
-func get_routes_database() ->Dictionary:
+func get_routes_database() ->Array:
 	return routes_database
 	
 func add_to_routes_database(location_A:String, location_B:String, time:int) ->void:
-	var key : String = create_locations_database_key(location_A, location_B)
-	routes_database[key] = time
+#	var key : String = create_locations_database_key(location_A, location_B)
+#	routes_database[key] = time
+	var new_route: Array = [location_A, location_B, time]
+	routes_database.append(new_route)
 	Signals.emit_signal("routes_database_updated")
-	
-func remove_from_routes_database() ->void:
-	pass
+
+
+func remove_from_routes_database(location_A:String, location_B:String) ->void:
+	for route in routes_database:
+		if route.has(location_A) and route.has(location_B):
+			routes_database.remove(routes_database.find(route))
+			Signals.emit_signal("routes_database_updated")
 	
 func is_in_routes_database(location_A:String, location_B:String) -> bool:
-	var key : String = create_locations_database_key(location_A, location_B)
-	if routes_database.has(key):
-		return true 
+#	var key : String = create_locations_database_key(location_A, location_B)
+#	if routes_database.has(key):
+#		return true 
+#	return false
+	for route in routes_database:
+		if route.has(location_A) and route.has(location_B):
+			return true
 	return false
 
 
 func get_travel_time_between(location_A:String, location_B:String) ->int:
-	var key : String = create_locations_database_key(location_A, location_B)
-	if !routes_database.has(key):
-		return 0
-	return routes_database[key]
+#	var key : String = create_locations_database_key(location_A, location_B)
+#	if !routes_database.has(key):
+#		return 0
+#	return routes_database[key]
+	for route in routes_database:
+		if route.has(location_A) and route.has(location_B):
+			return route[2]
+	return 0
 
 
-func create_locations_database_key(location_A:String, location_B:String) ->String:
-	var locations = [location_A, location_B]
-	locations.sort()
-	return locations[0] + "/" + locations[1]
+#func create_locations_database_key(location_A:String, location_B:String) ->String:
+#	var locations = [location_A, location_B]
+#	locations.sort()
+#	return locations[0] + "/" + locations[1]
 
+func get_route_from_database(location_A:String, location_B:String) ->Array:
+	for route in routes_database:
+		if route.has(location_A) and route.has(location_B):
+			return route
+	return []
 
 ##__________ Gestion des etablissements
 func set_locations_database(value) ->void:
@@ -208,6 +228,8 @@ func reset_databases() -> void:
 	Signals.emit_signal("database_reseted", "lessons_database")
 	locations_database.clear()
 	Signals.emit_signal("database_reseted", "locations_database")
+	routes_database.clear()
+	Signals.emit_signal("database_reseted", "routes_database")
 	
 
 ## Met a jours les optionButton listant les differentes matieres

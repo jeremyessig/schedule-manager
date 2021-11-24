@@ -24,9 +24,9 @@ margin_bottom = 548.0
 
 [node name="BodyVContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Body" index="0"]
 margin_left = 96.0
-margin_top = 66.0
+margin_top = 44.0
 margin_right = 896.0
-margin_bottom = 436.0
+margin_bottom = 458.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 30

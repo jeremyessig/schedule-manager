@@ -21,8 +21,9 @@ func save_to_res(path:String = "") -> void:
 		path = path_to_save
 	var save := SaveAsResource.new()
 	save.version = version
-	save.subject = Global.subjects_database
-	save.lesson = Global.lessons_database
+	save.route = Global.get_routes_database()
+	save.subject = Global.get_subjects_database()
+	save.lesson = Global.get_lessons_database()
 	save.location = Global.get_locations_database()
 	for node in get_tree().get_nodes_in_group("lesson_cards"):
 		if !node.has_method("save_to_res"):
@@ -45,14 +46,15 @@ func load_from_res(path) -> void:
 		print("ERROR: file doesn't exist !")
 		return
 	var save : Resource = load(path)
+	Global.set_routes_database(save.route)
+	Global.set_lessons_database(save.lesson)
+	Global.set_subjects_database(save.subject)
+	Global.set_locations_database(save.location)
 	for node_data in save.data:
 		if not is_compatible(node_data):
 			return
 		node_data["version"] = version
 		Global.left_panel.create_lesson_card(node_data)
-	Global.set_lessons_database(save.lesson)
-	Global.set_subjects_database(save.subject)
-	Global.set_locations_database(save.location)
 	last_opened_path = path
 	path_to_save = path
 	
