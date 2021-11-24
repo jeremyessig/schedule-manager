@@ -228,7 +228,11 @@ func _on_SearchLineEdit_text_changed(new_text):
 	_refresh_searched_card(new_text)
 
 
-func _on_SearchLineEdit_focus_exited():
-	call_deferred("clear_searched") ## Sinon pas possible de cliquer sur la carte
+#func _on_SearchLineEdit_focus_exited():
+#	call_deferred("clear_searched") ## Sinon pas possible de cliquer sur la carte
 
 
+
+
+func _on_ClearBSearchBtn_pressed():
+	call_deferred("clear_searched")

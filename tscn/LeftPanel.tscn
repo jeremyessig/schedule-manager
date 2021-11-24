@@ -115,7 +115,7 @@ rect_min_size = Vector2( 270, 30 )
 placeholder_text = "Rechercher un cours"
 placeholder_alpha = 0.369
 
-[node name="Button" type="Button" parent="VBoxContainer/SearchContainer"]
+[node name="ClearBSearchBtn" type="Button" parent="VBoxContainer/SearchContainer"]
 margin_left = 306.0
 margin_right = 331.0
 margin_bottom = 30.0
@@ -290,6 +290,6 @@ __meta__ = {
 visible = false
 position = Vector2( -1395.15, -244.106 )
 
-[connection signal="focus_exited" from="VBoxContainer/SearchContainer/SearchLineEdit" to="." method="_on_SearchLineEdit_focus_exited"]
 [connection signal="text_changed" from="VBoxContainer/SearchContainer/SearchLineEdit" to="." method="_on_SearchLineEdit_text_changed"]
+[connection signal="pressed" from="VBoxContainer/SearchContainer/ClearBSearchBtn" to="." method="_on_ClearBSearchBtn_pressed"]
 [connection signal="toggled" from="SortBtn" to="." method="_on_SortBtn_toggled"]

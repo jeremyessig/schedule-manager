@@ -67,6 +67,18 @@ func load_res() ->void:
 		data["time"] = route[2]
 		add_route(data)
 
+
+func is_new_route_valid(data_from_user:Dictionary) ->bool:
+	if are_fields_empty():
+		print("Error: Fields are empty")
+		return false
+	if data_from_user["location_A"] == data_from_user["location_B"]:
+		return false
+	if Global.is_in_routes_database(data_from_user["location_A"], data_from_user["location_B"]):
+		return false
+	if data_from_user["time"] == 0:
+		return false
+	return true
 #___________________ GUI____________________________
 
 func refresh_GUI() ->void:
@@ -103,14 +115,9 @@ func _on_CloseBtn_pressed():
 
 
 func _on_AddNewRouteBtn_pressed():
-	if are_fields_empty():
-		print("Error: Fields are empty")
+	var data_from_user :Dictionary = get_data_from_user()
+	if !is_new_route_valid(data_from_user):
 		return
 	AddNewRouteBtn_pressed = true
-	var data_from_user :Dictionary = get_data_from_user()
-	if data_from_user["location_A"] == data_from_user["location_B"]:
-		return
-	if Global.is_in_routes_database(data_from_user["location_A"], data_from_user["location_B"]):
-		return
 	add_to_database(data_from_user)
 	add_route(data_from_user)
