@@ -91,6 +91,7 @@ func _clear_panel()->void:
 
 func _on_CancelButton_pressed() -> void:
 	_clear_panel()
+	emit_signal("canceled", error)
 
 
 func _on_ConfirmButton_pressed():
