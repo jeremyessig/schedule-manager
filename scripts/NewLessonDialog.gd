@@ -21,7 +21,6 @@ func _confirmed_error(error) ->void:
 func _canceled_error(error) ->void:
 	match error:
 		"RoomNotFound":
-			print("Annulé")
 			is_lesson_creating = false
 
 
