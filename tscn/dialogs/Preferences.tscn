@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://tscn/Dialog.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/PreferencesDialog.gd" type="Script" id=2]
+
+[node name="PreferencesDialog" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Panel" parent="." index="1"]
+margin_top = -332.0
+margin_bottom = 330.0
+
+[node name="Title" parent="Panel/VBoxContainer/Head" index="0"]
+text = "Préférences"
+
+[node name="Body" parent="Panel/VBoxContainer" index="1"]
+margin_bottom = 602.0
+
+[node name="Foot" parent="Panel/VBoxContainer" index="2"]
+margin_top = 602.0
+margin_bottom = 662.0

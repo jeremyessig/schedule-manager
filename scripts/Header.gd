@@ -6,6 +6,7 @@ signal export_csv_pressed
 signal about_pressed
 signal open_save_pressed
 signal route_pressed
+signal preferences_pressed
 
 onready var file : MenuButton = $HBoxContainer/Toolbar/FileMenuButton
 onready var database_menu : MenuButton = $HBoxContainer/Toolbar/DatabaseMenuButton
@@ -65,7 +66,7 @@ func _on_display_item_pressed(id)->void:
 func _on_settings_item_pressed(id)->void:
 	match id:
 		0:
-			pass
+			emit_signal("preferences_pressed")
 		1:
 			emit_signal("route_pressed")
 
