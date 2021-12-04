@@ -7,11 +7,11 @@ var is_empty := true
 var position := Vector2.ZERO
 var size := 1
 var start:int
-var duration:int = 30
+const duration:int = 30
 var end :int
+var day : String
 
 onready var label := $Label
-
 
 func add_coord_to_cell(xpos:int, ypos:int) ->void:
 	position.x = xpos
@@ -24,6 +24,7 @@ func add_coord_to_cell(xpos:int, ypos:int) ->void:
 func set_cell_time(index:int) ->void:
 	start = 420 + (index * duration) # 420 / 60 = 7h00
 	end = start + duration
+	day = Global.weekday[position.x]
 	
 
 func _turn_cell_to_occupied() -> void:

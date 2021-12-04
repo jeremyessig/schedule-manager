@@ -16,7 +16,6 @@ onready var preferences_dialog : Control = $PreferencesDialog
 
 
 func _ready() -> void:
-	print(1%7)
 	Global.new_subject_button.connect("pressed", self, "_show_new_subject_dialog")
 	Global.new_lesson_button.connect("pressed", self, "_show_new_lesson_dialog")
 	header.connect("export_json_pressed", self, "_open_export_dialog")

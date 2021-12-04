@@ -1,4 +1,5 @@
 extends Button
+class_name LessonCard
 
 signal lesson_cell_updated(datas)
 
@@ -161,17 +162,18 @@ func _calcul_size(duration: int) ->int:
 ##_________________ Verification avancee des conflits entre cours______________
 ## Verifie si il y a un clonflit avec un autre cours
 ## Calcule si les deux paires de chiffres ont des minutes de cours en commun
-func get_number_of_minutes_in_common_between_lessons(lesson_start:int, lesson_end:int) ->int:
-	var start = max(schedule["start"], lesson_start)
-	var end = min(schedule["end"], lesson_end)
-	return end-start+1
+#func get_number_of_minutes_in_common_between_lessons(lesson_start:int, lesson_end:int) ->int:
+#	var start = max(schedule["start"], lesson_start)
+#	var end = min(schedule["end"], lesson_end)
+#	return end-start+1
 
 
 ## Verifie si le nombre de minutes entre les 2 cours est superieur a 1 
 func is_in_conflict_with(lesson_start:int, lesson_end:int, lesson_day:String, travel_time:int) ->bool:
 	if lesson_day != schedule["day"]:
 		return false
-	var minutes:int = get_number_of_minutes_in_common_between_lessons(lesson_start, lesson_end) 
+#	var minutes:int = get_number_of_minutes_in_common_between_lessons(lesson_start, lesson_end) 
+	var minutes: int = Conflict.get_number_of_minutes_in_common(schedule["start"], schedule["end"], lesson_start, lesson_end)
 	minutes += travel_time
 	if minutes > 1:
 		return true
@@ -202,6 +204,8 @@ func does_conflict_exist_in(node_group:String) ->bool:
 func set_conflicts() ->void:	
 	if does_conflict_exist_in("lesson_cards_displayed"):
 		self.is_in_conflict = true
+#	elif does_conflict_exist_in("cell_buttons"):
+#		self.is_in_conflict = true
 	else:
 		self.is_in_conflict = false
 
