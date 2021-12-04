@@ -6,15 +6,24 @@ var normal_style = preload("res://res/calendar_cell_normal.tres")
 var is_empty := true
 var position := Vector2.ZERO
 var size := 1
+var start:int
+var duration:int = 30
+var end :int
 
 onready var label := $Label
-
 
 
 func add_coord_to_cell(xpos:int, ypos:int) ->void:
 	position.x = xpos
 	position.y = ypos
-	$Label.text = "(%s, %s)" % [position.x, position.y]
+#	$Label.text = "(%s, %s)" % [position.x, position.y]
+	set_cell_time(position.y)
+	$Label.text = "(%s, %s, %s)" %[start, end, duration]
+
+
+func set_cell_time(index:int) ->void:
+	start = 420 + (index * duration) # 420 / 60 = 7h00
+	end = start + duration
 	
 
 func _turn_cell_to_occupied() -> void:
