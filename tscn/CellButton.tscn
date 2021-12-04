@@ -6,7 +6,7 @@
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
-[node name="CellButton" type="Button" groups=["cell_buttons"]]
+[node name="CellButton" type="Button"]
 margin_right = 258.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 45 )

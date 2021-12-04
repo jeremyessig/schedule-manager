@@ -12,6 +12,7 @@ signal lesson_added_to_calendar(nodepath)
 signal deleting_lesson_from_calendar_finished # CalendarArray -> EditLessonDialog
 signal lesson_cell_opened(id) ## LessonCellButton -> LeftPanel
 signal program_reseted ## Header -> 
+signal updating_conflicts
 
 signal data_sent(nodepath, data, debug)
 
