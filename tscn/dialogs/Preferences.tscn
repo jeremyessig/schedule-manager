@@ -1,7 +1,34 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://tscn/Dialog.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/PreferencesDialog.gd" type="Script" id=2]
+[ext_resource path="res://res/Helvetica_normal.tres" type="DynamicFont" id=3]
+[ext_resource path="res://res/buttons/default_red_button_hover.tres" type="StyleBox" id=4]
+[ext_resource path="res://res/buttons/default_red_button_pressed.tres" type="StyleBox" id=5]
+[ext_resource path="res://res/buttons/default_red_button_normal.tres" type="StyleBox" id=6]
+[ext_resource path="res://res/Helvetica_bold.tres" type="DynamicFont" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.937255, 0.937255, 0.937255, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.6, 0.6, 0.6, 1 )
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
 
 [node name="PreferencesDialog" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -16,6 +43,282 @@ text = "Préférences"
 [node name="Body" parent="Panel/VBoxContainer" index="1"]
 margin_bottom = 602.0
 
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body" index="0"]
+margin_left = 23.0
+margin_top = 16.0
+margin_right = 776.0
+margin_bottom = 541.0
+size_flags_horizontal = 3
+
+[node name="LeftPanel" type="Panel" parent="Panel/VBoxContainer/Body/HBoxContainer" index="0"]
+margin_right = 200.0
+margin_bottom = 525.0
+rect_min_size = Vector2( 200, 525 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel" index="0"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -90.0
+margin_top = -252.5
+margin_right = 90.0
+margin_bottom = 252.5
+size_flags_horizontal = 0
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LessonsBtn" type="Button" parent="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer" index="0"]
+margin_right = 180.0
+margin_bottom = 19.0
+custom_colors/font_color_focus = Color( 0.305882, 0.305882, 0.305882, 1 )
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+custom_colors/font_color_hover = Color( 0.219608, 0.219608, 0.219608, 1 )
+custom_colors/font_color_pressed = Color( 0.305882, 0.305882, 0.305882, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+text = "Cours"
+align = 0
+
+[node name="PreferencesBtn" type="Button" parent="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer" index="1"]
+margin_top = 23.0
+margin_right = 180.0
+margin_bottom = 42.0
+custom_colors/font_color_focus = Color( 0.305882, 0.305882, 0.305882, 1 )
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+custom_colors/font_color_hover = Color( 0.219608, 0.219608, 0.219608, 1 )
+custom_colors/font_color_pressed = Color( 0.305882, 0.305882, 0.305882, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+text = "Préférences"
+align = 0
+
+[node name="SaveLoadBtn" type="Button" parent="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer" index="2"]
+margin_top = 46.0
+margin_right = 180.0
+margin_bottom = 65.0
+custom_colors/font_color_focus = Color( 0.305882, 0.305882, 0.305882, 1 )
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+custom_colors/font_color_hover = Color( 0.219608, 0.219608, 0.219608, 1 )
+custom_colors/font_color_pressed = Color( 0.305882, 0.305882, 0.305882, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+text = "Sauvegard et chargement"
+align = 0
+
+[node name="MarginCenter" type="MarginContainer" parent="Panel/VBoxContainer/Body/HBoxContainer" index="1"]
+margin_left = 204.0
+margin_right = 224.0
+margin_bottom = 525.0
+rect_min_size = Vector2( 20, 0 )
+
+[node name="RightPanel" type="Control" parent="Panel/VBoxContainer/Body/HBoxContainer" index="2"]
+margin_left = 228.0
+margin_right = 753.0
+margin_bottom = 525.0
+rect_min_size = Vector2( 525, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LessonsBox" type="VBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LessonsTitle" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox" index="0"]
+margin_right = 525.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+custom_fonts/font = ExtResource( 7 )
+text = "Cours"
+
+[node name="CardIndexTop" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox" index="1"]
+margin_top = 25.0
+margin_right = 525.0
+margin_bottom = 49.0
+custom_constants/separation = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CardIndexTopCheckBox" type="CheckBox" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/CardIndexTop" index="0"]
+margin_right = 24.0
+margin_bottom = 24.0
+
+[node name="CardIndexTopLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/CardIndexTop" index="1"]
+margin_left = 29.0
+margin_top = 5.0
+margin_right = 371.0
+margin_bottom = 19.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+text = "Afficher le dernier cours créé en premier dans la liste"
+
+[node name="TDSameColorCM" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox" index="2"]
+margin_top = 53.0
+margin_right = 525.0
+margin_bottom = 77.0
+custom_constants/separation = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TDSameColorCMCheckBox" type="CheckBox" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/TDSameColorCM" index="0"]
+margin_right = 24.0
+margin_bottom = 24.0
+
+[node name="TDSameColorCMLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/TDSameColorCM" index="1"]
+margin_left = 29.0
+margin_top = 5.0
+margin_right = 291.0
+margin_bottom = 19.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+text = "Les TD ont la même couleur que leur CM"
+
+[node name="EnableDefaultLessonTime" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox" index="3"]
+margin_top = 81.0
+margin_right = 525.0
+margin_bottom = 105.0
+custom_constants/separation = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnableDefaultLessonTimeCheckBox" type="CheckBox" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/EnableDefaultLessonTime" index="0"]
+margin_right = 24.0
+margin_bottom = 24.0
+
+[node name="EnableDefaultLessonTimeLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/EnableDefaultLessonTime" index="1"]
+margin_left = 29.0
+margin_top = 5.0
+margin_right = 346.0
+margin_bottom = 19.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+text = "Définir un temps par défaut pour les CM et les TD"
+
+[node name="PreferencesBox" type="VBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PreferencesTitle" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox" index="0"]
+margin_right = 525.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+custom_fonts/font = ExtResource( 7 )
+text = "Préférences"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox" index="1"]
+margin_top = 41.0
+margin_right = 525.0
+margin_bottom = 201.0
+rect_min_size = Vector2( 0, 160 )
+
+[node name="SetDefaultPreferencesLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox" index="2"]
+margin_top = 221.0
+margin_right = 525.0
+margin_bottom = 235.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+text = "Souhaitez-vous remettre les préférences d'origine ? (Action irréversible)"
+align = 1
+
+[node name="SetDefaultPreferencesBtn" type="Button" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox" index="3"]
+margin_left = 217.0
+margin_top = 255.0
+margin_right = 307.0
+margin_bottom = 290.0
+rect_min_size = Vector2( 90, 35 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+text = "OUI"
+
+[node name="SaveLoadBox" type="VBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel" index="2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveLoadTitle" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox" index="0"]
+margin_right = 525.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+custom_fonts/font = ExtResource( 7 )
+text = "Sauvegarde et chargement"
+
+[node name="AutoSave" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox" index="1"]
+margin_top = 25.0
+margin_right = 525.0
+margin_bottom = 49.0
+custom_constants/separation = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AutoSaveCheckBox" type="CheckBox" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox/AutoSave" index="0"]
+margin_right = 24.0
+margin_bottom = 24.0
+
+[node name="AutoSaveLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox/AutoSave" index="1"]
+margin_left = 29.0
+margin_top = 5.0
+margin_right = 186.0
+margin_bottom = 19.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+text = "Sauvegarde automatique"
+
 [node name="Foot" parent="Panel/VBoxContainer" index="2"]
 margin_top = 602.0
 margin_bottom = 662.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Foot" index="0"]
+margin_left = 293.0
+margin_top = 20.0
+margin_right = 506.0
+margin_bottom = 40.0
+custom_constants/separation = 10
+
+[node name="SaveAndCloseBtn" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="0"]
+margin_right = 145.0
+margin_bottom = 20.0
+text = "Enregistrer et fermer"
+
+[node name="CloseBtn" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="1"]
+margin_left = 155.0
+margin_right = 213.0
+margin_bottom = 20.0
+text = "Fermer"
+
+[connection signal="pressed" from="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer/LessonsBtn" to="." method="_on_LessonsBtn_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer/PreferencesBtn" to="." method="_on_PreferencesBtn_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer/SaveLoadBtn" to="." method="_on_SaveLoadBtn_pressed"]
+[connection signal="toggled" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/CardIndexTop/CardIndexTopCheckBox" to="." method="_on_CardIndexTopCheckBox_toggled"]
+[connection signal="pressed" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox/SetDefaultPreferencesBtn" to="." method="_on_SetDefaultPreferencesBtn_pressed"]
+[connection signal="toggled" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox/AutoSave/AutoSaveCheckBox" to="." method="_on_AutoSaveCheckBox_toggled"]
+[connection signal="pressed" from="Panel/VBoxContainer/Foot/HBoxContainer/SaveAndCloseBtn" to="." method="_on_SaveAndCloseBtn_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Foot/HBoxContainer/CloseBtn" to="." method="_on_CloseBtn_pressed"]

@@ -9,8 +9,33 @@ var last_opened_path : String
 func _ready():
 	version = ProjectSettings.get_setting("application/config/version")
 
+
 #######################################################################
-############################ SAUVEGARDE
+################### Sauvegarde des preferences  ######################
+#######################################################################
+
+func save_preferences(path:String = "user://preferences.tres") ->void:
+	var save := SavePreferences.new()
+	save.data = Preferences.get_data()
+	ResourceSaver.save(path, save)
+	
+func load_preferences(path:String = "user://preferences.tres") ->void:
+	var file = File.new()
+	if not file.file_exists("user://default_preferences.tres"):
+		print("ERROR: default preferences file doesn't exist !")
+		save_preferences("user://default_preferences.tres")
+		return
+	if not file.file_exists("user://preferences.tres"):
+		path = "user://default_preferences.tres"
+	var save : Resource = load(path)
+	Preferences.set_data(save.data)
+	Signals.emit_signal("preferences_loaded")
+
+
+
+
+#######################################################################
+############################ SAUVEGARDE ##############################
 ######################################################################
 
 func save_to_res(path:String = "") -> void:

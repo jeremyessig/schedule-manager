@@ -14,8 +14,11 @@ onready var open_save_dialog : FileDialog = $OpenSaveDialog
 onready var route_dialog :Control = $RouteDialog
 onready var preferences_dialog : Control = $PreferencesDialog
 
+onready var autosave : Timer = $AutoSave
+
 
 func _ready() -> void:
+	SaveSystem.load_preferences()
 	Global.new_subject_button.connect("pressed", self, "_show_new_subject_dialog")
 	Global.new_lesson_button.connect("pressed", self, "_show_new_lesson_dialog")
 	header.connect("export_json_pressed", self, "_open_export_dialog")
@@ -33,6 +36,13 @@ func _unhandled_input(event):
 		SaveSystem.save_to_res()
 	if event.is_action_pressed("open_saves"):
 		open_save_dialog.popup_centered()
+
+
+func _on_AutoSave_timeout():
+	if not Preferences.autosave:
+		return
+	SaveSystem.save_to_res()
+
 
 #________Methode d'affichage des dialogs_____________
 func _show_new_lesson_dialog() ->void:
@@ -92,3 +102,4 @@ func _on_SaveAsDialog_file_selected(path):
 
 func _on_OpenSaveDialog_file_selected(path):
 	SaveSystem.load_from_res(path)
+

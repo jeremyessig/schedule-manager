@@ -19,9 +19,9 @@ var subjects_database : Array
 var lessons_database : Dictionary
 var routes_database : Array
 
-var settings: Dictionary = {
-	"card_index_top": false,
-}
+#var settings: Dictionary = {
+#	"card_index_top": false,
+#}
 
 func set_routes_database(value:Array) ->void:
 	routes_database = value
@@ -253,7 +253,7 @@ func update_option_button(button:OptionButton, database, subject: String = "")->
 func reparent_node(parent: Node, child: Node, target:Node) ->void:
 	parent.remove_child(child)
 	target.add_child(child)
-	if settings["card_index_top"]:
+	if Preferences.card_index_top:
 		target.move_child(child, 0)
 	child.set_owner(target)
 

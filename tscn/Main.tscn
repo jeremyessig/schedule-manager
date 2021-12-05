@@ -173,9 +173,14 @@ visible = false
 [node name="AboutDialog" parent="." instance=ExtResource( 10 )]
 visible = false
 
+[node name="AutoSave" type="Timer" parent="."]
+wait_time = 600.0
+autostart = true
+
 [connection signal="open_exporting_csv_file_dialog" from="ExportingCSVDialog" to="." method="_on_ExportingCSVDialog_open_exporting_csv_file_dialog"]
 [connection signal="file_selected" from="ExportDatabaseDialog" to="." method="_on_FileDialog_file_selected"]
 [connection signal="file_selected" from="SaveAsDialog" to="." method="_on_SaveAsDialog_file_selected"]
 [connection signal="file_selected" from="ExportDialogCSV" to="." method="_on_ExportDialogCSV_file_selected"]
 [connection signal="file_selected" from="ImportDialog" to="." method="_on_ImportDialog_file_selected"]
 [connection signal="file_selected" from="OpenSaveDialog" to="." method="_on_OpenSaveDialog_file_selected"]
+[connection signal="timeout" from="AutoSave" to="." method="_on_AutoSave_timeout"]
