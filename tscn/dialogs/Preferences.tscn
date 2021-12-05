@@ -44,16 +44,16 @@ text = "Préférences"
 margin_bottom = 602.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body" index="0"]
-margin_left = 23.0
+margin_left = 13.0
 margin_top = 16.0
-margin_right = 776.0
+margin_right = 786.0
 margin_bottom = 541.0
 size_flags_horizontal = 3
 
 [node name="LeftPanel" type="Panel" parent="Panel/VBoxContainer/Body/HBoxContainer" index="0"]
-margin_right = 200.0
+margin_right = 220.0
 margin_bottom = 525.0
-rect_min_size = Vector2( 200, 525 )
+rect_min_size = Vector2( 220, 525 )
 custom_styles/panel = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel" index="0"]
@@ -61,9 +61,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -90.0
+margin_left = -95.0
 margin_top = -252.5
-margin_right = 90.0
+margin_right = 95.0
 margin_bottom = 252.5
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -72,7 +72,7 @@ __meta__ = {
 }
 
 [node name="LessonsBtn" type="Button" parent="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer" index="0"]
-margin_right = 180.0
+margin_right = 190.0
 margin_bottom = 19.0
 custom_colors/font_color_focus = Color( 0.305882, 0.305882, 0.305882, 1 )
 custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
@@ -89,7 +89,7 @@ align = 0
 
 [node name="PreferencesBtn" type="Button" parent="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer" index="1"]
 margin_top = 23.0
-margin_right = 180.0
+margin_right = 190.0
 margin_bottom = 42.0
 custom_colors/font_color_focus = Color( 0.305882, 0.305882, 0.305882, 1 )
 custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
@@ -106,7 +106,7 @@ align = 0
 
 [node name="SaveLoadBtn" type="Button" parent="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer" index="2"]
 margin_top = 46.0
-margin_right = 180.0
+margin_right = 190.0
 margin_bottom = 65.0
 custom_colors/font_color_focus = Color( 0.305882, 0.305882, 0.305882, 1 )
 custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
@@ -118,18 +118,18 @@ custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 4 )
 custom_styles/disabled = SubResource( 5 )
 custom_styles/normal = SubResource( 6 )
-text = "Sauvegard et chargement"
+text = "Sauvegardes et chargements"
 align = 0
 
 [node name="MarginCenter" type="MarginContainer" parent="Panel/VBoxContainer/Body/HBoxContainer" index="1"]
-margin_left = 204.0
-margin_right = 224.0
+margin_left = 224.0
+margin_right = 244.0
 margin_bottom = 525.0
 rect_min_size = Vector2( 20, 0 )
 
 [node name="RightPanel" type="Control" parent="Panel/VBoxContainer/Body/HBoxContainer" index="2"]
-margin_left = 228.0
-margin_right = 753.0
+margin_left = 248.0
+margin_right = 773.0
 margin_bottom = 525.0
 rect_min_size = Vector2( 525, 0 )
 size_flags_horizontal = 3
@@ -269,7 +269,7 @@ margin_right = 525.0
 margin_bottom = 21.0
 custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 custom_fonts/font = ExtResource( 7 )
-text = "Sauvegarde et chargement"
+text = "Sauvegardes et chargements"
 
 [node name="AutoSave" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox" index="1"]
 margin_top = 25.0
@@ -291,6 +291,45 @@ margin_right = 186.0
 margin_bottom = 19.0
 custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 text = "Sauvegarde automatique"
+
+[node name="AutoSaveWaitTime" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox" index="2"]
+margin_top = 53.0
+margin_right = 525.0
+margin_bottom = 73.0
+custom_constants/separation = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginLeft" type="MarginContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox/AutoSaveWaitTime" index="0"]
+margin_right = 25.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 25, 0 )
+
+[node name="AutoSaveWaitTimeLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox/AutoSaveWaitTime" index="1"]
+margin_left = 30.0
+margin_top = 3.0
+margin_right = 259.0
+margin_bottom = 17.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+text = "Sauvegarde automatique toutes les "
+
+[node name="AutoSaveWaitTimeOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox/AutoSaveWaitTime" index="2"]
+margin_left = 264.0
+margin_right = 301.0
+margin_bottom = 20.0
+disabled = true
+text = "5"
+items = [ "5", null, false, 0, null, "10", null, false, 1, null, "15", null, false, 2, null, "20", null, false, 3, null ]
+selected = 0
+
+[node name="AutoSaveWaitTimeLabel2" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox/AutoSaveWaitTime" index="3"]
+margin_left = 306.0
+margin_top = 3.0
+margin_right = 359.0
+margin_bottom = 17.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+text = "minutes"
 
 [node name="Foot" parent="Panel/VBoxContainer" index="2"]
 margin_top = 602.0
@@ -320,5 +359,6 @@ text = "Fermer"
 [connection signal="toggled" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/CardIndexTop/CardIndexTopCheckBox" to="." method="_on_CardIndexTopCheckBox_toggled"]
 [connection signal="pressed" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox/SetDefaultPreferencesBtn" to="." method="_on_SetDefaultPreferencesBtn_pressed"]
 [connection signal="toggled" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox/AutoSave/AutoSaveCheckBox" to="." method="_on_AutoSaveCheckBox_toggled"]
+[connection signal="item_selected" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox/AutoSaveWaitTime/AutoSaveWaitTimeOptionButton" to="." method="_on_AutoSaveWaitTimeOptionButton_item_selected"]
 [connection signal="pressed" from="Panel/VBoxContainer/Foot/HBoxContainer/SaveAndCloseBtn" to="." method="_on_SaveAndCloseBtn_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Foot/HBoxContainer/CloseBtn" to="." method="_on_CloseBtn_pressed"]

@@ -268,6 +268,16 @@ func get_item_string(node:OptionButton) ->String:
 	return string
 
 
+func find_item_string(node:OptionButton, text:String) ->int:
+	var index :int = 0
+	for item in node.get_item_count():
+		if node.get_item_text(index) == text:
+			return index
+		else:
+			index += 1
+	return 0
+
+
 static func find_node_by_name(root, node_name:String) ->Node:
 	if root.get_name() == node_name:
 		return root

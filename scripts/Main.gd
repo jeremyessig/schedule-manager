@@ -41,7 +41,10 @@ func _unhandled_input(event):
 func _on_AutoSave_timeout():
 	if not Preferences.autosave:
 		return
+	if autosave.wait_time != Preferences.autosave_wait_time:
+		autosave.wait_time = Preferences.autosave_wait_time
 	SaveSystem.save_to_res()
+	
 
 
 #________Methode d'affichage des dialogs_____________
