@@ -53,8 +53,8 @@ func _ready():
 	version = ProjectSettings.get_setting("application/config/version")
 	Signals.connect("lesson_removed_from_calendar", self, "_undisplay")
 	Signals.connect("program_reseted", self, "delete") ## Header -> Signals
-	Signals.connect("updating_conflicts", self, "set_conflicts")
-	Signals.connect("updating_conflicts", self, "refresh_is_in_conflict_GUI")
+	Signals.connect("updating_conflicts", self, "set_conflicts") ## CellButton -> Signals
+	Signals.connect("updating_conflicts", self, "refresh_is_in_conflict_GUI") ## CellButton -> Signals
 	save_date["created"] = OS.get_datetime()
 	
 

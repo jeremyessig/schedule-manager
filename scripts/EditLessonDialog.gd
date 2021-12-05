@@ -111,6 +111,7 @@ func _on_EditButton_pressed():
 			yield(get_tree(),"idle_frame")
 			var node_path = lesson_card.get_path()
 			Global.calendar_array.add_lesson(node_path)
+	Signals.emit_signal("updating_conflicts")
 	hide()
 
 

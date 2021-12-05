@@ -29,11 +29,6 @@ func set_cell_time(index:int) ->void:
 	schedule = {"start": start, "duration": 30, "end":end, "day": day}
 	
 
-#func _turn_cell_to_occupied() -> void:
-#	is_empty = false
-#	self.custom_styles.normal.bg_color = "#ff9595"
-#	self.custom_styles.set_bg_color(Color("#bada55"))
-
 func set_cell() ->void:
 	if is_empty:
 		is_empty = false
@@ -42,9 +37,9 @@ func set_cell() ->void:
 		Signals.emit_signal("updating_conflicts")
 		return
 	is_empty = true
-	remove_from_group("occupied_cells")
+	remove_from_group("occupied_cells") ## -> Signals -> LessonCard
 	self.add_stylebox_override("normal", normal_style)
-	Signals.emit_signal("updating_conflicts")
+	Signals.emit_signal("updating_conflicts") ## -> Signals -> LessonCard
 
 
 func _on_CellButton_gui_input(event):
