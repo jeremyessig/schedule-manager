@@ -25,6 +25,11 @@ func save_to_res(path:String = "") -> void:
 	save.subject = Global.get_subjects_database()
 	save.lesson = Global.get_lessons_database()
 	save.location = Global.get_locations_database()
+	for node in get_tree().get_nodes_in_group("occupied_cells"):
+		if !node.has_method("save_to_res"):
+			print("persistent node '%s' is missing a save_var() function, skipped" % node.name)
+			continue
+		save.cell.append(node.save_to_res())
 	for node in get_tree().get_nodes_in_group("lesson_cards"):
 		if !node.has_method("save_to_res"):
 			print("persistent node '%s' is missing a save_var() function, skipped" % node.name)
@@ -50,6 +55,10 @@ func load_from_res(path) -> void:
 	Global.set_lessons_database(save.lesson)
 	Global.set_subjects_database(save.subject)
 	Global.set_locations_database(save.location)
+	for cell in get_tree().get_nodes_in_group("cell_buttons"):
+		cell.reset()
+		if save.cell.has(var2str(Vector2(cell.position))):
+			cell.set_cell()
 	for node_data in save.data:
 		if not is_compatible(node_data):
 			return

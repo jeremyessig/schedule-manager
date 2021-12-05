@@ -8,11 +8,17 @@ var position := Vector2.ZERO
 var size := 1
 var schedule : Dictionary
 var start:int
-#const duration:int = 30
-#var end :int
-#var day : String
+
 
 onready var label := $Label
+
+func reset() ->void:
+	is_empty = true
+	if self.is_in_group("occupied_cells"):
+		remove_from_group("occupied_cells") ## -> Signals -> LessonCard
+	self.add_stylebox_override("normal", normal_style)
+	Signals.emit_signal("updating_conflicts") ## -> Signals -> LessonCard
+
 
 func add_coord_to_cell(xpos:int, ypos:int) ->void:
 	position.x = xpos
@@ -36,10 +42,12 @@ func set_cell() ->void:
 		add_to_group("occupied_cells")
 		Signals.emit_signal("updating_conflicts")
 		return
-	is_empty = true
-	remove_from_group("occupied_cells") ## -> Signals -> LessonCard
-	self.add_stylebox_override("normal", normal_style)
-	Signals.emit_signal("updating_conflicts") ## -> Signals -> LessonCard
+	reset()
+
+
+func save_to_res() -> String:
+	return var2str(Vector2(position))
+
 
 
 func _on_CellButton_gui_input(event):
@@ -50,4 +58,5 @@ func _on_CellButton_gui_input(event):
 				set_cell()
 			BUTTON_RIGHT:
 				set_cell()
+
 
