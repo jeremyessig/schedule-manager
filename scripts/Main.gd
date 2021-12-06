@@ -18,7 +18,7 @@ onready var autosave : Timer = $AutoSave
 
 
 func _ready() -> void:
-	OS.set_window_size(Vector2(1920, 1080))
+	OS.set_window_size(Preferences.start_window_size)
 	Global.new_subject_button.connect("pressed", self, "_show_new_subject_dialog")
 	Global.new_lesson_button.connect("pressed", self, "_show_new_lesson_dialog")
 	header.connect("export_json_pressed", self, "_open_export_dialog")

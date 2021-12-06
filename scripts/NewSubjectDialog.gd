@@ -147,12 +147,24 @@ func _show_grid(grid:GridContainer) ->void:
 	grid.show()
 
 
-func _btn_focused(button:Button) ->void:
-	for btn in buttons_container.get_children():
-		btn.set("custom_styles/normal",default_blue_btn_normal)
-		btn.set("custom_styles/hover",default_blue_btn_hover)
+func _set_button_navigation_selected(button:Button) ->void:
 	button.set("custom_styles/normal",default_blue_btn_focus)
 	button.set("custom_styles/hover",default_blue_btn_focus)
+	button.set("custom_styles/focus",default_blue_btn_focus)
+	button.set("custom_styles/pressed",default_blue_btn_focus)
+
+func _set_button_navigation_unselected(button:Button) ->void:
+	button.set("custom_styles/normal",default_blue_btn_normal)
+	button.set("custom_styles/hover",default_blue_btn_hover)
+	button.set("custom_styles/focus",default_blue_btn_normal)
+	button.set("custom_styles/pressed",default_blue_btn_focus)
+
+func _btn_focused(button:Button) ->void:
+	for btn in buttons_container.get_children():
+		if btn == button:
+			_set_button_navigation_selected(btn)
+		else:
+			_set_button_navigation_unselected(btn)
 
 
 ##_________________________ Methodes connectees ___________________________________
