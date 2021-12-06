@@ -67,10 +67,17 @@ func _on_settings_item_pressed(id)->void:
 	match id:
 		0:
 			emit_signal("preferences_pressed")
+			Signals.emit_signal("preferences_shown")
 		1:
 			emit_signal("route_pressed")
 
 func _on_help_item_pressed(id)->void:
 	match id:
 		0:
+			OS.shell_open("https://sites.google.com/view/schedulemanager/wiki")
+		1:
+			OS.shell_open("https://www.youtube.com/watch?v=fEdwhnshL5o&list=PLDX0YQ47r7645ZCiJqngqBQlqfnBtDwxL&index=3")
+		2:	
+			OS.shell_open("mailto:schedulemanagerforuniversity@gmail.com")
+		3:
 			emit_signal("about_pressed")

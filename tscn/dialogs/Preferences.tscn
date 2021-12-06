@@ -87,7 +87,7 @@ custom_styles/normal = SubResource( 6 )
 text = "Cours"
 align = 0
 
-[node name="PreferencesBtn" type="Button" parent="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer" index="1"]
+[node name="WindowBtn" type="Button" parent="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer" index="1"]
 margin_top = 23.0
 margin_right = 190.0
 margin_bottom = 42.0
@@ -101,13 +101,30 @@ custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 4 )
 custom_styles/disabled = SubResource( 5 )
 custom_styles/normal = SubResource( 6 )
-text = "Préférences"
+text = "Fenêtres"
 align = 0
 
-[node name="SaveLoadBtn" type="Button" parent="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer" index="2"]
+[node name="PreferencesBtn" type="Button" parent="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer" index="2"]
 margin_top = 46.0
 margin_right = 190.0
 margin_bottom = 65.0
+custom_colors/font_color_focus = Color( 0.305882, 0.305882, 0.305882, 1 )
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+custom_colors/font_color_hover = Color( 0.219608, 0.219608, 0.219608, 1 )
+custom_colors/font_color_pressed = Color( 0.305882, 0.305882, 0.305882, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+text = "Préférences"
+align = 0
+
+[node name="SaveLoadBtn" type="Button" parent="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer" index="3"]
+margin_top = 69.0
+margin_right = 190.0
+margin_bottom = 88.0
 custom_colors/font_color_focus = Color( 0.305882, 0.305882, 0.305882, 1 )
 custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 custom_colors/font_color_hover = Color( 0.219608, 0.219608, 0.219608, 1 )
@@ -145,15 +162,16 @@ __meta__ = {
 
 [node name="LessonsTitle" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox" index="0"]
 margin_right = 525.0
-margin_bottom = 21.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
 custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 custom_fonts/font = ExtResource( 7 )
 text = "Cours"
 
 [node name="CardIndexTop" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox" index="1"]
-margin_top = 25.0
+margin_top = 44.0
 margin_right = 525.0
-margin_bottom = 49.0
+margin_bottom = 68.0
 custom_constants/separation = 5
 __meta__ = {
 "_edit_use_anchors_": false
@@ -172,9 +190,9 @@ custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 text = "Afficher le dernier cours créé en premier dans la liste"
 
 [node name="TDSameColorCM" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox" index="2"]
-margin_top = 53.0
+margin_top = 72.0
 margin_right = 525.0
-margin_bottom = 77.0
+margin_bottom = 96.0
 custom_constants/separation = 5
 __meta__ = {
 "_edit_use_anchors_": false
@@ -193,25 +211,118 @@ custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 text = "Les TD ont la même couleur que leur CM"
 
 [node name="EnableDefaultLessonTime" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox" index="3"]
-margin_top = 81.0
+margin_top = 100.0
 margin_right = 525.0
-margin_bottom = 105.0
+margin_bottom = 125.0
+rect_min_size = Vector2( 0, 25 )
 custom_constants/separation = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="EnableDefaultLessonTimeCheckBox" type="CheckBox" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/EnableDefaultLessonTime" index="0"]
+visible = false
 margin_right = 24.0
 margin_bottom = 24.0
 
 [node name="EnableDefaultLessonTimeLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/EnableDefaultLessonTime" index="1"]
-margin_left = 29.0
 margin_top = 5.0
-margin_right = 346.0
+margin_right = 317.0
 margin_bottom = 19.0
 custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 text = "Définir un temps par défaut pour les CM et les TD"
+
+[node name="CMDefaultTime" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox" index="4"]
+margin_top = 129.0
+margin_right = 525.0
+margin_bottom = 149.0
+custom_constants/separation = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/CMDefaultTime" index="0"]
+margin_right = 50.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="CMDefaultTimeLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/CMDefaultTime" index="1"]
+margin_left = 55.0
+margin_top = 3.0
+margin_right = 217.0
+margin_bottom = 17.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+text = "Temps par défaut des CM"
+
+[node name="CMDefaultTimeHourOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/CMDefaultTime" index="2"]
+margin_left = 222.0
+margin_right = 259.0
+margin_bottom = 20.0
+text = "0"
+items = [ "0", null, false, 0, null, "1", null, false, 1, null, "2", null, false, 2, null, "3", null, false, 3, null, "4", null, false, 4, null, "5", null, false, 5, null, "6", null, false, 6, null, "7", null, false, 7, null, "8", null, false, 8, null ]
+selected = 0
+
+[node name="hour" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/CMDefaultTime" index="3"]
+margin_left = 264.0
+margin_top = 3.0
+margin_right = 272.0
+margin_bottom = 17.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+text = "h"
+
+[node name="CMDefaultTimeMinutesOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/CMDefaultTime" index="4"]
+margin_left = 277.0
+margin_right = 322.0
+margin_bottom = 20.0
+text = "00"
+items = [ "00", null, false, 0, null, "30", null, false, 1, null ]
+selected = 0
+
+[node name="TDDefaultTime" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox" index="5"]
+margin_top = 153.0
+margin_right = 525.0
+margin_bottom = 173.0
+custom_constants/separation = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/TDDefaultTime" index="0"]
+margin_right = 50.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="TDDefaultTimeLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/TDDefaultTime" index="1"]
+margin_left = 55.0
+margin_top = 3.0
+margin_right = 218.0
+margin_bottom = 17.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+text = "Temps par défaut des TD "
+
+[node name="TDDefaultTimeHourOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/TDDefaultTime" index="2"]
+margin_left = 223.0
+margin_right = 260.0
+margin_bottom = 20.0
+text = "0"
+items = [ "0", null, false, 0, null, "1", null, false, 1, null, "2", null, false, 2, null, "3", null, false, 3, null, "4", null, false, 4, null, "5", null, false, 5, null, "6", null, false, 6, null, "7", null, false, 7, null, "8", null, false, 8, null ]
+selected = 0
+
+[node name="hour" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/TDDefaultTime" index="3"]
+margin_left = 265.0
+margin_top = 3.0
+margin_right = 273.0
+margin_bottom = 17.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+text = "h"
+
+[node name="TDDefaultTimeMinutesOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/TDDefaultTime" index="4"]
+margin_left = 278.0
+margin_right = 323.0
+margin_bottom = 20.0
+text = "00"
+items = [ "00", null, false, 0, null, "30", null, false, 1, null ]
+selected = 0
 
 [node name="PreferencesBox" type="VBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel" index="1"]
 visible = false
@@ -224,30 +335,51 @@ __meta__ = {
 
 [node name="PreferencesTitle" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox" index="0"]
 margin_right = 525.0
-margin_bottom = 21.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
 custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 custom_fonts/font = ExtResource( 7 )
 text = "Préférences"
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox" index="1"]
-margin_top = 41.0
+[node name="OpenFileExplorerBox" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox" index="1"]
+margin_top = 60.0
 margin_right = 525.0
-margin_bottom = 201.0
-rect_min_size = Vector2( 0, 160 )
+margin_bottom = 80.0
+custom_constants/separation = 15
 
-[node name="SetDefaultPreferencesLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox" index="2"]
-margin_top = 221.0
+[node name="OpenFileExplorerLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox/OpenFileExplorerBox" index="0"]
+margin_top = 3.0
+margin_right = 351.0
+margin_bottom = 17.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+text = "Ouvir le dossier contenant les fichiers de configuration"
+align = 1
+
+[node name="OpenFileExplorerBtn" type="Button" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox/OpenFileExplorerBox" index="1"]
+margin_left = 366.0
+margin_right = 418.0
+margin_bottom = 20.0
+text = "Ouvrir"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox" index="2"]
+margin_top = 100.0
 margin_right = 525.0
-margin_bottom = 235.0
+margin_bottom = 220.0
+rect_min_size = Vector2( 0, 120 )
+
+[node name="SetDefaultPreferencesLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox" index="3"]
+margin_top = 240.0
+margin_right = 525.0
+margin_bottom = 254.0
 custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 text = "Souhaitez-vous remettre les préférences d'origine ? (Action irréversible)"
 align = 1
 
-[node name="SetDefaultPreferencesBtn" type="Button" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox" index="3"]
+[node name="SetDefaultPreferencesBtn" type="Button" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox" index="4"]
 margin_left = 217.0
-margin_top = 255.0
+margin_top = 274.0
 margin_right = 307.0
-margin_bottom = 290.0
+margin_bottom = 309.0
 rect_min_size = Vector2( 90, 35 )
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -266,15 +398,16 @@ __meta__ = {
 
 [node name="SaveLoadTitle" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox" index="0"]
 margin_right = 525.0
-margin_bottom = 21.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
 custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 custom_fonts/font = ExtResource( 7 )
 text = "Sauvegardes et chargements"
 
 [node name="AutoSave" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox" index="1"]
-margin_top = 25.0
+margin_top = 44.0
 margin_right = 525.0
-margin_bottom = 49.0
+margin_bottom = 68.0
 custom_constants/separation = 5
 __meta__ = {
 "_edit_use_anchors_": false
@@ -293,9 +426,9 @@ custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 text = "Sauvegarde automatique"
 
 [node name="AutoSaveWaitTime" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox" index="2"]
-margin_top = 53.0
+margin_top = 72.0
 margin_right = 525.0
-margin_bottom = 73.0
+margin_bottom = 92.0
 custom_constants/separation = 5
 __meta__ = {
 "_edit_use_anchors_": false
@@ -316,20 +449,63 @@ text = "Sauvegarde automatique toutes les "
 
 [node name="AutoSaveWaitTimeOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox/AutoSaveWaitTime" index="2"]
 margin_left = 264.0
-margin_right = 301.0
+margin_right = 314.0
 margin_bottom = 20.0
+rect_min_size = Vector2( 50, 0 )
 disabled = true
 text = "5"
+align = 1
 items = [ "5", null, false, 0, null, "10", null, false, 1, null, "15", null, false, 2, null, "20", null, false, 3, null ]
 selected = 0
 
 [node name="AutoSaveWaitTimeLabel2" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox/AutoSaveWaitTime" index="3"]
-margin_left = 306.0
+margin_left = 319.0
 margin_top = 3.0
-margin_right = 359.0
+margin_right = 372.0
 margin_bottom = 17.0
 custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 text = "minutes"
+
+[node name="WindowBox" type="VBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel" index="3"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WindowTitle" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/WindowBox" index="0"]
+margin_right = 525.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+custom_fonts/font = ExtResource( 7 )
+text = "Fenêtres"
+
+[node name="StartWindowSize" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/WindowBox" index="1"]
+margin_top = 44.0
+margin_right = 525.0
+margin_bottom = 64.0
+custom_constants/separation = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartWindowSizeLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/WindowBox/StartWindowSize" index="0"]
+margin_top = 3.0
+margin_right = 210.0
+margin_bottom = 17.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+text = "Taille de la fenêtre au démarrage"
+
+[node name="OptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/WindowBox/StartWindowSize" index="1"]
+margin_left = 215.0
+margin_right = 375.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 160, 0 )
+text = "1280x720"
+items = [ "640x360", null, false, 0, null, "1280x720", null, false, 1, null, "1920x1080", null, false, 2, null ]
+selected = 1
 
 [node name="Foot" parent="Panel/VBoxContainer" index="2"]
 margin_top = 602.0
@@ -354,9 +530,15 @@ margin_bottom = 20.0
 text = "Fermer"
 
 [connection signal="pressed" from="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer/LessonsBtn" to="." method="_on_LessonsBtn_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer/WindowBtn" to="." method="_on_WindowBtn_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer/PreferencesBtn" to="." method="_on_PreferencesBtn_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/VBoxContainer/SaveLoadBtn" to="." method="_on_SaveLoadBtn_pressed"]
 [connection signal="toggled" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/CardIndexTop/CardIndexTopCheckBox" to="." method="_on_CardIndexTopCheckBox_toggled"]
+[connection signal="item_selected" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/CMDefaultTime/CMDefaultTimeHourOptionButton" to="." method="_on_CMDefaultTimeHourOptionButton_item_selected"]
+[connection signal="item_selected" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/CMDefaultTime/CMDefaultTimeMinutesOptionButton" to="." method="_on_CMDefaultTimeMinutesOptionButton_item_selected"]
+[connection signal="item_selected" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/TDDefaultTime/TDDefaultTimeHourOptionButton" to="." method="_on_TDDefaultTimeHourOptionButton_item_selected"]
+[connection signal="item_selected" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/TDDefaultTime/TDDefaultTimeMinutesOptionButton" to="." method="_on_TDDefaultTimeMinutesOptionButton_item_selected"]
+[connection signal="pressed" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox/OpenFileExplorerBox/OpenFileExplorerBtn" to="." method="_on_OpenFileExplorerBtn_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/PreferencesBox/SetDefaultPreferencesBtn" to="." method="_on_SetDefaultPreferencesBtn_pressed"]
 [connection signal="toggled" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox/AutoSave/AutoSaveCheckBox" to="." method="_on_AutoSaveCheckBox_toggled"]
 [connection signal="item_selected" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox/AutoSaveWaitTime/AutoSaveWaitTimeOptionButton" to="." method="_on_AutoSaveWaitTimeOptionButton_item_selected"]

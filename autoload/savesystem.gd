@@ -17,19 +17,27 @@ func _ready():
 func save_preferences(path:String = "user://preferences.tres") ->void:
 	var save := SavePreferences.new()
 	save.data = Preferences.get_data()
+	save.version = version
 	ResourceSaver.save(path, save)
 	
 func load_preferences(path:String = "user://preferences.tres") ->void:
 	var file = File.new()
 	if not file.file_exists("user://default_preferences.tres"):
-		print("ERROR: default preferences file doesn't exist !")
+		print_debug("ERROR: default preferences file doesn't exist !")
 		save_preferences("user://default_preferences.tres")
 		return
 	if not file.file_exists("user://preferences.tres"):
 		path = "user://default_preferences.tres"
 	var save : Resource = load(path)
+	if version != save.version:
+		var dir = Directory.new()
+		dir.remove("user://preferences.tres")
+		dir.remove("user://default_preferences.tres")
+		load_preferences()
+		return
 	Preferences.set_data(save.data)
 	Signals.emit_signal("preferences_loaded")
+	print("Preferences loaded")
 
 
 

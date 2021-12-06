@@ -96,15 +96,15 @@ config/name="Schedule Manager"
 run/main_scene="res://tscn/Main.tscn"
 config/icon="res://assets/icon.png"
 config/windows_native_icon="res://assets/icon.ico"
-config/version=0.41
+config/version=0.43
 
 [autoload]
 
 Global="*res://autoload/global.gd"
 Signals="*res://autoload/Signals.gd"
+Preferences="*res://autoload/Preferences.gd"
 SaveSystem="*res://autoload/savesystem.gd"
 GetNode="*res://autoload/GetNode.gd"
-Preferences="*res://autoload/Preferences.gd"
 
 [display]
 

@@ -18,7 +18,7 @@ onready var autosave : Timer = $AutoSave
 
 
 func _ready() -> void:
-	SaveSystem.load_preferences()
+	OS.set_window_size(Vector2(1920, 1080))
 	Global.new_subject_button.connect("pressed", self, "_show_new_subject_dialog")
 	Global.new_lesson_button.connect("pressed", self, "_show_new_lesson_dialog")
 	header.connect("export_json_pressed", self, "_open_export_dialog")
@@ -51,6 +51,7 @@ func _on_AutoSave_timeout():
 func _show_new_lesson_dialog() ->void:
 	new_lesson_dialog.check_subject_lesson_database()
 	new_lesson_dialog.reset_default_GUI()
+	new_lesson_dialog.set_lesson_duration()
 	new_lesson_dialog.show()
 
 func _show_new_subject_dialog() ->void:

@@ -64,5 +64,6 @@ flat = true
 margin_left = 124.0
 margin_right = 244.0
 
+[connection signal="item_selected" from="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/TypeOptionButton" to="." method="_on_TypeOptionButton_item_selected"]
 [connection signal="color_picked" from="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/ColorGrid" to="." method="_on_ColorGrid_color_picked"]
 [connection signal="pressed" from="Panel/VBoxContainer/Foot/HBoxContainer/CreateButton" to="." method="_on_CreateButton_pressed"]

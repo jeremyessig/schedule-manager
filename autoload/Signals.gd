@@ -27,3 +27,4 @@ signal save_as_pressed ## Head ->
 
 
 signal preferences_loaded
+signal preferences_shown
