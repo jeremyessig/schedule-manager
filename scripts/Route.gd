@@ -9,6 +9,8 @@ onready var location_B_line_edit : LineEdit = $LocationBLineEdit
 onready var hour_line_edit : LineEdit = $TimeContainer/HourLineEdit
 onready var minute_line_edit : LineEdit = $TimeContainer/MinuteLineEdit
 
+func _ready():
+	Signals.connect("error_confirmed", self, "_on_error_confirmed")
 
 func set_location_A(value:String) ->void:
 	location_A = value
@@ -61,7 +63,13 @@ func _refresh_GUI() ->void:
 	minute_line_edit.text = time_table[1]
 
 
+func _on_error_confirmed(error, node_path):
+	if get_path() != node_path:
+		return
+	match error:
+		"ConfirmDeletion":
+			delete()
 
 
 func _on_DeleteBtn_pressed():
-	delete()
+	Signals.emit_signal("error_emitted", "ConfirmDeletion", get_path())

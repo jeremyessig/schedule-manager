@@ -140,6 +140,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LessonsBox" type="VBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel" index="0"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -383,7 +384,6 @@ custom_styles/normal = ExtResource( 6 )
 text = "OUI"
 
 [node name="SaveLoadBox" type="VBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel" index="2"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -459,6 +459,26 @@ margin_right = 372.0
 margin_bottom = 17.0
 custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 text = "minutes"
+
+[node name="LastResFileLoaded" type="VBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox" index="3"]
+margin_top = 96.0
+margin_right = 525.0
+margin_bottom = 139.0
+custom_constants/separation = 5
+
+[node name="LastResFileLoadedLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox/LastResFileLoaded" index="0"]
+margin_right = 525.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+text = "Chemin du dernier fichier ouvert"
+
+[node name="LastResFileLoadedLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox/LastResFileLoaded" index="1"]
+margin_top = 19.0
+margin_right = 525.0
+margin_bottom = 43.0
+custom_colors/font_color = Color( 0.6, 0.6, 0.6, 1 )
+editable = false
+selecting_enabled = false
 
 [node name="WindowBox" type="VBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel" index="3"]
 visible = false

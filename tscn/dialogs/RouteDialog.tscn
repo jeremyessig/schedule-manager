@@ -1,34 +1,198 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://tscn/Dialog.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/DistancesDialog.gd" type="Script" id=2]
 [ext_resource path="res://res/Helvetica_bold.tres" type="DynamicFont" id=3]
 [ext_resource path="res://res/panels/panel_as_container.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/icons/walkig_guy.png" type="Texture" id=5]
+[ext_resource path="res://res/buttons/default_button_disabled.tres" type="StyleBox" id=6]
+[ext_resource path="res://res/buttons/default_green_button_normal.tres" type="StyleBox" id=7]
+[ext_resource path="res://res/buttons/default_green_button_pressed.tres" type="StyleBox" id=8]
+[ext_resource path="res://res/buttons/default_green_button_hover.tres" type="StyleBox" id=9]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel/VBoxContainer/Body/BodyVContainer/Notifications:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "Veuillez indiquer une durée de trajet valide !" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel/VBoxContainer/Body/BodyVContainer/Notifications:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.803922, 0.117647, 0.117647, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel/VBoxContainer/Body/BodyVContainer/Notifications:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "already_saved"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel/VBoxContainer/Body/BodyVContainer/Notifications:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "Ce trajet est déjà enregistré !", "" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel/VBoxContainer/Body/BodyVContainer/Notifications:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.803922, 0.117647, 0.117647, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel/VBoxContainer/Body/BodyVContainer/Notifications:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 4.8, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "wrong_destination"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel/VBoxContainer/Body/BodyVContainer/Notifications:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "Veuillez entrer une destination valide !", "" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel/VBoxContainer/Body/BodyVContainer/Notifications:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.803922, 0.117647, 0.117647, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel/VBoxContainer/Body/BodyVContainer/Notifications:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 4.8, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "wrong_time"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel/VBoxContainer/Body/BodyVContainer/Notifications:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "Veuillez indiquer une durée de trajet valide !", "" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel/VBoxContainer/Body/BodyVContainer/Notifications:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.803922, 0.117647, 0.117647, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel/VBoxContainer/Body/BodyVContainer/Notifications:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 4.8, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [node name="RouteDialog" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="Panel" parent="." index="1"]
 margin_left = -496.5
-margin_top = -304.0
+margin_top = -320.0
 margin_right = 496.5
-margin_bottom = 304.0
+margin_bottom = 320.0
 
 [node name="Head" parent="Panel/VBoxContainer" index="0"]
 margin_right = 993.0
 
 [node name="Title" parent="Panel/VBoxContainer/Head" index="0"]
-text = "Configuration des distances entre les lieux d'étude"
+text = "Configuration des temps de trajet entre les lieux d'étude"
 
 [node name="Body" parent="Panel/VBoxContainer" index="1"]
 margin_right = 993.0
-margin_bottom = 548.0
+margin_bottom = 580.0
 
 [node name="BodyVContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Body" index="0"]
 margin_left = 36.0
-margin_top = 18.0
+margin_top = 19.0
 margin_right = 956.0
-margin_bottom = 484.0
+margin_bottom = 515.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 5
@@ -47,7 +211,7 @@ margin_bottom = 406.0
 rect_min_size = Vector2( 920, 380 )
 custom_styles/panel = ExtResource( 4 )
 
-[node name="ListOfRoutes" type="VBoxContainer" parent="Panel/VBoxContainer/Body/BodyVContainer/ListOfRoutesPanel" index="0"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/Body/BodyVContainer/ListOfRoutesPanel" index="0"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -57,6 +221,14 @@ margin_top = -180.0
 margin_right = 450.0
 margin_bottom = 180.0
 rect_min_size = Vector2( 900, 360 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ListOfRoutes" type="VBoxContainer" parent="Panel/VBoxContainer/Body/BodyVContainer/ListOfRoutesPanel/ScrollContainer" index="2"]
+margin_right = 900.0
+margin_bottom = 360.0
+rect_min_size = Vector2( 900, 360 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
@@ -64,41 +236,63 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NoRouteLabel" type="Label" parent="Panel/VBoxContainer/Body/BodyVContainer/ListOfRoutesPanel/ListOfRoutes" index="0"]
-margin_left = 379.0
-margin_top = 173.0
-margin_right = 520.0
-margin_bottom = 187.0
+[node name="NoRouteContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body/BodyVContainer/ListOfRoutesPanel/ScrollContainer/ListOfRoutes" index="0"]
+margin_left = 361.0
+margin_top = 164.0
+margin_right = 538.0
+margin_bottom = 196.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="NoRouteLabel" type="Label" parent="Panel/VBoxContainer/Body/BodyVContainer/ListOfRoutesPanel/ScrollContainer/ListOfRoutes/NoRouteContainer" index="0"]
+margin_top = 9.0
+margin_right = 141.0
+margin_bottom = 23.0
 size_flags_horizontal = 4
 size_flags_vertical = 6
 custom_colors/font_color = Color( 0.6, 0.6, 0.6, 1 )
 text = "Aucun trajet configuré"
 align = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Body/BodyVContainer" index="2"]
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer/Body/BodyVContainer/ListOfRoutesPanel/ScrollContainer/ListOfRoutes/NoRouteContainer" index="1"]
+margin_left = 145.0
+margin_right = 177.0
+margin_bottom = 32.0
+texture = ExtResource( 5 )
+
+[node name="Notifications" type="Label" parent="Panel/VBoxContainer/Body/BodyVContainer" index="2"]
+self_modulate = Color( 1, 1, 1, 0 )
 margin_top = 411.0
 margin_right = 920.0
-margin_bottom = 421.0
-rect_min_size = Vector2( 0, 10 )
+margin_bottom = 451.0
+rect_min_size = Vector2( 0, 40 )
+custom_colors/font_color = Color( 0.803922, 0.117647, 0.117647, 1 )
+text = "Veuillez indiquer une durée de trajet valide !"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="NewConnectionContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body/BodyVContainer" index="3"]
-margin_top = 426.0
+margin_top = 456.0
 margin_right = 920.0
-margin_bottom = 466.0
+margin_bottom = 496.0
 rect_min_size = Vector2( 800, 40 )
 custom_constants/separation = 35
 alignment = 1
 
 [node name="NewLocationAOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer" index="0"]
-margin_left = 70.0
-margin_right = 290.0
+margin_left = 54.0
+margin_right = 274.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 220, 40 )
+text = "Aucun établissement"
 align = 1
 
 [node name="TimeContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer" index="1"]
-margin_left = 325.0
-margin_right = 501.0
+margin_left = 309.0
+margin_right = 485.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -131,22 +325,45 @@ items = [ "00", null, false, 0, null, "30", null, false, 1, null ]
 selected = 0
 
 [node name="NewLocationBOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer" index="2"]
-margin_left = 536.0
-margin_right = 756.0
+margin_left = 520.0
+margin_right = 740.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 220, 40 )
+text = "Aucun établissement"
 align = 1
 
 [node name="AddNewRouteBtn" type="Button" parent="Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer" index="3"]
-margin_left = 791.0
-margin_right = 850.0
+margin_left = 775.0
+margin_right = 865.0
 margin_bottom = 40.0
+rect_min_size = Vector2( 90, 0 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/normal = ExtResource( 7 )
+enabled_focus_mode = 0
+text = "Ajouter"
+
+[node name="AddNewRouteBtnDisabled" type="Button" parent="Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer" index="4"]
+visible = false
+margin_left = 834.0
+margin_right = 901.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 90, 0 )
+focus_mode = 0
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+enabled_focus_mode = 0
 text = "Ajouter"
 
 [node name="Foot" parent="Panel/VBoxContainer" index="2"]
-margin_top = 548.0
+margin_top = 580.0
 margin_right = 993.0
-margin_bottom = 608.0
+margin_bottom = 640.0
 
 [node name="CloseBtn" type="Button" parent="Panel/VBoxContainer/Foot" index="0"]
 margin_left = 467.0
@@ -155,5 +372,15 @@ margin_right = 525.0
 margin_bottom = 40.0
 text = "Fermer"
 
+[node name="NotificationsPlayer" type="AnimationPlayer" parent="." index="2"]
+anims/RESET = SubResource( 1 )
+anims/already_saved = SubResource( 3 )
+anims/wrong_destination = SubResource( 4 )
+anims/wrong_time = SubResource( 2 )
+
+[connection signal="item_selected" from="Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer/NewLocationAOptionButton" to="." method="_on_NewLocationAOptionButton_item_selected"]
+[connection signal="item_selected" from="Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer/TimeContainer/NewHourTimeOptionButton" to="." method="_on_NewHourTimeOptionButton_item_selected"]
+[connection signal="item_selected" from="Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer/TimeContainer/NewMinuteTimeOptionButton" to="." method="_on_NewMinuteTimeOptionButton_item_selected"]
+[connection signal="item_selected" from="Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer/NewLocationBOptionButton" to="." method="_on_NewLocationBOptionButton_item_selected"]
 [connection signal="pressed" from="Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer/AddNewRouteBtn" to="." method="_on_AddNewRouteBtn_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Foot/CloseBtn" to="." method="_on_CloseBtn_pressed"]

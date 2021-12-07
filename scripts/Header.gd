@@ -5,7 +5,7 @@ signal import_json_pressed
 signal export_csv_pressed
 signal about_pressed
 signal open_save_pressed
-signal route_pressed
+#signal route_pressed
 signal preferences_pressed
 
 onready var file : MenuButton = $HBoxContainer/Toolbar/FileMenuButton
@@ -33,10 +33,14 @@ func _on_file_item_pressed(id)->void:
 			pass
 			emit_signal("open_save_pressed")
 		2:
-			SaveSystem.save_to_res()
+			if Preferences.last_res_file_loaded == "":
+				return
+			SaveSystem.load_from_res(Preferences.last_res_file_loaded)
 		3:
-			Signals.emit_signal("save_as_pressed")
+			SaveSystem.save_to_res()
 		4:
+			Signals.emit_signal("save_as_pressed")
+		5:
 			emit_signal("export_csv_pressed")
 
 func _on_database_item_pressed(id)->void:
@@ -72,7 +76,8 @@ func _on_settings_item_pressed(id)->void:
 			emit_signal("preferences_pressed")
 			Signals.emit_signal("preferences_shown")
 		1:
-			emit_signal("route_pressed")
+#			emit_signal("route_pressed")
+			Signals.emit_signal("dialog_route_shown")
 
 func _on_help_item_pressed(id)->void:
 	match id:

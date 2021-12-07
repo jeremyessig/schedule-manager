@@ -133,7 +133,7 @@ rect_min_size = Vector2( 10, 0 )
 
 [node name="Toolbar" type="HBoxContainer" parent="HBoxContainer"]
 margin_left = 10.0
-margin_right = 1780.0
+margin_right = 1820.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -149,7 +149,7 @@ focus_mode = 2
 custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Fichier"
-items = [ "Nouvel emploi du temps", null, 0, false, false, 0, 0, null, "", false, "Ouvrir (Ctrl+O)", null, 0, false, false, 1, 0, null, "", false, "Enregistrer (Ctrl+S)", null, 0, false, false, 2, 0, null, "", false, "Enregistrer sous...", null, 0, false, false, 3, 0, null, "", false, "Exporter pour Google Agenda", null, 0, false, false, 4, 0, null, "", false ]
+items = [ "Nouvel emploi du temps", null, 0, false, false, 0, 0, null, "", false, "Ouvrir (Ctrl+O)", null, 0, false, false, 1, 0, null, "", false, "Dernier fichier ouvert (Ctrl+Shift+O)", null, 0, false, false, 2, 0, null, "", false, "Enregistrer (Ctrl+S)", null, 0, false, false, 3, 0, null, "", false, "Enregistrer sous...", null, 0, false, false, 4, 0, null, "", false, "Exporter pour Google Agenda", null, 0, false, false, 5, 0, null, "", false ]
 switch_on_hover = true
 
 [node name="EditionMenuButton" type="MenuButton" parent="HBoxContainer/Toolbar"]
@@ -192,7 +192,7 @@ focus_mode = 2
 custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Paramètres"
-items = [ "Préférences", null, 0, false, false, 0, 0, null, "", false, "Configurer les trajets", null, 0, false, false, 1, 0, null, "", false ]
+items = [ "Préférences", null, 0, false, false, 0, 0, null, "", false, "Configurer les trajets Ctrl+Shift+T", null, 0, false, false, 1, 0, null, "", false ]
 switch_on_hover = true
 
 [node name="HelpMenuButton" type="MenuButton" parent="HBoxContainer/Toolbar"]
@@ -208,7 +208,7 @@ switch_on_hover = true
 
 [node name="Notifications" type="Label" parent="HBoxContainer"]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_left = 1780.0
+margin_left = 1820.0
 margin_right = 1920.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 100, 0 )

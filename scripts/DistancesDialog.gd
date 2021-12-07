@@ -3,12 +3,15 @@ extends Control
 var route = load("res://tscn/prefabs/Route.tscn")
 var AddNewRouteBtn_pressed : bool = false
 
-onready var list_of_routes : VBoxContainer = $Panel/VBoxContainer/Body/BodyVContainer/ListOfRoutesPanel/ListOfRoutes
+onready var list_of_routes : VBoxContainer = $Panel/VBoxContainer/Body/BodyVContainer/ListOfRoutesPanel/ScrollContainer/ListOfRoutes
 onready var new_location_A_OptionButton : OptionButton = $Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer/NewLocationAOptionButton
 onready var new_location_B_OptionButton : OptionButton = $Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer/NewLocationBOptionButton
 onready var new_hour_OptionButton : OptionButton = $Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer/TimeContainer/NewHourTimeOptionButton
 onready var new_minute_OptionButton : OptionButton = $Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer/TimeContainer/NewMinuteTimeOptionButton
-onready var no_route_label : Label = $Panel/VBoxContainer/Body/BodyVContainer/ListOfRoutesPanel/ListOfRoutes/NoRouteLabel
+onready var no_route_container : HBoxContainer = $Panel/VBoxContainer/Body/BodyVContainer/ListOfRoutesPanel/ScrollContainer/ListOfRoutes/NoRouteContainer
+onready var add_new_route_btn : Button = $Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer/AddNewRouteBtn
+onready var add_new_route_btn_disabled : Button = $Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer/AddNewRouteBtnDisabled
+onready var notifications_player : AnimationPlayer = $NotificationsPlayer
 
 func _ready():
 	Signals.connect("locations_database_updated", self, "refresh_GUI")
@@ -16,12 +19,15 @@ func _ready():
 	Signals.connect("locations_database_updated", self, "reset_inputs")
 	Signals.connect("locations_database_updated", self, "load_res")
 	Signals.connect("route_deleted", self, "_set_NoRouteLabel")
+	Signals.connect("dialog_route_shown", self, "_shown")
 
 
+func _shown() ->void:
+	refresh_GUI()
 
 ##________________________ Create a new route_____________________________
 func add_route(data:Dictionary) ->void:
-	no_route_label.hide()
+	no_route_container.hide()
 	var new_route = route.instance()
 	list_of_routes.add_child(new_route)
 	new_route.init_values(data)
@@ -87,26 +93,30 @@ func is_new_route_valid(data_from_user:Dictionary) ->bool:
 func refresh_GUI() ->void:
 	Global.update_option_button(new_location_A_OptionButton, Global.locations_database)
 	Global.update_option_button(new_location_B_OptionButton, Global.locations_database)
+	if Global.locations_database.empty():
+		new_location_A_OptionButton.text = "Aucun établissement"
+		new_location_B_OptionButton.text = "Aucun établissement"
+	set_AddNewRouteBtn()
 
 
 func _set_NoRouteLabel() ->void:
 	print(list_of_routes.get_child_count())
 	if list_of_routes.get_child_count() == 2:
-		no_route_label.show()
+		no_route_container.show()
 
 func reset_GUI(database_name:String="") ->void:
 	clear_inputs()
 	for child in list_of_routes.get_children():
-		if child is HBoxContainer:
+		if child.name != "NoRouteContainer":
 			child.queue_free()
-	no_route_label.show()
+	no_route_container.show()
 
 
 func clear_inputs():
 	new_location_A_OptionButton.clear()
 	new_location_B_OptionButton.clear()
 	reset_inputs()
-	
+
 
 func reset_inputs() ->void:
 	if new_location_A_OptionButton.get_item_count() != 0:
@@ -118,7 +128,32 @@ func reset_inputs() ->void:
 	if new_minute_OptionButton.get_item_count() != 0:
 		new_minute_OptionButton.select(0)
 
+func set_AddNewRouteBtn() ->void:
+	_disabled_AddNewRouteBtn()
+	if Global.locations_database.empty():
+		return
+	if new_location_A_OptionButton.get_selected_id() == new_location_B_OptionButton.get_selected_id():
+		notifications_player.play("wrong_destination")
+		return
+	if Global.get_item_string(new_hour_OptionButton) == "0" and Global.get_item_string(new_minute_OptionButton) == "00":
+		notifications_player.play("wrong_time")
+		return
+	var data_from_user :Dictionary = get_data_from_user()
+	if !is_new_route_valid(data_from_user):
+		notifications_player.play("already_saved")
+		return
+	notifications_player.play("RESET")
+	_enabled_AddNewRouteBtn()
 
+
+func _disabled_AddNewRouteBtn() ->void:
+		add_new_route_btn.hide()
+		add_new_route_btn_disabled.show()
+		
+func _enabled_AddNewRouteBtn() ->void:
+	add_new_route_btn_disabled.hide()
+	add_new_route_btn.show()
+	
 ##_________________ Methodes connectees________________________
 
 func _on_CloseBtn_pressed():
@@ -127,8 +162,25 @@ func _on_CloseBtn_pressed():
 
 func _on_AddNewRouteBtn_pressed():
 	var data_from_user :Dictionary = get_data_from_user()
-	if !is_new_route_valid(data_from_user):
-		return
+#	if !is_new_route_valid(data_from_user):
+#		return
 	AddNewRouteBtn_pressed = true
 	add_to_database(data_from_user)
 	add_route(data_from_user)
+	_disabled_AddNewRouteBtn()
+
+
+func _on_NewLocationAOptionButton_item_selected(index):
+	set_AddNewRouteBtn()
+
+
+func _on_NewLocationBOptionButton_item_selected(index):
+	set_AddNewRouteBtn()
+
+
+func _on_NewMinuteTimeOptionButton_item_selected(index):
+	set_AddNewRouteBtn()
+
+
+func _on_NewHourTimeOptionButton_item_selected(index):
+	set_AddNewRouteBtn()

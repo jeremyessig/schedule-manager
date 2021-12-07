@@ -14,6 +14,7 @@ onready var CM_default_time_minutes_optionbutton: OptionButton = $Panel/VBoxCont
 onready var TD_default_time_hour_optionbutton : OptionButton = $Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/TDDefaultTime/TDDefaultTimeHourOptionButton
 onready var TD_default_time_minutes_optionbutton: OptionButton = $Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/TDDefaultTime/TDDefaultTimeMinutesOptionButton
 onready var start_window_size_optionbutton : OptionButton = $Panel/VBoxContainer/Body/HBoxContainer/RightPanel/WindowBox/StartWindowSize/StartWindowSizeOptionButton
+onready var last_res_file_loaded_lineedit : LineEdit = $Panel/VBoxContainer/Body/HBoxContainer/RightPanel/SaveLoadBox/LastResFileLoaded/LastResFileLoadedLineEdit
 
 onready var right_panel : Control = $Panel/VBoxContainer/Body/HBoxContainer/RightPanel
 onready var lessons_box : VBoxContainer = $Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox
@@ -74,6 +75,7 @@ func refresh_GUI() -> void:
 	TD_default_time_minutes_optionbutton.selected = Global.find_item_string(TD_default_time_minutes_optionbutton, TD_time[1])
 	refresh_autosave_wait_time_optionbutton()
 	refresh_start_window_size_optionbutton()
+	last_res_file_loaded_lineedit.text = Preferences.last_res_file_loaded
 
 
 func refresh_autosave_wait_time_optionbutton():

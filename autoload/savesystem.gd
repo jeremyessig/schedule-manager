@@ -98,6 +98,8 @@ func load_from_res(path) -> void:
 		Global.left_panel.create_lesson_card(node_data)
 	last_opened_path = path
 	path_to_save = path
+	Preferences.last_res_file_loaded = path
+	save_preferences()
 	
 	
 		

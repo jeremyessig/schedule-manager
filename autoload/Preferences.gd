@@ -8,6 +8,7 @@ var CM_default_duration : int = 0 setget set_CM_default_duration
 var TD_default_duration : int = 0 setget set_TD_default_duration
 var start_window_size : Vector2 = Vector2(1280,720) setget set_start_window_size
 var tutorial_popup : bool = true setget set_tutorial_popup
+var last_res_file_loaded : String setget set_last_res_file_loaded
 
 func set_card_index_top(value:bool) ->void:
 	card_index_top = value
@@ -30,6 +31,9 @@ func set_start_window_size(value:Vector2) ->void:
 	
 func set_tutorial_popup(value:bool) ->void:
 	tutorial_popup = value
+	
+func set_last_res_file_loaded(value:String) ->void:
+	last_res_file_loaded = value
 
 
 
@@ -41,7 +45,8 @@ func get_data() -> Dictionary:
 		"CM_default_duration": CM_default_duration,
 		"TD_default_duration": TD_default_duration,
 		"start_window_size": var2str(Vector2(start_window_size)),
-		"tutorial_popup": tutorial_popup
+		"tutorial_popup": tutorial_popup,
+		"last_res_file_loaded": last_res_file_loaded
 	}
 	return data
 
@@ -54,3 +59,4 @@ func set_data(data:Dictionary) -> void:
 	set_TD_default_duration(data["TD_default_duration"])
 	set_start_window_size(str2var(data["start_window_size"]) as Vector2)
 	set_tutorial_popup(data["tutorial_popup"])
+	set_last_res_file_loaded(data["last_res_file_loaded"])

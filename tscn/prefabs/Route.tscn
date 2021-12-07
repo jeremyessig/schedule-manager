@@ -70,8 +70,9 @@ caret_blink_speed = 0.5
 
 [node name="DeleteBtn" type="Button" parent="."]
 margin_left = 721.0
-margin_right = 807.0
+margin_right = 811.0
 margin_bottom = 40.0
+rect_min_size = Vector2( 90, 0 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 2 )

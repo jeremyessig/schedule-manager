@@ -26,6 +26,16 @@ func get_item_index_by_string(node:OptionButton, content:String) -> int:
 			return node.get_item_index(item)
 	return 0
 
+##___________ Message d'erreur_____________________
+func _on_error_confirmed(error, node_path):
+	if get_path() != node_path:
+		return
+	match error:
+		"ConfirmDeletion":
+			delete_lesson_card()
+
+
+
 ##_______________Affiche les informations de la card_lesson______________________
 func _open_dialog(nodepath:NodePath) ->void:
 	_show_edit_lesson_dialog()
@@ -87,15 +97,6 @@ func edit_lesson() ->void:
 	data["color"] = card_color
 	data["is_displayed"] = lesson_card.is_displayed
 	Signals.emit_signal("lesson_edited", data, old_id)
-
-
-func _on_error_confirmed(error, node_path):
-	print("1")
-	if get_path() != node_path:
-		return
-	match error:
-		"ConfirmDeletion":
-			delete_lesson_card()
 			
 
 

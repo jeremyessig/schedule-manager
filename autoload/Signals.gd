@@ -25,6 +25,10 @@ signal routes_database_updated
 signal save_as_pressed ## Head ->
 signal data_saved
 
+##________Affichage des fenetres de dialog_____
+signal dialog_route_shown
+
+
 ##_______ Messages d'erreur____________
 signal error_emitted(error_name, node_path)
 signal error_confirmed(error_name, node_path)

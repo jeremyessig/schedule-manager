@@ -28,7 +28,8 @@ func _ready() -> void:
 	header.connect("about_pressed", self, "_open_about_dialog")
 	Signals.connect("save_as_pressed", self, "_open_save_as_dialog")
 	header.connect("open_save_pressed", self, "_open_open_save_dialog")
-	header.connect("route_pressed", self, "_on_open_route_dialog")
+#	header.connect("route_pressed", self, "_on_open_route_dialog")
+	Signals.connect("dialog_route_shown", self, "_on_open_route_dialog")
 	header.connect("preferences_pressed", self, "_on_open_preferences_dialog")
 
 
@@ -42,8 +43,18 @@ func _centering_screen(screen_size:Vector2) ->void:
 func _unhandled_input(event):
 	if event.is_action_pressed("save"):
 		SaveSystem.save_to_res()
+		return
+	if event.is_action_pressed("last_file_opened"):
+		if Preferences.last_res_file_loaded == "":
+			return
+		SaveSystem.load_from_res(Preferences.last_res_file_loaded)
+		return
 	if event.is_action_pressed("open_saves"):
 		open_save_dialog.popup_centered()
+		return
+	if event.is_action_pressed("show_route_dialog"):
+		Signals.emit_signal("dialog_route_shown")
+		return
 
 
 func _on_AutoSave_timeout():
