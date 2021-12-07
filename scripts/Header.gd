@@ -14,6 +14,8 @@ onready var help : MenuButton = $HBoxContainer/Toolbar/HelpMenuButton
 onready var display_menu : MenuButton = $HBoxContainer/Toolbar/DisplayMenuButton
 onready var settings_menu : MenuButton = $HBoxContainer/Toolbar/SettingsMenuButton
 
+onready var notifications : Label = $HBoxContainer/Notifications
+onready var notifications_player : AnimationPlayer = $NotificationsPlayer
 
 func _ready() -> void:
 	file.get_popup().connect("id_pressed", self, "_on_file_item_pressed")
@@ -21,6 +23,7 @@ func _ready() -> void:
 	help.get_popup().connect("id_pressed", self, "_on_help_item_pressed")
 	display_menu.get_popup().connect("id_pressed", self, "_on_display_item_pressed")
 	settings_menu.get_popup().connect("id_pressed", self, "_on_settings_item_pressed")
+	Signals.connect("data_saved", self, "_on_play_notif_data_saved")
 
 func _on_file_item_pressed(id)->void:
 	match id:
@@ -81,3 +84,7 @@ func _on_help_item_pressed(id)->void:
 			OS.shell_open("mailto:schedulemanagerforuniversity@gmail.com")
 		3:
 			emit_signal("about_pressed")
+
+
+func _on_play_notif_data_saved() ->void:
+	notifications_player.play("saving")

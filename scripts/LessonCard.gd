@@ -45,6 +45,7 @@ onready var displayed_field := $VBoxContainer/HBoxContainer/VBoxContainer/GridCo
 onready var stars_container := $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/StarsContainer
 onready var location_field : Label = $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/LocationField
 onready var note_field : Label = $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/NoteField
+onready var grid_container : GridContainer = $VBoxContainer/HBoxContainer/VBoxContainer/GridContainer
 
 
 
@@ -230,12 +231,12 @@ func _refresh_rating_gui():
 			star.show()
 
 func refresh_is_in_conflict_GUI():
-	print("refresh_is_in_conflict_GUI")
 	if is_in_conflict:
 		self.add_stylebox_override("normal", _conflict_lesson_bg)
+		self.set_card_labels_font_color("FFFFFF")
 	else:
 		_update_background()
-	
+		self.set_card_labels_font_color("#383838")	
 	
 func update_color(color:String) -> void:
 	var new_style = StyleBoxFlat.new()
@@ -243,6 +244,11 @@ func update_color(color:String) -> void:
 	new_style.set_corner_radius_individual(10,10,0,0)
 	header_panel.set('custom_styles/panel', new_style)
 
+
+func set_card_labels_font_color(color:String) ->void:
+	for label in grid_container.get_children():
+		if label is Label:
+			label.set("custom_colors/font_color", Color(color))
 
 func _update_background():
 	if is_displayed:

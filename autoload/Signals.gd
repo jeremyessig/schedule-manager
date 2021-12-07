@@ -24,6 +24,7 @@ signal disciplines_database_updated
 signal routes_database_updated
 
 signal save_as_pressed ## Head ->
+signal data_saved
 
 
 signal preferences_loaded

@@ -70,6 +70,7 @@ func save_to_res(path:String = "") -> void:
 		save.data.append(node.save_to_res())
 	ResourceSaver.save(path, save)
 	path_to_save = path
+	Signals.emit_signal("data_saved")
 
 
 func load_from_res(path) -> void:

@@ -456,22 +456,22 @@ rect_min_size = Vector2( 80, 0 )
 text = "Discipline"
 
 [node name="SubjectBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="1"]
-margin_left = 271.0
-margin_right = 391.0
+margin_left = 172.0
+margin_right = 292.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 120, 0 )
 text = "Matières"
 
 [node name="LessonBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="2"]
-margin_left = 354.0
-margin_right = 434.0
+margin_left = 307.0
+margin_right = 427.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 120, 0 )
 text = "Cours"
 
 [node name="LocationBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="3"]
-margin_left = 417.0
-margin_right = 537.0
+margin_left = 442.0
+margin_right = 562.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 120, 0 )
 text = "Lieux"

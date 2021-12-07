@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://tscn/dialogs/LessonDialog.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/NewLessonDialog.gd" type="Script" id=2]
@@ -7,8 +7,16 @@
 [ext_resource path="res://res/buttons/default_green_button_hover.tres" type="StyleBox" id=5]
 [ext_resource path="res://res/buttons/default_green_button_pressed.tres" type="StyleBox" id=6]
 
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.117647, 0.564706, 1, 1 )
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+
 [node name="NewLessonDialog" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="Head" parent="Panel/VBoxContainer" index="0"]
+custom_styles/panel = SubResource( 1 )
 
 [node name="Title" parent="Panel/VBoxContainer/Head" index="0"]
 autowrap = false
