@@ -8,7 +8,7 @@
 [node name="Route" type="HBoxContainer"]
 margin_right = 799.0
 margin_bottom = 40.0
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 custom_constants/separation = 35
 script = ExtResource( 1 )
 __meta__ = {

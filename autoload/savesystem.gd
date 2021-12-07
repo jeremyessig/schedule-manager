@@ -78,9 +78,7 @@ func load_from_res(path) -> void:
 		Signals.emit_signal("error_emitted", "LoadingWrongFormat" ,null)
 		return
 	var file = File.new()
-	for lesson_card in get_tree().get_nodes_in_group("lesson_cards"):
-		lesson_card.delete()
-	Global.reset_databases()
+	yield(Util.reset_program(), "completed")
 	if not file.file_exists(path):
 		print("ERROR: file doesn't exist !")
 		return

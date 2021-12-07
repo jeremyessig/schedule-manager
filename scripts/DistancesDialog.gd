@@ -3,22 +3,25 @@ extends Control
 var route = load("res://tscn/prefabs/Route.tscn")
 var AddNewRouteBtn_pressed : bool = false
 
-onready var list_of_routes : VBoxContainer = $Panel/VBoxContainer/Body/BodyVContainer/ListOfRoutes
+onready var list_of_routes : VBoxContainer = $Panel/VBoxContainer/Body/BodyVContainer/ListOfRoutesPanel/ListOfRoutes
 onready var new_location_A_OptionButton : OptionButton = $Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer/NewLocationAOptionButton
 onready var new_location_B_OptionButton : OptionButton = $Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer/NewLocationBOptionButton
 onready var new_hour_OptionButton : OptionButton = $Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer/TimeContainer/NewHourTimeOptionButton
 onready var new_minute_OptionButton : OptionButton = $Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer/TimeContainer/NewMinuteTimeOptionButton
+onready var no_route_label : Label = $Panel/VBoxContainer/Body/BodyVContainer/ListOfRoutesPanel/ListOfRoutes/NoRouteLabel
 
 func _ready():
 	Signals.connect("locations_database_updated", self, "refresh_GUI")
 	Signals.connect("database_reseted", self, "reset_GUI")
 	Signals.connect("locations_database_updated", self, "reset_inputs")
 	Signals.connect("locations_database_updated", self, "load_res")
+	Signals.connect("route_deleted", self, "_set_NoRouteLabel")
 
 
 
 ##________________________ Create a new route_____________________________
 func add_route(data:Dictionary) ->void:
+	no_route_label.hide()
 	var new_route = route.instance()
 	list_of_routes.add_child(new_route)
 	new_route.init_values(data)
@@ -54,7 +57,7 @@ func are_fields_empty() ->bool:
 
 func add_to_database(data) ->void:
 	Global.add_to_routes_database(data["location_A"], data["location_B"], data["time"])
-	print_debug(Global.routes_database)
+#	print_debug(Global.routes_database)
 
 
 func load_res() ->void:
@@ -85,10 +88,18 @@ func refresh_GUI() ->void:
 	Global.update_option_button(new_location_A_OptionButton, Global.locations_database)
 	Global.update_option_button(new_location_B_OptionButton, Global.locations_database)
 
+
+func _set_NoRouteLabel() ->void:
+	print(list_of_routes.get_child_count())
+	if list_of_routes.get_child_count() == 2:
+		no_route_label.show()
+
 func reset_GUI(database_name:String="") ->void:
 	clear_inputs()
 	for child in list_of_routes.get_children():
-		child.queue_free()
+		if child is HBoxContainer:
+			child.queue_free()
+	no_route_label.show()
 
 
 func clear_inputs():

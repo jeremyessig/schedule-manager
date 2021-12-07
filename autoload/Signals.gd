@@ -27,5 +27,12 @@ signal save_as_pressed ## Head ->
 signal data_saved
 
 
+##______ Gestion des trajets ______
+signal route_deleted
+
+
+##______ Système de préférences _____
+
 signal preferences_loaded
 signal preferences_shown
+signal preferences_reseted

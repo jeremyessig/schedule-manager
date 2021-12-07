@@ -32,6 +32,7 @@ func _ready():
 	SaveSystem.load_preferences()
 	Signals.connect("preferences_loaded", self, "refresh_GUI")
 	Signals.connect("preferences_shown", self, "refresh_GUI")
+	Signals.connect("preferences_reseted", self, "reset_to_default")
 	_hide_RightPanel_children()
 	lessons_box.show()
 	set_selected_tree_button(lesson_btn)
@@ -57,6 +58,10 @@ func set_tree_button(button:Button) ->void:
 		else:
 			set_unselected_tree_button(btn)
 			
+
+func reset_to_default() ->void:
+	SaveSystem.load_preferences("user://default_preferences.tres")
+	SaveSystem.save_preferences()
 
 
 func refresh_GUI() -> void:
@@ -132,9 +137,7 @@ func _on_WindowBtn_pressed():
 ##________________________________________
 
 func _on_SetDefaultPreferencesBtn_pressed():
-	SaveSystem.load_preferences("user://default_preferences.tres")
-	SaveSystem.save_preferences()
-
+	reset_to_default()
 
 
 

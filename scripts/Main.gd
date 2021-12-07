@@ -19,6 +19,7 @@ onready var autosave : Timer = $AutoSave
 
 func _ready() -> void:
 	OS.set_window_size(Preferences.start_window_size)
+	_centering_screen(Preferences.start_window_size)
 	Global.new_subject_button.connect("pressed", self, "_show_new_subject_dialog")
 	Global.new_lesson_button.connect("pressed", self, "_show_new_lesson_dialog")
 	header.connect("export_json_pressed", self, "_open_export_dialog")
@@ -29,8 +30,15 @@ func _ready() -> void:
 	header.connect("open_save_pressed", self, "_open_open_save_dialog")
 	header.connect("route_pressed", self, "_on_open_route_dialog")
 	header.connect("preferences_pressed", self, "_on_open_preferences_dialog")
-	
-	
+
+
+func _centering_screen(screen_size:Vector2) ->void:
+	var computer_screen : Vector2 = OS.get_screen_size()
+	var centering_screen := Vector2(computer_screen.x, computer_screen.y)
+	centering_screen = Vector2((centering_screen.x - screen_size.x)/2, (centering_screen.y - screen_size.y)/2)
+	OS.set_window_position(centering_screen)	
+
+
 func _unhandled_input(event):
 	if event.is_action_pressed("save"):
 		SaveSystem.save_to_res()

@@ -43,6 +43,7 @@ func init_values(data:Dictionary) ->void:
 func delete() ->void:
 	Global.remove_from_routes_database(location_A, location_B)
 	self.queue_free()
+	Signals.emit_signal("route_deleted")
 
 
 #func add_to_database() ->void:

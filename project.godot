@@ -97,15 +97,16 @@ run/main_scene="res://tscn/Main.tscn"
 boot_splash/image="res://assets/splashscreen/splash_screen.png"
 config/icon="res://assets/icon.png"
 config/windows_native_icon="res://assets/icon.ico"
-config/version=0.51
+config/version=0.52
 
 [autoload]
 
 Global="*res://autoload/global.gd"
-Signals="*res://autoload/Signals.gd"
 Preferences="*res://autoload/Preferences.gd"
+Signals="*res://autoload/Signals.gd"
 SaveSystem="*res://autoload/savesystem.gd"
 GetNode="*res://autoload/GetNode.gd"
+Util="*res://autoload/Utilities.gd"
 
 [display]
 
