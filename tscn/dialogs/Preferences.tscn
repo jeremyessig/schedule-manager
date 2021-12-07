@@ -528,21 +528,27 @@ margin_top = 602.0
 margin_bottom = 662.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Foot" index="0"]
-margin_left = 293.0
+margin_left = 245.0
 margin_top = 20.0
-margin_right = 506.0
+margin_right = 555.0
 margin_bottom = 40.0
 custom_constants/separation = 10
 
 [node name="SaveAndCloseBtn" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="0"]
-margin_right = 145.0
+margin_right = 150.0
 margin_bottom = 20.0
+rect_min_size = Vector2( 150, 0 )
+focus_mode = 0
+enabled_focus_mode = 0
 text = "Enregistrer et fermer"
 
 [node name="CloseBtn" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="1"]
-margin_left = 155.0
-margin_right = 213.0
+margin_left = 160.0
+margin_right = 310.0
 margin_bottom = 20.0
+rect_min_size = Vector2( 150, 0 )
+focus_mode = 0
+enabled_focus_mode = 0
 text = "Fermer"
 
 [connection signal="pressed" from="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/TreeButtonsContainer/LessonsBtn" to="." method="_on_LessonsBtn_pressed"]

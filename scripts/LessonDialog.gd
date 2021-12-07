@@ -44,10 +44,10 @@ func _ready() -> void:
 ## Permet un affichage responsive
 func _physics_process(delta):
 	if  self.rect_size.y >= 980:
-		panel.rect_size.y = 900
-		vbox_container.rect_size.y = 840
+		panel.rect_size.y = 960
+		vbox_container.rect_size.y = 790
 		vbox_container.margin_top = 40
-		_set_panel_to_center(0,-25)
+		_set_panel_to_center(0,-5)
 		return
 	_set_panel_to_center(0,0)
 	panel.rect_size.y = 680

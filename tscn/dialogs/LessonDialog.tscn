@@ -1,18 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/LessonDialog.gd" type="Script" id=1]
-[ext_resource path="res://res/Helvetica_bold.tres" type="DynamicFont" id=2]
 [ext_resource path="res://tscn/ColorGrid.tscn" type="PackedScene" id=3]
 [ext_resource path="res://tscn/Dialog.tscn" type="PackedScene" id=4]
 [ext_resource path="res://tscn/btn/StarBtn.tscn" type="PackedScene" id=5]
-
-[sub_resource type="StyleBoxEmpty" id=1]
-
-[sub_resource type="StyleBoxEmpty" id=2]
-
-[sub_resource type="StyleBoxEmpty" id=3]
-
-[sub_resource type="StyleBoxEmpty" id=4]
 
 [node name="LessonDialog" instance=ExtResource( 4 )]
 script = ExtResource( 1 )
@@ -395,20 +386,12 @@ margin_left = 240.0
 margin_top = 10.0
 margin_right = 360.0
 margin_bottom = 40.0
+custom_constants/separation = 10
 
 [node name="CancelButton" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="0"]
 margin_right = 120.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 120, 30 )
-custom_colors/font_color_focus = Color( 0.227451, 0.494118, 0.890196, 1 )
-custom_colors/font_color = Color( 0.235294, 0.498039, 1, 1 )
-custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
-custom_colors/font_color_pressed = Color( 0.223529, 0.717647, 0.988235, 1 )
-custom_fonts/font = ExtResource( 2 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
 text = "Annuler"
 
 [connection signal="item_selected" from="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/SubjectOptionButton" to="." method="_on_SubjectOptionButton_item_selected"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://tscn/Dialog.tscn" type="PackedScene" id=1]
 [ext_resource path="res://res/Helvetica_bold.tres" type="DynamicFont" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://res/buttons/default_red_button_hover.tres" type="StyleBox" id=5]
 [ext_resource path="res://res/buttons/default_red_button_pressed.tres" type="StyleBox" id=6]
 [ext_resource path="res://res/buttons/default_blue_button_pressed.tres" type="StyleBox" id=7]
+[ext_resource path="res://res/buttons/default_green_button_normal.tres" type="StyleBox" id=8]
+[ext_resource path="res://res/buttons/default_green_button_hover.tres" type="StyleBox" id=9]
+[ext_resource path="res://res/buttons/default_green_button_pressed.tres" type="StyleBox" id=10]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -17,14 +20,6 @@
 [sub_resource type="StyleBoxEmpty" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=5]
-
-[sub_resource type="StyleBoxEmpty" id=6]
-
-[sub_resource type="StyleBoxEmpty" id=7]
-
-[sub_resource type="StyleBoxEmpty" id=8]
-
-[sub_resource type="StyleBoxEmpty" id=9]
 
 [sub_resource type="Animation" id=10]
 length = 0.001
@@ -455,33 +450,37 @@ alignment = 1
 [node name="DisciplineBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="0"]
 visible = false
 margin_left = 194.0
-margin_right = 270.0
+margin_right = 274.0
 margin_bottom = 20.0
+rect_min_size = Vector2( 80, 0 )
 text = "Discipline"
 
 [node name="SubjectBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="1"]
 margin_left = 271.0
-margin_right = 339.0
+margin_right = 391.0
 margin_bottom = 20.0
+rect_min_size = Vector2( 120, 0 )
 text = "Matières"
 
 [node name="LessonBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="2"]
 margin_left = 354.0
-margin_right = 402.0
+margin_right = 434.0
 margin_bottom = 20.0
+rect_min_size = Vector2( 120, 0 )
 text = "Cours"
 
 [node name="LocationBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="3"]
 margin_left = 417.0
-margin_right = 463.0
+margin_right = 537.0
 margin_bottom = 20.0
+rect_min_size = Vector2( 120, 0 )
 text = "Lieux"
 
 [node name="DisciplineGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="1"]
 visible = false
-margin_top = 37.0
+margin_top = 40.0
 margin_right = 747.0
-margin_bottom = 217.0
+margin_bottom = 220.0
 rect_min_size = Vector2( 0, 180 )
 custom_constants/vseparation = 20
 custom_constants/hseparation = 10
@@ -577,6 +576,12 @@ margin_left = 615.0
 margin_right = 735.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 120, 30 )
+focus_mode = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 8 )
+enabled_focus_mode = 0
 text = "Ajouter"
 
 [node name="RemoveSubjectLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid" index="3"]
@@ -605,7 +610,6 @@ custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 4 )
@@ -616,7 +620,7 @@ text = "Supprimer"
 [node name="LessonGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="3"]
 visible = false
 margin_top = 40.0
-margin_right = 704.0
+margin_right = 735.0
 margin_bottom = 220.0
 rect_min_size = Vector2( 0, 180 )
 custom_constants/vseparation = 20
@@ -667,6 +671,12 @@ margin_top = 60.0
 margin_right = 704.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 120, 30 )
+focus_mode = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 8 )
+enabled_focus_mode = 0
 text = "Ajouter"
 
 [node name="RemoveLessonLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid" index="6"]
@@ -690,22 +700,23 @@ margin_top = 120.0
 margin_right = 704.0
 margin_bottom = 160.0
 rect_min_size = Vector2( 120, 30 )
+focus_mode = 0
 custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = ExtResource( 4 )
+enabled_focus_mode = 0
 text = "Supprimer"
 
 [node name="LocationGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="4"]
 visible = false
 margin_top = 40.0
-margin_right = 690.0
+margin_right = 735.0
 margin_bottom = 220.0
 rect_min_size = Vector2( 0, 180 )
 custom_constants/vseparation = 20
@@ -732,6 +743,12 @@ margin_left = 570.0
 margin_right = 690.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 120, 30 )
+focus_mode = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 8 )
+enabled_focus_mode = 0
 text = "Ajouter"
 
 [node name="RemoveLocationLabel" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer/LocationGrid" index="3"]
@@ -758,6 +775,7 @@ margin_top = 60.0
 margin_right = 690.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 120, 30 )
+focus_mode = 0
 custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
@@ -766,6 +784,7 @@ custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
+enabled_focus_mode = 0
 text = "Supprimer"
 
 [node name="Description" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer" index="5"]
@@ -803,13 +822,8 @@ margin_bottom = 45.0
 margin_right = 120.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 120, 30 )
-custom_colors/font_color = Color( 0.235294, 0.498039, 1, 1 )
-custom_colors/font_color_hover = Color( 0.223529, 0.717647, 0.988235, 1 )
-custom_fonts/font = ExtResource( 2 )
-custom_styles/hover = SubResource( 6 )
-custom_styles/pressed = SubResource( 7 )
-custom_styles/focus = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+focus_mode = 0
+enabled_focus_mode = 0
 text = "Fermer"
 
 [node name="NotificationPlayer" type="AnimationPlayer" parent="." index="2"]
