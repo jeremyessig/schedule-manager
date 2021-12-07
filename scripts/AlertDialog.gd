@@ -5,6 +5,7 @@ signal canceled(error)
 
 var error: String
 var node : Node
+var nodepath : NodePath
 
 onready var body := $Panel/VBoxContainer/Body
 onready var confirm_button : Button = $Panel/VBoxContainer/Foot/ButtonsContainer/ConfirmButton
@@ -21,6 +22,7 @@ onready var old_version : Label = $Panel/VBoxContainer/Body/OldVersion
 onready var loading_old_save : Label = $Panel/VBoxContainer/Body/LoadingOldSave
 onready var empty_schedule : Label = $Panel/VBoxContainer/Body/EmptySchedule
 onready var banned_word : Label = $Panel/VBoxContainer/Body/BannedWord
+onready var confirm_deletion : Label = $Panel/VBoxContainer/Body/ConfirmDeletion
 
 
 func _ready():
@@ -28,18 +30,22 @@ func _ready():
 	cancel_button.hide()
 	confirm_button.hide()
 	sub_button.hide()
+	for label in body.get_children():
+		label.hide()
 
 
 func _show_alert_dialog(message, node_path) ->void:
 	show()
+	nodepath = ""
 	if node_path != null:
 		node = get_node(node_path)
+		nodepath = node_path
+	error = message
 	match message:
 		"RoomNotFound":
 			confirm_button.show()
 			cancel_button.show()
 			room_not_found_label.show()
-			error = message
 			
 		"LessonAlreadyInCalendar": ## Pas sur que cette erreur existe encore dans le code !
 			sub_button.show()
@@ -78,6 +84,12 @@ func _show_alert_dialog(message, node_path) ->void:
 		"BannedWord":
 			cancel_button.show()
 			banned_word.show()
+			
+		"ConfirmDeletion":
+			cancel_button.show()
+			confirm_button.show()
+			confirm_deletion.show()
+			
 
 
 
@@ -91,11 +103,13 @@ func _clear_panel()->void:
 
 func _on_CancelButton_pressed() -> void:
 	_clear_panel()
-	emit_signal("canceled", error)
+	Signals.emit_signal("error_canceled", error, nodepath)
+	error = ""
 
 
 func _on_ConfirmButton_pressed():
-	emit_signal("confirmed", error)
+	Signals.emit_signal("error_confirmed", error, nodepath)
+	error = ""
 	_clear_panel()
 	hide()
 

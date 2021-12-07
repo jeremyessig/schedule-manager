@@ -5,7 +5,6 @@ signal lesson_edited(dictionary, string) ## EditLesson -> LeftPanel
 signal lesson_card_pressed(nodepath) ## lessonCard -> EditLessonDialog
 signal subject_added
 signal lesson_added
-signal error_emitted(error_name, node_path)
 signal lesson_removed_from_calendar(id) ## CalendarArray -> LessonCard
 signal removing_lesson_from_calendar(position, size, id)  ## [EditLessonDialog, AlertDialog, LessonCellButton] -> CalendarArray
 signal lesson_added_to_calendar(nodepath)
@@ -26,6 +25,10 @@ signal routes_database_updated
 signal save_as_pressed ## Head ->
 signal data_saved
 
+##_______ Messages d'erreur____________
+signal error_emitted(error_name, node_path)
+signal error_confirmed(error_name, node_path)
+signal error_canceled(error_name, node_path)
 
 ##______ Gestion des trajets ______
 signal route_deleted

@@ -81,7 +81,7 @@ func _check_lesson_duration() ->bool:
 	return true
 
 
-func check_for_validation() :
+func check_for_validation(node_path) :
 	var is_safe = IsSafe.new()
 	if (not is_safe.string(note_text_edit.text) or 
 		not is_safe.string(teacher_line_edit.text) or 
@@ -97,7 +97,7 @@ func check_for_validation() :
 		return false
 	if room_line_edit.text == "":
 		notification.text = ""
-		Signals.emit_signal("error_emitted", "RoomNotFound", null) ## To AlertDialog by Main
+		Signals.emit_signal("error_emitted", "RoomNotFound", node_path) ## To AlertDialog by Main
 		return false
 	return true
 

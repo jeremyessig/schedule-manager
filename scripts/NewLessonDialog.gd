@@ -5,11 +5,13 @@ extends "res://scripts/LessonDialog.gd"
 var is_lesson_creating: bool = false
 
 func _ready():
-	Global.alert_dialog.connect("confirmed", self, "_confirmed_error")
-	Global.alert_dialog.connect("canceled", self, "_canceled_error")
+	Signals.connect("error_confirmed", self, "_on_error_confirmed")
+	Signals.connect("error_canceled", self, "_on_canceled_error")
 
 
-func _confirmed_error(error) ->void:
+func _on_error_confirmed(error, node_path) ->void:
+	if get_path() != node_path:
+		return
 	match error:
 		"RoomNotFound":
 			print(is_lesson_creating)
@@ -17,7 +19,9 @@ func _confirmed_error(error) ->void:
 				return
 			create_lesson()
 
-func _canceled_error(error) ->void:
+func _on_canceled_error(error, node_path) ->void:
+	if get_path() != node_path:
+		return
 	match error:
 		"RoomNotFound":
 			is_lesson_creating = false
@@ -36,7 +40,6 @@ func set_lesson_duration() ->void:
 
 #______________Initialisation de la creation du cours_____________
 func create_lesson() ->void:
-	print(is_lesson_creating)
 	if is_lesson_creating == false:
 		return 
 	if not check_subject_lesson_database():
@@ -51,7 +54,7 @@ func create_lesson() ->void:
 ##________________Methodes connectees par signal_______________________________
 func _on_CreateButton_pressed() -> void:
 	is_lesson_creating = true
-	if not check_for_validation():
+	if not check_for_validation(get_path()):
 		return
 	create_lesson()
 

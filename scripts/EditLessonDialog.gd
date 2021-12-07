@@ -10,9 +10,12 @@ var data : Dictionary
 
 onready var add_lesson_to_calendar_button :Button = $Panel/VBoxContainer/Foot/HBoxContainer/AddLessonToCalendarButton
 onready var sub_lesson_to_calendar_button : Button = $Panel/VBoxContainer/Foot/HBoxContainer/SubLessonToCalendarButton
+onready var delete_button : Button = $Panel/VBoxContainer/Foot/HBoxContainer/DeleteButton
+onready var edit_button : Button = $Panel/VBoxContainer/Foot/HBoxContainer/EditButton
 
 func _ready() -> void:
 	Signals.connect("lesson_card_pressed", self, "_open_dialog") ## -> LessonCard -> Signals -> self
+	Signals.connect("error_confirmed", self, "_on_error_confirmed")
 
 
 
@@ -58,12 +61,21 @@ func _update_gui() ->void:
 	lesson_code_line_edit.text = lesson_card.lesson_code
 	old_id = lesson_card.id
 	card_color = lesson_card.color
+	refresh_action_buttons()
+	
+	
+	
+func refresh_action_buttons() ->void:
 	if lesson_card.is_displayed:
 		add_lesson_to_calendar_button.hide()
 		sub_lesson_to_calendar_button.show()
+		delete_button.hide()
+		edit_button.hide()
 	else:
 		add_lesson_to_calendar_button.show()
 		sub_lesson_to_calendar_button.hide()
+		delete_button.show()
+		edit_button.show()
 
 
 
@@ -77,6 +89,20 @@ func edit_lesson() ->void:
 	Signals.emit_signal("lesson_edited", data, old_id)
 
 
+func _on_error_confirmed(error, node_path):
+	print("1")
+	if get_path() != node_path:
+		return
+	match error:
+		"ConfirmDeletion":
+			delete_lesson_card()
+			
+
+
+func delete_lesson_card():
+	lesson_card.delete()
+	hide()
+	
 
 
 ##____________Fonctions connectees par signaux_______________________
@@ -86,8 +112,7 @@ func _show_edit_lesson_dialog() ->void:
 
 
 func _on_DeleteButton_pressed():
-	lesson_card.delete()
-	hide()
+	Signals.emit_signal("error_emitted", "ConfirmDeletion", get_path())
 
 
 func _on_EditButton_pressed():
@@ -101,7 +126,7 @@ func _on_EditButton_pressed():
 		Global.get_item_string(schedule_minutes_option_button) != schedule[1] or
 		room_line_edit.text != lesson_card.room
 		):
-			if not check_for_validation():
+			if not check_for_validation(get_path()):
 				return
 	var old := {"position":lesson_card.position, "size":lesson_card.size}
 	edit_lesson()
