@@ -7,11 +7,15 @@ extends "res://scripts/LessonDialog.gd"
 var lesson_card : Node
 var old_id : String
 var data : Dictionary
+var editable: bool = false
 
 onready var add_lesson_to_calendar_button :Button = $Panel/VBoxContainer/Foot/HBoxContainer/AddLessonToCalendarButton
+onready var add_lesson_to_calendar_button_disabled : Button = $Panel/VBoxContainer/Foot/HBoxContainer/AddLessonToCalendarButtonDisabled
 onready var sub_lesson_to_calendar_button : Button = $Panel/VBoxContainer/Foot/HBoxContainer/SubLessonToCalendarButton
 onready var delete_button : Button = $Panel/VBoxContainer/Foot/HBoxContainer/DeleteButton
 onready var edit_button : Button = $Panel/VBoxContainer/Foot/HBoxContainer/EditButton
+onready var edit_button_disabled : Button = $Panel/VBoxContainer/Foot/HBoxContainer/EditButtonDisabled
+onready var confirm_changes_button: Button = $Panel/VBoxContainer/Foot/HBoxContainer/ConfirmChangesButton
 
 func _ready() -> void:
 	Signals.connect("lesson_card_pressed", self, "_open_dialog") ## -> LessonCard -> Signals -> self
@@ -35,6 +39,24 @@ func _on_error_confirmed(error, node_path):
 			delete_lesson_card()
 
 
+func _set_fields_editable(value:bool) ->void:
+	editable = value
+	value = !value
+	type_option_button.disabled = value
+	subject_option_button.disabled = value
+	lesson_option_button.disabled = value
+	location_option_button.disabled = value
+	room_line_edit.editable = !value
+	duration_hours_option_button.disabled = value
+	duration_minutes_option_button.disabled = value
+	schedule_days_option_button.disabled = value
+	schedule_hours_option_button.disabled = value
+	schedule_minutes_option_button.disabled = value
+	obligatory_check_button.disabled = value
+	teacher_line_edit.editable = !value
+	lesson_code_line_edit.editable = !value
+	note_text_edit.readonly = value
+
 
 ##_______________Affiche les informations de la card_lesson______________________
 func _open_dialog(nodepath:NodePath) ->void:
@@ -43,6 +65,39 @@ func _open_dialog(nodepath:NodePath) ->void:
 	rating = lesson_card.rating
 	_update_gui()
 	update_color(card_color)
+	_set_fields_editable(false)
+	confirm_changes_button.hide()
+	_set_action_buttons()
+	
+	
+func _set_action_buttons() ->void:
+	if lesson_card.is_in_conflict:
+		add_lesson_to_calendar_button.hide()
+		add_lesson_to_calendar_button_disabled.show()
+		edit_button.show()
+		edit_button_disabled.hide()
+	elif lesson_card.is_displayed:
+		add_lesson_to_calendar_button.hide()
+		add_lesson_to_calendar_button_disabled.hide()
+		edit_button.hide()
+		edit_button_disabled.show()
+		delete_button.hide()
+		sub_lesson_to_calendar_button.show()
+	else:
+		add_lesson_to_calendar_button_disabled.hide()
+		add_lesson_to_calendar_button.show()
+		sub_lesson_to_calendar_button.hide()
+		edit_button_disabled.hide()
+		edit_button.show()
+	if editable:
+		add_lesson_to_calendar_button_disabled.hide()
+		add_lesson_to_calendar_button.hide()
+		edit_button.hide()
+		edit_button_disabled.hide()
+		confirm_changes_button.show()
+	else:
+		confirm_changes_button.hide()
+		delete_button.show()
 
 
 func _update_gui() ->void:
@@ -71,7 +126,8 @@ func _update_gui() ->void:
 	lesson_code_line_edit.text = lesson_card.lesson_code
 	old_id = lesson_card.id
 	card_color = lesson_card.color
-	refresh_action_buttons()
+#	refresh_action_buttons()
+	_set_action_buttons()
 	
 	
 	
@@ -117,28 +173,32 @@ func _on_DeleteButton_pressed():
 
 
 func _on_EditButton_pressed():
-	var time = Time.new()
-	var schedule : Array = time.get_time_00h00_StringArray(lesson_card.schedule["start"])
-	if (Global.get_item_string(type_option_button) != lesson_card.type or
-		Global.get_item_string(subject_option_button) != lesson_card.subject or
-		Global.get_item_string(lesson_option_button) != lesson_card.lesson or
-		Global.get_item_string(schedule_days_option_button) != lesson_card.schedule["day"] or
-		Global.get_item_string(schedule_hours_option_button) != schedule[0] or
-		Global.get_item_string(schedule_minutes_option_button) != schedule[1] or
-		room_line_edit.text != lesson_card.room
-		):
-			if not check_for_validation(get_path()):
-				return
-	var old := {"position":lesson_card.position, "size":lesson_card.size}
-	edit_lesson()
-	if lesson_card.is_displayed: ## Lorsque l'horaire est modifie, recharge la cellule dans le bon emplacement
-		if old["position"].x != lesson_card.position.x or old["position"].y != lesson_card.position.y or lesson_card.size != old["size"]:
-			Signals.emit_signal("removing_lesson_from_calendar", old["position"], old["size"], lesson_card.id)
-			yield(get_tree(),"idle_frame")
-			var node_path = lesson_card.get_path()
-			Global.calendar_array.add_lesson(node_path)
-	Signals.emit_signal("updating_conflicts")
-	hide()
+	_set_fields_editable(true)
+	_set_action_buttons()
+	
+#	var time = Time.new()
+#	var schedule : Array = time.get_time_00h00_StringArray(lesson_card.schedule["start"])
+#	if (Global.get_item_string(type_option_button) != lesson_card.type or
+#		Global.get_item_string(subject_option_button) != lesson_card.subject or
+#		Global.get_item_string(lesson_option_button) != lesson_card.lesson or
+#		Global.get_item_string(schedule_days_option_button) != lesson_card.schedule["day"] or
+#		Global.get_item_string(schedule_hours_option_button) != schedule[0] or
+#		Global.get_item_string(schedule_minutes_option_button) != schedule[1] or
+#		room_line_edit.text != lesson_card.room
+#		):
+#			if not check_for_validation(get_path()):
+#				return
+#	var old := {"position":lesson_card.position, "size":lesson_card.size}
+#	edit_lesson()
+#	if lesson_card.is_displayed: ## Lorsque l'horaire est modifie, recharge la cellule dans le bon emplacement
+#		if old["position"].x != lesson_card.position.x or old["position"].y != lesson_card.position.y or lesson_card.size != old["size"]:
+#			Signals.emit_signal("removing_lesson_from_calendar", old["position"], old["size"], lesson_card.id)
+#			yield(get_tree(),"idle_frame")
+#			var node_path = lesson_card.get_path()
+#			Global.calendar_array.add_lesson(node_path)
+#	Signals.emit_signal("updating_conflicts")
+#	hide()
+	pass
 
 
 func _on_ColorGrid_color_picked(color):
@@ -163,3 +223,30 @@ func _on_SubLessonToCalendarButton_pressed():
 	else:
 		Signals.emit_signal("removing_lesson_from_calendar", lesson_card.position, lesson_card.size, lesson_card.id)
 	hide()
+
+
+func _on_ConfirmChangesButton_pressed():
+	var time = Time.new()
+	var schedule : Array = time.get_time_00h00_StringArray(lesson_card.schedule["start"])
+	if (Global.get_item_string(type_option_button) != lesson_card.type or
+		Global.get_item_string(subject_option_button) != lesson_card.subject or
+		Global.get_item_string(lesson_option_button) != lesson_card.lesson or
+		Global.get_item_string(schedule_days_option_button) != lesson_card.schedule["day"] or
+		Global.get_item_string(schedule_hours_option_button) != schedule[0] or
+		Global.get_item_string(schedule_minutes_option_button) != schedule[1] or
+		room_line_edit.text != lesson_card.room
+		):
+			if not check_for_validation(get_path()):
+				return
+	var old := {"position":lesson_card.position, "size":lesson_card.size}
+	edit_lesson()
+	if lesson_card.is_displayed: ## Lorsque l'horaire est modifie, recharge la cellule dans le bon emplacement
+		if old["position"].x != lesson_card.position.x or old["position"].y != lesson_card.position.y or lesson_card.size != old["size"]:
+			Signals.emit_signal("removing_lesson_from_calendar", old["position"], old["size"], lesson_card.id)
+			yield(get_tree(),"idle_frame")
+			var node_path = lesson_card.get_path()
+			Global.calendar_array.add_lesson(node_path)
+	Signals.emit_signal("updating_conflicts")
+#	hide()
+	_set_fields_editable(false)
+	_set_action_buttons()

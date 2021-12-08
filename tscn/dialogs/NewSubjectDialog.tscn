@@ -474,7 +474,7 @@ margin_left = 442.0
 margin_right = 562.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 120, 0 )
-text = "Lieux"
+text = "Campus"
 
 [node name="DisciplineGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="1"]
 visible = false

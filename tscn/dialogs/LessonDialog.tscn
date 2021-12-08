@@ -130,6 +130,7 @@ margin_top = 200.0
 margin_right = 484.0
 margin_bottom = 230.0
 rect_min_size = Vector2( 220, 30 )
+custom_colors/font_color_uneditable = Color( 0.486275, 0.486275, 0.486275, 1 )
 align = 1
 placeholder_text = "Entrez un nom de salle (optionnel)"
 

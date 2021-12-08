@@ -202,7 +202,7 @@ margin_top = 126.0
 margin_right = 150.0
 margin_bottom = 153.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
-text = "Etablissement: "
+text = "Campus: "
 
 [node name="LocationField" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 margin_left = 150.0

@@ -7,6 +7,7 @@ onready var is_displayed_bg = preload("res://res/button_lesson_card_in_schedule.
 onready var is_not_displayed_bg = preload("res://res/button_lesson_card_normal.tres")
 onready var is_not_displayed_bg_hover = preload("res://res/button_lesson_card_hover.tres")
 onready var _conflict_lesson_bg = preload("res://res/button_lesson_card_conflict.tres") 
+onready var _conflict_lesson_bg_hover = preload("res://res/button_lesson_card_conflict_hover.tres")
 
 var id :String
 var type :String
@@ -233,10 +234,11 @@ func _refresh_rating_gui():
 func refresh_is_in_conflict_GUI():
 	if is_in_conflict:
 		self.add_stylebox_override("normal", _conflict_lesson_bg)
-		self.set_card_labels_font_color("FFFFFF")
+		self.add_stylebox_override("hover", _conflict_lesson_bg_hover)
+#		self.set_card_labels_font_color("FFFFFF")
 	else:
 		_update_background()
-		self.set_card_labels_font_color("#383838")	
+#		self.set_card_labels_font_color("#383838")	
 	
 func update_color(color:String) -> void:
 	var new_style = StyleBoxFlat.new()

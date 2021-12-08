@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://tscn/dialogs/LessonDialog.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/EditLessonDialog.gd" type="Script" id=2]
 [ext_resource path="res://res/Helvetica_bold.tres" type="DynamicFont" id=3]
+[ext_resource path="res://res/buttons/default_button_disabled.tres" type="StyleBox" id=4]
 [ext_resource path="res://res/buttons/default_red_button_normal.tres" type="StyleBox" id=6]
 [ext_resource path="res://res/buttons/default_red_button_pressed.tres" type="StyleBox" id=7]
 [ext_resource path="res://res/buttons/default_red_button_hover.tres" type="StyleBox" id=8]
@@ -19,22 +20,48 @@ autowrap = false
 clip_text = false
 
 [node name="TypeOptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="1"]
-items = [ "Travaux Dirigés", null, false, 0, null, "Cours Magistral", null, false, 1, null ]
+disabled = true
+
+[node name="SubjectOptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="3"]
+disabled = true
+
+[node name="LessonOptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="5"]
+disabled = true
+
+[node name="LocationOptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="7"]
+disabled = true
+
+[node name="RoomLineEdit" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="9"]
+editable = false
 
 [node name="HoursOptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/LessonDuration" index="0"]
-items = [ "0", null, false, 0, null, "1", null, false, 1, null, "2", null, false, 2, null, "3", null, false, 3, null, "4", null, false, 4, null, "5", null, false, 5, null, "6", null, false, 6, null, "7", null, false, 7, null, "8", null, false, 8, null ]
+disabled = true
 
 [node name="MinutesOptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/LessonDuration" index="2"]
+disabled = true
 items = [ "00", null, false, 0, null, "30", null, false, 1, null ]
 
 [node name="DaysOptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/Schedule" index="0"]
-items = [ "Lundi", null, false, 0, null, "Mardi", null, false, 1, null, "Mercredi", null, false, 2, null, "Jeudi", null, false, 3, null, "Vendredi", null, false, 4, null, "Samedi", null, false, 5, null ]
+disabled = true
 
 [node name="HoursOptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/Schedule" index="2"]
-items = [ "07", null, false, 0, null, "08", null, false, 1, null, "09", null, false, 2, null, "10", null, false, 3, null, "11", null, false, 4, null, "12", null, false, 5, null, "13", null, false, 6, null, "14", null, false, 7, null, "15", null, false, 8, null, "16", null, false, 9, null, "17", null, false, 10, null, "18", null, false, 11, null, "19", null, false, 12, null, "20", null, false, 13, null, "21", null, false, 14, null ]
+disabled = true
 
 [node name="MinutesOptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/Schedule" index="4"]
+disabled = true
 items = [ "00", null, false, 0, null, "30", null, false, 2, null ]
+
+[node name="ObligatoryCheckButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="15"]
+disabled = true
+
+[node name="TeacherLineEdit" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="17"]
+editable = false
+
+[node name="LessonCodeLineEdit" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="19"]
+editable = false
+
+[node name="NoteTextEdit" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="25"]
+readonly = true
 
 [node name="HBoxContainer" parent="Panel/VBoxContainer/Foot" index="0"]
 margin_left = 45.0
@@ -54,7 +81,21 @@ custom_styles/normal = ExtResource( 10 )
 enabled_focus_mode = 0
 text = "Ajouter"
 
-[node name="SubLessonToCalendarButton" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="1"]
+[node name="AddLessonToCalendarButtonDisabled" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="1"]
+visible = false
+margin_left = 130.0
+margin_right = 250.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 120, 30 )
+focus_mode = 0
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+enabled_focus_mode = 0
+text = "Ajouter"
+
+[node name="SubLessonToCalendarButton" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="2"]
 visible = false
 margin_left = 124.0
 margin_right = 244.0
@@ -70,7 +111,7 @@ custom_styles/normal = ExtResource( 6 )
 enabled_focus_mode = 0
 text = "Retirer"
 
-[node name="EditButton" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="2"]
+[node name="EditButton" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="3"]
 margin_left = 130.0
 margin_right = 250.0
 margin_bottom = 35.0
@@ -79,12 +120,37 @@ focus_mode = 0
 enabled_focus_mode = 0
 text = "Modifier"
 
-[node name="CancelButton" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="3"]
+[node name="ConfirmChangesButton" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="4"]
+visible = false
+margin_left = 260.0
+margin_right = 380.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 120, 30 )
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Valider"
+
+[node name="EditButtonDisabled" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="5"]
+visible = false
+margin_left = 260.0
+margin_right = 380.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 120, 30 )
+focus_mode = 0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+enabled_focus_mode = 0
+text = "Modifier"
+
+[node name="CancelButton" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="6"]
 margin_left = 260.0
 margin_right = 380.0
 margin_bottom = 35.0
 
-[node name="DeleteButton" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="4"]
+[node name="DeleteButton" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="7"]
 margin_left = 390.0
 margin_right = 510.0
 margin_bottom = 35.0
@@ -100,4 +166,5 @@ text = "Supprimer"
 [connection signal="pressed" from="Panel/VBoxContainer/Foot/HBoxContainer/AddLessonToCalendarButton" to="." method="_on_AddLessonToCalendarButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Foot/HBoxContainer/SubLessonToCalendarButton" to="." method="_on_SubLessonToCalendarButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Foot/HBoxContainer/EditButton" to="." method="_on_EditButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Foot/HBoxContainer/ConfirmChangesButton" to="." method="_on_ConfirmChangesButton_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Foot/HBoxContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]
