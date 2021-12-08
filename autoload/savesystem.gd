@@ -87,6 +87,7 @@ func load_from_res(path) -> void:
 	Global.set_lessons_database(save.lesson)
 	Global.set_subjects_database(save.subject)
 	Global.set_locations_database(save.location)
+	Global.route_dialog.load_from_res(save.route)
 	for cell in get_tree().get_nodes_in_group("cell_buttons"):
 		cell.reset()
 		if save.cell.has(var2str(Vector2(cell.position))):

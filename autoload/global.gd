@@ -7,6 +7,7 @@ var new_subject_button : Button
 var alert_dialog : Control
 var calendar_array : HBoxContainer
 var new_subject_dialog : Control
+var route_dialog : Control
 const weekday : Array = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
 
 ## Les disciplines ne sont pas encore ajoutees dans le programme car cela complexifie enormement son fonctionnement.
@@ -19,9 +20,6 @@ var subjects_database : Array
 var lessons_database : Dictionary
 var routes_database : Array
 
-#var settings: Dictionary = {
-#	"card_index_top": false,
-#}
 
 func set_routes_database(value:Array) ->void:
 	routes_database = value
@@ -31,8 +29,6 @@ func get_routes_database() ->Array:
 	return routes_database
 	
 func add_to_routes_database(location_A:String, location_B:String, time:int) ->void:
-#	var key : String = create_locations_database_key(location_A, location_B)
-#	routes_database[key] = time
 	var new_route: Array = [location_A, location_B, time]
 	routes_database.append(new_route)
 	Signals.emit_signal("routes_database_updated")
@@ -45,10 +41,6 @@ func remove_from_routes_database(location_A:String, location_B:String) ->void:
 			Signals.emit_signal("routes_database_updated")
 	
 func is_in_routes_database(location_A:String, location_B:String) -> bool:
-#	var key : String = create_locations_database_key(location_A, location_B)
-#	if routes_database.has(key):
-#		return true 
-#	return false
 	for route in routes_database:
 		if route.has(location_A) and route.has(location_B):
 			return true
@@ -56,20 +48,12 @@ func is_in_routes_database(location_A:String, location_B:String) -> bool:
 
 
 func get_travel_time_between(location_A:String, location_B:String) ->int:
-#	var key : String = create_locations_database_key(location_A, location_B)
-#	if !routes_database.has(key):
-#		return 0
-#	return routes_database[key]
+
 	for route in routes_database:
 		if route.has(location_A) and route.has(location_B):
 			return route[2]
 	return 0
 
-
-#func create_locations_database_key(location_A:String, location_B:String) ->String:
-#	var locations = [location_A, location_B]
-#	locations.sort()
-#	return locations[0] + "/" + locations[1]
 
 func get_route_from_database(location_A:String, location_B:String) ->Array:
 	for route in routes_database:
@@ -214,6 +198,7 @@ func _ready() -> void:
 	left_panel = find_node_by_name(root, "LeftPanel")
 	calendar_array = find_node_by_name(root, "CalendarArray")
 	new_subject_dialog = find_node_by_name(root, "NewSubjectDialog")
+	route_dialog = find_node_by_name(root, "RouteDialog")
 
 
 func _connect_signals() ->void:

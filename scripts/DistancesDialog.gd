@@ -1,7 +1,6 @@
 extends Control
 
 var route = load("res://tscn/prefabs/Route.tscn")
-var AddNewRouteBtn_pressed : bool = false
 
 onready var list_of_routes : VBoxContainer = $Panel/VBoxContainer/Body/BodyVContainer/ListOfRoutesPanel/ScrollContainer/ListOfRoutes
 onready var new_location_A_OptionButton : OptionButton = $Panel/VBoxContainer/Body/BodyVContainer/NewConnectionContainer/NewLocationAOptionButton
@@ -17,7 +16,7 @@ func _ready():
 	Signals.connect("locations_database_updated", self, "refresh_GUI")
 	Signals.connect("database_reseted", self, "reset_GUI")
 	Signals.connect("locations_database_updated", self, "reset_inputs")
-	Signals.connect("locations_database_updated", self, "load_res")
+#	Signals.connect("locations_database_updated", self, "load_res")
 	Signals.connect("route_deleted", self, "_set_NoRouteLabel")
 	Signals.connect("dialog_route_shown", self, "_shown")
 
@@ -31,7 +30,6 @@ func add_route(data:Dictionary) ->void:
 	var new_route = route.instance()
 	list_of_routes.add_child(new_route)
 	new_route.init_values(data)
-	AddNewRouteBtn_pressed = false
 
 
 func get_data_from_user() ->Dictionary:
@@ -66,9 +64,8 @@ func add_to_database(data) ->void:
 #	print_debug(Global.routes_database)
 
 
-func load_res() ->void:
-	if AddNewRouteBtn_pressed:
-		return
+
+func load_from_res(routes:Array) ->void:
 	for route in Global.routes_database:
 		var data :Dictionary
 		data["location_A"] = route[0]
@@ -128,6 +125,7 @@ func reset_inputs() ->void:
 	if new_minute_OptionButton.get_item_count() != 0:
 		new_minute_OptionButton.select(0)
 
+
 func set_AddNewRouteBtn() ->void:
 	_disabled_AddNewRouteBtn()
 	if Global.locations_database.empty():
@@ -164,7 +162,6 @@ func _on_AddNewRouteBtn_pressed():
 	var data_from_user :Dictionary = get_data_from_user()
 #	if !is_new_route_valid(data_from_user):
 #		return
-	AddNewRouteBtn_pressed = true
 	add_to_database(data_from_user)
 	add_route(data_from_user)
 	_disabled_AddNewRouteBtn()
