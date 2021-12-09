@@ -9,6 +9,7 @@ var TD_default_duration : int = 0 setget set_TD_default_duration
 var start_window_size : Vector2 = Vector2(1280,720) setget set_start_window_size
 var tutorial_popup : bool = true setget set_tutorial_popup
 var last_res_file_loaded : String setget set_last_res_file_loaded
+var number_of_columns : int = 1 setget set_number_of_columns
 
 func set_card_index_top(value:bool) ->void:
 	card_index_top = value
@@ -34,6 +35,10 @@ func set_tutorial_popup(value:bool) ->void:
 	
 func set_last_res_file_loaded(value:String) ->void:
 	last_res_file_loaded = value
+	
+func set_number_of_columns(value:int) ->void:
+	number_of_columns = value
+	Signals.emit_signal("preference_number_of_columns_setted")
 
 
 
@@ -46,7 +51,8 @@ func get_data() -> Dictionary:
 		"TD_default_duration": TD_default_duration,
 		"start_window_size": var2str(Vector2(start_window_size)),
 		"tutorial_popup": tutorial_popup,
-		"last_res_file_loaded": last_res_file_loaded
+		"last_res_file_loaded": last_res_file_loaded,
+		"number_of_columns" : number_of_columns
 	}
 	return data
 
@@ -60,3 +66,4 @@ func set_data(data:Dictionary) -> void:
 	set_start_window_size(str2var(data["start_window_size"]) as Vector2)
 	set_tutorial_popup(data["tutorial_popup"])
 	set_last_res_file_loaded(data["last_res_file_loaded"])
+	set_number_of_columns(data["number_of_columns"])

@@ -23,22 +23,22 @@ text = "Nouveau cours"
 
 [node name="Body" parent="Panel/VBoxContainer" index="1"]
 margin_right = 600.0
-margin_bottom = 630.0
+margin_bottom = 600.0
 rect_pivot_offset = Vector2( -912.859, -210.385 )
 
 [node name="VboxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Body" index="0"]
 margin_left = 25.0
-margin_top = 29.0
+margin_top = 16.0
 margin_right = 575.0
-margin_bottom = 555.0
+margin_bottom = 538.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 32
+custom_constants/separation = 8
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/Body/VboxContainer" index="0"]
 margin_right = 550.0
-margin_bottom = 480.0
-rect_min_size = Vector2( 550, 480 )
+margin_bottom = 500.0
+rect_min_size = Vector2( 550, 500 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -368,25 +368,25 @@ rect_min_size = Vector2( 0, 100 )
 wrap_enabled = true
 
 [node name="Notification" type="Label" parent="Panel/VBoxContainer/Body/VboxContainer" index="1"]
-margin_top = 512.0
+margin_top = 508.0
 margin_right = 550.0
-margin_bottom = 526.0
+margin_bottom = 522.0
 custom_colors/font_color = Color( 0.662745, 0, 0, 1 )
 align = 1
 valign = 1
 autowrap = true
 
 [node name="Foot" parent="Panel/VBoxContainer" index="2"]
-margin_top = 630.0
+margin_top = 600.0
 margin_right = 600.0
 margin_bottom = 680.0
-rect_min_size = Vector2( 0, 50 )
+rect_min_size = Vector2( 0, 80 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Foot" index="0"]
 margin_left = 240.0
-margin_top = 10.0
+margin_top = 25.0
 margin_right = 360.0
-margin_bottom = 40.0
+margin_bottom = 55.0
 custom_constants/separation = 10
 
 [node name="CancelButton" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="0"]

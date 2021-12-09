@@ -25,6 +25,9 @@ clip_text = false
 [node name="TypeOptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="1"]
 items = [ "Travaux Dirigés", null, false, 0, null, "Cours Magistral", null, false, 1, null ]
 
+[node name="LessonOptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="5"]
+text = "Aucun cours trouvé"
+
 [node name="HoursOptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/LessonDuration" index="0"]
 items = [ "0", null, false, 0, null, "1", null, false, 1, null, "2", null, false, 2, null, "3", null, false, 3, null, "4", null, false, 4, null, "5", null, false, 5, null, "6", null, false, 6, null, "7", null, false, 7, null, "8", null, false, 8, null ]
 
@@ -42,9 +45,9 @@ items = [ "00", null, false, 0, null, "30", null, false, 2, null ]
 
 [node name="HBoxContainer" parent="Panel/VBoxContainer/Foot" index="0"]
 margin_left = 175.0
-margin_top = 7.0
+margin_top = 22.0
 margin_right = 425.0
-margin_bottom = 42.0
+margin_bottom = 57.0
 
 [node name="CreateButton" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="0"]
 margin_right = 120.0

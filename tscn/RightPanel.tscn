@@ -21,6 +21,8 @@ border_color = Color( 0.819608, 0.819608, 0.819608, 1 )
 margin_left = 372.0
 margin_right = 1920.0
 margin_bottom = 1050.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

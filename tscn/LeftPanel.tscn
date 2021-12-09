@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://res/panel_secondary_color.tres" type="StyleBox" id=1]
 [ext_resource path="res://res/button_white_hover_styleboxflat.tres" type="StyleBox" id=2]
@@ -7,6 +7,10 @@
 [ext_resource path="res://scripts/LeftPanel.gd" type="Script" id=5]
 [ext_resource path="res://assets/buttons/sort_descending_icon_128x128_normal.png" type="Texture" id=6]
 [ext_resource path="res://assets/buttons/sort_descending_icon_128x128_hover.png" type="Texture" id=7]
+[ext_resource path="res://assets/icons/1_columns_white.png" type="Texture" id=8]
+[ext_resource path="res://assets/icons/3_columns_white.png" type="Texture" id=9]
+[ext_resource path="res://assets/icons/2_columns_white.png" type="Texture" id=10]
+[ext_resource path="res://assets/icons/4_columns_white.png" type="Texture" id=11]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -131,8 +135,54 @@ custom_fonts/font = ExtResource( 4 )
 text = "X"
 flat = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 margin_top = 181.0
+margin_right = 360.0
+margin_bottom = 189.0
+rect_min_size = Vector2( 0, 8 )
+
+[node name="DisplayColumnsContainer" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
+margin_top = 193.0
+margin_right = 360.0
+margin_bottom = 225.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="OneColumnsBtn" type="TextureButton" parent="VBoxContainer/DisplayColumnsContainer"]
+margin_left = 85.0
+margin_right = 101.0
+margin_bottom = 32.0
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 8 )
+
+[node name="TwoColumnsBtn" type="TextureButton" parent="VBoxContainer/DisplayColumnsContainer"]
+margin_left = 111.0
+margin_right = 143.0
+margin_bottom = 32.0
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 10 )
+
+[node name="TreeColumnsBtn" type="TextureButton" parent="VBoxContainer/DisplayColumnsContainer"]
+margin_left = 153.0
+margin_right = 201.0
+margin_bottom = 32.0
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 9 )
+
+[node name="FourColumnsBtn" type="TextureButton" parent="VBoxContainer/DisplayColumnsContainer"]
+margin_left = 211.0
+margin_right = 275.0
+margin_bottom = 32.0
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 11 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 193.0
 margin_right = 360.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
@@ -141,26 +191,26 @@ custom_constants/separation = 0
 
 [node name="MarginLeft" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
 margin_right = 5.0
-margin_bottom = 539.0
+margin_bottom = 527.0
 rect_min_size = Vector2( 5, 0 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2"]
 margin_left = 5.0
 margin_right = 360.0
-margin_bottom = 539.0
+margin_bottom = 527.0
 size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer"]
 margin_right = 355.0
-margin_bottom = 519.0
+margin_bottom = 507.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="ClassContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer/ScrollContainer"]
 margin_right = 355.0
-margin_bottom = 519.0
+margin_bottom = 507.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
@@ -251,16 +301,16 @@ color = Color( 0.427451, 0.623529, 1, 1 )
 margin_left = 177.0
 margin_top = 180.0
 margin_right = 177.0
-margin_bottom = 519.0
+margin_bottom = 507.0
 size_flags_horizontal = 6
 size_flags_vertical = 3
 custom_constants/vseparation = 10
 custom_constants/hseparation = 10
 
 [node name="MarginBottom" type="MarginContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer"]
-margin_top = 519.0
+margin_top = 507.0
 margin_right = 355.0
-margin_bottom = 539.0
+margin_bottom = 527.0
 rect_min_size = Vector2( 0, 20 )
 
 [node name="MarginRight" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
@@ -296,4 +346,8 @@ position = Vector2( -1395.15, -244.106 )
 
 [connection signal="text_changed" from="VBoxContainer/SearchContainer/SearchLineEdit" to="." method="_on_SearchLineEdit_text_changed"]
 [connection signal="pressed" from="VBoxContainer/SearchContainer/ClearBSearchBtn" to="." method="_on_ClearBSearchBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/DisplayColumnsContainer/OneColumnsBtn" to="." method="_on_OneColumnsBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/DisplayColumnsContainer/TwoColumnsBtn" to="." method="_on_TwoColumnsBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/DisplayColumnsContainer/TreeColumnsBtn" to="." method="_on_TreeColumnsBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/DisplayColumnsContainer/FourColumnsBtn" to="." method="_on_FourColumnsBtn_pressed"]
 [connection signal="toggled" from="SortBtn" to="." method="_on_SortBtn_toggled"]

@@ -27,6 +27,7 @@ signal data_saved
 
 ##________Affichage des fenetres de dialog_____
 signal dialog_route_shown
+signal dialog_new_lesson_shown
 
 
 ##_______ Messages d'erreur____________
@@ -43,3 +44,7 @@ signal route_deleted
 signal preferences_loaded
 signal preferences_shown
 signal preferences_reseted
+signal preferences_saving
+signal preferences_saved
+
+signal preference_number_of_columns_setted

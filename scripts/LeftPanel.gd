@@ -2,10 +2,25 @@ extends Panel
 
 var lesson_card := preload("res://tscn/LessonCard.tscn")
 
+var one_columns_white := preload("res://assets/icons/1_columns_white.png")
+var one_columns_focus := preload("res://assets/icons/1_columns_focus.png")
+var two_columns_white := preload("res://assets/icons/2_columns_white.png")
+var two_columns_focus := preload("res://assets/icons/2_columns_focus.png")
+var tree_columns_white := preload("res://assets/icons/3_columns_white.png")
+var tree_columns_focus := preload("res://assets/icons/3_columns_focus.png")
+var four_columns_white := preload("res://assets/icons/4_columns_white.png")
+var four_columns_focus := preload("res://assets/icons/4_columns_focus.png")
+
+
 onready var td_container := $VBoxContainer/HBoxContainer2/VBoxContainer/ScrollContainer/ClassContainer/TDContainer
 onready var cm_container := $VBoxContainer/HBoxContainer2/VBoxContainer/ScrollContainer/ClassContainer/CMContainer
 onready var buttons_grid_container := $VBoxContainer/NewClassContainer/ButtonsGridContainer
 onready var search_line_edit: LineEdit = $VBoxContainer/SearchContainer/SearchLineEdit
+onready var display_columns_container : HBoxContainer = $VBoxContainer/DisplayColumnsContainer
+onready var one_columns_btn : TextureButton = $VBoxContainer/DisplayColumnsContainer/OneColumnsBtn
+onready var two_columns_btn : TextureButton = $VBoxContainer/DisplayColumnsContainer/TwoColumnsBtn
+onready var tree_columns_btn : TextureButton = $VBoxContainer/DisplayColumnsContainer/TreeColumnsBtn
+onready var four_columns_btn : TextureButton = $VBoxContainer/DisplayColumnsContainer/FourColumnsBtn
 onready var temp := $Temp
 onready var sort_btn := $SortBtn
 
@@ -15,7 +30,9 @@ func _ready() -> void:
 	Signals.connect("lesson_created",self,"create_lesson_card") ## From NewLessonDialog by Signals
 	Signals.connect("lesson_edited", self, "edit_lesson_card") ## From EditLessonDialog by Signals
 	Signals.connect("lesson_cell_opened", self, "lesson_cell_opened")
+	Signals.connect("preference_number_of_columns_setted", self, "_set_number_of_columns")
 	_init_key_reference()
+	_set_number_of_columns()
 
 
 ## Cree une carte temporaire pour recuperer les clefs des data
@@ -193,6 +210,7 @@ func clear_searched() ->void:
 ##___________________Affichage responsive_______________________________
 ## Ecart de 340 px
 func _responsive_TDCM_container():
+	buttons_grid_container.columns = 2
 	if self.rect_size.x >= 1700:
 		td_container.columns = 5
 		cm_container.columns = 5
@@ -215,6 +233,41 @@ func _responsive_TDCM_container():
 	buttons_grid_container.columns = 1
 
 
+## Non fonctionnel...
+func _set_number_of_columns(value = Preferences.number_of_columns) ->void:
+	one_columns_btn.set("texture_normal", one_columns_white)
+	two_columns_btn.set("texture_normal", two_columns_white)
+	tree_columns_btn.set("texture_normal", tree_columns_white)
+	four_columns_btn.set("texture_normal", four_columns_white)
+		
+	match value:
+		1:
+			self.rect_min_size.x = 360
+			self.rect_size.x = 360
+			Global.right_panel.rect_size.x += 360
+			one_columns_btn.set("texture_normal", one_columns_focus)
+			td_container.columns = 1
+			cm_container.columns = 1
+		2:
+			self.rect_min_size.x = 680
+#			self.rect_size.x = 680
+			two_columns_btn.set("texture_normal", two_columns_focus)
+			td_container.columns = 2
+			cm_container.columns = 2
+		3:
+			self.rect_min_size.x = 1020
+#			self.rect_size.x = 1020
+			tree_columns_btn.set("texture_normal", tree_columns_focus)
+			td_container.columns = 3
+			cm_container.columns = 3
+			
+		4:
+			self.rect_min_size.x = 1360
+			self.rect_size.x = 1360
+			four_columns_btn.set("texture_normal", four_columns_focus)
+			td_container.columns = 4
+			cm_container.columns = 4
+
 
 ##__________________Methode connectees_______________________		
 	
@@ -234,3 +287,20 @@ func _on_SearchLineEdit_text_changed(new_text):
 
 func _on_ClearBSearchBtn_pressed():
 	call_deferred("clear_searched")
+
+
+
+func _on_OneColumnsBtn_pressed():
+	Preferences.number_of_columns = 1
+
+
+func _on_TwoColumnsBtn_pressed():
+	Preferences.number_of_columns = 2
+
+
+func _on_TreeColumnsBtn_pressed():
+	Preferences.number_of_columns = 3
+
+
+func _on_FourColumnsBtn_pressed():
+	Preferences.number_of_columns = 4

@@ -1,0 +1,161 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://tscn/Dialog.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/icons/arrow.png" type="Texture" id=2]
+[ext_resource path="res://scripts/TutorialDialog.gd" type="Script" id=3]
+[ext_resource path="res://assets/tutorials/manage_subejcts_lessons.png" type="Texture" id=4]
+[ext_resource path="res://res/Helvetica_bold.tres" type="DynamicFont" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="TutorialDialog" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Panel" parent="." index="1"]
+margin_top = -302.5
+margin_bottom = 302.5
+
+[node name="Title" parent="Panel/VBoxContainer/Head" index="0"]
+text = "Tutoriel"
+
+[node name="Body" parent="Panel/VBoxContainer" index="1"]
+margin_bottom = 545.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body" index="0"]
+margin_left = 15.0
+margin_right = 785.0
+margin_bottom = 500.0
+rect_min_size = Vector2( 0, 500 )
+custom_constants/separation = 10
+
+[node name="LeftArrow" type="TextureButton" parent="Panel/VBoxContainer/Body/HBoxContainer" index="0"]
+margin_top = 230.0
+margin_right = 20.0
+margin_bottom = 270.0
+rect_min_size = Vector2( 20, 40 )
+focus_mode = 0
+size_flags_vertical = 4
+enabled_focus_mode = 0
+texture_normal = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer" index="1"]
+margin_left = 30.0
+margin_right = 740.0
+margin_bottom = 500.0
+rect_min_size = Vector2( 0, 450 )
+custom_constants/separation = 10
+
+[node name="TopMargin" type="MarginContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/VBoxContainer" index="0"]
+margin_right = 710.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="SlideManageSubject" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/VBoxContainer" index="1"]
+margin_top = 30.0
+margin_right = 710.0
+margin_bottom = 430.0
+rect_min_size = Vector2( 710, 400 )
+custom_constants/separation = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer/Body/HBoxContainer/VBoxContainer/SlideManageSubject" index="0"]
+margin_right = 300.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 300, 400 )
+texture = ExtResource( 4 )
+expand = true
+
+[node name="TextTutorialContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/VBoxContainer/SlideManageSubject" index="1"]
+margin_left = 315.0
+margin_right = 710.0
+margin_bottom = 400.0
+size_flags_horizontal = 3
+
+[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/VBoxContainer/SlideManageSubject/TextTutorialContainer" index="0"]
+margin_right = 395.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+custom_fonts/font = ExtResource( 5 )
+text = "Créez vos premiers cours"
+align = 1
+valign = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/VBoxContainer/SlideManageSubject/TextTutorialContainer" index="1"]
+margin_top = 25.0
+margin_right = 395.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 0, 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/VBoxContainer/Body/HBoxContainer/VBoxContainer/SlideManageSubject/TextTutorialContainer" index="2"]
+margin_top = 39.0
+margin_right = 395.0
+margin_bottom = 400.0
+size_flags_vertical = 3
+custom_colors/default_color = Color( 0.219608, 0.219608, 0.219608, 1 )
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
+text = "Avant de créer votre premier cours, vous devez renseigner les différentes matières que vous étudiez, les sujets de cours ainsi que les campus où vous étudiez. 
+
+Cliquez sur le bouton \"Gérer les cours et les matières\" pour configurer vos cours
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/VBoxContainer" index="2"]
+margin_top = 440.0
+margin_right = 710.0
+margin_bottom = 464.0
+alignment = 1
+
+[node name="NoMoreTipsLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/VBoxContainer/HBoxContainer" index="0"]
+margin_left = 180.0
+margin_top = 5.0
+margin_right = 501.0
+margin_bottom = 19.0
+custom_colors/font_color = Color( 0.486275, 0.486275, 0.486275, 1 )
+text = "J'ai compris, je ne souhaite pas voir plus d'astuces"
+align = 1
+valign = 1
+
+[node name="NoMoreTipsCheckBox" type="CheckBox" parent="Panel/VBoxContainer/Body/HBoxContainer/VBoxContainer/HBoxContainer" index="1"]
+margin_left = 505.0
+margin_right = 529.0
+margin_bottom = 24.0
+
+[node name="RightArrow" type="TextureButton" parent="Panel/VBoxContainer/Body/HBoxContainer" index="2"]
+margin_left = 750.0
+margin_top = 230.0
+margin_right = 770.0
+margin_bottom = 270.0
+rect_min_size = Vector2( 20, 40 )
+focus_mode = 0
+size_flags_vertical = 4
+enabled_focus_mode = 0
+texture_normal = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Foot" parent="Panel/VBoxContainer" index="2"]
+margin_top = 545.0
+margin_bottom = 605.0
+
+[node name="CloseButton" type="Button" parent="Panel/VBoxContainer/Foot" index="0"]
+margin_left = 371.0
+margin_top = 20.0
+margin_right = 429.0
+margin_bottom = 40.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Fermer"
+
+[connection signal="toggled" from="Panel/VBoxContainer/Body/HBoxContainer/VBoxContainer/HBoxContainer/NoMoreTipsCheckBox" to="." method="_on_NoMoreTipsCheckBox_toggled"]
+[connection signal="pressed" from="Panel/VBoxContainer/Foot/CloseButton" to="." method="_on_CloseButton_pressed"]

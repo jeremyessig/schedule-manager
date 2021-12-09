@@ -420,6 +420,8 @@ tracks/2/keys = {
 }
 
 [node name="NewSubjectDialog" instance=ExtResource( 1 )]
+margin_top = 1.0
+margin_bottom = 1.0
 script = ExtResource( 3 )
 
 [node name="Panel" parent="." index="1"]
@@ -620,7 +622,7 @@ text = "Supprimer"
 [node name="LessonGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="3"]
 visible = false
 margin_top = 40.0
-margin_right = 735.0
+margin_right = 704.0
 margin_bottom = 220.0
 rect_min_size = Vector2( 0, 180 )
 custom_constants/vseparation = 20
@@ -692,6 +694,7 @@ margin_top = 120.0
 margin_right = 574.0
 margin_bottom = 160.0
 rect_min_size = Vector2( 380, 40 )
+text = "Sélectionnez un cours à supprimer"
 clip_text = true
 
 [node name="RemoveLessonButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid" index="8"]
@@ -716,7 +719,7 @@ text = "Supprimer"
 [node name="LocationGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="4"]
 visible = false
 margin_top = 40.0
-margin_right = 735.0
+margin_right = 690.0
 margin_bottom = 220.0
 rect_min_size = Vector2( 0, 180 )
 custom_constants/vseparation = 20
@@ -764,6 +767,7 @@ margin_top = 60.0
 margin_right = 560.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 380, 40 )
+text = "Sélectionnez un campus à supprimer"
 clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false

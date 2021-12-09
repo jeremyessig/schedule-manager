@@ -13,6 +13,7 @@ onready var save_as_dialog : FileDialog = $SaveAsDialog
 onready var open_save_dialog : FileDialog = $OpenSaveDialog
 onready var route_dialog :Control = $RouteDialog
 onready var preferences_dialog : Control = $PreferencesDialog
+onready var tutorial_dialog : Control = $TutorialDialog
 
 onready var autosave : Timer = $AutoSave
 
@@ -31,6 +32,9 @@ func _ready() -> void:
 #	header.connect("route_pressed", self, "_on_open_route_dialog")
 	Signals.connect("dialog_route_shown", self, "_on_open_route_dialog")
 	header.connect("preferences_pressed", self, "_on_open_preferences_dialog")
+	if Preferences.tutorial_popup:
+		tutorial_dialog.show()
+	
 
 
 func _centering_screen(screen_size:Vector2) ->void:
@@ -68,10 +72,11 @@ func _on_AutoSave_timeout():
 
 #________Methode d'affichage des dialogs_____________
 func _show_new_lesson_dialog() ->void:
-	new_lesson_dialog.check_subject_lesson_database()
-	new_lesson_dialog.reset_default_GUI()
-	new_lesson_dialog.set_lesson_duration()
-	new_lesson_dialog.show()
+	Signals.emit_signal("dialog_new_lesson_shown")
+#	new_lesson_dialog.check_subject_lesson_database()
+#	new_lesson_dialog.reset_default_GUI()
+#	new_lesson_dialog.set_lesson_duration()
+#	new_lesson_dialog.show()
 
 func _show_new_subject_dialog() ->void:
 	new_subject_dialog.show()

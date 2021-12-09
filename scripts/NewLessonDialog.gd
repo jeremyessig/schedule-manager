@@ -7,7 +7,16 @@ var is_lesson_creating: bool = false
 func _ready():
 	Signals.connect("error_confirmed", self, "_on_error_confirmed")
 	Signals.connect("error_canceled", self, "_on_canceled_error")
+	Signals.connect("dialog_new_lesson_shown", self, "_shown")
 
+
+func _shown() ->void:
+	check_subject_lesson_database()
+	reset_default_GUI()
+	set_lesson_duration()
+	_set_fields_messages_no_database_found()
+	show()
+		
 
 func _on_error_confirmed(error, node_path) ->void:
 	if get_path() != node_path:
@@ -36,6 +45,16 @@ func set_lesson_duration() ->void:
 		time_table = Time.get_time_24h_StringArray(Preferences.TD_default_duration)
 	duration_hours_option_button.selected = Global.find_item_string(duration_hours_option_button, time_table[0])
 	duration_minutes_option_button.selected = Global.find_item_string(duration_minutes_option_button, time_table[1])
+
+
+##_______________ GUI __________________________
+func _set_fields_messages_no_database_found() ->void:
+	if Global.subjects_database.empty():
+		subject_option_button.text = "Aucune matière trouvée"
+	if Global.lessons_database.empty():
+		lesson_option_button.text = "Aucun cours trouvé"
+	if Global.locations_database.empty():
+		location_option_button.text = "Aucun campus trouvé"
 
 
 #______________Initialisation de la creation du cours_____________
