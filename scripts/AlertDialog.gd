@@ -23,6 +23,7 @@ onready var loading_old_save : Label = $Panel/VBoxContainer/Body/LoadingOldSave
 onready var empty_schedule : Label = $Panel/VBoxContainer/Body/EmptySchedule
 onready var banned_word : Label = $Panel/VBoxContainer/Body/BannedWord
 onready var confirm_deletion : Label = $Panel/VBoxContainer/Body/ConfirmDeletion
+onready var confirm_all_deletion : Label = $Panel/VBoxContainer/Body/ConfirmAllDeletion
 
 
 func _ready():
@@ -36,6 +37,7 @@ func _ready():
 
 func _show_alert_dialog(message, node_path) ->void:
 	show()
+	confirm_button.text = "Confirmer"
 	nodepath = ""
 	if node_path != null:
 		node = get_node(node_path)
@@ -87,8 +89,15 @@ func _show_alert_dialog(message, node_path) ->void:
 			
 		"ConfirmDeletion":
 			cancel_button.show()
+			confirm_button.text = "Supprimer"
 			confirm_button.show()
 			confirm_deletion.show()
+			
+		"ConfirmAllDeletion":
+			cancel_button.show()
+			confirm_button.text = "Supprimer"
+			confirm_button.show()
+			confirm_all_deletion.show()
 			
 
 

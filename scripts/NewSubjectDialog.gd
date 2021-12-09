@@ -184,13 +184,13 @@ func _btn_focused(button:Button) ->void:
 
 ##_________________________ Methodes connectees ___________________________________
 func _on_error_confirmed(error, node_path) ->void:
-	if remove_subject_btn.get_path() == node_path and error == "ConfirmDeletion":
+	if remove_subject_btn.get_path() == node_path and error == "ConfirmAllDeletion":
 		_remove_subject_from_database()
 		return
-	if remove_lesson_btn.get_path() == node_path and error == "ConfirmDeletion":
+	if remove_lesson_btn.get_path() == node_path and error == "ConfirmAllDeletion":
 		_remove_lesson_from_database()
 		return
-	if remove_location_btn.get_path() == node_path and error == "ConfirmDeletion":
+	if remove_location_btn.get_path() == node_path and error == "ConfirmAllDeletion":
 		_remove_location_from_database()
 		return
 		
@@ -213,7 +213,7 @@ func _on_CreateButton_pressed() -> void:
 	
 
 func _on_RemoveSubjectButton_pressed() -> void:
-	Signals.emit_signal("error_emitted", "ConfirmDeletion", remove_subject_btn.get_path())
+	Signals.emit_signal("error_emitted", "ConfirmAllDeletion", remove_subject_btn.get_path())
 #	_remove_subject_from_database()
 
 
@@ -224,7 +224,7 @@ func _on_CreateLessonButton_pressed() -> void:
 
 
 func _on_RemoveLessonButton_pressed() -> void:
-	Signals.emit_signal("error_emitted", "ConfirmDeletion", remove_lesson_btn.get_path())
+	Signals.emit_signal("error_emitted", "ConfirmAllDeletion", remove_lesson_btn.get_path())
 #	_remove_lesson_from_database()
 
 
@@ -250,7 +250,7 @@ func _on_AddLocationLineEdit_text_entered(new_text):
 
 
 func _on_RemoveLocationButton_pressed():
-	Signals.emit_signal("error_emitted", "ConfirmDeletion", remove_location_btn.get_path())
+	Signals.emit_signal("error_emitted", "ConfirmAllDeletion", remove_location_btn.get_path())
 #	_remove_location_from_database()
 
 

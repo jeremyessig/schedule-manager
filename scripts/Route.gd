@@ -11,6 +11,7 @@ onready var minute_line_edit : LineEdit = $TimeContainer/MinuteLineEdit
 
 func _ready():
 	Signals.connect("error_confirmed", self, "_on_error_confirmed")
+	Signals.connect("locations_database_updated", self, "_check_if_exists")
 
 func set_location_A(value:String) ->void:
 	location_A = value
@@ -47,6 +48,11 @@ func delete() ->void:
 	self.queue_free()
 	Signals.emit_signal("route_deleted")
 
+
+func _check_if_exists() ->void:
+	if !Global.locations_database.has(location_A) or !Global.locations_database.has(location_B):
+		Global.remove_from_routes_database(location_A, location_B)
+		delete()
 
 #func add_to_database() ->void:
 #	Global.add_to_routes_database(location_A, location_B, time)

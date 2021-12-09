@@ -72,6 +72,7 @@ func load_from_res(routes:Array) ->void:
 		data["location_B"] = route[1]
 		data["time"] = route[2]
 		add_route(data)
+	print(Global.routes_database)
 
 
 func is_new_route_valid(data_from_user:Dictionary) ->bool:

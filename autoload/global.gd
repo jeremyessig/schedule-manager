@@ -39,6 +39,7 @@ func remove_from_routes_database(location_A:String, location_B:String) ->void:
 		if route.has(location_A) and route.has(location_B):
 			routes_database.remove(routes_database.find(route))
 			Signals.emit_signal("routes_database_updated")
+	print(routes_database)
 	
 func is_in_routes_database(location_A:String, location_B:String) -> bool:
 	for route in routes_database:
@@ -60,6 +61,7 @@ func get_route_from_database(location_A:String, location_B:String) ->Array:
 		if route.has(location_A) and route.has(location_B):
 			return route
 	return []
+
 
 ##__________ Gestion des etablissements
 func set_locations_database(value) ->void:
