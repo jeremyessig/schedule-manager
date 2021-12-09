@@ -31,7 +31,7 @@ func get_item_index_by_string(node:OptionButton, content:String) -> int:
 	return 0
 
 ##___________ Message d'erreur_____________________
-func _on_error_confirmed(error, node_path):
+func _on_error_confirmed(error, node_path) ->void:
 	if get_path() != node_path:
 		return
 	match error:

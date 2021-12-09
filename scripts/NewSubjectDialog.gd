@@ -30,6 +30,9 @@ onready var description_label : Label = $Panel/VBoxContainer/Body/VBoxContainer/
 onready var notification_player : AnimationPlayer = $NotificationPlayer
 onready var body_vbox : VBoxContainer = $Panel/VBoxContainer/Body/VBoxContainer
 onready var buttons_container : HBoxContainer = $Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer
+onready var remove_subject_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid/RemoveSubjectButton
+onready var remove_lesson_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/LessonGrid/RemoveLessonButton
+onready var remove_location_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/LocationGrid/RemoveLocationButton
 
 
 
@@ -38,6 +41,7 @@ func _ready():
 	Signals.connect("lessons_database_updated", self, "_refresh_lessons_GUI")
 	Signals.connect("locations_database_updated", self, "_refresh_locations_GUI")
 	Signals.connect("subjects_database_updated", self, "_update_GUI")
+	Signals.connect("error_confirmed", self, "_on_error_confirmed")
 	_btn_focused(subject_btn)
 
 
@@ -122,17 +126,28 @@ func _remove_location_from_database() ->void:
 
 ##_________________________ Gestion de la GUI _________________________
 func _update_GUI() ->void:
+	_refresh_subjects_GUI()
+
+
+func _refresh_subjects_GUI() ->void:
 	Global.update_option_button(remove_subject_option_button, Global.subjects_database)
-	Global.update_option_button(remove_lesson_option_button, Global.lessons_database)
+	_refresh_lessons_GUI()
 	Global.update_option_button(define_lesson_subject_option_button, Global.subjects_database)
+	if Global.subjects_database.empty():
+		remove_subject_option_button.text = "Aucune matière enregistrée"
+		define_lesson_subject_option_button.text = "Aucune matière enregistrée"
 	
 	
 func _refresh_lessons_GUI() ->void:
 	Global.update_option_button(remove_lesson_option_button, Global.lessons_database)
+	if Global.lessons_database.empty():
+		remove_lesson_option_button.text = "Aucune leçon enregistrée"
 
 
 func _refresh_locations_GUI() ->void:
 	Global.update_option_button(remove_location_option_button, Global.locations_database)
+	if Global.locations_database.empty():
+		remove_location_option_button.text = "Aucun campus enregistré"
 
 
 func _error_notification(msg:String) ->void:
@@ -168,6 +183,18 @@ func _btn_focused(button:Button) ->void:
 
 
 ##_________________________ Methodes connectees ___________________________________
+func _on_error_confirmed(error, node_path) ->void:
+	if remove_subject_btn.get_path() == node_path and error == "ConfirmDeletion":
+		_remove_subject_from_database()
+		return
+	if remove_lesson_btn.get_path() == node_path and error == "ConfirmDeletion":
+		_remove_lesson_from_database()
+		return
+	if remove_location_btn.get_path() == node_path and error == "ConfirmDeletion":
+		_remove_location_from_database()
+		return
+		
+
 func _on_database_reseted(database_name:String) -> void:
 	if database_name == "subjects_database" or database_name == "lessons_database" :
 		_update_GUI()
@@ -186,7 +213,8 @@ func _on_CreateButton_pressed() -> void:
 	
 
 func _on_RemoveSubjectButton_pressed() -> void:
-	_remove_subject_from_database()
+	Signals.emit_signal("error_emitted", "ConfirmDeletion", remove_subject_btn.get_path())
+#	_remove_subject_from_database()
 
 
 func _on_CreateLessonButton_pressed() -> void:
@@ -196,7 +224,8 @@ func _on_CreateLessonButton_pressed() -> void:
 
 
 func _on_RemoveLessonButton_pressed() -> void:
-	_remove_lesson_from_database()
+	Signals.emit_signal("error_emitted", "ConfirmDeletion", remove_lesson_btn.get_path())
+#	_remove_lesson_from_database()
 
 
 func _on_AddSubjectLineEdit_text_entered(new_text):
@@ -221,7 +250,8 @@ func _on_AddLocationLineEdit_text_entered(new_text):
 
 
 func _on_RemoveLocationButton_pressed():
-	_remove_location_from_database()
+	Signals.emit_signal("error_emitted", "ConfirmDeletion", remove_location_btn.get_path())
+#	_remove_location_from_database()
 
 
 ## Boutons de navigation entre les sujets, les cours et les etablissements

@@ -65,9 +65,9 @@ readonly = true
 
 [node name="HBoxContainer" parent="Panel/VBoxContainer/Foot" index="0"]
 margin_left = 45.0
-margin_top = 7.0
+margin_top = 22.0
 margin_right = 555.0
-margin_bottom = 42.0
+margin_bottom = 57.0
 
 [node name="AddLessonToCalendarButton" type="Button" parent="Panel/VBoxContainer/Foot/HBoxContainer" index="0"]
 margin_right = 120.0
