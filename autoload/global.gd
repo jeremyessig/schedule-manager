@@ -2,6 +2,7 @@ extends Node
 
 var right_panel : HBoxContainer
 var left_panel : Panel
+var hsplit_container : HSplitContainer
 var new_lesson_button : Button
 var new_subject_button : Button
 var alert_dialog : Control
@@ -201,6 +202,7 @@ func _ready() -> void:
 	calendar_array = find_node_by_name(root, "CalendarArray")
 	new_subject_dialog = find_node_by_name(root, "NewSubjectDialog")
 	route_dialog = find_node_by_name(root, "RouteDialog")
+	hsplit_container = find_node_by_name(root, "HSplitContainer")
 
 
 func _connect_signals() ->void:

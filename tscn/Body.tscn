@@ -25,5 +25,6 @@ margin_bottom = 690.0
 rect_min_size = Vector2( 360, 0 )
 
 [node name="RightPanel" parent="HSplitContainer" instance=ExtResource( 4 )]
+margin_left = 372.0
 margin_right = 1280.0
 margin_bottom = 690.0

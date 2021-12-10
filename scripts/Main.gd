@@ -1,5 +1,8 @@
 extends Control
 
+var screenshot = preload("res://tscn/prefabs/ScreenShot.tscn")
+
+
 onready var new_lesson_dialog := $NewLessonDialog
 onready var new_subject_dialog := $NewSubjectDialog
 onready var alert_dialog := $AlertDialog
@@ -14,6 +17,11 @@ onready var open_save_dialog : FileDialog = $OpenSaveDialog
 onready var route_dialog :Control = $RouteDialog
 onready var preferences_dialog : Control = $PreferencesDialog
 onready var tutorial_dialog : Control = $TutorialDialog
+onready var export_as_png_dialog : FileDialog = $ExportAsPNGDialog
+
+#onready var viewport_container : ViewportContainer = $ViewportContainer
+#onready var viewport : Viewport = $ViewportContainer/Viewport
+#onready var background : ColorRect = $ViewportContainer/Viewport/BackgroundColorRect
 
 onready var autosave : Timer = $AutoSave
 
@@ -32,6 +40,7 @@ func _ready() -> void:
 #	header.connect("route_pressed", self, "_on_open_route_dialog")
 	Signals.connect("dialog_route_shown", self, "_on_open_route_dialog")
 	header.connect("preferences_pressed", self, "_on_open_preferences_dialog")
+	header.connect("export_png_pressed", self, "_open_export_as_PNG_dialog")
 	if Preferences.tutorial_popup:
 		tutorial_dialog.show()
 	
@@ -69,6 +78,32 @@ func _on_AutoSave_timeout():
 	SaveSystem.save_to_res()
 	
 
+func export_as_png(path):
+	var size = Vector2(2339,1365)
+	var tmp_position :Vector2 = Global.right_panel.rect_position
+	var tmp_size : Vector2 = Global.right_panel.rect_size
+	var instance = screenshot.instance()
+	self.add_child(instance)
+	var viewport_container = self.get_child(self.get_child_count()-1)
+	var viewport = viewport_container.get_child(0)
+	var background = viewport.get_child(0)
+	Global.reparent_node(Global.hsplit_container, Global.right_panel, viewport)
+	Global.right_panel.rect_position = Vector2(0,0)
+	Global.right_panel.rect_size = size
+	viewport_container.rect_size = size
+	viewport.size = size
+	background.rect_size = size
+	Signals.emit_signal("png_export_started")
+	yield(VisualServer, "frame_post_draw")
+	var img = viewport.get_texture().get_data()
+	Signals.emit_signal("png_export_ended")
+	viewport_container.queue_free()
+	Global.right_panel.rect_position = tmp_position
+	Global.right_panel.rect_size = tmp_size
+	Global.reparent_node(viewport, Global.right_panel, Global.hsplit_container)
+	img.flip_y()
+	img.save_png(path)
+
 
 #________Methode d'affichage des dialogs_____________
 func _show_new_lesson_dialog() ->void:
@@ -93,6 +128,9 @@ func _open_export_csv_dialog() ->void:
 
 func _open_about_dialog() ->void:
 	about_dialog.popup_centered()
+	
+func _open_export_as_PNG_dialog() ->void:
+	export_as_png_dialog.popup_centered()
 	
 func _open_save_as_dialog() ->void:
 	save_as_dialog.popup_centered()
@@ -131,3 +169,8 @@ func _on_SaveAsDialog_file_selected(path):
 func _on_OpenSaveDialog_file_selected(path):
 	SaveSystem.load_from_res(path)
 
+
+
+
+func _on_ExportAsPNG_file_selected(path):
+	export_as_png(path)

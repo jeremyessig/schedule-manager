@@ -48,3 +48,8 @@ signal preferences_saving
 signal preferences_saved
 
 signal preference_number_of_columns_setted
+
+
+## _______ export PNG _________
+signal png_export_started
+signal png_export_ended

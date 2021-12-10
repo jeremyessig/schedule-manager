@@ -1,0 +1,20 @@
+[gd_scene format=2]
+
+[node name="ScreenShot" type="ViewportContainer"]
+margin_right = 1278.0
+margin_bottom = 900.0
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 10, 10 )
+transparent_bg = true
+handle_input_locally = false
+usage = 0
+render_target_update_mode = 3
+
+[node name="BackgroundColorRect" type="ColorRect" parent="Viewport"]
+margin_right = 40.0
+margin_bottom = 40.0

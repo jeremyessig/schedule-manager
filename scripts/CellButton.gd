@@ -1,5 +1,6 @@
 extends Button
 
+var png_style = preload("res://res/cells/calendar_cell_normal_png.tres")
 var red_style = preload("res://res/calendar_cell_normal_red.tres")
 var normal_style = preload("res://res/calendar_cell_normal.tres")
 
@@ -11,6 +12,11 @@ var start:int
 
 
 onready var label := $Label
+
+func _ready():
+	Signals.connect("png_export_started", self, "_on_png_export_started")
+	Signals.connect("png_export_ended", self, "_on_png_export_ended")
+
 
 func reset() ->void:
 	is_empty = true
@@ -48,6 +54,14 @@ func set_cell() ->void:
 func save_to_res() -> String:
 	return var2str(Vector2(position))
 
+
+
+func _on_png_export_started() ->void:
+	self.set("custom_styles/normal", png_style)
+
+
+func _on_png_export_ended() ->void:
+	self.set("custom_styles/normal", normal_style)
 
 
 func _on_CellButton_gui_input(event):

@@ -1,5 +1,8 @@
 extends Button
 
+var font_bold := preload("res://res/Helvetica_bold.tres")
+var font_normal := preload("res://res/Helvetica_normal.tres")
+
 var is_empty := false
 var position:= Vector2.ZERO
 var size := 0
@@ -11,6 +14,8 @@ onready var infos : Label = $CenterContainer/VBoxContainer/Infos
 
 func _ready():
 	Signals.connect("lesson_edited", self, "update_cell")
+	Signals.connect("png_export_started", self, "_on_png_export_started")
+	Signals.connect("png_export_ended", self, "_on_png_export_ended")
 	infos.text = "%s \n %s \n Salle %s \n Prof. %s" %[datas["lesson"], datas["type"], datas["room"], datas["teacher"]]
 
 
@@ -53,8 +58,11 @@ func _on_LessonCellButton_gui_input(event):
 				else:
 					Signals.emit_signal("removing_lesson_from_calendar", position, size, id)
 
-	
-	
+func _on_png_export_started() ->void:
+	infos.set("custom_fonts/font", font_bold)
+
+func _on_png_export_ended() ->void:
+	infos.set("custom_fonts/font", font_normal)
 	
 ## Permet d'adapter la couleur de la cellule en fonction de la couleur de la carte
 func _color_table(color:String) ->void:

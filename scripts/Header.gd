@@ -3,6 +3,7 @@ extends Panel
 signal export_json_pressed
 signal import_json_pressed
 signal export_csv_pressed
+signal export_png_pressed
 signal about_pressed
 signal open_save_pressed
 #signal route_pressed
@@ -42,6 +43,8 @@ func _on_file_item_pressed(id)->void:
 			Signals.emit_signal("save_as_pressed")
 		5:
 			emit_signal("export_csv_pressed")
+		6:
+			emit_signal("export_png_pressed")
 
 func _on_database_item_pressed(id)->void:
 	match id:

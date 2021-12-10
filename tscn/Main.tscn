@@ -100,6 +100,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ExportAsPNGDialog" type="FileDialog" parent="."]
+margin_left = 223.82
+margin_top = 74.591
+margin_right = 1086.82
+margin_bottom = 646.591
+popup_exclusive = true
+window_title = "Enregistrer un fichier"
+resizable = true
+access = 2
+filters = PoolStringArray( "*.png" )
+current_dir = "/home/moi-xps/Godot/schedule-manager"
+current_path = "/home/moi-xps/Godot/schedule-manager/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="SaveAsDialog" type="FileDialog" parent="."]
 margin_left = 223.82
 margin_top = 74.591
@@ -183,6 +199,7 @@ autostart = true
 
 [connection signal="open_exporting_csv_file_dialog" from="ExportingCSVDialog" to="." method="_on_ExportingCSVDialog_open_exporting_csv_file_dialog"]
 [connection signal="file_selected" from="ExportDatabaseDialog" to="." method="_on_FileDialog_file_selected"]
+[connection signal="file_selected" from="ExportAsPNGDialog" to="." method="_on_ExportAsPNG_file_selected"]
 [connection signal="file_selected" from="SaveAsDialog" to="." method="_on_SaveAsDialog_file_selected"]
 [connection signal="file_selected" from="ExportDialogCSV" to="." method="_on_ExportDialogCSV_file_selected"]
 [connection signal="file_selected" from="ImportDialog" to="." method="_on_ImportDialog_file_selected"]
