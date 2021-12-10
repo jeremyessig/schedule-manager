@@ -32,7 +32,7 @@ func _ready() -> void:
 	Signals.connect("lesson_cell_opened", self, "lesson_cell_opened")
 	Signals.connect("preference_number_of_columns_setted", self, "_set_number_of_columns")
 	_init_key_reference()
-	_set_number_of_columns()
+#	_set_number_of_columns()
 
 
 ## Cree une carte temporaire pour recuperer les clefs des data
@@ -234,39 +234,39 @@ func _responsive_TDCM_container():
 
 
 ## Non fonctionnel...
-func _set_number_of_columns(value = Preferences.number_of_columns) ->void:
-	one_columns_btn.set("texture_normal", one_columns_white)
-	two_columns_btn.set("texture_normal", two_columns_white)
-	tree_columns_btn.set("texture_normal", tree_columns_white)
-	four_columns_btn.set("texture_normal", four_columns_white)
-		
-	match value:
-		1:
-			self.rect_min_size.x = 360
-			self.rect_size.x = 360
-			Global.right_panel.rect_size.x += 360
-			one_columns_btn.set("texture_normal", one_columns_focus)
-			td_container.columns = 1
-			cm_container.columns = 1
-		2:
-			self.rect_min_size.x = 680
-#			self.rect_size.x = 680
-			two_columns_btn.set("texture_normal", two_columns_focus)
-			td_container.columns = 2
-			cm_container.columns = 2
-		3:
-			self.rect_min_size.x = 1020
-#			self.rect_size.x = 1020
-			tree_columns_btn.set("texture_normal", tree_columns_focus)
-			td_container.columns = 3
-			cm_container.columns = 3
-			
-		4:
-			self.rect_min_size.x = 1360
-			self.rect_size.x = 1360
-			four_columns_btn.set("texture_normal", four_columns_focus)
-			td_container.columns = 4
-			cm_container.columns = 4
+#func _set_number_of_columns(value = Preferences.number_of_columns) ->void:
+#	one_columns_btn.set("texture_normal", one_columns_white)
+#	two_columns_btn.set("texture_normal", two_columns_white)
+#	tree_columns_btn.set("texture_normal", tree_columns_white)
+#	four_columns_btn.set("texture_normal", four_columns_white)
+#
+#	match value:
+#		1:
+#			self.rect_min_size.x = 360
+#			self.rect_size.x = 360
+#			Global.right_panel.rect_size.x += 360
+#			one_columns_btn.set("texture_normal", one_columns_focus)
+#			td_container.columns = 1
+#			cm_container.columns = 1
+#		2:
+#			self.rect_min_size.x = 680
+##			self.rect_size.x = 680
+#			two_columns_btn.set("texture_normal", two_columns_focus)
+#			td_container.columns = 2
+#			cm_container.columns = 2
+#		3:
+#			self.rect_min_size.x = 1020
+##			self.rect_size.x = 1020
+#			tree_columns_btn.set("texture_normal", tree_columns_focus)
+#			td_container.columns = 3
+#			cm_container.columns = 3
+#
+#		4:
+#			self.rect_min_size.x = 1360
+#			self.rect_size.x = 1360
+#			four_columns_btn.set("texture_normal", four_columns_focus)
+#			td_container.columns = 4
+#			cm_container.columns = 4
 
 
 ##__________________Methode connectees_______________________		
