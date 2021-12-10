@@ -79,7 +79,7 @@ func _on_AutoSave_timeout():
 	
 
 func export_as_png(path):
-	var size = Vector2(2339,1365)
+	var size = Vector2(2339,1372)
 	var tmp_position :Vector2 = Global.right_panel.rect_position
 	var tmp_size : Vector2 = Global.right_panel.rect_size
 	var instance = screenshot.instance()

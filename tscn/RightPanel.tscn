@@ -1,13 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/RightPanel.gd" type="Script" id=1]
 [ext_resource path="res://tscn/TimeButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tscn/CalendarArray.tscn" type="PackedScene" id=3]
-[ext_resource path="res://tscn/DaysLabel.tscn" type="PackedScene" id=4]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 1, 1, 1, 0 )
-border_color = Color( 0.819608, 0.819608, 0.819608, 1 )
+[ext_resource path="res://tscn/prefabs/DaysButton.tscn" type="PackedScene" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -34,9 +30,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="DaysContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 margin_right = 1524.0
-margin_bottom = 40.0
+margin_bottom = 7.0
+rect_min_size = Vector2( 0, 7 )
+
+[node name="DaysContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 7.0
+margin_right = 1524.0
+margin_bottom = 47.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_horizontal = 3
 custom_constants/separation = 0
@@ -48,46 +50,46 @@ rect_min_size = Vector2( 60, 0 )
 
 [node name="Monday" parent="VBoxContainer/DaysContainer" instance=ExtResource( 4 )]
 margin_left = 60.0
-margin_right = 304.0
-custom_styles/normal = SubResource( 1 )
+margin_right = 302.0
 
 [node name="Tuesday" parent="VBoxContainer/DaysContainer" instance=ExtResource( 4 )]
-margin_left = 304.0
-margin_right = 548.0
-custom_styles/normal = SubResource( 1 )
+margin_left = 302.0
+margin_right = 544.0
 text = "Mardi"
 x = 1
 
-[node name="Wednesday" parent="VBoxContainer/DaysContainer" instance=ExtResource( 4 )]
-margin_left = 548.0
-margin_right = 792.0
-custom_styles/normal = SubResource( 1 )
+[node name="Wendsday" parent="VBoxContainer/DaysContainer" instance=ExtResource( 4 )]
+margin_left = 544.0
+margin_right = 786.0
 text = "Mercredi"
 x = 2
 
 [node name="Thursday" parent="VBoxContainer/DaysContainer" instance=ExtResource( 4 )]
-margin_left = 792.0
-margin_right = 1036.0
-custom_styles/normal = SubResource( 1 )
+margin_left = 786.0
+margin_right = 1028.0
 text = "Jeudi"
 x = 3
 
 [node name="Friday" parent="VBoxContainer/DaysContainer" instance=ExtResource( 4 )]
-margin_left = 1036.0
-margin_right = 1280.0
-custom_styles/normal = SubResource( 1 )
+margin_left = 1028.0
+margin_right = 1270.0
 text = "Vendredi"
 x = 4
 
 [node name="Saturday" parent="VBoxContainer/DaysContainer" instance=ExtResource( 4 )]
-margin_left = 1280.0
-margin_right = 1524.0
-custom_styles/normal = SubResource( 1 )
+margin_left = 1270.0
+margin_right = 1512.0
 text = "Samedi"
 x = 5
 
+[node name="MarginRight" type="MarginContainer" parent="VBoxContainer/DaysContainer"]
+margin_left = 1512.0
+margin_right = 1524.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 12, 0 )
+
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
-margin_top = 40.0
+margin_top = 47.0
 margin_right = 1524.0
 margin_bottom = 1030.0
 size_flags_horizontal = 3
