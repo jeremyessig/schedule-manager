@@ -18,14 +18,14 @@ margin_bottom = 78.0
 rect_min_size = Vector2( 0, 45 )
 size_flags_horizontal = 3
 size_flags_vertical = 7
-custom_styles/hover = ExtResource( 1 )
-custom_styles/pressed = ExtResource( 1 )
-custom_styles/focus = SubResource( 1 )
-custom_styles/normal = SubResource( 2 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 custom_colors/font_color_hover = Color( 0.219608, 0.219608, 0.219608, 1 )
 custom_colors/font_color_pressed = Color( 0.219608, 0.219608, 0.219608, 1 )
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 1 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
 text = "7:00"
 script = ExtResource( 2 )
 __meta__ = {
@@ -38,5 +38,8 @@ margin_bottom = 20.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "7:00"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="." to="." method="_on_TimeLabel_pressed"]

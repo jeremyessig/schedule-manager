@@ -35,6 +35,14 @@ func set_all_the_line(y:int, is_empty:bool) ->void: ## -> RightPanel
 						grand_child.set_cell()
 
 
+func set_all_the_column(x:int, is_empty:bool) ->void:
+	for child in self.get_children():
+		for grand_child in child.get_children():
+			if grand_child.position.x == x:
+				if grand_child.is_empty == is_empty:
+					if grand_child.has_method("set_cell"):
+						grand_child.set_cell()
+
 
 func remove_lesson(pos: Vector2, size:int, id:String) ->void:
 	for column in self.get_children():

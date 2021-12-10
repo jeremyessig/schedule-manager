@@ -56,30 +56,35 @@ margin_left = 304.0
 margin_right = 548.0
 custom_styles/normal = SubResource( 1 )
 text = "Mardi"
+x = 1
 
 [node name="Wednesday" parent="VBoxContainer/DaysContainer" instance=ExtResource( 4 )]
 margin_left = 548.0
 margin_right = 792.0
 custom_styles/normal = SubResource( 1 )
 text = "Mercredi"
+x = 2
 
 [node name="Thursday" parent="VBoxContainer/DaysContainer" instance=ExtResource( 4 )]
 margin_left = 792.0
 margin_right = 1036.0
 custom_styles/normal = SubResource( 1 )
 text = "Jeudi"
+x = 3
 
 [node name="Friday" parent="VBoxContainer/DaysContainer" instance=ExtResource( 4 )]
 margin_left = 1036.0
 margin_right = 1280.0
 custom_styles/normal = SubResource( 1 )
 text = "Vendredi"
+x = 4
 
 [node name="Saturday" parent="VBoxContainer/DaysContainer" instance=ExtResource( 4 )]
 margin_left = 1280.0
 margin_right = 1524.0
 custom_styles/normal = SubResource( 1 )
 text = "Samedi"
+x = 5
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 margin_top = 40.0
