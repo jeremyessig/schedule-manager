@@ -57,10 +57,14 @@ func save_to_res() -> String:
 
 
 func _on_png_export_started() ->void:
+	if !is_empty:
+		return
 	self.set("custom_styles/normal", png_style)
 
 
 func _on_png_export_ended() ->void:
+	if !is_empty:
+		return
 	self.set("custom_styles/normal", normal_style)
 
 

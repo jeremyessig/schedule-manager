@@ -149,7 +149,7 @@ focus_mode = 2
 custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Fichier"
-items = [ "Nouvel emploi du temps", null, 0, false, false, 0, 0, null, "", false, "Ouvrir (Ctrl+O)", null, 0, false, false, 1, 0, null, "", false, "Dernier fichier ouvert (Ctrl+Shift+O)", null, 0, false, false, 2, 0, null, "", false, "Enregistrer (Ctrl+S)", null, 0, false, false, 3, 0, null, "", false, "Enregistrer sous...", null, 0, false, false, 4, 0, null, "", false, "Exporter pour Google Agenda", null, 0, false, false, 5, 0, null, "", false, "Exporter en image PNG", null, 0, false, false, 6, 0, null, "", false ]
+items = [ "Nouvel emploi du temps", null, 0, false, false, 0, 0, null, "", false, "Ouvrir (Ctrl+O)", null, 0, false, false, 1, 0, null, "", false, "Dernier fichier ouvert (Ctrl+Shift+O)", null, 0, false, false, 2, 0, null, "", false, "Enregistrer (Ctrl+S)", null, 0, false, false, 3, 0, null, "", false, "Enregistrer sous...", null, 0, false, false, 4, 0, null, "", false, "Exporter pour Google Agenda", null, 0, false, false, 5, 0, null, "", false, "Exporter comme image PNG", null, 0, false, false, 6, 0, null, "", false ]
 switch_on_hover = true
 
 [node name="EditionMenuButton" type="MenuButton" parent="HBoxContainer/Toolbar"]
