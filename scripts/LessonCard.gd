@@ -57,6 +57,7 @@ func _ready():
 	Signals.connect("program_reseted", self, "delete") ## Header -> Signals
 	Signals.connect("updating_conflicts", self, "set_conflicts") ## CellButton -> Signals
 	Signals.connect("updating_conflicts", self, "refresh_is_in_conflict_GUI") ## CellButton -> Signals
+	Signals.connect("set_color_same_as_CM_emitted", self, "_on_set_color_same_as_CM_emitted")
 	save_date["created"] = OS.get_datetime()
 	
 
@@ -135,12 +136,16 @@ func set_data(data:Dictionary) -> void:
 
 
 func set_CM_lessons_cards_group() ->void:
-	if self.is_in_group("CM_lesson_cards") and type != "CM_lesson_cards":
+	print("Hello 1")
+	if self.is_in_group("CM_lesson_cards") and type != "Cours Magistral":
 		self.remove_from_group("CM_lesson_cards")
+		print("Hello 2")
 		return
 	if not self.is_in_group("CM_lesson_cards") and type == "Cours Magistral":
+		print("Hello 3")
 		add_to_group("CM_lesson_cards")
 		return
+	print("Hello 4")
 
 
 ##________________Methodes de calcule___________________________
@@ -248,7 +253,8 @@ func refresh_is_in_conflict_GUI():
 		_update_background()
 #		self.set_card_labels_font_color("#383838")	
 	
-func update_color(color:String) -> void:
+func update_color(new_color:String) -> void:
+	self.color = new_color
 	var new_style = StyleBoxFlat.new()
 	new_style.set_bg_color(Color(color))
 	new_style.set_corner_radius_individual(10,10,0,0)
@@ -332,6 +338,11 @@ func export_to_csv() ->PoolStringArray:
 func _undisplay(card_id:String):
 	if card_id == id:
 		self.is_displayed = false
+
+func _on_set_color_same_as_CM_emitted(new_color:String, lesson_name:String) ->void:
+	if lesson_name != lesson:
+		return
+	update_color(new_color)
 
 
 func _on_LessonCard_gui_input(event):

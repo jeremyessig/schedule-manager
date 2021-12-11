@@ -153,6 +153,8 @@ func edit_lesson() ->void:
 	print(data["id"])
 	data["color"] = card_color
 	data["is_displayed"] = lesson_card.is_displayed
+	if Global.get_item_string(type_option_button) == "Cours Magistral" and Preferences.TD_is_same_color_as_CM:
+		Signals.emit_signal("set_color_same_as_CM_emitted", card_color, Global.get_item_string(lesson_option_button))
 	Signals.emit_signal("lesson_edited", data, old_id)
 			
 
@@ -203,8 +205,8 @@ func _on_SubLessonToCalendarButton_pressed():
 
 
 func _on_ConfirmChangesButton_pressed():
-	var time = Time.new()
-	var schedule : Array = time.get_time_00h00_StringArray(lesson_card.schedule["start"])
+#	var time = Time.new()
+	var schedule : Array = Time.get_time_00h00_StringArray(lesson_card.schedule["start"])
 	if (Global.get_item_string(type_option_button) != lesson_card.type or
 		Global.get_item_string(subject_option_button) != lesson_card.subject or
 		Global.get_item_string(lesson_option_button) != lesson_card.lesson or
@@ -225,6 +227,5 @@ func _on_ConfirmChangesButton_pressed():
 			var node_path = lesson_card.get_path()
 			Global.calendar_array.add_lesson(node_path)
 	Signals.emit_signal("updating_conflicts")
-#	hide()
 	_set_fields_editable(false)
 	_set_action_buttons()

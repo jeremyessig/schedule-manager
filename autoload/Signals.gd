@@ -25,6 +25,9 @@ signal routes_database_updated
 signal save_as_pressed ## Head ->
 signal data_saved
 
+
+signal set_color_same_as_CM_emitted(color, lesson_name)
+
 ##______________________________
 signal day_button_pressed(x, is_empty)
 signal time_button_pressed(y, is_empty)

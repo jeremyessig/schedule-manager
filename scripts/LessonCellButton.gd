@@ -14,6 +14,7 @@ onready var infos : Label = $CenterContainer/VBoxContainer/Infos
 
 func _ready():
 	Signals.connect("lesson_edited", self, "update_cell")
+	Signals.connect("set_color_same_as_CM_emitted", self, "_on_set_color_same_as_CM_emitted")
 	Signals.connect("png_export_started", self, "_on_png_export_started")
 	Signals.connect("png_export_ended", self, "_on_png_export_ended")
 	infos.text = "%s \n %s \n Salle %s \n Prof. %s" %[datas["lesson"], datas["type"], datas["room"], datas["teacher"]]
@@ -45,6 +46,14 @@ func _update_color(background:String, borders:String) ->void:
 	new_style.border_color = Color(borders)
 	new_style.set_border_width_all(1)
 	set('custom_styles/normal', new_style)
+
+
+func _on_set_color_same_as_CM_emitted(new_color:String, lesson_name:String) ->void:
+	if lesson_name != datas["lesson"]:
+		return
+	datas["color"] = new_color
+	_color_table(datas["color"])
+	
 
 func _on_LessonCellButton_gui_input(event):
 	var node_path : NodePath = self.get_path()

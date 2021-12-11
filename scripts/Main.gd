@@ -41,6 +41,7 @@ func _ready() -> void:
 	Signals.connect("dialog_route_shown", self, "_on_open_route_dialog")
 	header.connect("preferences_pressed", self, "_on_open_preferences_dialog")
 	header.connect("export_png_pressed", self, "_open_export_as_PNG_dialog")
+	print(get_tree().get_nodes_in_group("CM_lesson_cards"))
 	if Preferences.tutorial_popup:
 		tutorial_dialog.show()
 	
