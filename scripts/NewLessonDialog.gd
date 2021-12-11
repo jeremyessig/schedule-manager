@@ -59,14 +59,12 @@ func _set_fields_messages_no_database_found() ->void:
 
 
 func _use_same_color_as_CM() ->void:
-	print("hello 1")
-	if Global.get_item_string(type_option_button) != "Travaux Dirigés":
-		print("hello 2")
+	if not Preferences.TD_is_same_color_as_CM:
 		return
-	print("Hello 3")
+	if Global.get_item_string(type_option_button) != "Travaux Dirigés":
+		return
 	for card in get_tree().get_nodes_in_group("CM_lesson_cards"):
 		if card.lesson == Global.get_item_string(lesson_option_button):
-			print("hello 4")
 			update_color(card.color)
 
 

@@ -140,7 +140,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LessonsBox" type="VBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel" index="0"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -177,7 +176,6 @@ custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 text = "Afficher le dernier cours créé en haut de la liste"
 
 [node name="TDSameColorCM" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox" index="2"]
-visible = false
 margin_top = 72.0
 margin_right = 525.0
 margin_bottom = 96.0
@@ -189,6 +187,7 @@ __meta__ = {
 [node name="TDSameColorCMCheckBox" type="CheckBox" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/TDSameColorCM" index="0"]
 margin_right = 24.0
 margin_bottom = 24.0
+pressed = true
 
 [node name="TDSameColorCMLabel" type="Label" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/TDSameColorCM" index="1"]
 margin_left = 29.0
@@ -199,15 +198,15 @@ custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 text = "Les TD ont la même couleur que leur CM"
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox" index="3"]
-margin_top = 72.0
+margin_top = 100.0
 margin_right = 525.0
-margin_bottom = 87.0
+margin_bottom = 115.0
 rect_min_size = Vector2( 0, 15 )
 
 [node name="EnableDefaultLessonTime" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox" index="4"]
-margin_top = 91.0
+margin_top = 119.0
 margin_right = 525.0
-margin_bottom = 116.0
+margin_bottom = 144.0
 rect_min_size = Vector2( 0, 25 )
 custom_constants/separation = 5
 __meta__ = {
@@ -227,9 +226,9 @@ custom_colors/font_color = Color( 0.196078, 0.196078, 0.196078, 1 )
 text = "Définir un temps par défaut pour les nouveaux CM et les nouveaux TD"
 
 [node name="CMDefaultTime" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox" index="5"]
-margin_top = 120.0
+margin_top = 148.0
 margin_right = 525.0
-margin_bottom = 140.0
+margin_bottom = 168.0
 custom_constants/separation = 5
 __meta__ = {
 "_edit_use_anchors_": false
@@ -273,9 +272,9 @@ items = [ "00", null, false, 0, null, "30", null, false, 1, null ]
 selected = 0
 
 [node name="TDDefaultTime" type="HBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox" index="6"]
-margin_top = 144.0
+margin_top = 172.0
 margin_right = 525.0
-margin_bottom = 164.0
+margin_bottom = 192.0
 custom_constants/separation = 5
 __meta__ = {
 "_edit_use_anchors_": false
@@ -384,6 +383,7 @@ custom_styles/normal = ExtResource( 6 )
 text = "OUI"
 
 [node name="SaveLoadBox" type="VBoxContainer" parent="Panel/VBoxContainer/Body/HBoxContainer/RightPanel" index="2"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -565,6 +565,7 @@ text = "Fermer"
 [connection signal="pressed" from="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/TreeButtonsContainer/PreferencesBtn" to="." method="_on_PreferencesBtn_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Body/HBoxContainer/LeftPanel/TreeButtonsContainer/SaveLoadBtn" to="." method="_on_SaveLoadBtn_pressed"]
 [connection signal="toggled" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/CardIndexTop/CardIndexTopCheckBox" to="." method="_on_CardIndexTopCheckBox_toggled"]
+[connection signal="toggled" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/TDSameColorCM/TDSameColorCMCheckBox" to="." method="_on_TDSameColorCMCheckBox_toggled"]
 [connection signal="item_selected" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/CMDefaultTime/CMDefaultTimeHourOptionButton" to="." method="_on_CMDefaultTimeHourOptionButton_item_selected"]
 [connection signal="item_selected" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/CMDefaultTime/CMDefaultTimeMinutesOptionButton" to="." method="_on_CMDefaultTimeMinutesOptionButton_item_selected"]
 [connection signal="item_selected" from="Panel/VBoxContainer/Body/HBoxContainer/RightPanel/LessonsBox/TDDefaultTime/TDDefaultTimeHourOptionButton" to="." method="_on_TDDefaultTimeHourOptionButton_item_selected"]

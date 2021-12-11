@@ -134,6 +134,13 @@ func _on_WindowBtn_pressed():
 	_hide_RightPanel_children()
 	window_box.show()
 	set_tree_button(window_btn)
+
+
+##__________LessonBox___________________
+
+func _on_TDSameColorCMCheckBox_toggled(button_pressed):
+	Preferences.TD_is_same_color_as_CM = button_pressed
+
 	
 
 ##________________________________________
@@ -194,3 +201,6 @@ func _on_OpenFileExplorerBtn_pressed():
 func _on_StartWindowSizeOptionButton_item_selected(index):
 	var size_table :Array = start_window_size_optionbutton.get_item_text(index).split("x")
 	Preferences.start_window_size = Vector2(int(size_table[0]), int(size_table[1]))
+
+	
+
