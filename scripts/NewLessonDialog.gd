@@ -57,6 +57,18 @@ func _set_fields_messages_no_database_found() ->void:
 		location_option_button.text = "Aucun campus trouvé"
 
 
+func _use_same_color_as_CM(index) ->void:
+	print("hello 1")
+	if Global.get_item_string(type_option_button) != "Travaux Dirigés":
+		print("hello 2")
+		return
+	print("Hello 3")
+	for card in get_tree().get_nodes_in_group("CM_lesson_cards"):
+		if card.lesson == lesson_option_button.get_item_text(index):
+			print("hello 4")
+			update_color(card.color)
+
+
 #______________Initialisation de la creation du cours_____________
 func create_lesson() ->void:
 	if is_lesson_creating == false:
@@ -85,3 +97,7 @@ func _on_ColorGrid_color_picked(color):
 
 func _on_TypeOptionButton_item_selected(index):
 	set_lesson_duration()
+
+
+func _on_LessonOptionButton_item_selected(index):
+	_use_same_color_as_CM(index)

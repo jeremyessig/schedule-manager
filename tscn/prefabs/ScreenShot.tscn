@@ -1,20 +1,45 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://res/Helvetica_bold.tres" type="DynamicFont" id=1]
+[ext_resource path="res://res/fonts/Helvetica_PNG_Title.tres" type="DynamicFont" id=2]
 
 [node name="ScreenShot" type="ViewportContainer"]
-margin_right = 1278.0
-margin_bottom = 900.0
+margin_right = 2339.0
+margin_bottom = 1654.0
+rect_min_size = Vector2( 2339, 1654 )
 stretch = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 10, 10 )
+size = Vector2( 2339, 1654 )
 transparent_bg = true
 handle_input_locally = false
+disable_3d = true
 usage = 0
 render_target_update_mode = 3
 
 [node name="BackgroundColorRect" type="ColorRect" parent="Viewport"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 2339.0
+margin_bottom = 1654.0
+
+[node name="Title" type="Label" parent="Viewport"]
+margin_top = 75.0
+margin_right = 2339.0
+margin_bottom = 132.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Emploi du temps"
+align = 1
+valign = 1
+
+[node name="MadeWith" type="Label" parent="Viewport"]
+margin_left = 2059.0
+margin_top = 1600.0
+margin_right = 2325.0
+margin_bottom = 1621.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Fait avec schedule Manager"
+valign = 1

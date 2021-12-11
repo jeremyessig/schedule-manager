@@ -1,6 +1,5 @@
 extends Button
 
-signal day_button_pressed(value, boolean)
 export var x : int
 var is_empty : bool = true
 
@@ -21,5 +20,5 @@ func _on_png_export_ended() ->void:
 
 
 func _on_Day_pressed():
-	self.emit_signal("day_button_pressed", x, is_empty)
+	Signals.emit_signal("day_button_pressed", x, is_empty)
 	is_empty = !is_empty

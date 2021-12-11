@@ -25,6 +25,11 @@ signal routes_database_updated
 signal save_as_pressed ## Head ->
 signal data_saved
 
+##______________________________
+signal day_button_pressed(x, is_empty)
+signal time_button_pressed(y, is_empty)
+
+
 ##________Affichage des fenetres de dialog_____
 signal dialog_route_shown
 signal dialog_new_lesson_shown

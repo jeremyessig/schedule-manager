@@ -25,24 +25,6 @@ func _add_empty_cells(number:int, column:Node, x:int) ->void:
 		tmp.add_coord_to_cell(x,tmp.get_index())
 
 
-## Met toutes les cellules de la ligne en conge
-func set_all_the_line(y:int, is_empty:bool) ->void: ## -> RightPanel
-	for child in self.get_children():
-		for grand_child in child.get_children():
-			if grand_child.position.y == y:
-				if grand_child.is_empty == is_empty:
-					if grand_child.has_method("set_cell"):
-						grand_child.set_cell()
-
-
-func set_all_the_column(x:int, is_empty:bool) ->void:
-	for child in self.get_children():
-		for grand_child in child.get_children():
-			if grand_child.position.x == x:
-				if grand_child.is_empty == is_empty:
-					if grand_child.has_method("set_cell"):
-						grand_child.set_cell()
-
 
 func remove_lesson(pos: Vector2, size:int, id:String) ->void:
 	for column in self.get_children():

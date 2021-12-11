@@ -130,9 +130,17 @@ func set_data(data:Dictionary) -> void:
 		position = data["position"]
 	update_GUI()
 	set_conflicts()
+	set_CM_lessons_cards_group()
+	print(get_tree().get_nodes_in_group("CM_lesson_cards"))
 
 
-
+func set_CM_lessons_cards_group() ->void:
+	if self.is_in_group("CM_lesson_cards") and type != "CM_lesson_cards":
+		self.remove_from_group("CM_lesson_cards")
+		return
+	if not self.is_in_group("CM_lesson_cards") and type == "Cours Magistral":
+		add_to_group("CM_lesson_cards")
+		return
 
 
 ##________________Methodes de calcule___________________________

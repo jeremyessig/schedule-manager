@@ -79,7 +79,8 @@ func _on_AutoSave_timeout():
 	
 
 func export_as_png(path):
-	var size = Vector2(2339,1372)
+	var calendar_size = Vector2(2339,1372)
+	var A4_page_size = Vector2(2339, 1654) #200 dpi
 	var tmp_position :Vector2 = Global.right_panel.rect_position
 	var tmp_size : Vector2 = Global.right_panel.rect_size
 	var instance = screenshot.instance()
@@ -88,11 +89,11 @@ func export_as_png(path):
 	var viewport = viewport_container.get_child(0)
 	var background = viewport.get_child(0)
 	Global.reparent_node(Global.hsplit_container, Global.right_panel, viewport)
-	Global.right_panel.rect_position = Vector2(0,0)
-	Global.right_panel.rect_size = size
-	viewport_container.rect_size = size
-	viewport.size = size
-	background.rect_size = size
+	Global.right_panel.rect_position = Vector2(0, A4_page_size.y - calendar_size.y - 60)
+	Global.right_panel.rect_size = calendar_size
+	viewport_container.rect_size = A4_page_size
+	viewport.size = A4_page_size
+	background.rect_size = A4_page_size
 	Signals.emit_signal("png_export_started")
 	yield(VisualServer, "frame_post_draw")
 	var img = viewport.get_texture().get_data()

@@ -67,5 +67,6 @@ margin_right = 250.0
 margin_bottom = 35.0
 
 [connection signal="item_selected" from="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/TypeOptionButton" to="." method="_on_TypeOptionButton_item_selected"]
+[connection signal="item_selected" from="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/LessonOptionButton" to="." method="_on_LessonOptionButton_item_selected"]
 [connection signal="color_picked" from="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer/ColorGrid" to="." method="_on_ColorGrid_color_picked"]
 [connection signal="pressed" from="Panel/VBoxContainer/Foot/HBoxContainer/CreateButton" to="." method="_on_CreateButton_pressed"]

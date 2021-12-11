@@ -16,6 +16,8 @@ onready var label := $Label
 func _ready():
 	Signals.connect("png_export_started", self, "_on_png_export_started")
 	Signals.connect("png_export_ended", self, "_on_png_export_ended")
+	Signals.connect("day_button_pressed", self, "_on_day_button_pressed")
+	Signals.connect("time_button_pressed", self, "_on_time_button_pressed")
 
 
 func reset() ->void:
@@ -55,6 +57,19 @@ func save_to_res() -> String:
 	return var2str(Vector2(position))
 
 
+func _on_day_button_pressed(x, empty) ->void:
+	if position.x != x:
+		return
+	if is_empty != empty:
+		return
+	set_cell()
+	
+func _on_time_button_pressed(y, empty) ->void:
+	if position.y != y:
+		return
+	if is_empty != empty:
+		return
+	set_cell()
 
 func _on_png_export_started() ->void:
 	if !is_empty:
