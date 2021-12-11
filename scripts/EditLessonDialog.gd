@@ -150,6 +150,7 @@ func refresh_action_buttons() ->void:
 
 func edit_lesson() ->void:
 	var data :Dictionary = create_data_dictionary()
+	print(data["id"])
 	data["color"] = card_color
 	data["is_displayed"] = lesson_card.is_displayed
 	Signals.emit_signal("lesson_edited", data, old_id)
@@ -175,30 +176,6 @@ func _on_DeleteButton_pressed():
 func _on_EditButton_pressed():
 	_set_fields_editable(true)
 	_set_action_buttons()
-	
-#	var time = Time.new()
-#	var schedule : Array = time.get_time_00h00_StringArray(lesson_card.schedule["start"])
-#	if (Global.get_item_string(type_option_button) != lesson_card.type or
-#		Global.get_item_string(subject_option_button) != lesson_card.subject or
-#		Global.get_item_string(lesson_option_button) != lesson_card.lesson or
-#		Global.get_item_string(schedule_days_option_button) != lesson_card.schedule["day"] or
-#		Global.get_item_string(schedule_hours_option_button) != schedule[0] or
-#		Global.get_item_string(schedule_minutes_option_button) != schedule[1] or
-#		room_line_edit.text != lesson_card.room
-#		):
-#			if not check_for_validation(get_path()):
-#				return
-#	var old := {"position":lesson_card.position, "size":lesson_card.size}
-#	edit_lesson()
-#	if lesson_card.is_displayed: ## Lorsque l'horaire est modifie, recharge la cellule dans le bon emplacement
-#		if old["position"].x != lesson_card.position.x or old["position"].y != lesson_card.position.y or lesson_card.size != old["size"]:
-#			Signals.emit_signal("removing_lesson_from_calendar", old["position"], old["size"], lesson_card.id)
-#			yield(get_tree(),"idle_frame")
-#			var node_path = lesson_card.get_path()
-#			Global.calendar_array.add_lesson(node_path)
-#	Signals.emit_signal("updating_conflicts")
-#	hide()
-	pass
 
 
 func _on_ColorGrid_color_picked(color):
@@ -239,6 +216,7 @@ func _on_ConfirmChangesButton_pressed():
 			if not check_for_validation(get_path()):
 				return
 	var old := {"position":lesson_card.position, "size":lesson_card.size}
+	old_id = lesson_card.id
 	edit_lesson()
 	if lesson_card.is_displayed: ## Lorsque l'horaire est modifie, recharge la cellule dans le bon emplacement
 		if old["position"].x != lesson_card.position.x or old["position"].y != lesson_card.position.y or lesson_card.size != old["size"]:

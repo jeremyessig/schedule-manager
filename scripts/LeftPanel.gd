@@ -63,6 +63,7 @@ func does_lesson_exist(card_id: String, type:String):
 
 
 func edit_lesson_card(datas:Dictionary, old_id:String) ->void:
+	print(old_id)
 	var card : Button = find_lesson_card(old_id)
 	var old_type : String = card.type
 	card.set_data(datas)
