@@ -9,6 +9,9 @@ var default_blue_btn_normal : StyleBoxFlat = preload("res://res/buttons/default_
 var default_blue_btn_focus : StyleBoxFlat = preload("res://res/buttons/default_blue_button_focus.tres")
 var default_blue_btn_hover : StyleBoxFlat = preload("res://res/buttons/default_blue_button_hover.tres")
 
+var default_remove_subject_message : String 
+var default_remove_lesson_message : String
+var default_remove_location_message : String
 
 onready var add_subject_line_edit : LineEdit = $Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid/AddSubjectLineEdit
 onready var notification : Label = $Panel/VBoxContainer/Body/VBoxContainer/Notification
@@ -42,6 +45,9 @@ func _ready():
 	Signals.connect("locations_database_updated", self, "_refresh_locations_GUI")
 	Signals.connect("subjects_database_updated", self, "_update_GUI")
 	Signals.connect("error_confirmed", self, "_on_error_confirmed")
+	default_remove_subject_message = remove_subject_option_button.text
+	default_remove_lesson_message = remove_lesson_option_button.text
+	default_remove_location_message = remove_location_option_button.text
 	_btn_focused(subject_btn)
 
 
@@ -134,20 +140,20 @@ func _refresh_subjects_GUI() ->void:
 	_refresh_lessons_GUI()
 	Global.update_option_button(define_lesson_subject_option_button, Global.subjects_database)
 	if Global.subjects_database.empty():
-		remove_subject_option_button.text = "Aucune matière enregistrée"
-		define_lesson_subject_option_button.text = "Aucune matière enregistrée"
+		remove_subject_option_button.text = default_remove_subject_message
+		define_lesson_subject_option_button.text = default_remove_lesson_message
 	
 	
 func _refresh_lessons_GUI() ->void:
 	Global.update_option_button(remove_lesson_option_button, Global.lessons_database)
 	if Global.lessons_database.empty():
-		remove_lesson_option_button.text = "Aucune leçon enregistrée"
+		remove_lesson_option_button.text = default_remove_lesson_message
 
 
 func _refresh_locations_GUI() ->void:
 	Global.update_option_button(remove_location_option_button, Global.locations_database)
 	if Global.locations_database.empty():
-		remove_location_option_button.text = "Aucun campus enregistré"
+		remove_location_option_button.text = default_remove_location_message
 
 
 func _error_notification(msg:String) ->void:

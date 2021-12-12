@@ -599,7 +599,7 @@ margin_top = 60.0
 margin_right = 605.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 380, 40 )
-text = "Sélectionnez une matière à supprimer"
+text = "Aucune matière enregistrée"
 clip_text = true
 
 [node name="RemoveSubjectButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid" index="5"]
@@ -694,7 +694,7 @@ margin_top = 120.0
 margin_right = 574.0
 margin_bottom = 160.0
 rect_min_size = Vector2( 380, 40 )
-text = "Sélectionnez un cours à supprimer"
+text = "Aucun cours enregistré"
 clip_text = true
 
 [node name="RemoveLessonButton" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid" index="8"]
@@ -767,7 +767,7 @@ margin_top = 60.0
 margin_right = 560.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 380, 40 )
-text = "Sélectionnez un campus à supprimer"
+text = "Aucun campus enregistré"
 clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false

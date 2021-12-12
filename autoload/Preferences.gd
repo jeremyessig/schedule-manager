@@ -1,6 +1,6 @@
 extends Node
 
-
+var is_first_time :bool = true
 var card_index_top := false setget set_card_index_top
 var autosave := false setget set_autosave
 var autosave_wait_time :int= 300 setget set_autosave_wait_time
