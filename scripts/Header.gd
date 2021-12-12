@@ -44,7 +44,7 @@ func _on_file_item_pressed(id)->void:
 		4:
 			Signals.emit_signal("save_as_pressed")
 		5:
-			emit_signal("export_csv_pressed")
+			Signals.emit_signal("dialog_export_csv_shown")
 		6:
 			emit_signal("export_png_pressed")
 

@@ -41,7 +41,7 @@ func _connecting_signals() ->void:
 	header.connect("new_subject_pressed", self, "_show_new_subject_dialog")
 	header.connect("export_json_pressed", self, "_open_export_dialog")
 	header.connect("import_json_pressed", self, "_open_import_dialog")
-	header.connect("export_csv_pressed", self, "_open_export_csv_dialog")
+	Signals.connect("dialog_export_csv_shown", self, "_open_export_csv_dialog")
 	header.connect("about_pressed", self, "_open_about_dialog")
 	Signals.connect("save_as_pressed", self, "_open_save_as_dialog")
 	header.connect("open_save_pressed", self, "_open_open_save_dialog")

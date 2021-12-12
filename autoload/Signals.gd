@@ -37,6 +37,7 @@ signal time_button_pressed(y, is_empty)
 ##________Affichage des fenetres de dialog_____
 signal dialog_route_shown
 signal dialog_new_lesson_shown
+signal dialog_export_csv_shown
 
 
 ##_______ Messages d'erreur____________

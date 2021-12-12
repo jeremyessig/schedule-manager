@@ -10,9 +10,16 @@ var calendar = preload("res://addons/calendar_button/class/Calendar.gd")
 
 var start_date :Array = [] ## Premier lundi de la rentree des cours que l'utilisateur indique
 
-onready var begining_week_line_edit : LineEdit = $Panel/VBoxContainer/Body/GridContainer/BeginingWeekLineEdit
-onready var notification_label : Label = $Panel/VBoxContainer/Foot/VBoxContainer/NotificationLabel
+onready var begining_week_line_edit : LineEdit = $Panel/VBoxContainer/Body/VBoxContainer/GridContainer/BeginingWeekLineEdit
+onready var notification_label : Label = $Panel/VBoxContainer/Body/VBoxContainer/NotificationLabel
+onready var export_btn : Button = $Panel/VBoxContainer/Foot/HBoxContainer/ExportButton
+onready var export_btn_disabled : Button = $Panel/VBoxContainer/Foot/HBoxContainer/ExportButtonDisabled
 
+func _ready():
+	Signals.connect("dialog_export_csv_shown", self, "_shown")
+	
+func _shown() ->void:
+	_set_navigation_buttons()
 
 ## Ajoute les dates et les heures dans l'attribut datetime de lesson_card
 func _attribute_datetime_to_nodes(nodes:Array) ->void:
@@ -93,6 +100,18 @@ func _refresh_gui() ->void:
 	begining_week_line_edit.text = "Semaine du lundi %s/%s/%s" %[start_date[0], start_date[1], start_date[2]]
 	notification_label.text = ""
 
+func _set_navigation_buttons() ->void:
+	if begining_week_line_edit.text == "Aucune date":
+		export_btn.hide()
+		export_btn_disabled.show()
+		notification_label.text = "Veuillez entrer la date de début des cours"
+		notification_label.set("custom_colors/font_color", "#cd1e1e")
+		begining_week_line_edit.set("custom_colors/font_color_uneditable", "#7c7c7c")
+	else:
+		export_btn.show()
+		export_btn_disabled.hide()
+		notification_label.text =""
+		begining_week_line_edit.set("custom_colors/font_color_uneditable", "#383838")
 
 
 ##_______________________ Methodes connectees___________________________
@@ -105,6 +124,7 @@ func _on_BeginingDateButton_date_selected(date_obj):
 	start_date.append(int(date_obj.date("YYYY")))
 	_init_week_to_monday(start_date)
 	_refresh_gui()
+	_set_navigation_buttons()
 
 
 func _on_CancelButton_pressed():
