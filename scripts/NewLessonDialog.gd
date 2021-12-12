@@ -58,14 +58,14 @@ func _set_fields_messages_no_database_found() ->void:
 		location_option_button.text = "Aucun campus trouvé"
 
 
-#func _use_same_color_as_CM() ->void:
-#	if not Preferences.TD_is_same_color_as_CM:
-#		return
-#	if Global.get_item_string(type_option_button) != "Travaux Dirigés":
-#		return
-#	for card in get_tree().get_nodes_in_group("CM_lesson_cards"):
-#		if card.lesson == Global.get_item_string(lesson_option_button):
-#			update_color(card.color)
+func _use_same_color_as_CM() ->void:
+	if not Preferences.TD_is_same_color_as_CM:
+		return
+	if Global.get_item_string(type_option_button) != "Travaux Dirigés":
+		return
+	for card in get_tree().get_nodes_in_group("CM_lesson_cards"):
+		if card.lesson == Global.get_item_string(lesson_option_button):
+			update_color(card.color)
 
 
 #______________Initialisation de la creation du cours_____________
@@ -78,8 +78,7 @@ func create_lesson() ->void:
 	datas["is_displayed"] = false
 	Signals.emit_signal("lesson_created", datas) ## To LeftPanel by Signals
 	is_lesson_creating = false
-	if Global.get_item_string(type_option_button) == "Cours Magistral" and Preferences.TD_is_same_color_as_CM:
-		Signals.emit_signal("set_color_same_as_CM_emitted", datas["color"], datas["lesson"])
+	set_color_same_as_CM(datas["color"], datas["lesson"])
 
 
 

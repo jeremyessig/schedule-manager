@@ -26,6 +26,7 @@ signal save_as_pressed ## Head ->
 signal data_saved
 
 
+##_______________LessonDialog_____________________
 signal set_color_same_as_CM_emitted(color, lesson_name)
 
 ##______________________________

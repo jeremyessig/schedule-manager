@@ -29,22 +29,25 @@ onready var autosave : Timer = $AutoSave
 func _ready() -> void:
 	OS.set_window_size(Preferences.start_window_size)
 	_centering_screen(Preferences.start_window_size)
+	_connecting_signals()
+	if Preferences.tutorial_popup:
+		tutorial_dialog.show()
+	
+
+func _connecting_signals() ->void:
 	Global.new_subject_button.connect("pressed", self, "_show_new_subject_dialog")
 	Global.new_lesson_button.connect("pressed", self, "_show_new_lesson_dialog")
+	header.connect("new_lesson_pressed", self, "_show_new_lesson_dialog")
+	header.connect("new_subject_pressed", self, "_show_new_subject_dialog")
 	header.connect("export_json_pressed", self, "_open_export_dialog")
 	header.connect("import_json_pressed", self, "_open_import_dialog")
 	header.connect("export_csv_pressed", self, "_open_export_csv_dialog")
 	header.connect("about_pressed", self, "_open_about_dialog")
 	Signals.connect("save_as_pressed", self, "_open_save_as_dialog")
 	header.connect("open_save_pressed", self, "_open_open_save_dialog")
-#	header.connect("route_pressed", self, "_on_open_route_dialog")
 	Signals.connect("dialog_route_shown", self, "_on_open_route_dialog")
 	header.connect("preferences_pressed", self, "_on_open_preferences_dialog")
 	header.connect("export_png_pressed", self, "_open_export_as_PNG_dialog")
-	print(get_tree().get_nodes_in_group("CM_lesson_cards"))
-	if Preferences.tutorial_popup:
-		tutorial_dialog.show()
-	
 
 
 func _centering_screen(screen_size:Vector2) ->void:
@@ -69,6 +72,8 @@ func _unhandled_input(event):
 	if event.is_action_pressed("show_route_dialog"):
 		Signals.emit_signal("dialog_route_shown")
 		return
+	if event.is_action_pressed("new_lesson"):
+		_show_new_lesson_dialog()
 
 
 func _on_AutoSave_timeout():

@@ -171,7 +171,7 @@ focus_mode = 2
 custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Cours"
-items = [ "Importer des cours", null, 0, false, false, 0, 0, null, "", false, "Exporter des cours", null, 0, false, false, 1, 0, null, "", false ]
+items = [ "Nouveau cours Ctrl+Shift+N", null, 0, false, false, 0, 0, null, "", false, "Gérer les sujets, les cours et les campus", null, 0, false, false, 1, 0, null, "", false, "Importer des cours en JSON", null, 0, false, false, 2, 0, null, "", false, "Exporter des cours en JSON", null, 0, false, false, 3, 0, null, "", false ]
 switch_on_hover = true
 
 [node name="DisplayMenuButton" type="MenuButton" parent="HBoxContainer/Toolbar"]
@@ -193,7 +193,7 @@ focus_mode = 2
 custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Paramètres"
-items = [ "Préférences", null, 0, false, false, 0, 0, null, "", false, "Configurer les trajets Ctrl+Shift+T", null, 0, false, false, 1, 0, null, "", false ]
+items = [ "Configurer les trajets Ctrl+Shift+T", null, 0, false, false, 0, 0, null, "", false, "Préférences", null, 0, false, false, 1, 0, null, "", false ]
 switch_on_hover = true
 
 [node name="HelpMenuButton" type="MenuButton" parent="HBoxContainer/Toolbar"]
