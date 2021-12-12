@@ -47,9 +47,10 @@ func _on_StarBtn_toggled(button_pressed):
 
 
 func _on_StarBtn_gui_input(event):
-	if event is InputEventMouseButton and event.pressed:
-		toggle_is_pressed()
-		emit_signal("mouse_pressed", value, is_pressed)
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT and event.pressed:
+			toggle_is_pressed()
+			emit_signal("mouse_pressed", value, is_pressed)
 
 
 func _on_StarBtn_mouse_entered():

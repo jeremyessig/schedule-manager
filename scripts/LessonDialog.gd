@@ -220,16 +220,6 @@ func refresh_rating_gui():
 			btn.set_is_pressed(true)
 
 
-#func _use_same_color_as_CM() ->void:
-#	if not Preferences.TD_is_same_color_as_CM:
-#		return
-#	if Global.get_item_string(type_option_button) != "Travaux Dirigés":
-#		return
-#	for card in get_tree().get_nodes_in_group("CM_lesson_cards"):
-#		if card.lesson == Global.get_item_string(lesson_option_button):
-#			update_color(card.color)
-
-
 func set_color_same_as_CM(new_color:String, lesson_name:String) ->void:
 	if Global.get_item_string(type_option_button) == "Cours Magistral" and Preferences.TD_is_same_color_as_CM:
 			Signals.emit_signal("set_color_same_as_CM_emitted", new_color, lesson_name)

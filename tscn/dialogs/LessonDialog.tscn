@@ -55,6 +55,7 @@ margin_right = 129.0
 margin_bottom = 22.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Type de cours :"
+align = 2
 
 [node name="TypeOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="1"]
 margin_left = 149.0
@@ -73,6 +74,7 @@ margin_right = 129.0
 margin_bottom = 72.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Matière :"
+align = 2
 
 [node name="SubjectOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="3"]
 margin_left = 149.0
@@ -90,6 +92,7 @@ margin_right = 129.0
 margin_bottom = 122.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Nom du cours :"
+align = 2
 
 [node name="LessonOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="5"]
 margin_left = 149.0
@@ -106,6 +109,7 @@ margin_right = 129.0
 margin_bottom = 172.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Etablissement:"
+align = 2
 
 [node name="LocationOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="7"]
 margin_left = 149.0
@@ -123,6 +127,7 @@ margin_right = 129.0
 margin_bottom = 222.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Salle :"
+align = 2
 
 [node name="RoomLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="9"]
 margin_left = 149.0
@@ -140,6 +145,7 @@ margin_right = 129.0
 margin_bottom = 272.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Durée du cours :"
+align = 2
 
 [node name="LessonDuration" type="HBoxContainer" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="11"]
 margin_left = 149.0
@@ -192,6 +198,7 @@ margin_right = 129.0
 margin_bottom = 322.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Horaire :"
+align = 2
 
 [node name="Schedule" type="HBoxContainer" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="13"]
 margin_left = 149.0
@@ -254,6 +261,7 @@ margin_right = 129.0
 margin_bottom = 377.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Obligatoire :"
+align = 2
 
 [node name="ObligatoryCheckButton" type="CheckButton" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="15"]
 margin_left = 149.0
@@ -270,6 +278,7 @@ margin_right = 129.0
 margin_bottom = 432.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Professeur :"
+align = 2
 
 [node name="TeacherLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="17"]
 margin_left = 149.0
@@ -286,6 +295,7 @@ margin_right = 129.0
 margin_bottom = 482.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Identifiant du cours:"
+align = 2
 
 [node name="LessonCodeLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="19"]
 margin_left = 149.0
@@ -302,6 +312,7 @@ margin_right = 129.0
 margin_bottom = 533.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Avis"
+align = 2
 
 [node name="StarsContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="21"]
 margin_left = 149.0
@@ -345,6 +356,7 @@ margin_right = 129.0
 margin_bottom = 596.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Couleur :"
+align = 2
 
 [node name="ColorGrid" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="23" instance=ExtResource( 3 )]
 margin_top = 562.0
@@ -358,6 +370,7 @@ margin_right = 129.0
 margin_bottom = 693.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Note:"
+align = 2
 
 [node name="NoteTextEdit" type="TextEdit" parent="Panel/VBoxContainer/Body/VboxContainer/ScrollContainer/GridContainer" index="25"]
 margin_left = 149.0

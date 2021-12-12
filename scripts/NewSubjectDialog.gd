@@ -36,7 +36,7 @@ onready var buttons_container : HBoxContainer = $Panel/VBoxContainer/Body/VBoxCo
 onready var remove_subject_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid/RemoveSubjectButton
 onready var remove_lesson_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/LessonGrid/RemoveLessonButton
 onready var remove_location_btn : Button = $Panel/VBoxContainer/Body/VBoxContainer/LocationGrid/RemoveLocationButton
-
+onready var vbox_container : VBoxContainer = $Panel/VBoxContainer/Body/VBoxContainer
 
 
 func _ready():
@@ -49,6 +49,10 @@ func _ready():
 	default_remove_lesson_message = remove_lesson_option_button.text
 	default_remove_location_message = remove_location_option_button.text
 	_btn_focused(subject_btn)
+	for node in vbox_container.get_children():
+		if node is GridContainer:
+			node.hide()
+	subject_grid.show()
 
 
 ##________________________ Methodes de gestion des donees____________

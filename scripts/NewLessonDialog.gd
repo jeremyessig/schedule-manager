@@ -51,11 +51,11 @@ func set_lesson_duration() ->void:
 ##_______________ GUI __________________________
 func _set_fields_messages_no_database_found() ->void:
 	if Global.subjects_database.empty():
-		subject_option_button.text = "Aucune matière trouvée"
+		subject_option_button.text = "Aucune matière enregistrée"
 	if Global.lessons_database.empty():
-		lesson_option_button.text = "Aucun cours trouvé"
+		lesson_option_button.text = "Aucun cours enregistré"
 	if Global.locations_database.empty():
-		location_option_button.text = "Aucun campus trouvé"
+		location_option_button.text = "Aucun campus enregistré"
 
 
 func _use_same_color_as_CM() ->void:

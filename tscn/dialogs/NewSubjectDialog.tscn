@@ -435,16 +435,16 @@ text = "Gérer les cours et les matières"
 margin_bottom = 441.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Body" index="0"]
-margin_left = 32.0
+margin_left = 55.0
 margin_top = 29.0
-margin_right = 767.0
+margin_right = 745.0
 margin_bottom = 367.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 20
 
 [node name="ButtonsContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="0"]
-margin_right = 735.0
+margin_right = 690.0
 margin_bottom = 20.0
 custom_constants/separation = 15
 alignment = 1
@@ -458,22 +458,22 @@ rect_min_size = Vector2( 80, 0 )
 text = "Discipline"
 
 [node name="SubjectBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="1"]
-margin_left = 172.0
-margin_right = 292.0
+margin_left = 150.0
+margin_right = 270.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 120, 0 )
 text = "Matières"
 
 [node name="LessonBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="2"]
-margin_left = 307.0
-margin_right = 427.0
+margin_left = 285.0
+margin_right = 405.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 120, 0 )
 text = "Cours"
 
 [node name="LocationBtn" type="Button" parent="Panel/VBoxContainer/Body/VBoxContainer/ButtonsContainer" index="3"]
-margin_left = 442.0
-margin_right = 562.0
+margin_left = 420.0
+margin_right = 540.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 120, 0 )
 text = "Campus"
@@ -550,6 +550,7 @@ custom_styles/normal = SubResource( 5 )
 text = "Supprimer"
 
 [node name="SubjectGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="2"]
+visible = false
 margin_top = 40.0
 margin_right = 735.0
 margin_bottom = 220.0
@@ -564,6 +565,7 @@ margin_right = 215.0
 margin_bottom = 27.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Ajouter une nouvelle matière:"
+align = 2
 
 [node name="AddSubjectLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid" index="1"]
 margin_left = 225.0
@@ -592,6 +594,7 @@ margin_right = 215.0
 margin_bottom = 87.0
 custom_colors/font_color = Color( 0.803922, 0.117647, 0.117647, 1 )
 text = "Supprimer une matière existante:"
+align = 2
 
 [node name="RemoveSubjectOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VBoxContainer/SubjectGrid" index="4"]
 margin_left = 225.0
@@ -635,6 +638,7 @@ margin_right = 184.0
 margin_bottom = 27.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Matière du nouveau cours :"
+align = 2
 
 [node name="DefineLessonSubjectOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid" index="1"]
 margin_left = 194.0
@@ -657,6 +661,7 @@ margin_right = 184.0
 margin_bottom = 87.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Titre du nouveau cours :"
+align = 2
 
 [node name="AddLessonLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid" index="4"]
 margin_left = 194.0
@@ -687,6 +692,7 @@ margin_right = 184.0
 margin_bottom = 147.0
 custom_colors/font_color = Color( 0.803922, 0.117647, 0.117647, 1 )
 text = "Supprimer un cours existant:"
+align = 2
 
 [node name="RemoveLessonOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VBoxContainer/LessonGrid" index="7"]
 margin_left = 194.0
@@ -717,7 +723,6 @@ enabled_focus_mode = 0
 text = "Supprimer"
 
 [node name="LocationGrid" type="GridContainer" parent="Panel/VBoxContainer/Body/VBoxContainer" index="4"]
-visible = false
 margin_top = 40.0
 margin_right = 690.0
 margin_bottom = 220.0
@@ -732,6 +737,7 @@ margin_right = 170.0
 margin_bottom = 27.0
 custom_colors/font_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 text = "Ajouter un lieu d'étude:"
+align = 2
 
 [node name="AddLocationLineEdit" type="LineEdit" parent="Panel/VBoxContainer/Body/VBoxContainer/LocationGrid" index="1"]
 margin_left = 180.0
@@ -760,6 +766,7 @@ margin_right = 170.0
 margin_bottom = 87.0
 custom_colors/font_color = Color( 0.803922, 0.117647, 0.117647, 1 )
 text = "Supprimer un lieu d'étude:"
+align = 2
 
 [node name="RemoveLocationOptionButton" type="OptionButton" parent="Panel/VBoxContainer/Body/VBoxContainer/LocationGrid" index="4"]
 margin_left = 180.0
@@ -793,7 +800,7 @@ text = "Supprimer"
 
 [node name="Description" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer" index="5"]
 margin_top = 240.0
-margin_right = 735.0
+margin_right = 690.0
 margin_bottom = 288.0
 rect_min_size = Vector2( 0, 48 )
 custom_colors/font_color = Color( 0.6, 0.6, 0.6, 1 )
@@ -804,7 +811,7 @@ autowrap = true
 [node name="Notification" type="Label" parent="Panel/VBoxContainer/Body/VBoxContainer" index="6"]
 modulate = Color( 0.160784, 0.666667, 0, 0 )
 margin_top = 308.0
-margin_right = 735.0
+margin_right = 690.0
 margin_bottom = 338.0
 rect_min_size = Vector2( 0, 30 )
 custom_colors/font_color = Color( 0.054902, 0.67451, 0.00392157, 1 )
