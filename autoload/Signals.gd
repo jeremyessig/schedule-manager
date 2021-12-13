@@ -46,7 +46,8 @@ signal error_confirmed(error_name, node_path)
 signal error_canceled(error_name, node_path)
 
 ##______ Gestion des trajets ______
-signal route_deleted
+signal route_deleted(location_A, location_B)
+signal route_created(location_A, location_B)
 
 
 ##______ Système de préférences _____

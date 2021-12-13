@@ -58,6 +58,8 @@ func _ready():
 	Signals.connect("updating_conflicts", self, "set_conflicts") ## CellButton -> Signals
 	Signals.connect("updating_conflicts", self, "refresh_is_in_conflict_GUI") ## CellButton -> Signals
 	Signals.connect("set_color_same_as_CM_emitted", self, "_on_set_color_same_as_CM_emitted")
+	Signals.connect("route_created", self, "_on_route_edited")
+	Signals.connect("route_deleted", self, "_on_route_edited")
 	save_date["created"] = OS.get_datetime()
 	
 
@@ -344,6 +346,14 @@ func _on_set_color_same_as_CM_emitted(new_color:String, lesson_name:String) ->vo
 		return
 	update_color(new_color)
 
+
+func _on_route_edited(location_A:String, location_B:String) ->void:
+	if !self.is_displayed:
+		return
+	if location_A == location or location_B == location:
+		self.is_displayed = false
+		Signals.emit_signal("removing_lesson_from_calendar", position, size, id)
+		
 
 func _on_LessonCard_gui_input(event):
 	var node_path : NodePath = self.get_path()

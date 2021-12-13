@@ -40,13 +40,14 @@ func init_values(data:Dictionary) ->void:
 	location_B = data["location_B"]
 	time = data["time"]
 #	add_to_database()
+	Signals.emit_signal("route_created", location_A, location_B)
 	_refresh_GUI()
-
+	
 
 func delete() ->void:
 	Global.remove_from_routes_database(location_A, location_B)
 	self.queue_free()
-	Signals.emit_signal("route_deleted")
+	Signals.emit_signal("route_deleted", location_A, location_B)
 
 
 func _check_if_exists() ->void:

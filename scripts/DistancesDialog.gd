@@ -97,8 +97,7 @@ func refresh_GUI() ->void:
 	set_AddNewRouteBtn()
 
 
-func _set_NoRouteLabel() ->void:
-	print(list_of_routes.get_child_count())
+func _set_NoRouteLabel(location_A:String, location_B:String) ->void:
 	if list_of_routes.get_child_count() == 2:
 		no_route_container.show()
 
